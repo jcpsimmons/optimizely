@@ -19,11 +19,4 @@ window.$(document).ready(function() {
 
 window.EventBus.$on("productResultsUpdated", function(data) {
   moveFeaturesDropdown();
-  if (data["facet"] == "features") {
-    window["optimizely"] = window["optimizely"] || [];
-    window["optimizely"].push({
-      type: "event",
-      eventName: "clickFeaturesFacet"
-    });
-  }
 });
