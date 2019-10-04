@@ -4,41 +4,56 @@
     transform: translate3d(0, 100%, 0);
     visibility: visible;
   }
-  10% {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-  40% {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-  50% {
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
   100% {
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
-@keyframes comeThru {
+@keyframes enter {
   0% {
     -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
     visibility: visible;
   }
-  10% {
+  100% {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
-  40% {
+}
+
+.enter {
+  transition-timing-function: ease-out;
+  -webkit-animation-name: enter;
+  animation-name: enter;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  /* delay before start */
+  -webkit-animation-delay: 0;
+  animation-delay: 0;
+}
+
+@-webkit-keyframes exit {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+  100% {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
-  50% {
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
+}
+
+@keyframes exit {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
   }
   100% {
     -webkit-transform: translate3d(0, -100%, 0);
@@ -46,16 +61,16 @@
   }
 }
 
-.comeThru {
+.exit {
   transition-timing-function: ease-out;
-  -webkit-animation-name: comeThru;
-  animation-name: comeThru;
-  -webkit-animation-duration: 10s;
-  animation-duration: 10s;
+  -webkit-animation-name: exit;
+  animation-name: exit;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
   /* delay before start */
   -webkit-animation-delay: 0;
   animation-delay: 0;
@@ -78,6 +93,11 @@ body {
   padding: 0;
   height: 100%;
 }
+
+.stowaway {
+  transform: translateY(100%);
+}
+
 .banner {
   background-color: purple;
   text-align: center;
@@ -91,6 +111,12 @@ body {
   line-height: 3rem;
 }
 
+#animation2 {
+  translate: transform;
+}
+.overlapper {
+  transform: translateY(-100%);
+}
 .white-link {
   color: white;
 }
