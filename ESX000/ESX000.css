@@ -112,10 +112,9 @@ body {
 }
 
 #animation2 {
-  translate: transform;
-}
-.overlapper {
-  transform: translateY(-100%);
+  position: absolute;
+  width: 100%;
+  top: 0px;
 }
 .white-link {
   color: white;
