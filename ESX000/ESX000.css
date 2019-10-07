@@ -1,4 +1,4 @@
-@-webkit-keyframes comeThru {
+@-webkit-keyframes enter {
   0% {
     -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
@@ -76,6 +76,61 @@
   animation-delay: 0;
 }
 
+@-webkit-keyframes in-n-out {
+  0% {
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+  25% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  75% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+@keyframes in-n-out {
+  0% {
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+  25% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  75% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+.in-n-out {
+  transition-timing-function: ease-out;
+  -webkit-animation-name: in-n-out;
+  animation-name: in-n-out;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  /* delay before start */
+  -webkit-animation-delay: 0;
+  animation-delay: 0;
+}
+
 /* ADA for reduced motion */
 @media (print), (prefers-reduced-motion: reduce) {
   .animated {
@@ -86,6 +141,13 @@
     -webkit-animation-iteration-count: 1 !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+.white-link {
+  color: white;
+}
+.white-link :hover {
+  color: grey;
 }
 
 body {
@@ -99,8 +161,7 @@ body {
 }
 
 .banner {
-  background-color: purple;
-  text-align: center;
+  text-align: left;
   height: 3rem;
 }
 
@@ -115,10 +176,4 @@ body {
   position: absolute;
   width: 100%;
   top: 0px;
-}
-.white-link {
-  color: white;
-}
-.white-link :hover {
-  color: grey;
 }
