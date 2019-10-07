@@ -1,0 +1,101 @@
+@-webkit-keyframes in-n-out {
+  0% {
+    -webkit-transform: translate3d(0, 200%, 0);
+    transform: translate3d(0, 200%, 0);
+    visibility: visible;
+  }
+  10% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  85% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    -webkit-transform: translate3d(0, -200%, 0);
+    transform: translate3d(0, -200%, 0);
+  }
+}
+
+@keyframes in-n-out {
+  0% {
+    -webkit-transform: translate3d(0, 200%, 0);
+    transform: translate3d(0, 200%, 0);
+    visibility: visible;
+  }
+  10% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  85% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    -webkit-transform: translate3d(0, -200%, 0);
+    transform: translate3d(0, -200%, 0);
+  }
+}
+
+.in-n-out {
+  transition-timing-function: ease-out;
+  -webkit-animation-name: in-n-out;
+  animation-name: in-n-out;
+  -webkit-animation-duration: 7s;
+  animation-duration: 7s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-delay: 0;
+  animation-delay: 0;
+}
+
+/* ADA for reduced motion */
+@media (print), (prefers-reduced-motion: reduce) {
+  .animated {
+    -webkit-animation-duration: 1ms !important;
+    animation-duration: 1ms !important;
+    -webkit-transition-duration: 1ms !important;
+    transition-duration: 1ms !important;
+    -webkit-animation-iteration-count: 1 !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+.white-link {
+  color: white;
+}
+
+.white-link:hover {
+  text-decoration-color: white;
+  text-decoration: underline;
+  color: white !important;
+}
+
+.stowaway {
+  transform: translateY(100%);
+}
+
+.banner {
+  text-align: left;
+}
+
+.banner-text {
+  margin: 0;
+}
+
+header .secondary-nav {
+  background-color: #20455f;
+}
+
+.secondary-nav .container .row {
+  overflow: hidden;
+}
+
+.secondary-nav .container .row .col-sm-6:first-of-type {
+  color: white;
+  font-size: 1.5rem;
+  line-height: 3rem;
+}
