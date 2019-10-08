@@ -74,6 +74,21 @@
   color: white !important;
 }
 
+.white-link:active {
+  text-decoration-color: white;
+  text-decoration: underline;
+  color: white !important;
+}
+
+.white-link:visited {
+  text-decoration: none;
+  color: white !important;
+}
+
+.white-link:focus {
+  color: white !important;
+}
+
 .stowaway {
   transform: translateY(100%);
 }
