@@ -1,0 +1,18 @@
+10 facets each
+
+sofa - https://www.livingspaces.com/departments/furniture/living-room/sofas-and-sectionals/sofas
+sectional - https://www.livingspaces.com/departments/furniture/living-room/sofas-and-sectionals/sectional-sofas
+beds - https://www.livingspaces.com/departments/furniture/bedroom/beds
+dining tables - https://www.livingspaces.com/departments/furniture/dining-room/dining-tables
+dining sets - https://www.livingspaces.com/departments/furniture/dining-room/dining-room-sets
+dining chairs - https://www.livingspaces.com/departments/furniture/dining-room/dining-room-chairs
+rugs - https://www.livingspaces.com/departments/rugs/all-rugs
+mattresses - https://www.livingspaces.com/departments/mattresses/all-mattresses
+accent chairs - https://www.livingspaces.com/departments/furniture/living-room/accent-and-sofa-chairs/accent-chairs
+coffee tables - https://www.livingspaces.com/departments/furniture/living-room/coffee-tables
+tv stands - https://www.livingspaces.com/departments/furniture/living-room/tv-stands-and-entertainment-centers/tv-stands
+accent pillows - https://www.livingspaces.com/departments/home-decor/pillows/all
+recliners - https://www.livingspaces.com/departments/furniture/living-room/recliners/recliner-chairs
+nightstands - https://www.livingspaces.com/departments/furniture/bedroom/nightstands
+dresses - https://www.livingspaces.com/departments/furniture/bedroom/dressers
+search page - https://www.livingspaces.com/search 
