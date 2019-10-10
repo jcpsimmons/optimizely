@@ -1,18 +1,26 @@
-function clickFacet() {
-  $("div.faceted-search-component .navbar-collapse")
+$(document).ready(function() {
+  window
+    .$(".navbar-collapse")
     .children(".nav")
     .click(function() {
+      console.log("x");
       window["optimizely"] = window["optimizely"] || [];
       window["optimizely"].push({
         type: "event",
-        eventName: "clickedFacet"
+        eventName: "clickedSortingFacet"
       });
     });
-}
-
-$(document).ready(function() {
-  clickFacet();
-  window.EventBus.$on("productResultsUpdated", function(data) {
-    clickFacet();
+  window.EventBus.$on("productResultsUpdated", function() {
+    window
+      .$(".navbar-collapse")
+      .children(".nav")
+      .click(function() {
+        console.log("x");
+        window["optimizely"] = window["optimizely"] || [];
+        window["optimizely"].push({
+          type: "event",
+          eventName: "clickedSortingFacet"
+        });
+      });
   });
 });
