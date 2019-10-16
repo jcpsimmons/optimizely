@@ -1,0 +1,7 @@
+(www\.livingspaces\.com\/search\?term=)(sofa|sofas|sfoa|couches|couch|loveseat|loveseats|love\+seat|love\+seats|dresser|dressers)
+(www\.livingspaces\.com\/search\?term=)(sectional|sectionals|sectional\+sofa|sectional\+sofas|sectional\+couch|sectional\+couches)
+(www\.livingspaces\.com\/search\?term=)(dining\+table|dining\+tables|dining\+room\+table|dining\+room\+tables)
+(www\.livingspaces\.com\/search\?term=)(sofa\+bed|sofa\+beds|sleeper\+sofa|sleeper\+sofas|tv\+stand|tv\+stands|tv\+console|tv\+consoles)
+(www\.livingspaces\.com\/search\?term=)(coffee\+table|coffee\+tables|cocktail\+table|cocktail\+tables)
+(www\.livingspaces\.com\/search\?term=)(accent\+chair|accent\+chairs|dining\+chairs|dining\+chair|recliner|recliners|bed|beds)
+(www\.livingspaces\.com\/search\?term=)(dining\+set|dining\+sets|dining\+room\+set|dining\+room\+sets|nightstand|nightstands|bedroom\+nightstand|bedroom\+nightstands)
