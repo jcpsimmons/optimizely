@@ -6,6 +6,12 @@ from selenium import webdriver
 
 OPTIMIZELY_SCRIPT_PATH = "/mnt/z/EpiContent/scripts/optimizely"
 
+def mountDrive():
+    try:
+        os.system('sudo mount -t drvfs Z: /mnt/z')
+    except:
+        pass
+
 def makeDirAndMove():
     '''
     Initialize output dirs.
@@ -33,10 +39,10 @@ def getOptimJS():
 def checkMove():
     x = os.listdir()
     if 'ls.js' in x and 'ls.min.js' in x:
-        os.system('mv ls.js {}'.format(OPTIMIZELY_SCRIPT_PATH))
-        os.system('mv ls.min.js {}'.format(OPTIMIZELY_SCRIPT_PATH))
+        os.system('sudo mv ls.js {}'.format(OPTIMIZELY_SCRIPT_PATH))
+        os.system('sudo mv ls.min.js {}'.format(OPTIMIZELY_SCRIPT_PATH))
 
-
+mountDrive()
 makeDirAndMove()
 getOptimJS()
 checkMove()
