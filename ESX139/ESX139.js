@@ -1,3 +1,9 @@
+// Targeting Code
+function jsCondition() {
+  return utag_data.product_group_id == "dining tables";
+}
+
+// Experiment Code
 function titleCase(str) {
   str = str.toLowerCase().split(" ");
   var final = [];
@@ -165,8 +171,13 @@ function mobile() {
   });
 }
 
-if (utag_data.site_type == "mobile") {
-  mobile();
-} else {
-  desktop();
-}
+var anotherInterval = setInterval(function() {
+  if (typeof window.jQuery !== "undefined" && $("#omniinventory").length > 0) {
+    clearInterval(anotherInterval);
+    if (utag_data.site_type == "mobile") {
+      mobile();
+    } else {
+      desktop();
+    }
+  }
+}, 50);
