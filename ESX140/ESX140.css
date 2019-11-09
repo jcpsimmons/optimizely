@@ -1,0 +1,9 @@
+.banner-container {
+  display: flex !important;
+}
+
+@media (max-width: 767px) {
+  #block232253 {
+    padding: 1rem 0;
+  }
+}
