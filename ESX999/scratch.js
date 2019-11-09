@@ -27,3 +27,5 @@ class Store {
     });
   }
 }
+
+x = new Store(utag_data);
