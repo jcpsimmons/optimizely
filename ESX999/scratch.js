@@ -39,15 +39,18 @@ class Store {
       .join(",");
     queryString =
       "https://www.livingspaces.com/api/restfulproducts?pid=" + queryString;
-    let response = await fetch(queryString)
-    let data = await response.json()
+    let response = await fetch(queryString);
+    let data = await response.json();
     this.rawData = data.products;
     for (i = 0; i < this.rawData.length; i++) {
       this.apiData[this.rawData[i].pid] = this.rawData[i];
       this.titleCorpus.push(this.rawData[i].title);
       this.titleCorpus.push(this.rawData[i].romanceCopy);
     }
-    this.titleCorpus = this.titleCorpus.join(' ').replace('  ', ' ').split(' ')
+    this.titleCorpus = this.titleCorpus
+      .join(" ")
+      .replace("  ", " ")
+      .split(" ");
     let wordProbz = {};
     this.titleCorpus.forEach(key => {
       if (wordProbz.hasOwnProperty(key)) {
@@ -56,10 +59,12 @@ class Store {
         wordProbz[key] = 1;
       }
     });
-    this.titleCorpus = wordProbz
-    this.titleCorpusSorted = Object.keys(wordProbz).sort(function (a, b) { return wordProbz[b] - wordProbz[a] })
-    return true
-  };
+    this.titleCorpus = wordProbz;
+    this.titleCorpusSorted = Object.keys(wordProbz).sort(function(a, b) {
+      return wordProbz[b] - wordProbz[a];
+    });
+    return true;
+  }
 
   titleCase(str) {
     str = str.toLowerCase().split(" ");
@@ -73,9 +78,7 @@ class Store {
 
 x = new Store(utag_data);
 await x.generateRestfulProductsData();
-console.log(x.apiData)
-  // x.generateWordProbabilities();
+console.log(x.apiData);
+// x.generateWordProbabilities();
 
-
-
-  `https://brm-core-0.brsrvr.com/api/v1/core/?account_id=5221&auth_key=o5xlkgn7my5fmr5c&domain_key=livingspaces_com&request_id=fd8d6a02a5764b7995c600e766a38bda&url=%2fbr-checker&_br_uid_2=uid%253D4961390647524%253Av%253D11.8%253Ats%253D1463613117510%253Ahc%253D3145&ptype=other&request_type=search&q=%${xxxx}%22&start=0&rows=13&search_type=keyword&fl=title,pid,url,price,sale_price,reviews,reviews_count,thumb_image&fq=product_attribute%3A%${xxxx}`
+// `https://brm-core-0.brsrvr.com/api/v1/core/?account_id=5221&auth_key=o5xlkgn7my5fmr5c&domain_key=livingspaces_com&request_id=fd8d6a02a5764b7995c600e766a38bda&url=%2fbr-checker&_br_uid_2=uid%253D4961390647524%253Av%253D11.8%253Ats%253D1463613117510%253Ahc%253D3145&ptype=other&request_type=search&q=%${xxxx}%22&start=0&rows=13&search_type=keyword&fl=title,pid,url,price,sale_price,reviews,reviews_count,thumb_image&fq=product_attribute%3A%${xxxx}`
