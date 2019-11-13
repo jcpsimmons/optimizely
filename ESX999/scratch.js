@@ -92,23 +92,18 @@ class Store {
     for (i = 0; i < this.titleCorpusSorted.length; i++) {
       if (Object.keys(this.relatedItems).length < 10) {
         let bloomreachQueryLink = `https://brm-core-0.brsrvr.com/api/v1/core/?account_id=5221&auth_key=o5xlkgn7my5fmr5c&domain_key=livingspaces_com&request_id=fd8d6a02a5764b7995c600e766a38bda&url=%2fbr-checker&_br_uid_2=uid%253D4961390647524%253Av%253D11.8%253Ats%253D1463613117510%253Ahc%253D3145&ptype=other&request_type=search&q=${this.titleCorpusSorted[i]}&start=0&rows=13&search_type=keyword&fl=title,pid,url,price,sale_price,reviews,reviews_count,thumb_image`;
-        console.log(bloomreachQueryLink);
         let response = await fetch(bloomreachQueryLink);
-        console.log(response);
         let data = await response.json();
-        console.log(data);
         if (data.response.numFound > 10) {
-          console.log("hit");
           this.relatedItems[this.titleCorpusSorted[i]] = data.response.docs;
         }
-        console.log(data.response.docs);
       }
     }
   }
+
+  generateHTML = () => {};
 }
 
 x = new Store(utag_data);
 await x.generateRestfulProductsData();
 await x.getRelatedProducts();
-
-// `https://brm-core-0.brsrvr.com/api/v1/core/?account_id=5221&auth_key=o5xlkgn7my5fmr5c&domain_key=livingspaces_com&request_id=fd8d6a02a5764b7995c600e766a38bda&url=%2fbr-checker&_br_uid_2=uid%253D4961390647524%253Av%253D11.8%253Ats%253D1463613117510%253Ahc%253D3145&ptype=other&request_type=search&q=%dining%22&start=0&rows=13&search_type=keyword&fl=title,pid,url,price,sale_price,reviews,reviews_count,thumb_image&fq=product_attribute%3A%dining`
