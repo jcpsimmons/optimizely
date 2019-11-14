@@ -96,7 +96,7 @@ class Store {
       }
     });
     this.titleCorpus = wordProbz;
-    console.log("API queried");
+    // console.log("API queried");
     this.titleCorpusSorted = Object.keys(wordProbz).sort(function(a, b) {
       return wordProbz[b] - wordProbz[a];
     });
@@ -128,9 +128,7 @@ class Store {
 
   async getBestSellers() {
     this.bestSellers = [];
-    let bloomreachQueryLink = `https://brm-core-0.brsrvr.com/api/v1/core/?account_id=5221&auth_key=o5xlkgn7my5fmr5c&domain_key=livingspaces_com&request_id=fd8d6a02a5764b7995c600e766a38bda&url=%2fbr-checker&request_type=search&q=best+sellers&start=${
-      (this.randomizer * 4).toString
-    }&rows=12&search_type=keyword&fl=title,pid,url,price,sale_price,reviews,reviews_count,thumb_image`;
+    let bloomreachQueryLink = `https://brm-core-0.brsrvr.com/api/v1/core/?account_id=5221&auth_key=o5xlkgn7my5fmr5c&domain_key=livingspaces_com&request_id=fd8d6a02a5764b7995c600e766a38bda&url=%2fbr-checker&request_type=search&q=best+sellers&start=${this.randomizer.toString()}&rows=12&search_type=keyword&fl=title,pid,url,price,sale_price,reviews,reviews_count,thumb_image`;
     let response = await fetch(bloomreachQueryLink);
     let data = await response.json();
     while (data.response.docs.length > 0) {
@@ -168,7 +166,20 @@ class Store {
   }
 }
 
+// Loading Graphic Logic
+function loadingState(bool) {
+  if (bool) {
+    document.getElementById("loadingSpinner").style.display = "block";
+    document.getElementById("productsArea").style.display = "none";
+  } else {
+    document.getElementById("loadingSpinner").style.display = "none";
+    document.getElementById("productsArea").style.display = "block";
+  }
+}
+
+// Holder function for Async success
 async function containerFcn() {
+  loadingState(true);
   x = new Store(utag_data);
   if (x.eligibility) {
     await x.generateRestfulProductsData();
@@ -181,12 +192,12 @@ async function containerFcn() {
     x.itemHtml[0];
   document.getElementById("MoreItemsToConsider").innerHTML = x.itemHtml[1];
   document.getElementById("BasedOnYourRecentHistory").innerHTML = x.itemHtml[2];
+  loadingState(false);
 }
 
 var anotherInterval = setInterval(function() {
   if (typeof utag_data !== "undefined") {
     clearInterval(anotherInterval);
-    // need to somehow check for eligibility first, outside of constructor
     containerFcn();
   }
-}, 50);
+}, 4000);
