@@ -58,7 +58,9 @@ class Store {
       "style",
       "construction",
       "solid",
-      "panel"
+      "panel",
+      "which",
+      "while"
     ];
     this.apiData = {};
     this.titleCorpus = [];
