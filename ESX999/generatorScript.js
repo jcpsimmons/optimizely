@@ -48,7 +48,18 @@ class Store {
   }
 
   async generateRestfulProductsData() {
-    let fillwords = ["boasts", "value", "doesn", "finish", "piece"];
+    let fillwords = [
+      "boasts",
+      "value",
+      "doesn",
+      "finish",
+      "piece",
+      "design",
+      "style",
+      "construction",
+      "solid",
+      "panel"
+    ];
     this.apiData = {};
     this.titleCorpus = [];
     let queryArr = [];
@@ -138,6 +149,7 @@ class Store {
   }
 
   async getRecentItems() {
+    // Unfinished method - was going to grab recently released items
     function makeDateString(d) {
       month = (d.getMonth() + 1).toString();
       if (month.length == 1) {
@@ -164,6 +176,20 @@ class Store {
     // STOPPED HERE THURSDAY - get the products data, put into HTML (probably just in this function) and assign it to a this object
   }
 
+  generateLinks() {
+    this.searchLinks = [];
+    if (this.titleCorpusSorted.length > 10) {
+      let arr = this.titleCorpusSorted;
+      arr.splice(10, arr.length);
+      this.searchLinks = arr.map(function(item) {
+        return `<a href="https://www.livingspaces.com/search?term=${item}"><p>"${item}"</p></a>`;
+      });
+    }
+    this.searchLinks =
+      "<h2 class='subtitle'>View more items related to:</h2>" +
+      this.searchLinks.join("");
+  }
+
   generateHtml() {
     this.itemHtml = [];
     if (this.relatedItems) {
@@ -180,7 +206,7 @@ class Store {
       for (i = 0; i < this.bestSellers.length; i++) {
         this.itemHtml.push(
           this.bestSellers[i].map(function(item) {
-            return `<div class='col-xs-6 col-md-3'><a href='#'><img class='img-responsive' src='${item.thumb_image}' alt='${item.title}'><p class='item-text'>${item.title}</p><p class='price-text'>$${item.sale_price}</p></a></div>`;
+            return `<div class='col-xs-6 col-md-3'><a href='https://www.livingspaces.com/${item.pid}'><img class='img-responsive' src='${item.thumb_image}' alt='${item.title}'><p class='item-text'>${item.title}</p><p class='price-text'>$${item.sale_price}</p></a></div>`;
           })
         );
       }
@@ -215,10 +241,12 @@ async function containerFcn() {
     await x.getBestSellers();
   }
   x.generateHtml();
+  x.generateLinks();
   document.getElementById("RelatedToItemsYouveViewed").innerHTML =
     x.itemHtml[0];
   document.getElementById("MoreItemsToConsider").innerHTML = x.itemHtml[1];
   document.getElementById("BasedOnYourRecentHistory").innerHTML = x.itemHtml[2];
+  document.getElementById("RelatedLinks").innerHTML = x.searchLinks;
   loadingState(false);
 }
 
