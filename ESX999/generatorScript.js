@@ -253,8 +253,30 @@ async function containerFcn() {
 }
 
 var anotherInterval = setInterval(function() {
-  if (typeof utag_data !== "undefined") {
+  if (
+    typeof utag_data !== "undefined" &&
+    typeof window.jQuery !== "undefined"
+  ) {
     clearInterval(anotherInterval);
+    if (utag_data.site_type == "desktop") {
+      $(".product-slider").slick({
+        infinite: true,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        arrows: false,
+        autoplay: true,
+        autoplaySpeed: 1000
+      });
+    } else {
+      $(".product-slider").slick({
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        autoplay: true,
+        autoplaySpeed: 1000
+      });
+    }
     containerFcn();
   }
 }, 4000);

@@ -1,9 +1,6 @@
 <style>
     .x .top-row {
-        padding-bottom: 3rem;
-        border-radius: .5rem;
-        padding: 3rem;
-        background: linear-gradient(90deg, rgba(254, 255, 0, 1) 0%, rgba(255, 145, 0, 1) 100%);
+
         margin-bottom: 3rem;
     }
 
@@ -48,6 +45,25 @@
     /* SHOW HIDE SETUP */
     #productsArea {
         display: none;
+    }
+
+    /* BANNER STYLING */
+    .banner-area {
+        background-color: #f4f4f4;
+    }
+
+    #BannerArea {
+        pointer-events: none;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .product-slider.slick-initialized.slick-slider {
+        padding: 3rem 0
+    }
+
+    .hand-picked {
+        padding: 2rem 4rem;
     }
 
     /* ANIMATION */
@@ -179,16 +195,62 @@
             display: block;
         }
     }
+
+    /* DESKTOP/MOBILE ONLY */
+    .x .desktop-only {
+        display: flex;
+    }
+
+    .x .desktop-only-block {
+        display: block;
+    }
+
+    .x .mobile-only {
+        display: none;
+    }
+
+    @media (max-width:767px) {
+        .x .desktop-only {
+            display: none
+        }
+
+        .x .desktop-only-block {
+            display: none
+        }
+
+        .x .mobile-only {
+            display: block
+        }
+    }
 </style>
 <div class="x">
     <div class="row top-row">
-        <div class="col-xs-12 text-center">
-            <h1 class="page-header bounce">
-                Hand Picked Items for You
-            </h1>
-            <h2>A personalized list of items, <span class="grey-underline">curated just for
-                    you</span>.<br />Check back
-                regularly to see more items.</h2>
+        <div id="BannerArea" class="col-xs-12 text-center banner-area">
+            <img src="https://www.livingspaces.com/globalassets/images/hand_picked_for_you/hand-picked-title.png"
+                alt="hand picked for you" class="img-responsive center-block hand-picked">
+            <p class="desktop-only-block" style="padding-top:1rem">A curated list for you. Check back regularly to see
+                more of
+                your favorites!</p>
+            <p class="mobile-only" style="padding-top:1rem">Check back regularly to see more of
+                your favorites!</p>
+            <div class="product-slider">
+                <img src="https://www.livingspaces.com/globalassets/images/hand_picked_for_you/item-bed.jpg"
+                    alt="slick component" class="img-responsive">
+                <img src='https://www.livingspaces.com/globalassets/images/hand_picked_for_you/item-table.jpg'
+                    alt='slick component' class='img-responsive'>
+                <img src='https://www.livingspaces.com/globalassets/images/hand_picked_for_you/item-sectional.jpg'
+                    alt='slick component' class='img-responsive'>
+                <img src='https://www.livingspaces.com/globalassets/images/hand_picked_for_you/item-reclining.jpg'
+                    alt='slick component' class='img-responsive'>
+                <img src='https://www.livingspaces.com/globalassets/images/hand_picked_for_you/item-dining.jpg'
+                    alt='slick component' class='img-responsive'>
+                <img src='https://www.livingspaces.com/globalassets/images/hand_picked_for_you/item-loveseat.jpg'
+                    alt='slick component' class='img-responsive'>
+                <img src='https://www.livingspaces.com/globalassets/images/hand_picked_for_you/item-chest.jpg'
+                    alt='slick component' class='img-responsive'>
+                <img src='https://www.livingspaces.com/globalassets/images/hand_picked_for_you/item-chair.jpg'
+                    alt='slick component' class='img-responsive'>
+            </div>
         </div>
     </div>
     <div id="loadingSpinner" class="text-center">
