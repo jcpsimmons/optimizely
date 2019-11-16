@@ -239,11 +239,11 @@ async function containerFcn() {
   if (x.eligibility) {
     await x.generateRestfulProductsData();
     await x.getRelatedProducts();
+    x.generateLinks();
   } else {
     await x.getBestSellers();
   }
   x.generateHtml();
-  x.generateLinks();
   document.getElementById("RelatedToItemsYouveViewed").innerHTML =
     x.itemHtml[0];
   document.getElementById("MoreItemsToConsider").innerHTML = x.itemHtml[1];
