@@ -261,7 +261,7 @@ var anotherInterval = setInterval(function() {
     if (utag_data.site_type == "desktop") {
       $(".product-slider").slick({
         infinite: true,
-        slidesToShow: 5,
+        slidesToShow: 4,
         slidesToScroll: 1,
         arrows: false,
         autoplay: true,
@@ -270,7 +270,7 @@ var anotherInterval = setInterval(function() {
     } else {
       $(".product-slider").slick({
         infinite: true,
-        slidesToShow: 1,
+        slidesToShow: 2.5,
         slidesToScroll: 1,
         arrows: false,
         autoplay: true,
