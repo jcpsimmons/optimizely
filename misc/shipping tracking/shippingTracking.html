@@ -1,0 +1,25 @@
+<!-- Purple Cow Code -->
+<script>
+    try {
+        var urlParams = new URLSearchParams(window.location.search);
+        var qstring = urlParams.getAll('query')[0]
+        if (qstring.length == 9) {
+            window.location.href = "https://www.livingspaces.com/track-delivery?orderid=SO-" + qstring
+        }
+    } catch (e) { }
+</script>
+
+<!-- SO - No Results Found Code -->
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+        if (document.querySelectorAll("span.no-results").length) {
+            try {
+                var urlParams = new URLSearchParams(window.location.search);
+                var qstring = urlParams.getAll('query')[0]
+                if (qstring.startsWith("so") && qstring.split("-")[1].length == 9) {
+                    window.location.href = "https://www.livingspaces.com/track-delivery?orderid=" + qstring
+                }
+            } catch (e) { }
+        }
+    })
+</script>
