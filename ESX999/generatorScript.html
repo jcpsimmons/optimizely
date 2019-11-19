@@ -61,7 +61,11 @@
         "solid",
         "panel",
         "which",
-        "while"
+        "while",
+        "facing",
+        "order",
+        "extra",
+        "program"
       ];
       this.apiData = {};
       this.titleCorpus = [];
@@ -99,6 +103,7 @@
         if (
           key.length > 4 &&
           !key.endsWith("y") &&
+          !key.endsWith("ing") &&
           !key.endsWith("s") &&
           fillwords.indexOf(key) == -1
         ) {
@@ -185,12 +190,10 @@
         let arr = this.titleCorpusSorted;
         arr.splice(10, arr.length);
         this.searchLinks = arr.map(function (item) {
-          return `<a href="https://www.livingspaces.com/search?term=${item}"><p>"${item}"</p></a>`;
+          return `<li><a href="https://www.livingspaces.com/search?term=${item}" title="${item}">${item}</a></li>`;
         });
+        this.searchLinks = this.searchLinks.join("")
       }
-      this.searchLinks =
-        "<h2 class='subtitle'>View more items related to:</h2>" +
-        this.searchLinks.join("");
     }
 
     generateHtml() {
@@ -265,7 +268,7 @@
       if (utag_data.site_type == "desktop") {
         $(".product-slider").slick({
           infinite: true,
-          slidesToShow: 3,
+          slidesToShow: 5,
           centerMode: true,
           slidesToScroll: 1,
           arrows: false,

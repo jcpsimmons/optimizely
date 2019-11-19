@@ -71,6 +71,17 @@
         padding: 2rem 4rem;
     }
 
+    /* Lower List Tags Styling */
+
+    .x ul {
+        white-space: normal;
+        padding-left: 1.25rem;
+    }
+
+    .x .block-related {
+        height: auto;
+    }
+
     /* ANIMATION */
     @-webkit-keyframes fadeIn {
         from {
@@ -299,6 +310,18 @@
         .x .mobile-only {
             display: block
         }
+
+        .x .subtitle {
+            padding-left: 2rem;
+            padding-right: 2rem;
+            margin-left: -2rem;
+            margin-right: -2rem;
+        }
+
+        /* top space fix */
+        .generic-html-template>.container {
+            padding-top: 0;
+        }
     }
 </style>
 <div class="x">
@@ -334,7 +357,7 @@
         </div>
     </div>
     <div id="loadingSpinner" class="text-center">
-        <h2 class="fadeIn">Retrieving Your Items</h2>
+        <h2 class="fadeIn">Curating Items for You</h2>
         <i class="fa fa-spinner spin" aria-hidden="true"></i>
     </div>
     <div id="productsArea">
@@ -359,7 +382,9 @@
         </div>
         <div class="row" id="BasedOnYourRecentHistory">
         </div>
-        <div class="row" id="RelatedLinks">
+        <h3 class='subtitle'>View more items related to:</h3>
+        <div class="row block-related" id="RelatedLinksContainer">
+            <ul id="RelatedLinks"></ul>
         </div>
     </div>
 </div>
