@@ -1,5 +1,4 @@
 <script>
-
   const undefinedChecker = (query) => {
     if (typeof query == 'undefined') {
       return false
@@ -60,7 +59,7 @@
 
     async generateRestfulProductsData() {
       let fillwords = [
-        "boasts", "shouldn", "include", "additional", "unbeatable", "unbelievable", "value", "doesn", "finish", "piece", "design", "style", "construction", "solid", "panel", "which", "while", "facing", "order", "extra", "program", "through", "special", "receive", "ensure", "addition", "tailored", "available", "right", "price", "offered", "mention", "there", "could", "would", "welcome", "select", "select", "favorite", "these", "boast", "provide", "meant", "yourself", "lunch", "dinner", "create"
+        "boasts", "shouldn", "include", "additional", "unbeatable", "unbelievable", "value", "doesn", "finish", "piece", "design", "style", "construction", "solid", "panel", "which", "while", "facing", "order", "extra", "program", "through", "special", "receive", "ensure", "addition", "tailored", "available", "right", "price", "offered", "mention", "there", "could", "would", "welcome", "select", "select", "favorite", "these", "boast", "provide", "meant", "yourself", "lunch", "dinner", "create", "experience", "device", "developed", "convenient"
       ];
       this.apiData = {};
       this.titleCorpus = [];
@@ -195,7 +194,6 @@
         });
         this.searchLinks = this.searchLinks.join("")
       }
-      console.log(this.searchLinks)
     }
 
     generateHtml() {
