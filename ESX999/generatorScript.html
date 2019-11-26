@@ -1,13 +1,22 @@
 <script>
+
+  const undefinedChecker = (query) => {
+    if (typeof query == 'undefined') {
+      return false
+    } else {
+      return true
+    }
+  }
+
   class Store {
     constructor(utag_data) {
       this.randomizer = Math.floor(Math.random() * 3 + 1) * 4;
       try {
-        this.searchTerms = utag_data["cp.lsf-search-term"].split(",");
-        this.searchWords = utag_data["cp.lsf-search-term"].split(/,| /);
-        this.likedItems = JSON.parse(utag_data["cp.lsf-liked-items"]);
-        this.viewedItems = JSON.parse(utag_data["cp.lsf-recently-viewed-list"]);
-        this.cartAdds = utag_data["cp.lsf-cartadds"].split(",");
+        this.searchTerms = undefinedChecker(utag_data["cp.lsf-search-term"]) ? utag_data["cp.lsf-search-term"].split(",") : []
+        this.searchWords = undefinedChecker(utag_data["cp.lsf-search-term"]) ? utag_data["cp.lsf-search-term"].split(/,| /) : []
+        this.likedItems = undefinedChecker(utag_data["cp.lsf-liked-items"]) ? JSON.parse(utag_data["cp.lsf-liked-items"]) : []
+        this.viewedItems = undefinedChecker(utag_data["cp.lsf-recently-viewed-list"]) ? JSON.parse(utag_data["cp.lsf-recently-viewed-list"]) : []
+        this.cartAdds = undefinedChecker(utag_data["cp.lsf-cartadds"]) ? utag_data["cp.lsf-cartadds"].split(",") : []
         let colors = [
           "black",
           "brown",
@@ -44,13 +53,14 @@
           this.eligibility = true;
         }
       } catch (e) {
+        console.log(e)
         this.eligibility = false;
       }
     }
 
     async generateRestfulProductsData() {
       let fillwords = [
-        "boasts", "value", "doesn", "finish", "piece", "design", "style", "construction", "solid", "panel", "which", "while", "facing", "order", "extra", "program", "through", "special", "receive", "ensure", "addition", "tailored", "available", "right", "price", "offered", "mention", "there", "could", "would", "welcome", "select", "select", "favorite", "these", "boast", "provide", "meant", "yourself"
+        "boasts", "shouldn", "include", "additional", "unbeatable", "unbelievable", "value", "doesn", "finish", "piece", "design", "style", "construction", "solid", "panel", "which", "while", "facing", "order", "extra", "program", "through", "special", "receive", "ensure", "addition", "tailored", "available", "right", "price", "offered", "mention", "there", "could", "would", "welcome", "select", "select", "favorite", "these", "boast", "provide", "meant", "yourself", "lunch", "dinner", "create"
       ];
       this.apiData = {};
       this.titleCorpus = [];
@@ -170,7 +180,12 @@
     }
 
     generateLinks() {
-      let sectionLength = 30
+      var sectionLength = 0
+      if (this.titleCorpusSorted.length > 20) {
+        sectionLength = 30
+      } else {
+        sectionLength = this.titleCorpusSorted.length
+      }
       this.searchLinks = [];
       if (this.titleCorpusSorted.length > sectionLength) {
         let arr = this.titleCorpusSorted;
@@ -180,6 +195,7 @@
         });
         this.searchLinks = this.searchLinks.join("")
       }
+      console.log(this.searchLinks)
     }
 
     generateHtml() {
@@ -236,6 +252,7 @@
   async function containerFcn() {
     loadingState(true);
     x = new Store(utag_data);
+    console.log('eligible ' + x.eligibility.toString())
     if (x.eligibility) {
       await x.generateRestfulProductsData();
       await x.getRelatedProducts();
