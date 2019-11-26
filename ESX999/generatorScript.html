@@ -50,24 +50,7 @@
 
     async generateRestfulProductsData() {
       let fillwords = [
-        "boasts",
-        "value",
-        "doesn",
-        "finish",
-        "piece",
-        "design",
-        "style",
-        "construction",
-        "solid",
-        "panel",
-        "which",
-        "while",
-        "facing",
-        "order",
-        "extra",
-        "program",
-        "through",
-        "special"
+        "boasts", "value", "doesn", "finish", "piece", "design", "style", "construction", "solid", "panel", "which", "while", "facing", "order", "extra", "program", "through", "special", "receive", "ensure", "addition", "tailored", "available", "right", "price", "offered", "mention", "there", "could", "would", "welcome", "select", "select", "favorite", "these", "boast", "provide", "meant", "yourself"
       ];
       this.apiData = {};
       this.titleCorpus = [];
@@ -187,12 +170,13 @@
     }
 
     generateLinks() {
+      let sectionLength = 30
       this.searchLinks = [];
-      if (this.titleCorpusSorted.length > 10) {
+      if (this.titleCorpusSorted.length > sectionLength) {
         let arr = this.titleCorpusSorted;
-        arr.splice(10, arr.length);
+        arr.splice(sectionLength, arr.length);
         this.searchLinks = arr.map(function (item) {
-          return `<li><a href="https://www.livingspaces.com/search?term=${item}" title="${item}">${item}</a></li>`;
+          return `<li><a href="https://www.livingspaces.com/search?term=${item}" title="${item}">${item.replace(/^\w/, c => c.toUpperCase())}</a></li>`;
         });
         this.searchLinks = this.searchLinks.join("")
       }
@@ -238,6 +222,13 @@
       $(".product-slider").css("display", "block");
       $(".product-slider").addClass("fadeInFast");
       $(".placeholder-image").css("display", "none");
+      $('html, body').animate(
+        {
+          scrollTop: $("#BannerArea").offset().top,
+        },
+        500,
+        'linear'
+      )
     }
   }
 
@@ -257,10 +248,16 @@
       x.itemHtml[0];
     document.getElementById("MoreItemsToConsider").innerHTML = x.itemHtml[1];
     document.getElementById("BasedOnYourRecentHistory").innerHTML = x.itemHtml[2];
-    document.getElementById("RelatedLinks").innerHTML = x.searchLinks;
+    if (x.searchLinks == 'undefined' || typeof x.searchLinks == 'undefined') {
+      document.getElementById("RelatedLinksContainer").style.display = 'none'
+      document.getElementById("RelatedItemsTitle").style.display = 'none'
+    } else {
+      document.getElementById("RelatedLinks").innerHTML = x.searchLinks;
+    }
     loadingState(false);
   }
 
+  // handler interval, slick init
   var anotherInterval = setInterval(function () {
     if (
       typeof utag_data !== "undefined" &&
@@ -275,7 +272,7 @@
           slidesToScroll: 1,
           arrows: false,
           autoplay: true,
-          autoplaySpeed: 1000
+          autoplaySpeed: 2000
         });
       } else {
         $(".product-slider").slick({
@@ -284,7 +281,7 @@
           slidesToScroll: 1,
           arrows: false,
           autoplay: true,
-          autoplaySpeed: 1000
+          autoplaySpeed: 2000
         });
       }
       containerFcn();
