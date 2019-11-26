@@ -56,10 +56,28 @@
         background-color: #f4f4f4;
     }
 
+    .x .placeholder-image {
+        height: auto;
+        max-width: 15rem;
+    }
+
     #BannerArea {
         pointer-events: none;
         padding-left: 0;
         padding-right: 0;
+        overflow: hidden
+    }
+
+    .x .img-responsive.slick-slide {
+        padding: 0 2.5rem
+    }
+
+    .x .slick-slide {
+        margin: 0 50px
+    }
+
+    .x .slick-list {
+        margin: 0 -50px
     }
 
     .product-slider.slick-initialized.slick-slider {
@@ -68,7 +86,7 @@
     }
 
     .hand-picked {
-        padding: 2rem 4rem;
+        padding: 1rem 4rem;
     }
 
     /* Lower List Tags Styling */
@@ -324,15 +342,16 @@
         }
     }
 </style>
+<div style="color:red;background-color:yellow;">this is in es6 and needs babel'd before deploy</div>
 <div class="x">
     <div class="row top-row">
         <div id="BannerArea" class="col-xs-12 text-center banner-area">
             <img src="https://www.livingspaces.com/globalassets/images/hand_picked_for_you/hand-picked-title.png"
                 alt="hand picked for you" class="img-responsive center-block hand-picked">
-            <p class="desktop-only-block" style="padding-top:1rem">A curated list for you. Check back regularly to see
+            <p class="desktop-only-block">A curated list for you. Check back regularly to see
                 more of
                 your favorites!</p>
-            <p class="mobile-only" style="padding-top:1rem">Check back regularly to see more of
+            <p class="mobile-only">Check back regularly to see more of
                 your favorites!</p>
             <div class="product-slider">
                 <img src="https://www.livingspaces.com/globalassets/images/hand_picked_for_you/item-bed.jpg"
@@ -350,6 +369,8 @@
                 <img src='https://www.livingspaces.com/globalassets/images/hand_picked_for_you/item-chest.jpg'
                     alt='slick component' class='img-responsive'>
                 <img src='https://www.livingspaces.com/globalassets/images/hand_picked_for_you/item-chair.jpg'
+                    alt='slick component' class='img-responsive'>
+                <img src='https://www.livingspaces.com/globalassets/images/hand_picked_for_you/item-diningtable.jpg'
                     alt='slick component' class='img-responsive'>
             </div>
             <img src="https://www.livingspaces.com/globalassets/images/hand_picked_for_you/item-bed.jpg"
