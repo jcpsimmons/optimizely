@@ -1,17 +1,17 @@
 function moveFeaturesDropdown() {
-  if (
-    window
-      .$(".navbar-collapse ul:nth-child(5)>li>a")
-      .text()
-      .replace(/ /g, "")
-      .replace(/\n/g, "") == "Features"
-  ) {
+  if (window.$("a.dropdown-toggle:contains(Features)").length == 1) {
     var featuresDropdown = window
-      .$(".navbar-collapse ul:nth-child(5)")
+      .$("a.dropdown-toggle:contains(Features)")
+      .parent()
+      .parent()
       .detach();
     featuresDropdown.prependTo(".navbar-collapse");
   }
 }
+
+setInterval(function() {
+  moveFeaturesDropdown();
+}, 100);
 
 window.$(document).ready(function() {
   moveFeaturesDropdown();
@@ -20,3 +20,8 @@ window.$(document).ready(function() {
 window.EventBus.$on("productResultsUpdated", function(data) {
   moveFeaturesDropdown();
 });
+
+// TARGETING
+function jsCond() {
+  return utag_data.page_type == "category" || utag_data.page_type == "search";
+}
