@@ -1,51 +1,62 @@
 function checkAndUpdate() {
-    Date.prototype.addDays = function (days) {
-        this.setDate(this.getDate() + parseInt(days));
-        return this;
-    };
-    var firstDate = Date.parse(
-        window.server.DeliveryDates[0].value.split(" ")[0]
-    );
-    var today = new Date();
-    var fiveDaysOut = today.addDays(5);
+  Date.prototype.addDays = function(days) {
+    this.setDate(this.getDate() + parseInt(days));
+    return this;
+  };
+  var firstDate = Date.parse(
+    window.server.DeliveryDates[0].value.split(" ")[0]
+  );
+  var today = new Date();
+  var fiveDaysOut = today.addDays(5);
 
-    var curZip = parseInt($(".current-shipping-zip-code").text());
-    if ((curZip > 90001) & (curZip < 96162)) {
-        var state = "CA";
-    } else if ((curZip > 85001) & (curZip < 86556)) {
-        var state = "AZ";
-    }
+  var curZip = parseInt($(".current-shipping-zip-code").text());
+  if ((curZip >= 90001) & (curZip <= 96162)) {
+    var state = "CA";
+  } else if ((curZip >= 85001) & (curZip <= 86556)) {
+    var state = "AZ";
+  }
 
+  if (
+    (state == "CA" && firstDate < fiveDaysOut) ||
+    (state == "AZ" && firstDate < fiveDaysOut)
+  ) {
+    //   ADD COLON
     if (
-        (state == "CA" && firstDate < fiveDaysOut) ||
-        (state == "AZ" && firstDate < fiveDaysOut)
+      $("p.delivery-fee")
+        .html()
+        .search(":") == -1
     ) {
-        if (state == "CA") {
-            $("body").append(
-                '<style> p.delivery-fee { position: relative; } p.delivery-fee::after { content: "Shipping From Rialto, CA 92324"; position: absolute; right: 0; font-size:1.5rem; } .in-home-options .delivery-fee span {margin-left:1rem!important; } </style>'
-            )
-        } else {
-            $("body").append(
-                '<style> p.delivery-fee { position: relative; } p.delivery-fee::after { content: "Shipping From Phoenix, AZ 85043"; position: absolute; right: 0; font-size:1.5rem; } .in-home-options .delivery-fee span {margin-left:1rem!important; } </style>'
-            );
-        }
+      $("body").append(
+        '<style> p.delivery-fee { position: relative; } .in-home-options .delivery-fee span { margin-left: 0rem !important; color: #00699a; font-weight: bolder; font-size: 1.8rem } .delivery-fee span::before { content: ":"; color: #333; font-weight: normal; margin-left: -.3rem; margin-right: .3rem; } </style>'
+      );
     }
+
+    if (state == "CA") {
+      $("body").append(
+        '<style> p.delivery-fee::after { content: "Shipping From Rialto, CA 92324"; position: absolute; right: 0; bottom: 1px } </style>'
+      );
+    } else {
+      $("body").append(
+        '<style> p.delivery-fee::after { content: "Shipping From Phoenix, AZ 85043"; position: absolute; right: 0; bottom: 1px } </style>'
+      );
+    }
+  }
 }
 
 // MIGHT NEED WINDOW ON EVENT BUS
 function eventBusHook() {
-    EventBus.$on("refreshCart", function () {
-        checkAndUpdate();
-    });
+  EventBus.$on("refreshCart", function() {
+    checkAndUpdate();
+  });
 }
 
-var anotherInterval = setInterval(function () {
-    if (
-        typeof window.jQuery !== "undefined" &&
-        typeof window.server !== "undefined"
-    ) {
-        clearInterval(anotherInterval);
-        checkAndUpdate();
-        eventBusHook();
-    }
+var anotherInterval = setInterval(function() {
+  if (
+    typeof window.jQuery !== "undefined" &&
+    typeof window.server !== "undefined"
+  ) {
+    clearInterval(anotherInterval);
+    checkAndUpdate();
+    eventBusHook();
+  }
 }, 50);
