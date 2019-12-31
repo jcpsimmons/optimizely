@@ -6,28 +6,28 @@
 // Let's make sure to take the .00 off after the $99
 
 // VARIATION CODE
-var i = 0;
-var checkjq = setInterval(function() {
+let i = 0;
+var checkjq = setInterval(() => {
   if (i == 5) {
     clearInterval(checkjq);
   }
   if (
-    window.jQuery &&
-    $("#omniinventory").length > 0 &&
-    $("a[data-target='#homeDeliveryModal']").length
+    window.jQuery
+    && $('#omniinventory').length > 0
+    && $("a[data-target='#homeDeliveryModal']").length
   ) {
     clearInterval(checkjq);
     newHtml = $(
-      "#omniinventory .list-unstyled li:contains('Get everything delivered')"
+      "#omniinventory .list-unstyled li:contains('Get everything delivered')",
     )
       .html()
       .replace(
-        "Get everything delivered for $",
-        "Get unlimited items delivered for $"
+        'Get everything delivered for $',
+        'Get unlimited items delivered for $',
       )
-      .replace(".00", "");
+      .replace('.00', '');
     $(
-      "#omniinventory .list-unstyled li:contains('Get everything delivered')"
+      "#omniinventory .list-unstyled li:contains('Get everything delivered')",
     ).html(newHtml);
     i++;
   }
@@ -35,5 +35,5 @@ var checkjq = setInterval(function() {
 
 // JS Function Code
 function jsCondition() {
-  return Number($("span.counter.cart").text()) == 0;
+  return Number($('span.counter.cart').text()) == 0;
 }

@@ -1,3 +1,3 @@
-var anotherInterval = setInterval(function() {
-  $(".remove-button").click();
+const anotherInterval = setInterval(() => {
+  $('.remove-button').click();
 }, 50);

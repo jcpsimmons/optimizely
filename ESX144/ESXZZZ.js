@@ -1,10 +1,10 @@
 // EXPERIMENT CODE - DESKTOP ONLY TEST
-var anotherInterval = setInterval(function() {
-  if (typeof window.jQuery !== "undefined") {
+var anotherInterval = setInterval(() => {
+  if (typeof window.jQuery !== 'undefined') {
     clearInterval(anotherInterval);
-    $(document).ready(function() {
-      $("body").on("click", ".product-info-component .img-wrapper", function() {
-        window.$(".action-buttons #largeViewLink").trigger("click");
+    $(document).ready(() => {
+      $('body').on('click', '.product-info-component .img-wrapper', () => {
+        window.$('.action-buttons #largeViewLink').trigger('click');
       });
     });
   }
@@ -14,20 +14,20 @@ var anotherInterval = setInterval(function() {
 //  clicked - signature image
 
 // SHARED CODE
-$(document).ready(function() {
-  $("body").on("click", ".action-buttons #largeViewLink", function() {
-    window["optimizely"] = window["optimizely"] || [];
-    window["optimizely"].push({
-      type: "event",
-      eventName: "largeView_icon"
+$(document).ready(() => {
+  $('body').on('click', '.action-buttons #largeViewLink', () => {
+    window.optimizely = window.optimizely || [];
+    window.optimizely.push({
+      type: 'event',
+      eventName: 'largeView_icon',
     });
   });
 
-  $("body").on("click", ".product-info-component .img-wrapper", function() {
-    window["optimizely"] = window["optimizely"] || [];
-    window["optimizely"].push({
-      type: "event",
-      eventName: "signature_img"
+  $('body').on('click', '.product-info-component .img-wrapper', () => {
+    window.optimizely = window.optimizely || [];
+    window.optimizely.push({
+      type: 'event',
+      eventName: 'signature_img',
     });
   });
 });

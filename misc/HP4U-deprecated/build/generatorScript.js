@@ -1,41 +1,37 @@
-"use strict";
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === 'function' && obj.constructor === Symbol && obj !== Symbol.prototype ? 'symbol' : typeof obj; }; } return _typeof(obj); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) { for (let i = 0; i < props.length; i++) { const descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var undefinedChecker = function undefinedChecker(query) {
-  if (typeof query == "undefined") {
+const undefinedChecker = function undefinedChecker(query) {
+  if (typeof query === 'undefined') {
     return false;
-  } else {
-    return true;
   }
+  return true;
 };
 
-var Store =
-/*#__PURE__*/
-function () {
+const Store =
+/* #__PURE__ */
+(function () {
   function Store(utag_data) {
     _classCallCheck(this, Store);
 
     this.randomizer = Math.floor(Math.random() * 3 + 1) * 4;
 
     try {
-      this.searchTerms = undefinedChecker(utag_data["cp.lsf-search-term"]) ? utag_data["cp.lsf-search-term"].split(",") : [];
-      this.searchWords = undefinedChecker(utag_data["cp.lsf-search-term"]) ? utag_data["cp.lsf-search-term"].split(/,| /) : [];
-      this.likedItems = undefinedChecker(utag_data["cp.lsf-liked-items"]) ? JSON.parse(utag_data["cp.lsf-liked-items"]) : [];
-      this.viewedItems = undefinedChecker(utag_data["cp.lsf-recently-viewed-list"]) ? JSON.parse(utag_data["cp.lsf-recently-viewed-list"]) : [];
-      this.cartAdds = undefinedChecker(utag_data["cp.lsf-cartadds"]) ? utag_data["cp.lsf-cartadds"].split(",") : [];
-      var colors = ["black", "brown", "tan", "red", "orange", "yellow", "green", "blue", "purple", "violet"];
-      this.searchColors = this.searchWords.filter(function (term) {
-        return colors.includes(term);
-      });
+      this.searchTerms = undefinedChecker(utag_data['cp.lsf-search-term']) ? utag_data['cp.lsf-search-term'].split(',') : [];
+      this.searchWords = undefinedChecker(utag_data['cp.lsf-search-term']) ? utag_data['cp.lsf-search-term'].split(/,| /) : [];
+      this.likedItems = undefinedChecker(utag_data['cp.lsf-liked-items']) ? JSON.parse(utag_data['cp.lsf-liked-items']) : [];
+      this.viewedItems = undefinedChecker(utag_data['cp.lsf-recently-viewed-list']) ? JSON.parse(utag_data['cp.lsf-recently-viewed-list']) : [];
+      this.cartAdds = undefinedChecker(utag_data['cp.lsf-cartadds']) ? utag_data['cp.lsf-cartadds'].split(',') : [];
+      const colors = ['black', 'brown', 'tan', 'red', 'orange', 'yellow', 'green', 'blue', 'purple', 'violet'];
+      this.searchColors = this.searchWords.filter((term) => colors.includes(term));
 
-      if (this.searchTerms.length + this.searchWords.length + this.searchTerms.length + this.viewedItems.length + this.likedItems.length + this.cartAdds.length < 3 || _typeof(this.searchTerms.length) + this.searchWords.length + this.searchTerms.length + this.viewedItems.length + this.likedItems.length + this.cartAdds.length === "undefined") {
+      if (this.searchTerms.length + this.searchWords.length + this.searchTerms.length + this.viewedItems.length + this.likedItems.length + this.cartAdds.length < 3 || _typeof(this.searchTerms.length) + this.searchWords.length + this.searchTerms.length + this.viewedItems.length + this.likedItems.length + this.cartAdds.length === 'undefined') {
         this.eligibility = false;
       } else {
         this.eligibility = true;
@@ -47,25 +43,25 @@ function () {
   }
 
   _createClass(Store, [{
-    key: "generateRestfulProductsData",
+    key: 'generateRestfulProductsData',
     value: function generateRestfulProductsData() {
-      var fillwords, queryArr, queryString, response, data, wordProbz;
+      let fillwords; let queryArr; let queryString; let response; let data; let
+        wordProbz;
       return regeneratorRuntime.async(function generateRestfulProductsData$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              fillwords = ["boasts", "shouldn", "include", "additional", "unbeatable", "unbelievable", "value", "doesn", "finish", "piece", "design", "style", "construction", "solid", "panel", "which", "while", "facing", "order", "extra", "program", "through", "special", "receive", "ensure", "addition", "tailored", "available", "right", "price", "offered", "mention", "there", "could", "would", "welcome", "select", "select", "favorite", "these", "boast", "provide", "meant", "yourself", "lunch", "dinner", "create", "experience", "device", "developed", "convenient"];
+              fillwords = ['boasts', 'shouldn', 'include', 'additional', 'unbeatable', 'unbelievable', 'value', 'doesn', 'finish', 'piece', 'design', 'style', 'construction', 'solid', 'panel', 'which', 'while', 'facing', 'order', 'extra', 'program', 'through', 'special', 'receive', 'ensure', 'addition', 'tailored', 'available', 'right', 'price', 'offered', 'mention', 'there', 'could', 'would', 'welcome', 'select', 'select', 'favorite', 'these', 'boast', 'provide', 'meant', 'yourself', 'lunch', 'dinner', 'create', 'experience', 'device', 'developed', 'convenient'];
               this.apiData = {};
               this.titleCorpus = [];
               queryArr = [];
-              queryString = queryArr.concat(this.likedItems, this.viewedItems, this.cartAdds).map(function (item) {
-                if (item.search("cv") > 0) {
-                  return item.split("cv")[0];
-                } else {
-                  return item;
+              queryString = queryArr.concat(this.likedItems, this.viewedItems, this.cartAdds).map((item) => {
+                if (item.search('cv') > 0) {
+                  return item.split('cv')[0];
                 }
-              }).slice(0, 100).join(",");
-              queryString = "https://www.livingspaces.com/api/restfulproducts?pid=" + queryString;
+                return item;
+              }).slice(0, 100).join(',');
+              queryString = `https://www.livingspaces.com/api/restfulproducts?pid=${queryString}`;
               _context.next = 8;
               return regeneratorRuntime.awrap(fetch(queryString));
 
@@ -84,10 +80,12 @@ function () {
                 this.titleCorpus.push(this.rawData[i].romanceCopy);
               }
 
-              this.titleCorpus = this.titleCorpus.join(" ").toLowerCase().replace("  ", " ").replace(/\d+/g, "").replace(/\W/g, " ").split(" ");
+              this.titleCorpus = this.titleCorpus.join(' ').toLowerCase().replace('  ', ' ').replace(/\d+/g, '')
+                .replace(/\W/g, ' ')
+                .split(' ');
               wordProbz = {};
-              this.titleCorpus.forEach(function (key) {
-                if (key.length > 4 && !key.endsWith("y") && !key.endsWith("ing") && !key.endsWith("s") && fillwords.indexOf(key) == -1) {
+              this.titleCorpus.forEach((key) => {
+                if (key.length > 4 && !key.endsWith('y') && !key.endsWith('ing') && !key.endsWith('s') && fillwords.indexOf(key) == -1) {
                   if (wordProbz.hasOwnProperty(key)) {
                     wordProbz[key]++;
                   } else {
@@ -97,34 +95,33 @@ function () {
               });
               this.titleCorpus = wordProbz; // console.log("API queried");
 
-              this.titleCorpusSorted = Object.keys(wordProbz).sort(function (a, b) {
-                return wordProbz[b] - wordProbz[a];
-              });
-              return _context.abrupt("return", true);
+              this.titleCorpusSorted = Object.keys(wordProbz).sort((a, b) => wordProbz[b] - wordProbz[a]);
+              return _context.abrupt('return', true);
 
             case 20:
-            case "end":
+            case 'end':
               return _context.stop();
           }
         }
       }, null, this);
-    }
+    },
   }, {
-    key: "titleCase",
+    key: 'titleCase',
     value: function titleCase(str) {
-      str = str.toLowerCase().split(" ");
-      var _final = [];
+      str = str.toLowerCase().split(' ');
+      const _final = [];
 
       for (i = 0; i < str.length; i++) {
         _final.push(str[i].charAt(0).toUpperCase() + str[i].slice(1));
       }
 
-      return _final.join(" ");
-    }
+      return _final.join(' ');
+    },
   }, {
-    key: "getRelatedProducts",
+    key: 'getRelatedProducts',
     value: function getRelatedProducts() {
-      var bloomreachQueryLink, response, data;
+      let bloomreachQueryLink; let response; let
+        data;
       return regeneratorRuntime.async(function getRelatedProducts$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -143,7 +140,7 @@ function () {
                 break;
               }
 
-              bloomreachQueryLink = "https://brm-core-0.brsrvr.com/api/v1/core/?account_id=5221&auth_key=o5xlkgn7my5fmr5c&domain_key=livingspaces_com&request_id=fd8d6a02a5764b7995c600e766a38bda&url=%2fbr-checker&_br_uid_2=uid%253D4961390647524%253Av%253D11.8%253Ats%253D1463613117510%253Ahc%253D3145&ptype=other&request_type=search&q=".concat(this.titleCorpusSorted[i], "&start=0&rows=4&search_type=keyword&fl=title,pid,url,price,sale_price,reviews,reviews_count,thumb_image");
+              bloomreachQueryLink = 'https://brm-core-0.brsrvr.com/api/v1/core/?account_id=5221&auth_key=o5xlkgn7my5fmr5c&domain_key=livingspaces_com&request_id=fd8d6a02a5764b7995c600e766a38bda&url=%2fbr-checker&_br_uid_2=uid%253D4961390647524%253Av%253D11.8%253Ats%253D1463613117510%253Ahc%253D3145&ptype=other&request_type=search&q='.concat(this.titleCorpusSorted[i], '&start=0&rows=4&search_type=keyword&fl=title,pid,url,price,sale_price,reviews,reviews_count,thumb_image');
               _context2.next = 7;
               return regeneratorRuntime.awrap(fetch(bloomreachQueryLink));
 
@@ -165,22 +162,23 @@ function () {
               break;
 
             case 15:
-            case "end":
+            case 'end':
               return _context2.stop();
           }
         }
       }, null, this);
-    }
+    },
   }, {
-    key: "getBestSellers",
+    key: 'getBestSellers',
     value: function getBestSellers() {
-      var bloomreachQueryLink, response, data, chunk;
+      let bloomreachQueryLink; let response; let data; let
+        chunk;
       return regeneratorRuntime.async(function getBestSellers$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
               this.bestSellers = [];
-              bloomreachQueryLink = "https://brm-core-0.brsrvr.com/api/v1/core/?account_id=5221&auth_key=o5xlkgn7my5fmr5c&domain_key=livingspaces_com&request_id=fd8d6a02a5764b7995c600e766a38bda&url=%2fbr-checker&request_type=search&q=best+sellers&start=".concat(this.randomizer.toString(), "&rows=12&search_type=keyword&fl=title,pid,url,price,sale_price,reviews,reviews_count,thumb_image");
+              bloomreachQueryLink = 'https://brm-core-0.brsrvr.com/api/v1/core/?account_id=5221&auth_key=o5xlkgn7my5fmr5c&domain_key=livingspaces_com&request_id=fd8d6a02a5764b7995c600e766a38bda&url=%2fbr-checker&request_type=search&q=best+sellers&start='.concat(this.randomizer.toString(), '&rows=12&search_type=keyword&fl=title,pid,url,price,sale_price,reviews,reviews_count,thumb_image');
               _context3.next = 4;
               return regeneratorRuntime.awrap(fetch(bloomreachQueryLink));
 
@@ -198,17 +196,18 @@ function () {
               }
 
             case 9:
-            case "end":
+            case 'end':
               return _context3.stop();
           }
         }
       }, null, this);
-    }
+    },
   }, {
-    key: "getRecentItems",
+    key: 'getRecentItems',
     value: function getRecentItems() {
-      var makeDateString, today, twoMonthsAgo, reqUrl, response, data;
-      return regeneratorRuntime.async(function getRecentItems$(_context4) {
+      let makeDateString; let today; let twoMonthsAgo; let reqUrl; let response; let
+        data;
+      return regeneratorRuntime.async((_context4) => {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
@@ -216,13 +215,11 @@ function () {
                 month = (d.getMonth() + 1).toString();
 
                 if (month.length == 1) {
-                  month = "0" + month;
+                  month = `0${month}`;
                 }
 
                 d = [d.getFullYear(), month, d.getDate()];
-                d = d.map(function (item) {
-                  return item.toString();
-                }).join("");
+                d = d.map((item) => item.toString()).join('');
                 return d;
               };
 
@@ -231,7 +228,7 @@ function () {
               twoMonthsAgo = new Date();
               twoMonthsAgo.setDate(twoMonthsAgo.getDate() - 60);
               twoMonthsAgo = makeDateString(twoMonthsAgo);
-              reqUrl = "http://brm-core-0.brsrvr.com/api/v1/core/?account_id=5221&auth_key=o5xlkgn7my5fmr5c&domain_key=livingspaces_com&ptype=category&request_type=search&search_type=keyword&request_id=5bf4c900-a069-414a-abc0-cf5d78ea6868&url=https%3a%2f%2fwww.livingspaces.com%2fdepartments%2ffeatured%2fnew-arrivals&_br_uid_2=uid%3D4490539570488%3Av%3D12.0%3Ats%3D1561674361031%3Ahc%3D1377&q=&start=0&rows=4&fl=pid%2cskuid%2cbrand%2cdescription%2claunch_date%2cclearance%2ccrumbs%2cprice%2cthumb_image%2curl%2ctitle%2cinStockQuantity%2csku_thum_images&fq=launch_date_order:%5b".concat(twoMonthsAgo, "+TO+").concat(today, "%5d");
+              reqUrl = 'http://brm-core-0.brsrvr.com/api/v1/core/?account_id=5221&auth_key=o5xlkgn7my5fmr5c&domain_key=livingspaces_com&ptype=category&request_type=search&search_type=keyword&request_id=5bf4c900-a069-414a-abc0-cf5d78ea6868&url=https%3a%2f%2fwww.livingspaces.com%2fdepartments%2ffeatured%2fnew-arrivals&_br_uid_2=uid%3D4490539570488%3Av%3D12.0%3Ats%3D1561674361031%3Ahc%3D1377&q=&start=0&rows=4&fl=pid%2cskuid%2cbrand%2cdescription%2claunch_date%2cclearance%2ccrumbs%2cprice%2cthumb_image%2curl%2ctitle%2cinStockQuantity%2csku_thum_images&fq=launch_date_order:%5b'.concat(twoMonthsAgo, '+TO+').concat(today, '%5d');
               _context4.next = 9;
               return regeneratorRuntime.awrap(fetch(reqUrl));
 
@@ -244,16 +241,16 @@ function () {
               data = _context4.sent;
 
             case 13:
-            case "end":
+            case 'end':
               return _context4.stop();
           }
         }
       });
-    }
+    },
   }, {
-    key: "generateLinks",
+    key: 'generateLinks',
     value: function generateLinks() {
-      var sectionLength = 0;
+      let sectionLength = 0;
 
       if (this.titleCorpusSorted.length > 20) {
         sectionLength = 30;
@@ -264,74 +261,68 @@ function () {
       this.searchLinks = [];
 
       if (this.titleCorpusSorted.length > sectionLength) {
-        var arr = this.titleCorpusSorted;
+        const arr = this.titleCorpusSorted;
         arr.splice(sectionLength, arr.length);
-        this.searchLinks = arr.map(function (item) {
-          return "<li><a href=\"https://www.livingspaces.com/search?term=".concat(item, "\" title=\"").concat(item, "\">").concat(item.replace(/^\w/, function (c) {
-            return c.toUpperCase();
-          }), "</a></li>");
-        });
-        this.searchLinks = this.searchLinks.join("");
+        this.searchLinks = arr.map((item) => '<li><a href="https://www.livingspaces.com/search?term='.concat(item, '" title="').concat(item, '">').concat(item.replace(/^\w/, (c) => c.toUpperCase()), '</a></li>'));
+        this.searchLinks = this.searchLinks.join('');
       }
-    }
+    },
   }, {
-    key: "generateHtml",
+    key: 'generateHtml',
     value: function generateHtml() {
       this.itemHtml = [];
 
       if (this.relatedItems) {
-        for (var key in this.relatedItems) {
+        for (const key in this.relatedItems) {
           if (this.relatedItems.hasOwnProperty(key)) {
-            this.itemHtml.push(this.relatedItems[key].map(function (item) {
-              return "<div class='col-xs-6 col-md-3'><a href='https://www.livingspaces.com/".concat(item.pid, "'><img class='img-responsive' src='").concat(item.thumb_image, "' alt='").concat(item.title, "'><p class='item-text'>").concat(item.title, "</p><p class='price-text'>$").concat(item.sale_price, "</p></a></div>");
-            }));
+            this.itemHtml.push(this.relatedItems[key].map((item) => "<div class='col-xs-6 col-md-3'><a href='https://www.livingspaces.com/".concat(item.pid, "'><img class='img-responsive' src='").concat(item.thumb_image, "' alt='").concat(item.title, "'><p class='item-text'>").concat(item.title, "</p><p class='price-text'>$")
+              .concat(item.sale_price, '</p></a></div>')));
           }
         }
       } else {
         for (i = 0; i < this.bestSellers.length; i++) {
-          this.itemHtml.push(this.bestSellers[i].map(function (item) {
-            return "<div class='col-xs-6 col-md-3'><a href='https://www.livingspaces.com/".concat(item.pid, "'><img class='img-responsive' src='").concat(item.thumb_image, "' alt='").concat(item.title, "'><p class='item-text'>").concat(item.title, "</p><p class='price-text'>$").concat(item.sale_price, "</p></a></div>");
-          }));
+          this.itemHtml.push(this.bestSellers[i].map((item) => "<div class='col-xs-6 col-md-3'><a href='https://www.livingspaces.com/".concat(item.pid, "'><img class='img-responsive' src='").concat(item.thumb_image, "' alt='").concat(item.title, "'><p class='item-text'>").concat(item.title, "</p><p class='price-text'>$")
+            .concat(item.sale_price, '</p></a></div>')));
         }
       }
 
       for (var i = 0; i < this.itemHtml.length; i++) {
         // Bootstrap Clearfix
         this.itemHtml[i].splice(2, 0, "<div class='clearfix'></div>");
-        this.itemHtml[i] = this.itemHtml[i].join("");
+        this.itemHtml[i] = this.itemHtml[i].join('');
       }
-    }
+    },
   }]);
 
   return Store;
-}(); // Loading Graphic Logic
+}()); // Loading Graphic Logic
 
 
 function loadingState(bool) {
   if (bool) {
-    document.getElementById("loadingSpinner").style.display = "block";
-    document.getElementById("productsArea").style.display = "none";
+    document.getElementById('loadingSpinner').style.display = 'block';
+    document.getElementById('productsArea').style.display = 'none';
   } else {
-    document.getElementById("loadingSpinner").style.display = "none";
-    document.getElementById("productsArea").style.display = "block";
-    $(".product-slider").css("display", "block");
-    $(".product-slider").addClass("fadeInFast");
-    $(".placeholder-image").css("display", "none");
-    $("html, body").animate({
-      scrollTop: $("#BannerArea").offset().top
-    }, 500, "linear");
+    document.getElementById('loadingSpinner').style.display = 'none';
+    document.getElementById('productsArea').style.display = 'block';
+    $('.product-slider').css('display', 'block');
+    $('.product-slider').addClass('fadeInFast');
+    $('.placeholder-image').css('display', 'none');
+    $('html, body').animate({
+      scrollTop: $('#BannerArea').offset().top,
+    }, 500, 'linear');
   }
 } // Holder function for Async success
 
 
 function containerFcn() {
-  return regeneratorRuntime.async(function containerFcn$(_context5) {
+  return regeneratorRuntime.async((_context5) => {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
           loadingState(true);
           x = new Store(utag_data);
-          console.log("eligible " + x.eligibility.toString());
+          console.log(`eligible ${x.eligibility.toString()}`);
 
           if (!x.eligibility) {
             _context5.next = 11;
@@ -356,21 +347,21 @@ function containerFcn() {
 
         case 13:
           x.generateHtml();
-          document.getElementById("RelatedToItemsYouveViewed").innerHTML = x.itemHtml[0];
-          document.getElementById("MoreItemsToConsider").innerHTML = x.itemHtml[1];
-          document.getElementById("BasedOnYourRecentHistory").innerHTML = x.itemHtml[2];
+          document.getElementById('RelatedToItemsYouveViewed').innerHTML = x.itemHtml[0];
+          document.getElementById('MoreItemsToConsider').innerHTML = x.itemHtml[1];
+          document.getElementById('BasedOnYourRecentHistory').innerHTML = x.itemHtml[2];
 
-          if (x.searchLinks == "undefined" || typeof x.searchLinks == "undefined") {
-            document.getElementById("RelatedLinksContainer").style.display = "none";
-            document.getElementById("RelatedItemsTitle").style.display = "none";
+          if (x.searchLinks == 'undefined' || typeof x.searchLinks === 'undefined') {
+            document.getElementById('RelatedLinksContainer').style.display = 'none';
+            document.getElementById('RelatedItemsTitle').style.display = 'none';
           } else {
-            document.getElementById("RelatedLinks").innerHTML = x.searchLinks;
+            document.getElementById('RelatedLinks').innerHTML = x.searchLinks;
           }
 
           loadingState(false);
 
         case 19:
-        case "end":
+        case 'end':
           return _context5.stop();
       }
     }
@@ -378,28 +369,28 @@ function containerFcn() {
 } // handler interval, slick init
 
 
-var anotherInterval = setInterval(function () {
-  if (typeof utag !== "undefined" && typeof window.jQuery !== "undefined") {
+var anotherInterval = setInterval(() => {
+  if (typeof utag !== 'undefined' && typeof window.jQuery !== 'undefined') {
     clearInterval(anotherInterval);
 
-    if (utag_data.site_type == "desktop") {
-      $(".product-slider").slick({
+    if (utag_data.site_type == 'desktop') {
+      $('.product-slider').slick({
         infinite: true,
         slidesToShow: 5,
         centerMode: true,
         slidesToScroll: 1,
         arrows: false,
         autoplay: true,
-        autoplaySpeed: 2000
+        autoplaySpeed: 2000,
       });
     } else {
-      $(".product-slider").slick({
+      $('.product-slider').slick({
         infinite: true,
         slidesToShow: 2.5,
         slidesToScroll: 1,
         arrows: false,
         autoplay: true,
-        autoplaySpeed: 2000
+        autoplaySpeed: 2000,
       });
     }
 

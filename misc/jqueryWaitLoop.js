@@ -1,5 +1,5 @@
-var anotherInterval = setInterval(function() {
-  if (typeof window.jQuery !== "undefined") {
+var anotherInterval = setInterval(() => {
+  if (typeof window.jQuery !== 'undefined') {
     clearInterval(anotherInterval);
   }
 }, 50);

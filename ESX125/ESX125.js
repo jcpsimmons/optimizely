@@ -1,31 +1,31 @@
 window.addEventListener(
-  "load",
-  function() {
+  'load',
+  () => {
     if (window.jQuery) {
       window
-        .$(".navbar-collapse")
-        .children(".nav")
-        .click(function() {
-          window["optimizely"] = window["optimizely"] || [];
-          window["optimizely"].push({
-            type: "event",
-            eventName: "clickedSortingFacet"
+        .$('.navbar-collapse')
+        .children('.nav')
+        .click(() => {
+          window.optimizely = window.optimizely || [];
+          window.optimizely.push({
+            type: 'event',
+            eventName: 'clickedSortingFacet',
           });
         });
-      window.EventBus.$on("productResultsUpdated", function(data) {
+      window.EventBus.$on('productResultsUpdated', (data) => {
         window
-          .$(".navbar-collapse")
-          .children(".nav")
-          .click(function() {
-            console.log("ESX125_CLICKEVENT");
-            window["optimizely"] = window["optimizely"] || [];
-            window["optimizely"].push({
-              type: "event",
-              eventName: "clickedSortingFacet"
+          .$('.navbar-collapse')
+          .children('.nav')
+          .click(() => {
+            console.log('ESX125_CLICKEVENT');
+            window.optimizely = window.optimizely || [];
+            window.optimizely.push({
+              type: 'event',
+              eventName: 'clickedSortingFacet',
             });
           });
       });
     }
   },
-  false
+  false,
 );
