@@ -18,6 +18,7 @@
     "url": "https://github.com/jcpsimmons/optimizely/issues"
   },
   "homepage": "https://github.com/jcpsimmons/optimizely#readme",
+  "pre-commit": "build",
   "devDependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
