@@ -18,7 +18,7 @@ New experiments are added in the `src` folder. Create a new folder with the pref
 
 ## .gitsnaps?
 
-(gitsnap)[https://www.npmjs.com/package/gitsnap] is a fun repo that takes a webcam photo every time you make a commit (runs post-commit). Fun fact - I'm looking down to the right because I always run a terminal on my right-hand screen.
+[gitsnap](https://www.npmjs.com/package/gitsnap) is a fun repo that takes a webcam photo every time you make a commit (runs post-commit). Fun fact - I'm looking down to the right because I always run a terminal on my right-hand screen.
 
 ## misc?
 
