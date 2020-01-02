@@ -3,7 +3,7 @@ const babel = require("gulp-babel");
 
 exports.default = function() {
   console.log("Transpiling experiments to build folder");
-  return src("ESX*/*.js")
+  return src("src/ESX*/*.js")
     .pipe(babel())
     .pipe(dest("build/"));
 };
