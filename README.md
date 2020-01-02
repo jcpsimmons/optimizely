@@ -16,6 +16,10 @@ The excellent `pre-commit` library should automatically install a precommit hook
 
 New experiments are added in the `src` folder. Create a new folder with the prefix ESX and the experiment number exactly like this: `ESX425`. Naming of files inside the folder aren't important to the build script, but for good organization go with something like `ESX425.js` for the script, `ESX425.css` if there's an accompanying CSS file, etc.
 
+## .gitsnaps?
+
+(gitsnap)[https://www.npmjs.com/package/gitsnap] is a fun repo that takes a webcam photo every time you make a commit (runs post-commit). Fun fact - I'm looking down to the right because I always run a terminal on my right-hand screen.
+
 ## misc?
 
 There's a misc folder with various odds and ends for experiment development. A coulple of relevant ones:
