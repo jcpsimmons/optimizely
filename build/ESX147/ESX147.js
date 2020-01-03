@@ -4,7 +4,7 @@ var nested = function nested() {
   // define style component and inject as style tag in head
   var style = document.createElement("style");
   style.type = "text/css";
-  style.innerHTML = "#filter-sidebar > a {color: black;} .stickyStyle { position:sticky;top:0;width:100%; padding-top:2rem;z-index:1041} .dropdownMenus { padding-top: 0; } #floating-banner-bg { background-color:rgba(255,255,255,.9); border-bottom: 1px solid grey; position: fixed; left: 0; right: 0; top: 0; box-shadow: 0 5.3px 3px -4px grey; } @media screen and (max-width: 990px) { #floating-banner-bg { height: 13rem; } }";
+  style.innerHTML = "#filter-sidebar > a {color: black;} .stickyStyle { position:sticky; position:fixed;top:0;width:100%; padding-top:2rem;z-index:1041} .dropdownMenus { padding-top: 0; } #floating-banner-bg { background-color:rgba(255,255,255,.9); border-bottom: 1px solid grey; position: fixed; left: 0; right: 0; top: 0; box-shadow: 0 5.3px 3px -4px grey; } @media screen and (max-width: 990px) { #floating-banner-bg { height: 13rem; } }";
   document.getElementsByTagName("head")[0].appendChild(style); // Get page components
 
   $("#plpServerSide .faceted-search-component").addClass("toWrap");
@@ -60,11 +60,28 @@ var nested = function nested() {
   EventBus.$on("productResultsUpdated", function () {
     reposNav();
     window.scrollTo(0, 0);
-    nested();
+    nested(); // // Product results updated fires an unnecessary amount of times so I need to rate limit it manually...
+    // (function(window, undefined) {
+    //   var canCall = true;
+    //   window.funcName = function() {
+    //     if (!canCall) return;
+    //   //  function here
+    //     canCall = false;
+    //     setTimeout(function() {
+    //       canCall = true;
+    //     }, 100);
+    //   };
+    // })(window);
   });
-}; // fire on initial page load
+};
 
+$(document).ready(function () {
+  // fire on initial page load
+  nested(); // add container before page content to move everything into
 
-nested(); // add container before page content to move everything into
-
-$(".page-content").before('<div id="NavbarContainer"></div>');
+  $(".page-content").before('<div id="NavbarContainer"></div>');
+  $(".plp-action-link:contains('Clear All')").click(function (e) {
+    e.preventDefault();
+    window.location.href = window.location.href.split("?")[0];
+  });
+});
