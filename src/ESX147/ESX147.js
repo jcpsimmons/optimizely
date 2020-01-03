@@ -1,5 +1,5 @@
-function nested() {
-  // define class
+const nested = () => {
+  // define style component and inject as style tag in head
   const style = document.createElement("style");
   style.type = "text/css";
   style.innerHTML =
@@ -10,6 +10,7 @@ function nested() {
   $("#plpServerSide .faceted-search-component").addClass("toWrap");
   $("#plpServerSide .row:first-of-type").addClass("toWrap");
 
+  // Don't inject the Nav Container if it's already there
   $("#NavContainer").length
     ? null
     : $(".toWrap").wrapAll('<div id="NavContainer"></div>');
@@ -18,8 +19,9 @@ function nested() {
   const sticky = document.querySelector("#NavContainer").offsetTop;
 
   // move on scroll - check for dupes of title
-  function reposNav() {
-    if (window.pageYOffset >= sticky) {
+  const reposNav = () => {
+    // have to use this offest by 10px logic to avoid flicker where it thinks it's both
+    if (window.pageYOffset + 10 > sticky) {
       $("#NavContainer").addClass("stickyStyle");
       if (document.querySelector("#floating-banner-bg") == null) {
         $("#NavContainer > .row.toWrap").before(
@@ -28,6 +30,7 @@ function nested() {
       }
       $("#NavContainer .faceted-search-component").addClass("dropdownMenus");
       $("#NavContainer ul.pull-right").css("display", "none");
+      // Resize the height to fit components
       $("#floating-banner-bg").height(
         $(".toWrap.dropdownMenus").outerHeight() +
           $(".toWrap.row").outerHeight() +
@@ -57,26 +60,29 @@ function nested() {
         .css("margin-top", "0")
         .css("margin-bottom", "1.2rem");
     }
-  }
-
-  window.onscroll = function() {
-    reposNav();
-  };
-  window.onload = function() {
-    reposNav();
   };
 
-  $(window).on("resize", function() {
+  // Resposition on scroll, window load, product results updated, and display resize
+  window.onscroll = () => {
+    reposNav();
+  };
+  window.onload = () => {
+    reposNav();
+  };
+
+  $(window).on("resize", () => {
     reposNav();
   });
 
   EventBus.$on("productResultsUpdated", () => {
-    // reposNav();
+    reposNav();
     window.scrollTo(0, 0);
     nested();
   });
-}
+};
 
+// fire on initial page load
 nested();
 
+// add container before page content to move everything into
 $(".page-content").before('<div id="NavbarContainer"></div>');
