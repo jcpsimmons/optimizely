@@ -108,11 +108,4 @@ $(document).ready(() => {
       eventName: "clickMoreInThisColor"
     });
   });
-  $("body").on("click", "#moreInThisColorContainer", () => {
-    window.optimizely = window.optimizely || [];
-    window.optimizely.push({
-      type: "event",
-      eventName: "clickMoreInThisColor"
-    });
-  });
 });

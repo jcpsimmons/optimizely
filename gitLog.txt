@@ -1,0 +1,539 @@
+Thu Jan 2 09:33:10 2020 -0800 - [Josh] 19d7a55c68ee874bb9110e7c5ac00b65db0a94fd
+ README.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Thu Jan 2 09:32:47 2020 -0800 - [Josh] 79db9fb916c49e85a50d3bb09eb4af8712412c9b
+ README.md | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+Thu Jan 2 09:18:43 2020 -0800 - [Josh Simmons] e5ddcd9cf3c18cb1a44a569dba9f4a839bd004cf
+ .gitsnaps/undefined1577984366816.jpg | Bin 0 -> 163961 bytes
+ README.md                            |  29 +++++++++++++++++++++++++++++
+ 2 files changed, 29 insertions(+)
+
+Thu Jan 2 08:59:23 2020 -0800 - [Josh Simmons] 9af74b8674421a521b6d50e226d0540618e3979d
+ .gitsnaps/undefined1577984316668.jpg | Bin 0 -> 161632 bytes
+ gulpfile.js                          |   2 +-
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+
+Thu Jan 2 08:58:34 2020 -0800 - [Josh Simmons] 06006a114402299cb9a299085c9c9a305295bbf5
+ .gitsnaps/undefined1577984221969.jpg                   | Bin 0 -> 158699 bytes
+ {hp4u => misc/hp4u}/actualPageEventTracking.js         |   0
+ {hp4u => misc/hp4u}/check-function.js                  |   0
+ {hp4u => misc/hp4u}/hp4u.html                          |   0
+ {hp4u => misc/hp4u}/hp4u.js                            |   0
+ {jquery goodies => misc/jquery goodies}/kartKlear.js   |   0
+ .../python-scripts}/__pycache__/data.cpython-37.pyc    | Bin
+ .../python-scripts}/addNewOptimizely.py                |   0
+ {python-scripts => misc/python-scripts}/brokenlinks.py |   0
+ {python-scripts => misc/python-scripts}/data.py        |   0
+ {python-scripts => misc/python-scripts}/generateCSV.py |   0
+ {python-scripts => misc/python-scripts}/slickFinder.py |   0
+ {python-scripts => misc/python-scripts}/upd8r.py       |   0
+ package.json                                           |   1 +
+ {ESX058 => src/ESX058}/ESX058.js                       |   0
+ {ESX058 => src/ESX058}/ESX058Mobile.js                 |   0
+ {ESX058 => src/ESX058}/OLD.js                          |   0
+ {ESX058 => src/ESX058}/OLDMobile.js                    |   0
+ .../moreInThisColorDesktop.js                          |   0
+ .../moreInThisColorDesktop_POLLINGFUNCTION.js          |   0
+ .../moreInThisColorMobile.js                           |   0
+ .../moreInThisColor_OriginalTracking.js                |   0
+ {ESX119 => src/ESX119}/ESX119-SHARED_CODE_TRACKING.js  |   0
+ {ESX119 => src/ESX119}/ESX119.js                       |   0
+ {ESX120 => src/ESX120}/ESX120.js                       |   0
+ {ESX122 => src/ESX122}/ESX122.js                       |   0
+ {ESX123 => src/ESX123}/ESX123.css                      |   0
+ {ESX123 => src/ESX123}/ESX123.js                       |   0
+ {ESX123 => src/ESX123}/demo.html                       |   0
+ {ESX124 => src/ESX124}/ESX124.css                      |   0
+ {ESX124 => src/ESX124}/ESX124.js                       |   0
+ {ESX124 => src/ESX124}/demo.html                       |   0
+ {ESX125 => src/ESX125}/ESX125.css                      |   0
+ {ESX125 => src/ESX125}/ESX125.js                       |   0
+ {ESX125 => src/ESX125}/prototyping.html                |   0
+ {ESX125 => src/ESX125}/targeting.txt                   |   0
+ {ESX126 => src/ESX126}/Desktop/BAK.js                  |   0
+ {ESX126 => src/ESX126}/Desktop/ESX126.js               |   0
+ {ESX126 => src/ESX126}/Desktop/ESX126_NoVariation.js   |   0
+ {ESX126 => src/ESX126}/Desktop/insertHtml.html         |   0
+ {ESX126 => src/ESX126}/Desktop/pollingFn.js            |   0
+ {ESX126 => src/ESX126}/Mobile/ESX126-MOBILE.js         |   0
+ .../ESX126}/Mobile/ESX126-MOBILE_NoVariation.js        |   0
+ {ESX126 => src/ESX126}/Mobile/pollingFn.js             |   0
+ {ESX127 => src/ESX127}/ESX127-TARGETING.md             |   0
+ {ESX127 => src/ESX127}/ESX127-original.css             |   0
+ {ESX127 => src/ESX127}/ESX127-variation.js             |   0
+ {ESX130 => src/ESX130}/ESX130.js                       |   0
+ {ESX133 => src/ESX133}/ESX133.js                       |   0
+ {ESX135 => src/ESX135}/ESX135.js                       |   0
+ {ESX136 => src/ESX136}/ESX136.js                       |   0
+ {ESX138 => src/ESX138}/ESX138.js                       |   0
+ {ESX138 => src/ESX138}/html.html                       |   0
+ {ESX138 => src/ESX138}/html.txt                        |   0
+ {ESX139 => src/ESX139}/ESX139.js                       |   0
+ {ESX140 => src/ESX140}/ESX140.css                      |   0
+ {ESX140 => src/ESX140}/ESX140.js                       |   0
+ {ESX140 => src/ESX140}/mockup.html                     |   0
+ {ESX140 => src/ESX140}/readme.md                       |   0
+ {ESX142 => src/ESX142}/ESX142.js                       |   0
+ {ESX144 => src/ESX144}/ESXZZZ.css                      |   0
+ {ESX144 => src/ESX144}/ESXZZZ.js                       |   0
+ {ESX147 => src/ESX147}/ESX147.js                       |   0
+ {ESX148 => src/ESX148}/ESX148.js                       |   0
+ {ESX620-PROD => src/ESX620-PROD}/ESX620.js             |   0
+ {ESX620-PROD => src/ESX620-PROD}/x.html                |   0
+ {ESXTEST001 => src/ESXTEST001}/ESXTEST001.html         |   0
+ {ESXTEST001 => src/ESXTEST001}/ESXTEST001.js           |   0
+ test.txt                                               |   0
+ 69 files changed, 1 insertion(+)
+
+Thu Jan 2 08:57:00 2020 -0800 - [Josh Simmons] 2e001483d78b8305093b088ed506c3e044dd5062
+ .babelrc                                           |   1 +
+ .gitsnaps/undefined1577821350752.jpg               | Bin 0 -> 189075 bytes
+ ESX148/ESX148.js                                   | 118 +++
+ ESX148/ESX148_mobile.js                            | 130 ----
+ build/ESX058/ESX058.js                             |  59 ++
+ build/ESX058/ESX058Mobile.js                       |  59 ++
+ build/ESX058/OLD.js                                |  57 ++
+ build/ESX058/OLDMobile.js                          |  57 ++
+ .../moreInThisColorDesktop.js                      |  73 ++
+ .../moreInThisColorDesktop_POLLINGFUNCTION.js      |   5 +
+ .../moreInThisColorMobile.js                       |  73 ++
+ .../moreInThisColor_OriginalTracking.js            |  12 +
+ build/ESX119/ESX119-SHARED_CODE_TRACKING.js        |  13 +
+ build/ESX119/ESX119.js                             |  22 +
+ build/ESX120/ESX120.js                             |  13 +
+ build/ESX122/ESX122.js                             |  27 +
+ build/ESX123/ESX123.js                             |  52 ++
+ build/ESX124/ESX124.js                             |  52 ++
+ build/ESX125/ESX125.js                             |  23 +
+ build/ESX127/ESX127-variation.js                   |  11 +
+ build/ESX130/ESX130.js                             |  44 ++
+ build/ESX133/ESX133.js                             |  22 +
+ build/ESX135/ESX135.js                             |  17 +
+ build/ESX136/ESX136.js                             |  24 +
+ build/ESX138/ESX138.js                             |  24 +
+ build/ESX139/ESX139.js                             | 152 ++++
+ build/ESX140/ESX140.js                             |   9 +
+ build/ESX142/ESX142.js                             |  15 +
+ build/ESX144/ESXZZZ.js                             |  32 +
+ build/ESX147/ESX147.js                             |  56 ++
+ build/ESX148/ESX148.js                             | 114 +++
+ build/ESX620-PROD/ESX620.js                        |   9 +
+ build/ESXTEST001/ESXTEST001.js                     |  47 ++
+ gulpfile.js                                        |  12 +-
+ package-lock.json                                  | 839 +++++++++++++++++++++
+ package.json                                       |   1 +
+ 36 files changed, 2138 insertions(+), 136 deletions(-)
+
+Tue Dec 31 11:42:29 2019 -0800 - [Josh Simmons] fa2a69ee8727b357f52c4e9e82ee9d0b29bedef2
+ .DS_Store                            | Bin 0 -> 8196 bytes
+ .gitsnaps/undefined1577816328811.jpg | Bin 0 -> 186285 bytes
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+Tue Dec 31 10:18:47 2019 -0800 - [Josh Simmons] b627adb62fc67f4985483c02d39b99f9768c801a
+ .gitignore                                         |   2 +-
+ ESX058/ESX058.js                                   | 144 +++--
+ ESX058/ESX058Mobile.js                             | 148 +++--
+ ESX058/OLD.js                                      | 140 ++--
+ ESX058/OLDMobile.js                                | 144 +++--
+ .../moreInThisColorDesktop.js                      | 168 +++--
+ .../moreInThisColorDesktop_POLLINGFUNCTION.js      |   6 +-
+ .../moreInThisColorMobile.js                       | 168 +++--
+ .../moreInThisColor_OriginalTracking.js            |  22 +-
+ ESX119/ESX119-SHARED_CODE_TRACKING.js              |  22 +-
+ ESX119/ESX119.js                                   |  54 +-
+ ESX120/ESX120.js                                   |  33 +-
+ ESX122/ESX122.js                                   |  57 +-
+ ESX123/ESX123.js                                   | 130 ++--
+ ESX124/ESX124.js                                   | 122 ++--
+ ESX125/ESX125.js                                   |  62 +-
+ ESX126/Desktop/BAK.js                              | 162 +++--
+ ESX126/Desktop/ESX126.js                           | 125 ++--
+ ESX126/Desktop/ESX126_NoVariation.js               |  18 +-
+ ESX126/Desktop/pollingFn.js                        |  16 +-
+ ESX126/Mobile/ESX126-MOBILE.js                     | 152 +++--
+ ESX126/Mobile/ESX126-MOBILE_NoVariation.js         |  18 +-
+ ESX126/Mobile/pollingFn.js                         |  16 +-
+ ESX127/ESX127-variation.js                         |  18 +-
+ ESX130/ESX130.js                                   |  96 +--
+ ESX133/ESX133.js                                   |  58 +-
+ ESX136/ESX136.js                                   |  78 +--
+ ESX138/ESX138.js                                   |  66 +-
+ ESX139/ESX139.js                                   | 360 ++++++-----
+ ESX140/ESX140.js                                   |  14 +-
+ ESX142/ESX142.js                                   |  32 +-
+ ESX144/ESXZZZ.js                                   |  66 +-
+ ESX147/ESX147.js                                   |  82 +--
+ ESX148/ESX148_mobile.js                            | 127 ++--
+ ESX620-PROD/ESX620.js                              |  17 +-
+ ESXTEST001/ESXTEST001.js                           | 124 ++--
+ gulpfile.js                                        |  12 +-
+ hp4u/actualPageEventTracking.js                    |  64 +-
+ jquery goodies/kartKlear.js                        |   6 +-
+ misc/HP4U-deprecated/build/generatorScript.js      | 221 +++----
+ misc/HP4U-deprecated/old/dating.js                 |  40 +-
+ misc/HP4U-deprecated/old/fillwords.js              |  46 +-
+ misc/HP4U-deprecated/old/html.js                   |   2 +-
+ misc/HP4U-deprecated/src/generatorScript.js        | 708 ++++++++++-----------
+ misc/jqueryWaitLoop.js                             |  10 +-
+ misc/storeList.js                                  | 352 +++++-----
+ package-lock.json                                  | 352 ++++++++++
+ package.json                                       |   3 +
+ 48 files changed, 2586 insertions(+), 2297 deletions(-)
+
+Tue Dec 31 09:27:15 2019 -0800 - [Josh Simmons] 75c76507f955461b1282c4b8b308012ed0d2f30b
+ ESX137/ESX137.css       |    3 -
+ ESX137/ESX137.js        |   29 -
+ ESX147/ESX147.js        |   31 +-
+ ESX148/ESX148_mobile.js |  133 ++
+ gulpfile.js             |    9 +
+ package-lock.json       | 3921 +++++++++++++++++++++++++++++++++++++++++++++++
+ package.json            |   29 +
+ 7 files changed, 4121 insertions(+), 34 deletions(-)
+
+Tue Dec 24 10:07:44 2019 -0800 - [Josh Simmons] 9cc0c5d7e09ad0380a43cb53718fab98110c9334
+ ESX147/ESX147.js | 102 +++++++++++++++++++++----------------------------------
+ 1 file changed, 38 insertions(+), 64 deletions(-)
+
+Mon Dec 23 16:51:07 2019 -0800 - [Josh Simmons] 5305263b57addade4b086a9bf30d9c0868c539b7
+ ESX147/ESX147.js | 68 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 68 insertions(+)
+
+Tue Dec 17 16:37:53 2019 -0800 - [Josh] 6689526b200f2a2a6cd916697d7655826a665af0
+ ESXTEST001/ESXTEST001.html |  7 ++--
+ ESXTEST001/ESXTEST001.js   | 87 ++++++++++++++++++++++++++--------------------
+ 2 files changed, 54 insertions(+), 40 deletions(-)
+
+Tue Dec 17 11:31:58 2019 -0800 - [Josh] 9cedd30f39f69a8d2cb175e28649514abfc66bb1
+ {ESXZZZ => ESX144}/ESXZZZ.css |  0
+ {ESXZZZ => ESX144}/ESXZZZ.js  |  0
+ ESXTEST001/ESXTEST001.html    |  9 ++++++++
+ ESXTEST001/ESXTEST001.js      | 51 +++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 60 insertions(+)
+
+Thu Dec 12 16:58:24 2019 -0800 - [Josh] 17d9c744695d87886ccbb6bb405f257974500571
+Thu Dec 12 16:28:28 2019 -0800 - [Josh] 1f514a8c000004b0d260a62b42fef4511a9a9d54
+ ESX119/ESX119.js                                   |  21 +-
+ ESX620-PROD/ESX620.js                              |   9 +
+ ESX620-PROD/x.html                                 | 250 +++++++++++++++++++++
+ ESXZZZ/ESXZZZ.css                                  |   3 +
+ ESXZZZ/ESXZZZ.js                                   |  33 +++
+ hp4u/actualPageEventTracking.js                    |  32 +++
+ hp4u/check-function.js                             |  85 +++++++
+ hp4u/hp4u.html                                     |  46 ++++
+ hp4u/hp4u.js                                       |  80 +++++++
+ {ESX999 => misc/HP4U-deprecated}/.babelrc          |   0
+ .../HP4U-deprecated}/build/generatorScript.js      |   0
+ {ESX999 => misc/HP4U-deprecated}/layout.html       |   0
+ {ESX999 => misc/HP4U-deprecated}/old/bloomreach.md |   0
+ {ESX999 => misc/HP4U-deprecated}/old/dating.js     |   0
+ .../HP4U-deprecated}/old/demoLayout.html           |   0
+ {ESX999 => misc/HP4U-deprecated}/old/fillwords.js  |   0
+ {ESX999 => misc/HP4U-deprecated}/old/html.js       |   0
+ {ESX999 => misc/HP4U-deprecated}/old/utag_data.md  |   0
+ {ESX999 => misc/HP4U-deprecated}/package-lock.json |   0
+ {ESX999 => misc/HP4U-deprecated}/package.json      |   0
+ .../HP4U-deprecated}/src/generatorScript.js        |   0
+ 21 files changed, 551 insertions(+), 8 deletions(-)
+
+Wed Dec 11 13:43:33 2019 -0800 - [jcpsimmons] 92dc3484dc3fee477c619238b331e08ee7d389e6
+ test.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+Tue Nov 26 11:10:00 2019 -0800 - [Josh] 30ed492f4a5b13c8f1587971b0b4e20a4fb27d2b
+ ..gitignore.swp                 |  Bin 0 -> 1024 bytes
+ .gitignore                      |    1 +
+ .gitignore.save                 |    2 +
+ ESX999/.babelrc                 |    4 +
+ ESX999/build/generatorScript.js |  408 +++++
+ ESX999/generatorScript.html     |  305 ----
+ ESX999/layout.html              |   27 +-
+ ESX999/package-lock.json        | 3239 +++++++++++++++++++++++++++++++++++++++
+ ESX999/package.json             |   16 +
+ ESX999/src/generatorScript.js   |  362 +++++
+ 10 files changed, 4056 insertions(+), 308 deletions(-)
+
+Mon Nov 25 16:55:22 2019 -0800 - [Josh] a356f44457400a26f846b9d07985b73747fdff9e
+ ESX999/generatorScript.html | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+Mon Nov 25 16:47:38 2019 -0800 - [Josh] ca5508a3a45d8a927151ae3e422ed89a14b645a7
+ ESX999/generatorScript.html | 31 ++++++++++++++++++++++++-------
+ 1 file changed, 24 insertions(+), 7 deletions(-)
+
+Mon Nov 25 16:15:27 2019 -0800 - [Josh] 567f9f650bde22a06d9b45f4792b3cf4b2134d98
+ ESX999/generatorScript.html                  | 45 +++++++++++++---------------
+ ESX999/layout.html                           |  2 +-
+ misc/shipping tracking/shippingTracking.html |  2 +-
+ 3 files changed, 23 insertions(+), 26 deletions(-)
+
+Tue Nov 19 12:23:08 2019 -0800 - [Josh] d0da9b08365d197a6044c32a42949f65d9972d20
+ ESX999/generatorScript.html | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+Tue Nov 19 12:01:07 2019 -0800 - [Josh] 509ea1090cd5486cf5a3c29420603a33b343e56f
+ ESX999/generatorScript.html | 15 +++++++++------
+ ESX999/layout.html          | 29 +++++++++++++++++++++++++++--
+ 2 files changed, 36 insertions(+), 8 deletions(-)
+
+Tue Nov 19 10:30:54 2019 -0800 - [Josh] 44bd5b4449a683a8c02644c83d4fa2cddbf60299
+ ESX999/generatorScript.html                  | 288 +++++++++++++++++++++++++++
+ ESX999/generatorScript.js                    | 282 --------------------------
+ ESX999/layout.html                           | 102 +++++++---
+ misc/shipping tracking/shippingTracking.html |  25 +++
+ 4 files changed, 390 insertions(+), 307 deletions(-)
+
+Mon Nov 18 08:50:30 2019 -0800 - [Josh] 3bce7020046ab652186c38b34c9fe106389f2256
+ ESX999/generatorScript.js |  4 ++--
+ ESX999/layout.html        | 11 +++++++++++
+ 2 files changed, 13 insertions(+), 2 deletions(-)
+
+Fri Nov 15 16:36:52 2019 -0800 - [Josh] dead06f167dbc12800ebe04d835e114b1fa2c78e
+ ESX999/generatorScript.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Fri Nov 15 16:15:25 2019 -0800 - [Josh] 324ae265fc6c200d67307abeb81a002763bf6de6
+ ESX999/generatorScript.js  | 24 ++++++++++++-
+ ESX999/layout.html         | 84 ++++++++++++++++++++++++++++++++++++++++------
+ ESX999/{ => old}/dating.js |  0
+ 3 files changed, 96 insertions(+), 12 deletions(-)
+
+Fri Nov 15 12:25:22 2019 -0800 - [Josh] 98cc8cdd181253056b6832540c5623af1d712751
+ ESX999/generatorScript.js | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+Fri Nov 15 11:56:29 2019 -0800 - [Josh] f7fa02d2ccde1b5f342a02e93511608274039346
+ ESX142/ESX142.js                 | 16 ++++++++++++++++
+ ESX999/generatorScript.js        | 32 ++++++++++++++++++++++++++++++--
+ ESX999/layout.html               | 17 +++++++++++++----
+ ESX999/{ => old}/demoLayout.html |  0
+ python-scripts/outputs/ls.min.js |  1 -
+ 5 files changed, 59 insertions(+), 7 deletions(-)
+
+Thu Nov 14 16:50:12 2019 -0800 - [Josh] 7a6424aaf36b7570c74d0042551bd1fec7cb9e73
+ ESX999/dating.js          | 21 +++++++++++++++++++++
+ ESX999/generatorScript.js | 29 ++++++++++++++++++++++++++++-
+ 2 files changed, 49 insertions(+), 1 deletion(-)
+
+Thu Nov 14 15:09:02 2019 -0800 - [Josh] 3e66791d0405c1895d8c651211a8bb36c299646a
+ ESX999/generatorScript.js |  23 +++++--
+ ESX999/layout.html        | 154 +++++++++++++++++++++++++++++++++++++++++++++-
+ ESX999/{ => old}/html.js  |   0
+ 3 files changed, 169 insertions(+), 8 deletions(-)
+
+Thu Nov 14 11:20:26 2019 -0800 - [Josh] 957874a93270bcd3624f158a7b8cfe2c51def754
+ ESX999/generatorScript.js      | 192 +++++++++++++++++++++++++++++++++++++++++
+ ESX999/html.js                 |   1 +
+ ESX999/layout.html             |  81 +++++++++++++++++
+ ESX999/{ => old}/bloomreach.md |   0
+ ESX999/{ => old}/fillwords.js  |   0
+ ESX999/{ => old}/utag_data.md  |   0
+ ESX999/scratch.js              | 109 -----------------------
+ 7 files changed, 274 insertions(+), 109 deletions(-)
+
+Wed Nov 13 09:00:39 2019 -0800 - [Josh] c5d7d8bea5036d5d920e7f9dd175762f5f42ff75
+ ESX999/demoLayout.html | 153 +++++++++++++++++++++++++++++++++++++++++++++++++
+ ESX999/scratch.js      |   9 +--
+ 2 files changed, 155 insertions(+), 7 deletions(-)
+
+Tue Nov 12 16:48:15 2019 -0800 - [Josh] bca532f259bd6bb5c88089e63312a5fffe323244
+ ESX999/fillwords.js              |   23 +
+ ESX999/scratch.js                |   43 +-
+ python-scripts/outputs/ls.js     | 6114 --------------------------------------
+ python-scripts/outputs/ls.min.js |    1 +
+ 4 files changed, 61 insertions(+), 6120 deletions(-)
+
+Mon Nov 11 16:43:28 2019 -0800 - [Josh] 2fd17b24da5e6bb1b20fafb89212144509bef8c1
+ ESX999/scratch.js | 1 -
+ 1 file changed, 1 deletion(-)
+
+Mon Nov 11 16:31:39 2019 -0800 - [Josh] 3005e3b2093a623257cd9ec7343e9fa582bd7936
+ ESX999/scratch.js | 27 +++++++++++++++------------
+ 1 file changed, 15 insertions(+), 12 deletions(-)
+
+Mon Nov 11 16:10:12 2019 -0800 - [Josh] e2b47ae9504ff23d2bf660baef14436b26d184f4
+ ESX999/bloomreach.md | 14 ++++++++
+ ESX999/scratch.js    | 94 ++++++++++++++++++++++++++++++++++++++++------------
+ 2 files changed, 86 insertions(+), 22 deletions(-)
+
+Fri Nov 8 16:53:46 2019 -0800 - [Josh] ff883492b09cd212d0c0e4228f6ca87980609a93
+ ESX999/scratch.js | 2 ++
+ 1 file changed, 2 insertions(+)
+
+Fri Nov 8 16:52:51 2019 -0800 - [Josh] f164df9708d22e053470a9c45306a2bfecf19cfc
+ ESX126/Desktop/ESX126.js       |  113 +-
+ ESX126/Mobile/ESX126-MOBILE.js |  139 +-
+ ESX140/ESX140.css              |    9 +
+ ESX140/ESX140.js               |    7 +
+ ESX140/mockup.html             |   79 +
+ ESX140/readme.md               |   13 +
+ ESX999/scratch.js              |   29 +
+ ESX999/utag_data.md            |   18 +
+ misc/jqueryWaitLoop.js         |    5 +
+ python-scripts/outputs/ls.js   | 6114 ++++++++++++++++++++++++++++++++++++++++
+ 10 files changed, 6403 insertions(+), 123 deletions(-)
+
+Wed Nov 6 15:33:24 2019 -0800 - [Josh] 5d3d7109e0de9b61e2f5fed749ae442ff6fe6d62
+ ESX139/ESX139.js | 21 ++++++++++++++++-----
+ 1 file changed, 16 insertions(+), 5 deletions(-)
+
+Wed Nov 6 14:12:18 2019 -0800 - [Josh] abaf5dd75ae078ff38925a88a1f10a2ad13b024d
+ ESX135/ESX135.js                   |    2 +
+ ESX136/ESX136.js                   |   44 +-
+ ESX137/ESX137.css                  |    3 +
+ ESX137/ESX137.js                   |   29 +
+ ESX138/ESX138.js                   |   36 +
+ ESX138/html.html                   |   57 +
+ ESX138/html.txt                    |    1 +
+ ESX139/ESX139.js                   |  172 ++
+ misc/babel.md                      |    5 +
+ misc/storeList.js                  |  176 ++
+ python-scripts/addNewOptimizely.py |   12 +-
+ python-scripts/outputs/ls.js       | 5833 ------------------------------------
+ python-scripts/outputs/ls.min.js   |    1 -
+ 13 files changed, 518 insertions(+), 5853 deletions(-)
+
+Tue Nov 5 09:10:49 2019 -0800 - [Josh] ed189932f9e7c7500d43a0811abd452ba4072a49
+ ESX058/ESX058.js                                   |   73 +
+ ESX058/ESX058Mobile.js                             |   75 +
+ ESX058/OLD.js                                      |   71 +
+ ESX058/OLDMobile.js                                |   73 +
+ ESX133/ESX133.js                                   |   29 +
+ ESX135/ESX135.js                                   |   25 +
+ ESX136/ESX136.js                                   |   27 +
+ python-scripts/addNewOptimizely.py                 |   42 +
+ python-scripts/outputs/another_ap_and_r_update.csv |  520 --
+ python-scripts/outputs/ls.js                       | 5833 ++++++++++++++++++++
+ python-scripts/outputs/ls.min.js                   |    1 +
+ 11 files changed, 6249 insertions(+), 520 deletions(-)
+
+Fri Oct 18 16:48:58 2019 -0700 - [jcpsimmons@gmail.com] 8786576f80d1a725399b33f60a1ead8f2b850ce2
+ python-scripts/slickFinder.py | 36 ++++++++++++++++++++++++++++++++++++
+ x.xx                          |  0
+ 2 files changed, 36 insertions(+)
+
+Fri Oct 18 10:53:50 2019 -0700 - [jcpsimmons@gmail.com] d5a0fdc7259b4eb4de405718dff7f845d0c132f5
+ x.xx | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+Fri Oct 18 10:52:24 2019 -0700 - [jcpsimmons@gmail.com] 9cffa905b1e89488806008be5068ec2756292a09
+ ESX130/ESX130.js                                   |  48 ++
+ jquery goodies/kartKlear.js                        |   3 +
+ python-scripts/outputs/another_ap_and_r_update.csv | 520 +++++++++++++++++++++
+ python-scripts/outputs/ap_and_r_update.csv         | 189 --------
+ 4 files changed, 571 insertions(+), 189 deletions(-)
+
+Wed Oct 16 09:49:49 2019 -0700 - [Josh] 9b556edbc9ffe9dc6aaa964c5e3b9baf364e8404
+ ESX125/ESX125.js                               |  53 +++----
+ ESX126/Desktop/BAK.js                          |  82 +++++++++++
+ ESX126/Desktop/ESX126.js                       |  60 ++++++++
+ ESX126/Desktop/ESX126_NoVariation.js           |   9 ++
+ ESX126/Desktop/insertHtml.html                 |   1 +
+ ESX126/Desktop/pollingFn.js                    |   8 ++
+ ESX126/Mobile/ESX126-MOBILE.js                 |  74 ++++++++++
+ ESX126/Mobile/ESX126-MOBILE_NoVariation.js     |   9 ++
+ ESX126/Mobile/pollingFn.js                     |   8 ++
+ ESX127/ESX127-TARGETING.md                     |   7 +
+ ESX127/ESX127-original.css                     |   3 +
+ ESX127/ESX127-variation.js                     |   9 ++
+ python-scripts/__pycache__/data.cpython-37.pyc | Bin 0 -> 13246 bytes
+ python-scripts/brokenlinks.py                  |  99 +++++++++++++
+ python-scripts/data.py                         |   3 +
+ python-scripts/generateCSV.py                  |  73 ++++++++++
+ python-scripts/outputs/ap_and_r_update.csv     | 189 +++++++++++++++++++++++++
+ python-scripts/upd8r.py                        |  62 ++++++++
+ 18 files changed, 725 insertions(+), 24 deletions(-)
+
+Thu Oct 10 09:53:15 2019 -0700 - [Josh] 974a648f338f6ad9c02b659d984898c0ce4b4bb0
+ ESX125/ESX125.js | 26 +++++++++++++++++---------
+ 1 file changed, 17 insertions(+), 9 deletions(-)
+
+Wed Oct 9 14:18:22 2019 -0700 - [Josh] c77fb9bd78ea25581bd76f6a4bc3fe2eaf5a9aaa
+ ESX125/ESX125.css |  3 +++
+ ESX125/ESX125.js  | 37 ++++++++++++++-----------------------
+ 2 files changed, 17 insertions(+), 23 deletions(-)
+
+Wed Oct 9 13:49:21 2019 -0700 - [Josh] 3c2f4fdb78cbd68b051be58aaacfbf42a11018c0
+ ESX125/ESX125.js        |  27 ++++++++++++
+ ESX125/prototyping.html | 106 ++++++++++++++++++++++++++++++++++++++++++++++++
+ ESX125/targeting.txt    |  18 ++++++++
+ 3 files changed, 151 insertions(+)
+
+Tue Oct 8 16:57:52 2019 -0700 - [jcpsimmons@gmail.com] f285658d7d9a6158b9408d93f2272c4dc3e4a902
+ .../moreInThisColorDesktop.js                      | 170 ++++++++++-----------
+ .../moreInThisColorDesktop_POLLINGFUNCTION.js      |   6 +-
+ .../moreInThisColorMobile.js                       | 170 ++++++++++-----------
+ .../moreInThisColor_OriginalTracking.js            |  22 +--
+ 4 files changed, 184 insertions(+), 184 deletions(-)
+
+Tue Oct 8 14:11:53 2019 -0700 - [Josh] 564583cdd7cd898221fb876e3d9573bd267a76c8
+ ESX124/ESX124.css | 124 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ ESX124/ESX124.js  |  62 +++++++++++++++++++++++++++
+ ESX124/demo.html  |  42 ++++++++++++++++++
+ 3 files changed, 228 insertions(+)
+
+Tue Oct 8 11:24:03 2019 -0700 - [Josh] aa422c1142f4a7aeeff66c351d446b8371723035
+ ESX123/ESX123.css | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+Mon Oct 7 16:10:37 2019 -0700 - [Josh] aa956c272daef4a04451435b8fb9d948b87c9899
+ ESX000/ESX000.css            | 179 -------------------------------------------
+ ESX000/ESX000.js             |  58 --------------
+ ESX123/ESX123.css            | 101 ++++++++++++++++++++++++
+ ESX123/ESX123.js             |  66 ++++++++++++++++
+ {ESX000 => ESX123}/demo.html |   0
+ 5 files changed, 167 insertions(+), 237 deletions(-)
+
+Mon Oct 7 09:03:38 2019 -0700 - [Josh] db760bb9c95eedd3328cc5d59407b6c294c3a649
+ ESX000/ESX000.css | 73 ++++++++++++++++++++++++++++++++++++++++------
+ ESX000/ESX000.js  | 87 +++++++++++++++++++++++--------------------------------
+ ESX000/demo.html  | 11 +++----
+ 3 files changed, 106 insertions(+), 65 deletions(-)
+
+Fri Oct 4 16:31:21 2019 -0700 - [Josh] 002f61197ca87c411fc6d74972a35849c7b1456d
+ ESX000/ESX000.css |  7 +++----
+ ESX000/ESX000.js  | 20 +++++++++++---------
+ ESX000/demo.html  | 17 ++++++++---------
+ 3 files changed, 22 insertions(+), 22 deletions(-)
+
+Fri Oct 4 15:47:57 2019 -0700 - [Josh] e45ce2ea9d95b4487dfbc1bc210dce65afc70794
+ ESX000/ESX000.css | 78 +++++++++++++++++++++++++++++++++++------------------
+ ESX000/ESX000.js  | 81 +++++++++++++++++++++++++++++++++++++++++++++----------
+ ESX000/demo.html  | 15 ++++++-----
+ 3 files changed, 128 insertions(+), 46 deletions(-)
+
+Fri Oct 4 13:59:13 2019 -0700 - [Josh] 2d4fca5e2ff3a9d1727805f61b71a774b0dbe1ba
+ ESX000/ESX000.css | 99 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ ESX000/ESX000.js  | 18 ++++++++++
+ ESX000/demo.html  | 39 ++++++++++++++++++++++
+ ESX122/ESX122.js  | 17 +++++++---
+ 4 files changed, 169 insertions(+), 4 deletions(-)
+
+Thu Oct 3 14:50:12 2019 -0700 - [Josh] efaad38d4269a09a7e2c04dfabfbaaf611c0cf51
+ ESX119/ESX119-CLICK_TRACKING.js       |  6 ------
+ ESX119/ESX119-SHARED_CODE_TRACKING.js | 11 +++++++++++
+ ESX119/ESX119.js                      |  7 -------
+ ESX120/ESX120.js                      | 17 +++++++++++++++++
+ ESX122/ESX122.js                      | 20 ++++++++++++++++++++
+ ls.BAK.js                             |  1 -
+ 6 files changed, 48 insertions(+), 14 deletions(-)
+
+Mon Sep 30 11:38:29 2019 -0700 - [Josh] 1a2a1ee61ae06b03e20802318fd5d9ada57e0615
+ ESX119/ESX119-CLICK_TRACKING.js |  6 ++++++
+ ESX119/ESX119.js                | 29 +++++++++++++++++++++++++++++
+ 2 files changed, 35 insertions(+)
+
+Tue Jul 23 14:58:56 2019 -0700 - [Josh] 7bb9a078aec5c9ec1556a703878193921e6ec762
+ .../moreInThisColorDesktop.js                      | 85 ++++++++++++++++++++++
+ .../moreInThisColorDesktop_POLLINGFUNCTION.js      |  3 +
+ .../moreInThisColorMobile.js                       | 85 ++++++++++++++++++++++
+ .../moreInThisColor_OriginalTracking.js            | 11 +++
+ ls.BAK.js                                          |  1 +
+ moreInThisColor/moreInThisColorDesktop.js          | 80 --------------------
+ 6 files changed, 185 insertions(+), 80 deletions(-)
+
+Tue Jul 16 11:07:30 2019 -0700 - [Josh] 0c4f39c2ffcb96e5e81b9086c179c54041e911d5
+ moreInThisColor/moreInThisColorDesktop.js | 80 +++++++++++++++++++++++++++++++
+ 1 file changed, 80 insertions(+)

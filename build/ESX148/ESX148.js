@@ -104,11 +104,4 @@ $(document).ready(function () {
       eventName: "clickMoreInThisColor"
     });
   });
-  $("body").on("click", "#moreInThisColorContainer", function () {
-    window.optimizely = window.optimizely || [];
-    window.optimizely.push({
-      type: "event",
-      eventName: "clickMoreInThisColor"
-    });
-  });
 });
