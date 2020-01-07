@@ -3,7 +3,7 @@ const nested = () => {
   const style = document.createElement("style");
   style.type = "text/css";
   style.innerHTML =
-    "#filter-sidebar > a {color: black;} .stickyStyle { position:fixed; position:sticky;top:0;width:100%; padding-top:2rem;z-index:1041} .dropdownMenus { padding-top: 0; } #floating-banner-bg { background-color:rgba(255,255,255,.9); border-bottom: 1px solid grey; position: fixed; left: 0; right: 0; top: 0; box-shadow: 0 5.3px 3px -4px grey; } @media screen and (max-width: 990px) { #floating-banner-bg { height: 13rem; } }";
+    "#filter-sidebar > a {color: black;} .stickyStyle { position:fixed; top:0;width:100%; padding-top:2rem;z-index:1041} .dropdownMenus { padding-top: 0; } #floating-banner-bg { background-color:rgba(255,255,255,.9); border-bottom: 1px solid grey; position: fixed; left: 0; right: 0; top: 0; box-shadow: 0 5.3px 3px -4px grey; } @media screen and (max-width: 990px) { #floating-banner-bg { height: 13rem; } }";
   document.getElementsByTagName("head")[0].appendChild(style);
 };
 
@@ -25,7 +25,7 @@ const reposNav = () => {
       .querySelector(
         ".product-listing-template .grid-container, .search-template .grid-container"
       )
-      .getBoundingClientRect().top < 50
+      .getBoundingClientRect().top < 0
   ) {
     $("#NavContainer").addClass("stickyStyle");
     if (document.querySelector("#floating-banner-bg") == null) {
@@ -38,11 +38,7 @@ const reposNav = () => {
     // keep transparent to avoid flicker
     // $("#floating-banner-bg").css("background-color", "rgba(255,255,255,0");
     // Resize the height to fit components
-    $("#floating-banner-bg").height(
-      $(".toWrap.dropdownMenus").outerHeight() +
-        $(".toWrap.row").outerHeight() +
-        20
-    );
+
     $("#NavContainer h1")
       .css("font-size", "2rem")
       .css("margin-bottom", "0");
@@ -52,6 +48,11 @@ const reposNav = () => {
     $("#NavContainer .faceted-search-component .applied-filter-wrapper")
       .css("margin-top", "1.2rem")
       .css("margin-bottom", "0");
+    $("#floating-banner-bg").height(
+      $(".toWrap.dropdownMenus").outerHeight() +
+        $(".toWrap.row").outerHeight() +
+        20
+    );
     // $("#floating-banner-bg").css("background-color", "rgba(255,255,255,.9");
   } else {
     $("#NavContainer").removeClass("stickyStyle");
