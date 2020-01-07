@@ -15,11 +15,9 @@ var reposNav = function reposNav() {
 
   $("#NavContainer").length ? null : $(".toWrap").wrapAll('<div id="NavContainer"></div>'); // Get the offset position of the navbar
 
-  var sticky = document.querySelector("#NavContainer").offsetTop;
-  console.log(window.pageYOffset, "yoffset");
-  console.log(sticky, "sticky"); // have to use this offest by 10px logic to avoid flicker where it thinks it's both
+  var sticky = document.querySelector("#NavContainer").offsetTop; // have to use this offest by 10px logic to avoid flicker where it thinks it's both
 
-  if (window.pageYOffset > 250) {
+  if (document.querySelector(".product-listing-template .grid-container, .search-template .grid-container").getBoundingClientRect().top < 0) {
     $("#NavContainer").addClass("stickyStyle");
 
     if (document.querySelector("#floating-banner-bg") == null) {
@@ -36,7 +34,6 @@ var reposNav = function reposNav() {
     $("#NavContainer .filter-group-title").hide();
     $("#NavContainer .faceted-search-component .applied-filter-wrapper").css("margin-top", "1.2rem").css("margin-bottom", "0");
   } else {
-    console.log("elsecond");
     $("#NavContainer").removeClass("stickyStyle");
     $("#floating-banner-bg").remove();
     $("#NavContainer .faceted-search-component").removeClass("dropdownMenus");

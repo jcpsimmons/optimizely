@@ -25,7 +25,7 @@ const reposNav = () => {
       .querySelector(
         ".product-listing-template .grid-container, .search-template .grid-container"
       )
-      .getBoundingClientRect().top < 0
+      .getBoundingClientRect().top < 50
   ) {
     $("#NavContainer").addClass("stickyStyle");
     if (document.querySelector("#floating-banner-bg") == null) {
@@ -35,6 +35,8 @@ const reposNav = () => {
     }
     $("#NavContainer .faceted-search-component").addClass("dropdownMenus");
     $("#NavContainer ul.pull-right").css("display", "none");
+    // keep transparent to avoid flicker
+    // $("#floating-banner-bg").css("background-color", "rgba(255,255,255,0");
     // Resize the height to fit components
     $("#floating-banner-bg").height(
       $(".toWrap.dropdownMenus").outerHeight() +
@@ -50,6 +52,7 @@ const reposNav = () => {
     $("#NavContainer .faceted-search-component .applied-filter-wrapper")
       .css("margin-top", "1.2rem")
       .css("margin-bottom", "0");
+    // $("#floating-banner-bg").css("background-color", "rgba(255,255,255,.9");
   } else {
     $("#NavContainer").removeClass("stickyStyle");
     $("#floating-banner-bg").remove();
