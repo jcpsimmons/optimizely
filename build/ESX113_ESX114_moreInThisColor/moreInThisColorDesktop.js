@@ -1,5 +1,3 @@
-"use strict";
-
 $(document).ready(function () {
   function titleCase(str) {
     str = str.toLowerCase().split(' ');

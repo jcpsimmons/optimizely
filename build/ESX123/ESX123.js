@@ -1,5 +1,3 @@
-"use strict";
-
 $(document).ready(function () {
   $('.secondary-nav .container .row .col-sm-6:first-of-type').empty();
   var firstLink = "<a id='animation1' class='banner-text white-link' href='https://www.livingspaces.com/delivery'>Now delivering nationwide starting at $99.</a>";

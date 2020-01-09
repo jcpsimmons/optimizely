@@ -1,5 +1,3 @@
-"use strict";
-
 // EXPERIMENT CODE
 window.addEventListener('load', function () {
   if (window.jQuery) {

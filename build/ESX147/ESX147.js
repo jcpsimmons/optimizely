@@ -1,5 +1,3 @@
-"use strict";
-
 var anotherInterval = setInterval(function () {
   if (typeof window.jQuery !== "undefined") {
     clearInterval(anotherInterval);

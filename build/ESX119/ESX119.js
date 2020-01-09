@@ -1,5 +1,3 @@
-"use strict";
-
 function moveFeaturesDropdown() {
   if (window.$('a.dropdown-toggle:contains(Features)').length == 1) {
     var featuresDropdown = window.$('a.dropdown-toggle:contains(Features)').parent().parent().detach();

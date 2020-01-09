@@ -1,5 +1,3 @@
-"use strict";
-
 // Experiment Code
 var anotherInterval = setInterval(function () {
   if (typeof window.jQuery !== 'undefined' && $('#omniinventory').length > 0) {

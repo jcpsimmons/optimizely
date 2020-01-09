@@ -1,5 +1,3 @@
-"use strict";
-
 window.addEventListener('load', function () {
   if (window.jQuery) {
     window.$('.navbar-collapse').children('.nav').click(function () {

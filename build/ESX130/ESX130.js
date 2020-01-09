@@ -1,5 +1,3 @@
-"use strict";
-
 // EXPERIMENT CODE
 var busInterval = setInterval(function () {
   if (typeof window.EventBus !== 'undefined') {

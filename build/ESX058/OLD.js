@@ -1,5 +1,3 @@
-"use strict";
-
 window.addEventListener('load', function () {
   var cookieRecentlyAdd = window.$.cookie('lsf-cartadds') ? window.$.cookie('lsf-cartadds') : false;
   var recentlyAddCartList;

@@ -1,5 +1,3 @@
-"use strict";
-
 // I'd like to update the language of the omni-channel section of the cart.
 // This is the current language: Get everything delivered for $99.00
 // If there are no items in their cart, I'd like to update that to "Get unlimited items delivered for $99"

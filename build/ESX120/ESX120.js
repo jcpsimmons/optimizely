@@ -1,5 +1,3 @@
-"use strict";
-
 var spacing = '';
 
 if (utag_data.site_type == 'mobile') {

@@ -1,5 +1,3 @@
-"use strict";
-
 // Retry of ESX114
 $(document).ready(function () {
   function toggleBanner() {

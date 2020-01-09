@@ -1,5 +1,3 @@
-"use strict";
-
 function checkAndUpdate() {
   Date.prototype.addDays = function (days) {
     this.setDate(this.getDate() + parseInt(days));

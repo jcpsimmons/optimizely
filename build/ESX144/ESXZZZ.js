@@ -1,5 +1,3 @@
-"use strict";
-
 // EXPERIMENT CODE - DESKTOP ONLY TEST
 var anotherInterval = setInterval(function () {
   if (typeof window.jQuery !== 'undefined') {

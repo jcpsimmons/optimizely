@@ -1,5 +1,3 @@
-"use strict";
-
 $(document).ready(function () {
   $('.promo').empty();
   var firstLink = "<a id='animation1' class='banner-text white-link' href='https://www.livingspaces.com/delivery'>Now delivering nationwide starting at $99 &rsaquo;</a>";

@@ -1,5 +1,3 @@
-"use strict";
-
 window.addEventListener('load', function () {
   if (window.jQuery) {
     var constructSlider = function constructSlider(productList) {

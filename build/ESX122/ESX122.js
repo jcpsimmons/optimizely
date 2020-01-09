@@ -1,5 +1,3 @@
-"use strict";
-
 $(document).ready(function () {
   var selector = '.in-same-collection .product-element';
 

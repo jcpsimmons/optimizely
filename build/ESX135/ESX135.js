@@ -1,5 +1,3 @@
-"use strict";
-
 // Experiment Code
 window.addEventListener("load", function () {
   try {

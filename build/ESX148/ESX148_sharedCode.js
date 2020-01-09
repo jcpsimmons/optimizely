@@ -1,5 +1,3 @@
-"use strict";
-
 $("body").on("click", "#moreLikeThis", function () {
   window.optimizely = window.optimizely || [];
   window.optimizely.push({

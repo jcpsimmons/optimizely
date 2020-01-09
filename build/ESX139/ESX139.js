@@ -1,5 +1,3 @@
-"use strict";
-
 // Targeting Code
 function jsCondition() {
   return utag_data.product_group_id == 'dining tables';

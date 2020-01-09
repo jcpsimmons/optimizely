@@ -1,5 +1,3 @@
-"use strict";
-
 $(".faceted-search-component").click(function () {
   window["optimizely"] = window["optimizely"] || [];
   window["optimizely"].push({

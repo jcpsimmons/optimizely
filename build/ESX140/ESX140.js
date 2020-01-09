@@ -1,5 +1,3 @@
-"use strict";
-
 document.getElementById('block232253').addEventListener('click', function () {
   window.optimizely = window.optimizely || [];
   window.optimizely.push({

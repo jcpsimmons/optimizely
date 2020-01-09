@@ -1,5 +1,3 @@
-"use strict";
-
 $(document).ready(function () {
   $('body').on('click', '#block226978', function () {
     window.optimizely = window.optimizely || [];
