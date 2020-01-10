@@ -1,0 +1,79 @@
+<section class="container board">
+        <a class="collapse-link" role="button" data-toggle="collapse" href="#moreLikeThis" aria-expanded="true" aria-controls="moreLikeThis">
+            More Like This<span class="fa fa-angle-down" aria-hidden="true"></span>
+        </a>
+        <div class="collapse in" id="moreLikeThis">
+            <div class="product-grid-component">
+                <div class="row">
+                        <div class="col-xs-3 product-element">
+                            <a href="https://www.livingspaces.com/pdp-cassie-full-panel-bed-252191">
+                                <img src="https://www.livingspaces.com/globalassets/productassets/200000-299999/250000-259999/252000-252999/252100-252199/252191/252191_natural_wood_bed_signature_01.jpg?w=263&amp;h=174&amp;mode=pad" class="img-responsive" alt="Cassie Full Panel Bed">
+                                <span class="title">Cassie Full Panel Bed</span>
+                                <span class="price">$190</span>
+
+                                	<div class="ratings" role="button">
+			<span class="fa fa-star" aria-hidden="true"></span>
+			<span class="fa fa-star" aria-hidden="true"></span>
+			<span class="fa fa-star" aria-hidden="true"></span>
+			<span class="fa fa-star" aria-hidden="true"></span>
+			<span class="fa fa-star" aria-hidden="true"></span>
+						<span aria-label="total number of reviews" class="number">(6)</span>
+	</div>
+
+                            </a>
+                        </div>
+                        <div class="col-xs-3 product-element">
+                            <a href="https://www.livingspaces.com/pdp-cassie-twin-panel-bed-252195">
+                                <img src="https://www.livingspaces.com/globalassets/productassets/200000-299999/250000-259999/252000-252999/252100-252199/252195/252195_natural_wood_bed_signature_01.jpg?w=263&amp;h=174&amp;mode=pad" class="img-responsive" alt="Cassie Twin Panel Bed">
+                                <span class="title">Cassie Twin Panel Bed</span>
+                                <span class="price">$180</span>
+
+                                	<div class="ratings" role="button">
+			<span class="fa fa-star" aria-hidden="true"></span>
+			<span class="fa fa-star" aria-hidden="true"></span>
+			<span class="fa fa-star" aria-hidden="true"></span>
+			<span class="fa fa-star" aria-hidden="true"></span>
+			<span class="fa fa-star" aria-hidden="true"></span>
+						<span aria-label="total number of reviews" class="number">(6)</span>
+	</div>
+
+                            </a>
+                        </div>
+                        <div class="col-xs-3 product-element">
+                            <a href="https://www.livingspaces.com/pdp-finley-queen-panel-bed-244115">
+                                <img src="https://www.livingspaces.com/globalassets/productassets/200000-299999/240000-249999/244000-244999/244100-244199/244115/244115_grey_wood_queen_panel_bed_1.jpg?w=263&amp;h=174&amp;mode=pad" class="img-responsive" alt="Finley Queen Panel Bed">
+                                <span class="title">Finley Queen Panel Bed</span>
+                                <span class="price">$170</span>
+
+                                	<div class="ratings" role="button">
+			<span class="fa fa-star" aria-hidden="true"></span>
+			<span class="fa fa-star" aria-hidden="true"></span>
+			<span class="fa fa-star" aria-hidden="true"></span>
+			<span class="fa fa-star" aria-hidden="true"></span>
+					<span class="fa fa-star-half-o" aria-hidden="true"></span>
+				<span aria-label="total number of reviews" class="number">(27)</span>
+	</div>
+
+                            </a>
+                        </div>
+                        <div class="col-xs-3 product-element">
+                            <a href="https://www.livingspaces.com/pdp-ranier-queen-panel-bed-247135">
+                                <img src="https://www.livingspaces.com/globalassets/productassets/200000-299999/240000-249999/247000-247999/247100-247199/247135/247135_brown_wood_bed_signature_01.jpg?w=263&amp;h=174&amp;mode=pad" class="img-responsive" alt="Ranier Queen Panel Bed">
+                                <span class="title">Ranier Queen Panel Bed</span>
+                                <span class="price">$195</span>
+
+                                	<div class="ratings" role="button">
+			<span class="fa fa-star" aria-hidden="true"></span>
+			<span class="fa fa-star" aria-hidden="true"></span>
+			<span class="fa fa-star" aria-hidden="true"></span>
+			<span class="fa fa-star" aria-hidden="true"></span>
+					<span class="fa fa-star-half-o" aria-hidden="true"></span>
+				<span aria-label="total number of reviews" class="number">(28)</span>
+	</div>
+
+                            </a>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
