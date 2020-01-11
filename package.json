@@ -32,6 +32,7 @@
     "pre-commit": "^1.2.2"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.7.0",
     "gulp-eslint": "^6.0.0"
   }
 }
