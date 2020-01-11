@@ -1,6 +1,6 @@
 const injectCss = () => {
     $(
-        "<style type='text/css'>.ellipsis-wrap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;}</style>"
+        "<style type='text/css'>.ellipsis-wrap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;}#SuggestedProducts .cart-component .container {padding-left:0;padding-left:0;</style>"
     ).appendTo("head");
 };
 const injectSlickCss = () => {
@@ -58,33 +58,42 @@ const buildHtml = async userData => {
     );
     let data = await res.json();
 
-    // DESKTOP
-    for (const product of data.products) {
-        html.push(
-            `<div class="col-xs-3 product-element"> <a href="https://www.livingspaces.com/${
-            product.pid
-            }"> <img src="https://www.livingspaces.com/globalassets/productassets/200000-299999/250000-259999/252000-252999/252100-252199/252191/252191_natural_wood_bed_signature_01.jpg?w=263&amp;h=174&amp;mode=pad" class="img-responsive" alt="${
-            product.title
-            }"> <span class="title ellipsis-wrap">${
-            product.title
-            }</span> <span class="price">$${
-            product.price.salePrice
-            }</span><div class="ratings" role="button">${ratingGenerator(
-                product.reviewsAvg,
-                product.reviewsCount
-            )}</div></a> </div>`
-        );
-    }
+    if (utag_data.site_type == 'desktop') {
+        // DESKTOP
+        for (const product of data.products) {
+            html.push(
+                `<div class="col-xs-3 product-element"> <a href="https://www.livingspaces.com/${
+                product.pid
+                }"> <img src="${product.images[0].imageUrl}?w=263&amp;h=174&amp;mode=pad" class="img-responsive" alt="${
+                product.title
+                }"> <span class="title ellipsis-wrap">${
+                product.title
+                }</span> <span class="price">$${
+                product.price.salePrice
+                }</span><div class="ratings" role="button">${ratingGenerator(
+                    product.reviewsAvg,
+                    product.reviewsCount
+                )}</div></a> </div>`
+            );
+        }
 
-    html = `<section id="" class="container board"> <a class="collapse-link" role="button" data-toggle="collapse" href="#moreLikeThis" aria-expanded="true" aria-controls="moreLikeThis"> More Like This<span class="fa fa-angle-down" aria-hidden="true"></span> </a> <div class="collapse in"> <div class="product-grid-component"> <div class="row" id="SuggestedProducts"> ${html.join(
-        ""
-    )} </div> </div> </div> </section>`;
+        html = `<section id="" class="container board"> <a class="collapse-link" role="button" data-toggle="collapse" href="#moreLikeThis" aria-expanded="true" aria-controls="moreLikeThis"> More Like This<span class="fa fa-angle-down" aria-hidden="true"></span> </a> <div class="collapse in"> <div class="product-grid-component"> <div class="row" id="SuggestedProducts"> ${html.join(
+            ""
+        )} </div> </div> </div> </section>`;
 
-    $(".cart-content").after(html);
-
-    // Initialize and style slick if on mobile
-    if (utag_data.site_type == 'mobile') {
+        $(".cart-content").after(html);
+    } else {
         // MOBILE
+        for (const product of data.products) {
+            html.push(
+                `<div class="product-element"> <a href="https://www.livingspaces.com/${product.pid}"> <img data-src="${product.images[0].imageUrl}?w=151&amp;h=100&amp;mode=pad" class="img-responsive lazy " alt="${product.title}"> <span class="title">${product.title}</span> <span class="price">$${product.price.salePrice}</span> <div class="ratings" role="button">${ratingGenerator(
+                    product.reviewsAvg,
+                    product.reviewsCount
+                )}</div> </a> </div>`
+            );
+        }
+
+        $(".cart-content").after(html);
         $("#SuggestedProducts").slick({
             infinite: true,
             slidesToShow: 2.5,
@@ -94,7 +103,7 @@ const buildHtml = async userData => {
         });
         injectSlickCss()
     }
-    return html;
+    return true;
 };
 
 injectCss();

@@ -6,8 +6,19 @@ var injectCss = function injectCss() {
   $("<style type='text/css'>.ellipsis-wrap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;}</style>").appendTo("head");
 };
 
+var injectSlickCss = function injectSlickCss() {
+  $("#SuggestedProducts .slick-track").css('transform', 'translateX(0)');
+};
+
 var ratingGenerator = function ratingGenerator(average, count) {
-  // ROUND TO .5 GRAIN
+  console.log('average: ', average);
+  console.log('count: ', count); // If there are no reviews return no code
+
+  if (!parseInt(average) > 0 || !parseInt(average) > 0) {
+    return "";
+  } // ROUND TO .5 GRAIN
+
+
   var roundedAverage = Math.ceil(average * 2) / 2;
   var fullStars = parseInt(roundedAverage); // Add full-stars
 
@@ -32,7 +43,7 @@ var ratingGenerator = function ratingGenerator(average, count) {
   return html;
 };
 
-buildHtml =
+var buildHtml =
 /*#__PURE__*/
 function () {
   var _ref = _asyncToGenerator(
@@ -62,72 +73,74 @@ function () {
 
           case 9:
             data = _context.sent;
-
-            if (!(utag_data.site_type == "desktop")) {
-              _context.next = 34;
-              break;
-            }
-
+            // DESKTOP
             _iteratorNormalCompletion = true;
             _didIteratorError = false;
             _iteratorError = undefined;
-            _context.prev = 14;
+            _context.prev = 13;
 
             for (_iterator = data.products[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
               product = _step.value;
               html.push("<div class=\"col-xs-3 product-element\"> <a href=\"https://www.livingspaces.com/".concat(product.pid, "\"> <img src=\"https://www.livingspaces.com/globalassets/productassets/200000-299999/250000-259999/252000-252999/252100-252199/252191/252191_natural_wood_bed_signature_01.jpg?w=263&amp;h=174&amp;mode=pad\" class=\"img-responsive\" alt=\"").concat(product.title, "\"> <span class=\"title ellipsis-wrap\">").concat(product.title, "</span> <span class=\"price\">$").concat(product.price.salePrice, "</span><div class=\"ratings\" role=\"button\">").concat(ratingGenerator(product.reviewsAvg, product.reviewsCount), "</div></a> </div>"));
             }
 
-            _context.next = 22;
+            _context.next = 21;
             break;
 
-          case 18:
-            _context.prev = 18;
-            _context.t0 = _context["catch"](14);
+          case 17:
+            _context.prev = 17;
+            _context.t0 = _context["catch"](13);
             _didIteratorError = true;
             _iteratorError = _context.t0;
 
-          case 22:
+          case 21:
+            _context.prev = 21;
             _context.prev = 22;
-            _context.prev = 23;
 
             if (!_iteratorNormalCompletion && _iterator["return"] != null) {
               _iterator["return"]();
             }
 
-          case 25:
-            _context.prev = 25;
+          case 24:
+            _context.prev = 24;
 
             if (!_didIteratorError) {
-              _context.next = 28;
+              _context.next = 27;
               break;
             }
 
             throw _iteratorError;
 
+          case 27:
+            return _context.finish(24);
+
           case 28:
-            return _context.finish(25);
+            return _context.finish(21);
 
           case 29:
-            return _context.finish(22);
+            html = "<section id=\"\" class=\"container board\"> <a class=\"collapse-link\" role=\"button\" data-toggle=\"collapse\" href=\"#moreLikeThis\" aria-expanded=\"true\" aria-controls=\"moreLikeThis\"> More Like This<span class=\"fa fa-angle-down\" aria-hidden=\"true\"></span> </a> <div class=\"collapse in\"> <div class=\"product-grid-component\"> <div class=\"row\" id=\"SuggestedProducts\"> ".concat(html.join(""), " </div> </div> </div> </section>");
+            $(".cart-content").after(html); // Initialize and style slick if on mobile
 
-          case 30:
-            console.log(html);
-            html = "<section class=\"container board\"> <a class=\"collapse-link\" role=\"button\" data-toggle=\"collapse\" href=\"#moreLikeThis\" aria-expanded=\"true\" aria-controls=\"moreLikeThis\"> More Like This<span class=\"fa fa-angle-down\" aria-hidden=\"true\"></span> </a> <div class=\"collapse in\" id=\"moreLikeThis\"> <div class=\"product-grid-component\"> <div class=\"row\"> ".concat(html.join(""), " </div> </div> </div> </section>");
-            _context.next = 34;
-            break;
+            if (utag_data.site_type == 'mobile') {
+              // MOBILE
+              $("#SuggestedProducts").slick({
+                infinite: true,
+                slidesToShow: 2.5,
+                slidesToScroll: 1,
+                dots: false,
+                arrows: false
+              });
+              injectSlickCss();
+            }
 
-          case 34:
-            console.log(html);
-            $(".cart-content").after(html);
             return _context.abrupt("return", html);
 
-          case 37:
+          case 33:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[14, 18, 22, 30], [23,, 25, 29]]);
+    }, _callee, null, [[13, 17, 21, 29], [22,, 24, 28]]);
   }));
 
   return function buildHtml(_x) {
@@ -136,4 +149,4 @@ function () {
 }();
 
 injectCss();
-buildHtml(utag_data);
+buildHtml(utag_data); //  utag_data={"site_type":"desktop","site_section":"confirmation","page_type":"confirmation","page_name":"order confirmation","product_name":["kerri 2 piece sectional w/laf chaise"],"product_type":["furniture"],"product_category":["upholstery"],"product_id":["107150"],"product_quantity":["1"],"product_price":["895.00"],"customer_city":"la habra","customer_country":"us","customer_postal_code":"90638","customer_state":"ca","customer_email":"josh.simmons@livingspaces.com","unique_id":"a02c3da7f097fc486721b1de5e808cdc28e7301a717e8681dcdbb33c92f87ad5","customer_id":"c-010407447","order_currency_code":"usd","order_grand_total":"1132.23","order_id":"004676663","order_shipping_amount":"139.00","order_subtotal":"895.00","order_tax_amount":"98.23"};
