@@ -37,8 +37,7 @@ $(document).ready(function () {
       state = 1;
     }
   }, 7000);
-}); // FOR BOTH VARIATIONS
-
+});
 $(document).ready(function () {
   $('.secondary-nav .container .row .col-sm-6:first-of-type').click(function () {
     window.optimizely = window.optimizely || [];

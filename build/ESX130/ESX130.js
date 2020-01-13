@@ -1,4 +1,3 @@
-// EXPERIMENT CODE
 var busInterval = setInterval(function () {
   if (typeof window.EventBus !== 'undefined') {
     var checkAndToggle = function checkAndToggle() {
@@ -26,8 +25,7 @@ var busInterval = setInterval(function () {
     });
     checkAndToggle();
   }
-}, 50); // SHARED CODE
-
+}, 50);
 var anotherInterval = setInterval(function () {
   if (typeof window.EventBus !== 'undefined') {
     clearInterval(anotherInterval);

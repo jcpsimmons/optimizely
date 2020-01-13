@@ -1,4 +1,3 @@
-// EXPERIMENT CODE - DESKTOP ONLY TEST
 var anotherInterval = setInterval(function () {
   if (typeof window.jQuery !== 'undefined') {
     clearInterval(anotherInterval);
@@ -8,10 +7,7 @@ var anotherInterval = setInterval(function () {
       });
     });
   }
-}, 50); // clicked - large view icon
-//  clicked - signature image
-// SHARED CODE
-
+}, 50);
 $(document).ready(function () {
   $('body').on('click', '.action-buttons #largeViewLink', function () {
     window.optimizely = window.optimizely || [];

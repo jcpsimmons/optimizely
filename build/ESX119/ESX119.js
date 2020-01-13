@@ -13,7 +13,7 @@ window.$(document).ready(function () {
 });
 window.EventBus.$on('productResultsUpdated', function (data) {
   moveFeaturesDropdown();
-}); // TARGETING
+});
 
 function jsCond() {
   return utag_data.page_type == 'category' || utag_data.page_type == 'search';

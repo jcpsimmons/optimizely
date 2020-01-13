@@ -16,7 +16,6 @@ function checkAndUpdate() {
   }
 
   if (state == 'CA' && firstDate < fiveDaysOut || state == 'AZ' && firstDate < fiveDaysOut) {
-    //   ADD COLON
     if ($('p.delivery-fee').html().search(':') == -1) {
       $('body').append('<style> p.delivery-fee { position: relative; } .in-home-options .delivery-fee span { margin-left: 0rem !important; color: #00699a; font-weight: bolder; font-size: 1.8rem } .delivery-fee span::before { content: ":"; color: #333; font-weight: normal; margin-left: -.3rem; margin-right: .3rem; } </style>');
     }
@@ -27,8 +26,7 @@ function checkAndUpdate() {
       $('body').append('<style> p.delivery-fee::after { content: "Shipping From Phoenix, AZ 85043"; position: absolute; right: 0; bottom: 1px } </style>');
     }
   }
-} // MIGHT NEED WINDOW ON EVENT BUS
-
+}
 
 function eventBusHook() {
   EventBus.$on('refreshCart', function () {

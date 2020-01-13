@@ -1,10 +1,8 @@
-// EXPERIMENT CODE
 window.addEventListener('load', function () {
   if (window.jQuery) {
     $('.signup-component').remove();
   }
-}, false); // SHARED CODE
-
+}, false);
 window.addEventListener('load', function () {
   if (window.jQuery) {
     if ($('.signup-component').length > 0) {

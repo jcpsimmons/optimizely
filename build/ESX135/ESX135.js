@@ -1,4 +1,3 @@
-// Experiment Code
 window.addEventListener("load", function () {
   try {
     if (window.jQuery) {
@@ -6,7 +5,7 @@ window.addEventListener("load", function () {
       $("#remember-me").parent().parent().hide();
     }
   } catch (e) {}
-}, false); // Page targeting - https://www.livingspaces.com/checkout and JS condition:
+}, false);
 
 function jsCondition() {
   return $('span:contains("Sign In")').css("font-weight") == 600;

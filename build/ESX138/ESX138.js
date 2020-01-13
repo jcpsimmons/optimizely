@@ -1,4 +1,3 @@
-// Experiment Code
 var anotherInterval = setInterval(function () {
   if (typeof window.jQuery !== 'undefined' && $('#omniinventory').length > 0) {
     clearInterval(anotherInterval);
@@ -15,7 +14,7 @@ var anotherInterval = setInterval(function () {
       });
     });
   }
-}, 50); // Polling Function
+}, 50);
 
 function jsCondition() {
   return $("th:contains('Package')").length > 0;

@@ -5,9 +5,7 @@ $(".faceted-search-component").click(function () {
     eventName: "click_sorting_facets",
     tags: {
       revenue: 0,
-      // Optional in cents as integer (500 == $5.00)
-      value: 0.0 // Optional as float
-
+      value: 0.0
     }
   });
 });

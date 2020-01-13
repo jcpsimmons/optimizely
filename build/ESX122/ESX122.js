@@ -8,8 +8,7 @@ $(document).ready(function () {
   $(selector).each(function () {
     $(this).prependTo(this.parentNode);
   });
-}); // Shared
-
+});
 $(document).ready(function () {
   $('#thisCollection').click(function () {
     window.optimizely = window.optimizely || [];
@@ -18,7 +17,7 @@ $(document).ready(function () {
       eventName: 'clicked_alsointhiscollection_tiles'
     });
   });
-}); //  Polling function for targeting less than 8 products in here
+});
 
 function pollingFn() {
   return $('#thisCollection .product-grid-component .row .product-element').length > 0 && utag_data.product_attribute.search('bedroom') > -1;

@@ -11,25 +11,19 @@ var injectSlickCss = function injectSlickCss() {
 };
 
 var ratingGenerator = function ratingGenerator(average, count) {
-  console.log('average: ', average);
-  console.log('count: ', count); // If there are no reviews return no code
-
   if (!parseInt(average) > 0 || !parseInt(average) > 0) {
     return "";
-  } // ROUND TO .5 GRAIN
-
+  }
 
   var roundedAverage = Math.ceil(average * 2) / 2;
-  var fullStars = parseInt(roundedAverage); // Add full-stars
-
-  var fullStarsHtml = new Array(10).fill(1, 0, fullStars).map(function (x) {
+  var fullStars = parseInt(roundedAverage);
+  var fullStarsHtml = new Array(10).fill(1, 0, fullStars).map(function (throwawayVar) {
     return '<span class="fa fa-star" aria-hidden="true"></span>';
-  }); // Add half-stars
+  });
 
   if (!Number.isInteger(roundedAverage)) {
     fullStarsHtml.push('<span class="fa fa-star-half-o" aria-hidden="true"></span>');
-  } // Add empty-stars
-
+  }
 
   var missingStars = 5 - fullStarsHtml.length;
 
@@ -43,163 +37,164 @@ var ratingGenerator = function ratingGenerator(average, count) {
   return html;
 };
 
-var buildHtml =
-/*#__PURE__*/
-function () {
-  var _ref = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(userData) {
+var buildHtml = function () {
+  var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(userData, cssSelector) {
     var html, cartItems, recentlyViewed, res, data, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, product, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, _product;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            html = []; // UTAG DATA PARSING
-
+            html = [];
             cartItems = userData.product_id;
             recentlyViewed = JSON.parse(userData["cp.lsf-recently-viewed-list"]);
             recentlyViewed = recentlyViewed.filter(function (item) {
               return !cartItems.includes(item);
-            }).slice(0, 4); // API CALL
+            }).slice(0, 4);
 
-            _context.next = 6;
-            return fetch("https://www.livingspaces.com/api/restfulproducts?pid=".concat(recentlyViewed.join(",")));
-
-          case 6:
-            res = _context.sent;
-            _context.next = 9;
-            return res.json();
-
-          case 9:
-            data = _context.sent;
-
-            if (!(utag_data.site_type == 'desktop')) {
-              _context.next = 34;
+            if (!(recentlyViewed.length == 0)) {
+              _context.next = 6;
               break;
             }
 
-            // DESKTOP
+            return _context.abrupt("return", false);
+
+          case 6:
+            _context.next = 8;
+            return fetch("https://www.livingspaces.com/api/restfulproducts?pid=".concat(recentlyViewed.join(",")));
+
+          case 8:
+            res = _context.sent;
+            _context.next = 11;
+            return res.json();
+
+          case 11:
+            data = _context.sent;
+
+            if (!(utag_data.site_type == 'desktop')) {
+              _context.next = 36;
+              break;
+            }
+
             _iteratorNormalCompletion = true;
             _didIteratorError = false;
             _iteratorError = undefined;
-            _context.prev = 14;
+            _context.prev = 16;
 
             for (_iterator = data.products[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
               product = _step.value;
               html.push("<div class=\"col-xs-3 product-element\"> <a href=\"https://www.livingspaces.com/".concat(product.pid, "\"> <img src=\"").concat(product.images[0].imageUrl, "?w=263&amp;h=174&amp;mode=pad\" class=\"img-responsive\" alt=\"").concat(product.title, "\"> <span class=\"title ellipsis-wrap\">").concat(product.title, "</span> <span class=\"price\">$").concat(product.price.salePrice, "</span><div class=\"ratings\" role=\"button\">").concat(ratingGenerator(product.reviewsAvg, product.reviewsCount), "</div></a> </div>"));
             }
 
-            _context.next = 22;
+            _context.next = 24;
             break;
 
-          case 18:
-            _context.prev = 18;
-            _context.t0 = _context["catch"](14);
+          case 20:
+            _context.prev = 20;
+            _context.t0 = _context["catch"](16);
             _didIteratorError = true;
             _iteratorError = _context.t0;
 
-          case 22:
-            _context.prev = 22;
-            _context.prev = 23;
+          case 24:
+            _context.prev = 24;
+            _context.prev = 25;
 
             if (!_iteratorNormalCompletion && _iterator["return"] != null) {
               _iterator["return"]();
             }
 
-          case 25:
-            _context.prev = 25;
+          case 27:
+            _context.prev = 27;
 
             if (!_didIteratorError) {
-              _context.next = 28;
+              _context.next = 30;
               break;
             }
 
             throw _iteratorError;
 
-          case 28:
-            return _context.finish(25);
-
-          case 29:
-            return _context.finish(22);
-
           case 30:
-            html = "<section id=\"\" class=\"container board\"> <a class=\"collapse-link\" role=\"button\" data-toggle=\"collapse\" href=\"#moreLikeThis\" aria-expanded=\"true\" aria-controls=\"moreLikeThis\"> More Like This<span class=\"fa fa-angle-down\" aria-hidden=\"true\"></span> </a> <div class=\"collapse in\"> <div class=\"product-grid-component\"> <div class=\"row\" id=\"SuggestedProducts\"> ".concat(html.join(""), " </div> </div> </div> </section>");
-            $(".cart-content").after(html);
-            _context.next = 56;
+            return _context.finish(27);
+
+          case 31:
+            return _context.finish(24);
+
+          case 32:
+            html = "<section id=\"\" class=\"container board\"> <a class=\"collapse-link\" role=\"button\" data-toggle=\"collapse\" href=\"#moreLikeThis\" aria-expanded=\"true\" aria-controls=\"moreLikeThis\">Customers Who Bought This Also Bought</a> <div class=\"collapse in\"> <div class=\"product-grid-component\"> <div class=\"row\" id=\"SuggestedProducts\"> ".concat(html.join(""), " </div> </div> </div> </section>");
+            $(cssSelector).after(html);
+            _context.next = 58;
             break;
 
-          case 34:
-            // MOBILE
+          case 36:
             _iteratorNormalCompletion2 = true;
             _didIteratorError2 = false;
             _iteratorError2 = undefined;
-            _context.prev = 37;
+            _context.prev = 39;
 
             for (_iterator2 = data.products[Symbol.iterator](); !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
               _product = _step2.value;
-              html.push("<div class=\"product-element\"> <a href=\"https://www.livingspaces.com/".concat(_product.pid, "\"> <img data-src=\"").concat(_product.images[0].imageUrl, "?w=151&amp;h=100&amp;mode=pad\" class=\"img-responsive lazy \" alt=\"").concat(_product.title, "\"> <span class=\"title\">").concat(_product.title, "</span> <span class=\"price\">$").concat(_product.price.salePrice, "</span> <div class=\"ratings\" role=\"button\">").concat(ratingGenerator(_product.reviewsAvg, _product.reviewsCount), "</div> </a> </div>"));
+              html.push("<div class=\"product-element\"> <a href=\"https://www.livingspaces.com/".concat(_product.pid, "\"> <img src=\"").concat(_product.images[0].imageUrl, "?w=151&amp;h=100&amp;mode=pad\" class=\"img-responsive lazy \" alt=\"").concat(_product.title, "\"> <span class=\"title\">").concat(_product.title, "</span> <span class=\"price\">$").concat(_product.price.salePrice, "</span> <div class=\"ratings\" role=\"button\">").concat(ratingGenerator(_product.reviewsAvg, _product.reviewsCount), "</div> </a> </div>"));
             }
 
-            _context.next = 45;
+            _context.next = 47;
             break;
 
-          case 41:
-            _context.prev = 41;
-            _context.t1 = _context["catch"](37);
+          case 43:
+            _context.prev = 43;
+            _context.t1 = _context["catch"](39);
             _didIteratorError2 = true;
             _iteratorError2 = _context.t1;
 
-          case 45:
-            _context.prev = 45;
-            _context.prev = 46;
+          case 47:
+            _context.prev = 47;
+            _context.prev = 48;
 
             if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
               _iterator2["return"]();
             }
 
-          case 48:
-            _context.prev = 48;
+          case 50:
+            _context.prev = 50;
 
             if (!_didIteratorError2) {
-              _context.next = 51;
+              _context.next = 53;
               break;
             }
 
             throw _iteratorError2;
 
-          case 51:
-            return _context.finish(48);
-
-          case 52:
-            return _context.finish(45);
-
           case 53:
-            $(".cart-content").after(html);
-            $("#SuggestedProducts").slick({
+            return _context.finish(50);
+
+          case 54:
+            return _context.finish(47);
+
+          case 55:
+            html = "<section class=\"board\"> <a class=\"collapse-link\" role=\"button\" data-toggle=\"collapse\" href=\"#SuggestedProducts\" aria-expanded=\"true\" aria-controls=\"SuggestedProducts\" style=\" font-size: 2.1rem; \">Customers Who Bought This Also Bought</a> <div class=\"collapse in\" id=\"SuggestedProducts\"> <div class=\"product-grid-component\"> <div class=\"mobile-carousel-component\"> ".concat(html.join(""), "</div> </div> </div> </section>");
+            $(cssSelector).after(html);
+            $("#SuggestedProducts .mobile-carousel-component").slick({
               infinite: true,
-              slidesToShow: 2.5,
+              slidesToShow: 2,
               slidesToScroll: 1,
               dots: false,
               arrows: false
             });
-            injectSlickCss();
 
-          case 56:
+          case 58:
             return _context.abrupt("return", true);
 
-          case 57:
+          case 59:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[14, 18, 22, 30], [23,, 25, 29], [37, 41, 45, 53], [46,, 48, 52]]);
+    }, _callee, null, [[16, 20, 24, 32], [25,, 27, 31], [39, 43, 47, 55], [48,, 50, 54]]);
   }));
 
-  return function buildHtml(_x) {
+  return function buildHtml(_x, _x2) {
     return _ref.apply(this, arguments);
   };
 }();
 
 injectCss();
-buildHtml(utag_data); //  utag_data={"site_type":"desktop","site_section":"confirmation","page_type":"confirmation","page_name":"order confirmation","product_name":["kerri 2 piece sectional w/laf chaise"],"product_type":["furniture"],"product_category":["upholstery"],"product_id":["107150"],"product_quantity":["1"],"product_price":["895.00"],"customer_city":"la habra","customer_country":"us","customer_postal_code":"90638","customer_state":"ca","customer_email":"josh.simmons@livingspaces.com","unique_id":"a02c3da7f097fc486721b1de5e808cdc28e7301a717e8681dcdbb33c92f87ad5","customer_id":"c-010407447","order_currency_code":"usd","order_grand_total":"1132.23","order_id":"004676663","order_shipping_amount":"139.00","order_subtotal":"895.00","order_tax_amount":"98.23"};
+buildHtml(utag_data, ".cart-content");

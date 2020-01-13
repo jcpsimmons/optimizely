@@ -51,6 +51,10 @@ const buildHtml = async (userData, cssSelector) => {
         .filter(item => !cartItems.includes(item))
         .slice(0, 4);
 
+    if (recentlyViewed.length == 0) {
+        return false
+    }
+
     console.log("url: ", `https://www.livingspaces.com/api/restfulproducts?pid=${recentlyViewed.join(
         ","
     )}`)
@@ -82,7 +86,7 @@ const buildHtml = async (userData, cssSelector) => {
             );
         }
 
-        html = `<section id="" class="container board"> <a class="collapse-link" role="button" data-toggle="collapse" href="#moreLikeThis" aria-expanded="true" aria-controls="moreLikeThis"> Other Shoppers Bought<span class="fa fa-angle-down" aria-hidden="true"></span> </a> <div class="collapse in"> <div class="product-grid-component"> <div class="row" id="SuggestedProducts"> ${html.join(
+        html = `<section id="" class="container board"> <a class="collapse-link" role="button" data-toggle="collapse" href="#moreLikeThis" aria-expanded="true" aria-controls="moreLikeThis">Customers Who Bought This Also Bought</a> <div class="collapse in"> <div class="product-grid-component"> <div class="row" id="SuggestedProducts"> ${html.join(
             ""
         )} </div> </div> </div> </section>`;
 
@@ -98,7 +102,7 @@ const buildHtml = async (userData, cssSelector) => {
             );
         }
 
-        html = `<section class="board"> <a class="collapse-link" role="button" data-toggle="collapse" href="#SuggestedProducts" aria-expanded="true" aria-controls="SuggestedProducts"> Other Shoppers Bought<span class="fa fa-angle-down" aria-hidden="true"></span> </a> <div class="collapse in" id="SuggestedProducts"> <div class="product-grid-component"> <div class="mobile-carousel-component"> ${html.join("")}</div> </div> </div> </section>`
+        html = `<section class="board"> <a class="collapse-link" role="button" data-toggle="collapse" href="#SuggestedProducts" aria-expanded="true" aria-controls="SuggestedProducts" style=" font-size: 2.1rem; ">Customers Who Bought This Also Bought</a> <div class="collapse in" id="SuggestedProducts"> <div class="product-grid-component"> <div class="mobile-carousel-component"> ${html.join("")}</div> </div> </div> </section>`
 
         $(cssSelector).after(html);
         $("#SuggestedProducts .mobile-carousel-component").slick({
@@ -114,11 +118,11 @@ const buildHtml = async (userData, cssSelector) => {
 };
 
 injectCss();
-// buildHtml(utag_data, ".cart-content");
+buildHtml(utag_data, ".cart-content");
 
 
 // FOR DEBUGGING
-buildHtml(utag_data, "body > div.page-content > section.page > div:nth-child(2) > div:nth-child(1) > section:nth-child(3)")
+// buildHtml(utag_data, "body > div.page-content > section.page > div:nth-child(2) > div:nth-child(1) > section:nth-child(3)")
 
 
 

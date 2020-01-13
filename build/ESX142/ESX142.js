@@ -1,8 +1,6 @@
-// target delivery vs pickup
 function jsCondition() {
   return $('td.description:contains(In-Home Delivery)').length > 0;
-} // variation code
-
+}
 
 var anotherInterval = setInterval(function () {
   if (typeof window.jQuery !== 'undefined') {

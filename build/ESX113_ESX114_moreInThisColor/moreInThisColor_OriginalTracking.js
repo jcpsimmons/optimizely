@@ -1,4 +1,3 @@
-// For tracking clicks on 'more like this'
 $(document).ready(function () {
   $('body').on('click', '#moreLikeThis', function () {
     window.optimizely = window.optimizely || [];

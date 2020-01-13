@@ -1,5 +1,3 @@
 x();
 
-var x = function x() {
-  console.log('worked');
-};
+var x = function x() {};
