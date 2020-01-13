@@ -3,6 +3,7 @@ const injectCss = () => {
         "<style type='text/css'>.ellipsis-wrap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;}#SuggestedProducts .cart-component .container {padding-left:0;padding-left:0;</style>"
     ).appendTo("head");
 };
+
 const injectSlickCss = () => {
     $("#SuggestedProducts .slick-track").css('transform', 'translateX(0)')
 }
@@ -19,7 +20,7 @@ let ratingGenerator = (average, count) => {
     let fullStars = parseInt(roundedAverage);
 
     // Add full-stars
-    let fullStarsHtml = new Array(10).fill(1, 0, fullStars).map((x) => {
+    let fullStarsHtml = new Array(10).fill(1, 0, fullStars).map((throwawayVar) => {
         return '<span class="fa fa-star" aria-hidden="true"></span>'
     })
 
@@ -40,7 +41,7 @@ let ratingGenerator = (average, count) => {
     return html
 };
 
-const buildHtml = async userData => {
+const buildHtml = async (userData, cssSelector) => {
     let html = [];
 
     // UTAG DATA PARSING
@@ -50,6 +51,9 @@ const buildHtml = async userData => {
         .filter(item => !cartItems.includes(item))
         .slice(0, 4);
 
+    console.log("url: ", `https://www.livingspaces.com/api/restfulproducts?pid=${recentlyViewed.join(
+        ","
+    )}`)
     // API CALL
     let res = await fetch(
         `https://www.livingspaces.com/api/restfulproducts?pid=${recentlyViewed.join(
@@ -57,6 +61,7 @@ const buildHtml = async userData => {
         )}`
     );
     let data = await res.json();
+    console.log(data)
 
     if (utag_data.site_type == 'desktop') {
         // DESKTOP
@@ -77,37 +82,43 @@ const buildHtml = async userData => {
             );
         }
 
-        html = `<section id="" class="container board"> <a class="collapse-link" role="button" data-toggle="collapse" href="#moreLikeThis" aria-expanded="true" aria-controls="moreLikeThis"> More Like This<span class="fa fa-angle-down" aria-hidden="true"></span> </a> <div class="collapse in"> <div class="product-grid-component"> <div class="row" id="SuggestedProducts"> ${html.join(
+        html = `<section id="" class="container board"> <a class="collapse-link" role="button" data-toggle="collapse" href="#moreLikeThis" aria-expanded="true" aria-controls="moreLikeThis"> Other Shoppers Bought<span class="fa fa-angle-down" aria-hidden="true"></span> </a> <div class="collapse in"> <div class="product-grid-component"> <div class="row" id="SuggestedProducts"> ${html.join(
             ""
         )} </div> </div> </div> </section>`;
 
-        $(".cart-content").after(html);
+        $(cssSelector).after(html);
     } else {
         // MOBILE
         for (const product of data.products) {
             html.push(
-                `<div class="product-element"> <a href="https://www.livingspaces.com/${product.pid}"> <img data-src="${product.images[0].imageUrl}?w=151&amp;h=100&amp;mode=pad" class="img-responsive lazy " alt="${product.title}"> <span class="title">${product.title}</span> <span class="price">$${product.price.salePrice}</span> <div class="ratings" role="button">${ratingGenerator(
+                `<div class="product-element"> <a href="https://www.livingspaces.com/${product.pid}"> <img src="${product.images[0].imageUrl}?w=151&amp;h=100&amp;mode=pad" class="img-responsive lazy " alt="${product.title}"> <span class="title">${product.title}</span> <span class="price">$${product.price.salePrice}</span> <div class="ratings" role="button">${ratingGenerator(
                     product.reviewsAvg,
                     product.reviewsCount
                 )}</div> </a> </div>`
             );
         }
 
-        $(".cart-content").after(html);
-        $("#SuggestedProducts").slick({
+        html = `<section class="board"> <a class="collapse-link" role="button" data-toggle="collapse" href="#SuggestedProducts" aria-expanded="true" aria-controls="SuggestedProducts"> Other Shoppers Bought<span class="fa fa-angle-down" aria-hidden="true"></span> </a> <div class="collapse in" id="SuggestedProducts"> <div class="product-grid-component"> <div class="mobile-carousel-component"> ${html.join("")}</div> </div> </div> </section>`
+
+        $(cssSelector).after(html);
+        $("#SuggestedProducts .mobile-carousel-component").slick({
             infinite: true,
-            slidesToShow: 2.5,
+            slidesToShow: 2,
             slidesToScroll: 1,
             dots: false,
             arrows: false,
         });
-        injectSlickCss()
+        // injectSlickCss()
     }
     return true;
 };
 
 injectCss();
-buildHtml(utag_data);
+// buildHtml(utag_data, ".cart-content");
+
+
+// FOR DEBUGGING
+buildHtml(utag_data, "body > div.page-content > section.page > div:nth-child(2) > div:nth-child(1) > section:nth-child(3)")
 
 
 
