@@ -6,10 +6,6 @@ var injectCss = function injectCss() {
   $("<style type='text/css'>.ellipsis-wrap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;}#SuggestedProducts .cart-component .container {padding-left:0;padding-left:0;</style>").appendTo("head");
 };
 
-var injectSlickCss = function injectSlickCss() {
-  $("#SuggestedProducts .slick-track").css('transform', 'translateX(0)');
-};
-
 var ratingGenerator = function ratingGenerator(average, count) {
   if (!parseInt(average) > 0 || !parseInt(average) > 0) {
     return "";
@@ -71,7 +67,7 @@ var buildHtml = function () {
           case 11:
             data = _context.sent;
 
-            if (!(utag_data.site_type == 'desktop')) {
+            if (!(utag_data.site_type == "desktop")) {
               _context.next = 36;
               break;
             }
@@ -120,7 +116,7 @@ var buildHtml = function () {
             return _context.finish(24);
 
           case 32:
-            html = "<section id=\"\" class=\"container board\"> <a class=\"collapse-link\" role=\"button\" data-toggle=\"collapse\" href=\"#moreLikeThis\" aria-expanded=\"true\" aria-controls=\"moreLikeThis\">Customers Who Bought This Also Bought</a> <div class=\"collapse in\"> <div class=\"product-grid-component\"> <div class=\"row\" id=\"SuggestedProducts\"> ".concat(html.join(""), " </div> </div> </div> </section>");
+            html = "<section id=\"\" class=\"container board\"> <a class=\"collapse-link\" role=\"button\" data-toggle=\"collapse\" href=\"#SuggestedProducts\" aria-expanded=\"true\" aria-controls=\"SuggestedProducts\">People Who Bought This Also Bought</a> <div class=\"collapse in\"> <div class=\"product-grid-component\"> <div class=\"row\" id=\"SuggestedProducts\"> ".concat(html.join(""), " </div> </div> </div> </section>");
             $(cssSelector).after(html);
             _context.next = 58;
             break;
@@ -170,7 +166,7 @@ var buildHtml = function () {
             return _context.finish(47);
 
           case 55:
-            html = "<section class=\"board\"> <a class=\"collapse-link\" role=\"button\" data-toggle=\"collapse\" href=\"#SuggestedProducts\" aria-expanded=\"true\" aria-controls=\"SuggestedProducts\" style=\" font-size: 2.1rem; \">Customers Who Bought This Also Bought</a> <div class=\"collapse in\" id=\"SuggestedProducts\"> <div class=\"product-grid-component\"> <div class=\"mobile-carousel-component\"> ".concat(html.join(""), "</div> </div> </div> </section>");
+            html = "<section class=\"board\"> <a class=\"collapse-link\" role=\"button\" data-toggle=\"collapse\" href=\"#SuggestedProducts\" aria-expanded=\"true\" aria-controls=\"SuggestedProducts\" style=\" font-size: 2.1rem; \">People Who Bought This Also Bought</a> <div class=\"collapse in\" id=\"SuggestedProducts\"> <div class=\"product-grid-component\"> <div class=\"mobile-carousel-component\"> ".concat(html.join(""), "</div> </div> </div> </section>");
             $(cssSelector).after(html);
             $("#SuggestedProducts .mobile-carousel-component").slick({
               infinite: true,
@@ -196,5 +192,22 @@ var buildHtml = function () {
   };
 }();
 
-injectCss();
-buildHtml(utag_data, ".cart-content");
+var anotherInterval = setInterval(function () {
+  if (typeof window.jQuery !== "undefined") {
+    clearInterval(anotherInterval);
+    var $ = window.jQuery;
+    injectCss();
+    buildHtml(utag_data, ".cart-content");
+    $("#SuggestedProducts").click(function (e) {
+      window["optimizely"] = window["optimizely"] || [];
+      window["optimizely"].push({
+        type: "event",
+        eventName: "clickSuggestedProducts",
+        tags: {
+          revenue: 0,
+          value: 0.0
+        }
+      });
+    });
+  }
+}, 50);

@@ -58,8 +58,10 @@ var anotherInterval = setInterval(() => {
         $("#NavContainer .faceted-search-component .applied-filter-wrapper")
           .css("margin-top", "1.2rem")
           .css("margin-bottom", "0");
+        $(".footer-component #back-to-top").show();
         // $("#floating-banner-bg").css("background-color", "rgba(255,255,255,.9");
       } else {
+        $(".footer-component #back-to-top").hide();
         $("#NavContainer").removeClass("stickyStyle");
         $("#floating-banner-bg").remove();
         $("#NavContainer .faceted-search-component").removeClass(

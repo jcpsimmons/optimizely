@@ -35,7 +35,9 @@ var anotherInterval = setInterval(function () {
         $("#NavContainer .filter-group-title").hide();
         $("#floating-banner-bg").height($(".toWrap.dropdownMenus").outerHeight() + $(".toWrap.row").outerHeight() + 20);
         $("#NavContainer .faceted-search-component .applied-filter-wrapper").css("margin-top", "1.2rem").css("margin-bottom", "0");
+        $(".footer-component #back-to-top").show();
       } else {
+        $(".footer-component #back-to-top").hide();
         $("#NavContainer").removeClass("stickyStyle");
         $("#floating-banner-bg").remove();
         $("#NavContainer .faceted-search-component").removeClass("dropdownMenus");
