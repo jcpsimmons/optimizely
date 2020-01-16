@@ -1,6 +1,5 @@
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+var _regeneratorRuntime = "module.exports = require(\"regenerator-runtime\");\n";
+var _asyncToGenerator = "function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {\n  try {\n    var info = gen[key](arg);\n    var value = info.value;\n  } catch (error) {\n    reject(error);\n    return;\n  }\n\n  if (info.done) {\n    resolve(value);\n  } else {\n    Promise.resolve(value).then(_next, _throw);\n  }\n}\n\nfunction _asyncToGenerator(fn) {\n  return function () {\n    var self = this,\n        args = arguments;\n    return new Promise(function (resolve, reject) {\n      var gen = fn.apply(self, args);\n\n      function _next(value) {\n        asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"next\", value);\n      }\n\n      function _throw(err) {\n        asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"throw\", err);\n      }\n\n      _next(undefined);\n    });\n  };\n}\n\nmodule.exports = _asyncToGenerator;";
 
 var injectCss = function injectCss() {
   $("<style type='text/css'>.ellipsis-wrap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;}#SuggestedProducts .cart-component .container {padding-left:0;padding-left:0;</style>").appendTo("head");
@@ -34,10 +33,10 @@ var ratingGenerator = function ratingGenerator(average, count) {
 };
 
 var buildHtml = function () {
-  var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(userData, cssSelector) {
+  var _ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(userData, cssSelector) {
     var html, cartItems, recentlyViewed, res, data, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, product, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, _product;
 
-    return regeneratorRuntime.wrap(function _callee$(_context) {
+    return _regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -117,7 +116,7 @@ var buildHtml = function () {
 
           case 32:
             html = "<section id=\"\" class=\"container board\"> <a class=\"collapse-link\" role=\"button\" data-toggle=\"collapse\" href=\"#SuggestedProducts\" aria-expanded=\"true\" aria-controls=\"SuggestedProducts\">People Who Bought This Also Bought</a> <div class=\"collapse in\"> <div class=\"product-grid-component\"> <div class=\"row\" id=\"SuggestedProducts\"> ".concat(html.join(""), " </div> </div> </div> </section>");
-            $(cssSelector).after(html);
+            $(cssSelector).before(html);
             _context.next = 58;
             break;
 
@@ -167,7 +166,7 @@ var buildHtml = function () {
 
           case 55:
             html = "<section class=\"board\"> <a class=\"collapse-link\" role=\"button\" data-toggle=\"collapse\" href=\"#SuggestedProducts\" aria-expanded=\"true\" aria-controls=\"SuggestedProducts\" style=\" font-size: 2.1rem; \">People Who Bought This Also Bought</a> <div class=\"collapse in\" id=\"SuggestedProducts\"> <div class=\"product-grid-component\"> <div class=\"mobile-carousel-component\"> ".concat(html.join(""), "</div> </div> </div> </section>");
-            $(cssSelector).after(html);
+            $(cssSelector).before(html);
             $("#SuggestedProducts .mobile-carousel-component").slick({
               infinite: true,
               slidesToShow: 2,
@@ -197,7 +196,7 @@ var anotherInterval = setInterval(function () {
     clearInterval(anotherInterval);
     var $ = window.jQuery;
     injectCss();
-    buildHtml(utag_data, ".cart-content");
+    buildHtml(utag_data, "#main-image");
     $("#SuggestedProducts").click(function (e) {
       window["optimizely"] = window["optimizely"] || [];
       window["optimizely"].push({

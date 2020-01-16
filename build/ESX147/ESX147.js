@@ -12,7 +12,7 @@ var anotherInterval = setInterval(function () {
 
     var reposNav = function reposNav() {
       $("#plpServerSide .faceted-search-component").addClass("toWrap");
-      $("#plpServerSide .row:first-of-type").addClass("toWrap");
+      $("#plpServerSide>.row:first-of-type").addClass("toWrap");
 
       if ($("#NavContainer").length) {} else {
         $(".toWrap").wrapAll('<div id="NavContainer"></div>');
@@ -20,7 +20,23 @@ var anotherInterval = setInterval(function () {
 
       var sticky = document.querySelector("#NavContainer").offsetTop;
 
-      if (document.querySelector(".product-listing-template .grid-container, .search-template .grid-container").getBoundingClientRect().top < 0) {
+      var checkOffset = function checkOffset() {
+        if (document.querySelector(".product-listing-template .grid-container, .search-template .grid-container")) {
+          if (document.querySelector(".product-listing-template .grid-container, .search-template .grid-container").getBoundingClientRect().top < 0) {
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          if (document.querySelector(".product-listing-template .list-container, .search-template .list-container").getBoundingClientRect().top < 0) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      };
+
+      if (checkOffset()) {
         $("#NavContainer").addClass("stickyStyle");
 
         if (document.querySelector("#floating-banner-bg") == null) {

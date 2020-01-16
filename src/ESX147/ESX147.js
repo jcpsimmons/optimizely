@@ -14,7 +14,7 @@ var anotherInterval = setInterval(() => {
     const reposNav = () => {
       // Get page components
       $("#plpServerSide .faceted-search-component").addClass("toWrap");
-      $("#plpServerSide .row:first-of-type").addClass("toWrap");
+      $("#plpServerSide>.row:first-of-type").addClass("toWrap");
 
       // Don't inject the Nav Container if it's already there
       if ($("#NavContainer").length) {
@@ -24,14 +24,40 @@ var anotherInterval = setInterval(() => {
       // Get the offset position of the navbar
       let sticky = document.querySelector("#NavContainer").offsetTop;
 
-      // have to use this offest by 10px logic to avoid flicker where it thinks it's both
-      if (
-        document
-          .querySelector(
+      const checkOffset = () => {
+        if (
+          document.querySelector(
             ".product-listing-template .grid-container, .search-template .grid-container"
           )
-          .getBoundingClientRect().top < 0
-      ) {
+        ) {
+          if (
+            document
+              .querySelector(
+                ".product-listing-template .grid-container, .search-template .grid-container"
+              )
+              .getBoundingClientRect().top < 0
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          if (
+            document
+              .querySelector(
+                ".product-listing-template .list-container, .search-template .list-container"
+              )
+              .getBoundingClientRect().top < 0
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      };
+
+      // have to use this offest by 10px logic to avoid flicker where it thinks it's both
+      if (checkOffset()) {
         $("#NavContainer").addClass("stickyStyle");
         if (document.querySelector("#floating-banner-bg") == null) {
           $("#NavContainer > .row.toWrap").before(

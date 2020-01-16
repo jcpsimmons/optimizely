@@ -1,0 +1,50 @@
+{
+  "project_id": 8788531144,
+  "name": "x",
+  "type": "a/b",
+  "variations": [
+    {
+      "name": "original",
+      "status": "active",
+      "weight": 5000
+    },
+    {
+      "name": "variation",
+      "status": "active",
+      "weight": 5000
+    }
+  ],
+  "page_ids": [16772130649],
+  "metrics": [
+    {
+      "aggregator": "sum",
+      "field": "revenue",
+      "scope": "visitor",
+      "winning_direction": "increasing"
+    },
+    {
+      "aggregator": "unique",
+      "event_id": 10666463782,
+      "scope": "visitor",
+      "winning_direction": "increasing"
+    },
+    {
+      "aggregator": "unique",
+      "event_id": 14398330031,
+      "scope": "visitor",
+      "winning_direction": "increasing"
+    },
+    {
+      "aggregator": "unique",
+      "event_id": 10650830507,
+      "scope": "visitor",
+      "winning_direction": "increasing"
+    },
+    {
+      "aggregator": "unique",
+      "event_id": 10654130421,
+      "scope": "visitor",
+      "winning_direction": "increasing"
+    }
+  ]
+}

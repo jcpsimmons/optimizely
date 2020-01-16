@@ -97,7 +97,7 @@ const buildHtml = async (userData, cssSelector) => {
       ""
     )} </div> </div> </div> </section>`;
 
-    $(cssSelector).after(html);
+    $(cssSelector).before(html);
   } else {
     // MOBILE
     for (const product of data.products) {
@@ -121,7 +121,7 @@ const buildHtml = async (userData, cssSelector) => {
       ""
     )}</div> </div> </div> </section>`;
 
-    $(cssSelector).after(html);
+    $(cssSelector).before(html);
     $("#SuggestedProducts .mobile-carousel-component").slick({
       infinite: true,
       slidesToShow: 2,
@@ -139,7 +139,9 @@ var anotherInterval = setInterval(() => {
     clearInterval(anotherInterval);
     var $ = window.jQuery;
     injectCss();
-    buildHtml(utag_data, ".cart-content");
+    console.log("run");
+    // buildHtml(utag_data, "#main-image");
+    buildHtml(utag_data, ".pl-container");
     $("#SuggestedProducts").click(e => {
       window["optimizely"] = window["optimizely"] || [];
       window["optimizely"].push({
