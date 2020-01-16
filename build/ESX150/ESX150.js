@@ -1,5 +1,5 @@
-var _regeneratorRuntime = "module.exports = require(\"regenerator-runtime\");\n";
-var _asyncToGenerator = "function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {\n  try {\n    var info = gen[key](arg);\n    var value = info.value;\n  } catch (error) {\n    reject(error);\n    return;\n  }\n\n  if (info.done) {\n    resolve(value);\n  } else {\n    Promise.resolve(value).then(_next, _throw);\n  }\n}\n\nfunction _asyncToGenerator(fn) {\n  return function () {\n    var self = this,\n        args = arguments;\n    return new Promise(function (resolve, reject) {\n      var gen = fn.apply(self, args);\n\n      function _next(value) {\n        asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"next\", value);\n      }\n\n      function _throw(err) {\n        asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"throw\", err);\n      }\n\n      _next(undefined);\n    });\n  };\n}\n\nmodule.exports = _asyncToGenerator;";
+import _regeneratorRuntime from "@babel/runtime/regenerator";
+import _asyncToGenerator from "@babel/runtime/helpers/asyncToGenerator";
 
 var injectCss = function injectCss() {
   $("<style type='text/css'>.ellipsis-wrap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;}#SuggestedProducts .cart-component .container {padding-left:0;padding-left:0;</style>").appendTo("head");
@@ -196,7 +196,7 @@ var anotherInterval = setInterval(function () {
     clearInterval(anotherInterval);
     var $ = window.jQuery;
     injectCss();
-    buildHtml(utag_data, "#main-image");
+    buildHtml(utag_data, ".pl-container");
     $("#SuggestedProducts").click(function (e) {
       window["optimizely"] = window["optimizely"] || [];
       window["optimizely"].push({

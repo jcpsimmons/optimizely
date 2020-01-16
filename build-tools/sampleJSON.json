@@ -4,14 +4,22 @@
   "type": "a/b",
   "variations": [
     {
+      "weight": 5000,
       "name": "original",
-      "status": "active",
-      "weight": 5000
+      "actions": [
+        {
+          "page_id": 16772130649
+        }
+      ]​
     },
     {
+      "weight": 5000,
       "name": "variation",
-      "status": "active",
-      "weight": 5000
+  "actions": [
+        {
+          "page_id": 16772130649
+        }
+      ]​
     }
   ],
   "page_ids": [16772130649],

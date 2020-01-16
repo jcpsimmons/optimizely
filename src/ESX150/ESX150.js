@@ -1,6 +1,6 @@
 const injectCss = () => {
   $(
-    "<style type='text/css'>.ellipsis-wrap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;}#SuggestedProducts .cart-component .container {padding-left:0;padding-left:0;</style>"
+    "<style type='text/css'> .ellipsis-wrap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; } #SuggestedProducts .cart-component .container { padding-left: 0; padding-left: 0; } @media(max-width:767px) { #SuggestedProducts .product-grid-component { margin-left: -15px } .slick-list { margin-left: 0 } } </style>"
   ).appendTo("head");
 };
 
@@ -49,9 +49,7 @@ const buildHtml = async (userData, cssSelector) => {
   // UTAG DATA PARSING
   let cartItems = userData.product_id;
   let recentlyViewed = JSON.parse(userData["cp.lsf-recently-viewed-list"]);
-  recentlyViewed = recentlyViewed
-    .filter(item => !cartItems.includes(item))
-    .slice(0, 4);
+  recentlyViewed = recentlyViewed.slice(0, 4);
 
   if (recentlyViewed.length == 0) {
     return false;
@@ -156,7 +154,3 @@ var anotherInterval = setInterval(() => {
   }
 }, 50);
 
-// FOR DEBUGGING
-// buildHtml(utag_data, "body > div.page-content > section.page > div:nth-child(2) > div:nth-child(1) > section:nth-child(3)")
-
-//  utag_data={"site_type":"desktop","site_section":"confirmation","page_type":"confirmation","page_name":"order confirmation","product_name":["kerri 2 piece sectional w/laf chaise"],"product_type":["furniture"],"product_category":["upholstery"],"product_id":["107150"],"product_quantity":["1"],"product_price":["895.00"],"customer_city":"la habra","customer_country":"us","customer_postal_code":"90638","customer_state":"ca","customer_email":"josh.simmons@livingspaces.com","unique_id":"a02c3da7f097fc486721b1de5e808cdc28e7301a717e8681dcdbb33c92f87ad5","customer_id":"c-010407447","order_currency_code":"usd","order_grand_total":"1132.23","order_id":"004676663","order_shipping_amount":"139.00","order_subtotal":"895.00","order_tax_amount":"98.23"};
