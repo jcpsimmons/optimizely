@@ -2,7 +2,7 @@ import _regeneratorRuntime from "@babel/runtime/regenerator";
 import _asyncToGenerator from "@babel/runtime/helpers/asyncToGenerator";
 
 var injectCss = function injectCss() {
-  $("<style type='text/css'>.ellipsis-wrap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;}#SuggestedProducts .cart-component .container {padding-left:0;padding-left:0;</style>").appendTo("head");
+  $("<style type='text/css'> .ellipsis-wrap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; } #SuggestedProducts .cart-component .container { padding-left: 0; padding-left: 0; } @media(max-width:767px) { #SuggestedProducts .product-grid-component { margin-left: -15px } .slick-list { margin-left: 0 } } </style>").appendTo("head");
 };
 
 var ratingGenerator = function ratingGenerator(average, count) {
@@ -43,9 +43,7 @@ var buildHtml = function () {
             html = [];
             cartItems = userData.product_id;
             recentlyViewed = JSON.parse(userData["cp.lsf-recently-viewed-list"]);
-            recentlyViewed = recentlyViewed.filter(function (item) {
-              return !cartItems.includes(item);
-            }).slice(0, 4);
+            recentlyViewed = recentlyViewed.slice(0, 4);
 
             if (!(recentlyViewed.length == 0)) {
               _context.next = 6;

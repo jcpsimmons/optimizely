@@ -76,7 +76,7 @@ const buildHtml = async (userData, cssSelector) => {
       html.push(
         `<div class="col-xs-3 product-element"> <a href="https://www.livingspaces.com/${
           product.pid
-        }"> <img src="${
+        }" target="_blank"> <img src="${
           product.images[0].imageUrl
         }?w=263&amp;h=174&amp;mode=pad" class="img-responsive" alt="${
           product.title
@@ -91,7 +91,7 @@ const buildHtml = async (userData, cssSelector) => {
       );
     }
 
-    html = `<section id="" class="container board"> <a class="collapse-link" role="button" data-toggle="collapse" href="#SuggestedProducts" aria-expanded="true" aria-controls="SuggestedProducts">People Who Bought This Also Bought</a> <div class="collapse in"> <div class="product-grid-component"> <div class="row" id="SuggestedProducts"> ${html.join(
+    html = `<section id="PeopleWhoBoughtWrapper" class="container board"> <a class="collapse-link" role="button" data-toggle="collapse" href="#SuggestedProducts" aria-expanded="true" aria-controls="SuggestedProducts">People Who Bought This Also Bought</a> <div class="collapse in"> <div class="product-grid-component"> <div class="row" id="SuggestedProducts"> ${html.join(
       ""
     )} </div> </div> </div> </section>`;
 
@@ -153,4 +153,3 @@ var anotherInterval = setInterval(() => {
     });
   }
 }, 50);
-
