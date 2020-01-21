@@ -76,7 +76,7 @@ var buildHtml = function () {
 
             for (_iterator = data.products[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
               product = _step.value;
-              html.push("<div class=\"col-xs-3 product-element\"> <a href=\"https://www.livingspaces.com/".concat(product.pid, "\"> <img src=\"").concat(product.images[0].imageUrl, "?w=263&amp;h=174&amp;mode=pad\" class=\"img-responsive\" alt=\"").concat(product.title, "\"> <span class=\"title ellipsis-wrap\">").concat(product.title, "</span> <span class=\"price\">$").concat(product.price.salePrice, "</span><div class=\"ratings\" role=\"button\">").concat(ratingGenerator(product.reviewsAvg, product.reviewsCount), "</div></a> </div>"));
+              html.push("<div class=\"col-xs-3 product-element\"> <a href=\"https://www.livingspaces.com/".concat(product.pid, "\" target=\"_blank\"> <img src=\"").concat(product.images[0].imageUrl, "?w=263&amp;h=174&amp;mode=pad\" class=\"img-responsive\" alt=\"").concat(product.title, "\"> <span class=\"title ellipsis-wrap\">").concat(product.title, "</span> <span class=\"price\">$").concat(product.price.salePrice, "</span><div class=\"ratings\" role=\"button\">").concat(ratingGenerator(product.reviewsAvg, product.reviewsCount), "</div></a> </div>"));
             }
 
             _context.next = 24;
@@ -113,7 +113,7 @@ var buildHtml = function () {
             return _context.finish(24);
 
           case 32:
-            html = "<section id=\"\" class=\"container board\"> <a class=\"collapse-link\" role=\"button\" data-toggle=\"collapse\" href=\"#SuggestedProducts\" aria-expanded=\"true\" aria-controls=\"SuggestedProducts\">People Who Bought This Also Bought</a> <div class=\"collapse in\"> <div class=\"product-grid-component\"> <div class=\"row\" id=\"SuggestedProducts\"> ".concat(html.join(""), " </div> </div> </div> </section>");
+            html = "<section id=\"PeopleWhoBoughtWrapper\" class=\"container board\"> <a class=\"collapse-link\" role=\"button\" data-toggle=\"collapse\" href=\"#SuggestedProducts\" aria-expanded=\"true\" aria-controls=\"SuggestedProducts\">People Who Bought This Also Bought</a> <div class=\"collapse in\"> <div class=\"product-grid-component\"> <div class=\"row\" id=\"SuggestedProducts\"> ".concat(html.join(""), " </div> </div> </div> </section>");
             $(cssSelector).before(html);
             _context.next = 58;
             break;
