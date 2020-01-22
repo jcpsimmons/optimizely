@@ -1,72 +1,91 @@
-const mobile = () => {
-  // turn off slick slider
+var mobile = function mobile() {
   $("#imgSlider").slick("unslick");
-
-  // rearrange images
-  let lifestyleImages = $(`.product-info-component img[alt$=" - Room"]`)
+  var lifestyleImages = $('.product-info-component img[alt$=" - Room"]')
     .parent()
     .parent()
     .detach();
-
-  $(`.product-info-component img[alt$=" - Signature"]`)
+  $('.product-info-component img[alt$=" - Signature"]')
     .parent()
     .parent()
     .after(lifestyleImages);
-
-  // reenable slick slider
   $("#imgSlider").slick({
     dots: true,
     arrows: false
   });
 };
 
-const desktop = () => {
-  // detach view more overlay
-  let viewMoreNumber = $("span.view-more-number").detach();
-  // remove viewmore class
+var desktop = function desktop() {
+  var viewMoreNumber = $("span.view-more-number").detach();
   $(".product-info-component .view-more").removeClass("view-more");
-
   selectorPrefixes = [
     "#viewmoreComponentModal",
     ".product-info-component  div.img-click"
   ];
 
-  selectorPrefixes.forEach(prefix => {
-    let lifestyleImages = $(`${prefix} img[alt$=" - Room"]`)
+  for (var i = 0; i < selectorPrefixes.length; i++) {
+    $("".concat(selectorPrefixes[i], ' img[alt$=" - Room"]'))
       .parent()
-      .detach()
-      .off("click");
-
-    $(`${prefix} img[alt$=" - Signature"]`)
-      .parent()
-      .after(lifestyleImages);
-  });
+      .each(function() {
+        var x = $(this)
+          .unbind("click")
+          .detach();
+        $("".concat(selectorPrefixes[i], ' img[alt$=" - Signature"]'))
+          .first()
+          .parent()
+          .after(x);
+      });
+  }
 
   if ($(".thumb-list .img-click").length > 7) {
     $(".thumb-list .img-click:nth-of-type(7)")
       .addClass("view-more")
       .append(viewMoreNumber)
       .click(function() {
-        $("#viewmoreComponentModal").modal("show");
+        window.$("#viewmoreComponentModal").modal("show");
       });
+
+    setTimeout(function() {
+      for (var i = 0; i < 6; i++) {
+        console.log("timeout fire");
+        console.log(".thumb-list .img-click:nth-of-type(" + (i + 1) + ")");
+        $(".thumb-list .img-click:nth-of-type(" + (i + 1) + ")").unbind(
+          "click"
+        );
+      }
+    }, 3000);
   } else {
+    var index = $(".thumb-list .img-click").index(
+      $(".thumb-list .img-click:last-of-type")
+    );
     $(".thumb-list .img-click:last-of-type")
       .addClass("view-more")
       .append(viewMoreNumber)
       .click(function() {
-        $("#viewmoreComponentModal").modal("show");
+        window.$("#viewmoreComponentModal").modal("show");
       });
   }
 };
 
-var anotherInterval = setInterval(() => {
+var anotherInterval = setInterval(function() {
   if (typeof window.jQuery !== "undefined") {
-    clearInterval(anotherInterval);
     var $ = window.jQuery;
-    if (utag_data.site_type == "desktop") {
-      desktop();
-    } else {
-      mobile();
-    }
+
+    try {
+      $._data($("span.view-more-number").parent()[0], "events").hasOwnProperty(
+        "click"
+      );
+
+      if (
+        typeof window.$("#viewmoreComponentModal").modal("hide") == "object"
+      ) {
+        clearInterval(anotherInterval);
+
+        if (utag_data.site_type == "desktop") {
+          desktop();
+        } else {
+          mobile();
+        }
+      }
+    } catch (error) {}
   }
 }, 50);

@@ -1,35 +1,46 @@
-var mobile = function mobile() {
+const mobile = () => {
+  // turn off slick slider
   $("#imgSlider").slick("unslick");
-  var lifestyleImages = $('.product-info-component img[alt$=" - Room"]')
+
+  // rearrange images
+  let lifestyleImages = $(`.product-info-component img[alt$=" - Room"]`)
     .parent()
     .parent()
     .detach();
-  $('.product-info-component img[alt$=" - Signature"]')
+
+  $(`.product-info-component img[alt$=" - Signature"]`)
     .parent()
     .parent()
     .after(lifestyleImages);
+
+  // reenable slick slider
   $("#imgSlider").slick({
     dots: true,
     arrows: false
   });
 };
 
-var desktop = function desktop() {
-  var viewMoreNumber = $("span.view-more-number").detach();
+const desktop = () => {
+  console.log("fire desktop variation");
+  // detach view more overlay
+  let viewMoreNumber = $("span.view-more-number").detach();
+  // remove viewmore class
   $(".product-info-component .view-more").removeClass("view-more");
+
   selectorPrefixes = [
     "#viewmoreComponentModal",
     ".product-info-component  div.img-click"
   ];
 
   for (var i = 0; i < selectorPrefixes.length; i++) {
-    $("".concat(selectorPrefixes[i], ' img[alt$=" - Room"]'))
+    $(`${selectorPrefixes[i]} img[alt$=" - Room"]`)
       .parent()
       .each(function() {
         var x = $(this)
           .detach()
           .off("click");
-        $("".concat(selectorPrefixes[i], ' img[alt$=" - Signature"]'))
+
+        $(`${selectorPrefixes[i]} img[alt$=" - Signature"]`)
           .first()
           .parent()
           .after(x);
@@ -53,26 +64,26 @@ var desktop = function desktop() {
   }
 };
 
-var anotherInterval = setInterval(function() {
+var anotherInterval = setInterval(() => {
   if (typeof window.jQuery !== "undefined") {
     var $ = window.jQuery;
-
     try {
       $._data($("span.view-more-number").parent()[0], "events").hasOwnProperty(
         "click"
       );
-
       if (
         typeof window.$("#viewmoreComponentModal").modal("hide") == "object"
       ) {
         clearInterval(anotherInterval);
-
+        console.log("object");
         if (utag_data.site_type == "desktop") {
           desktop();
         } else {
           mobile();
         }
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   }
 }, 50);
