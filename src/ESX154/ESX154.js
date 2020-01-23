@@ -1,5 +1,5 @@
 var mobile = function mobile() {
-  $("#imgSlider").slick("unslick");
+  window.$("#imgSlider").slick("unslick");
   var lifestyleImages = $('.product-info-component img[alt$=" - Room"]')
     .parent()
     .parent()
@@ -8,11 +8,12 @@ var mobile = function mobile() {
     .parent()
     .parent()
     .after(lifestyleImages);
-  $("#imgSlider").slick({
+  window.$("#imgSlider").slick({
     dots: true,
     arrows: false
   });
-  window.$('#imgSlider').click(function () {
+  // Touch Event
+  window.$('#imgSlider img[alt$=" - Room"]').bind('touchmove', function () {
     window['optimizely'] = window['optimizely'] || [];
     window['optimizely'].push({
       type: "event",
@@ -22,7 +23,7 @@ var mobile = function mobile() {
         value: 0.00 // Optional as float
       }
     });
-  })
+  });
 };
 
 var desktop = function desktop() {
@@ -78,7 +79,7 @@ var desktop = function desktop() {
           .$(".thumb-list .img-click:nth-of-type(" + (i + 1) + ")")
           .unbind("click");
       }
-      window.$(".thumb-list img[alt$=' - Signature']").click(function () {
+      window.$(".thumb-list img[alt$=' - Room']").click(function () {
         window['optimizely'] = window['optimizely'] || [];
         window['optimizely'].push({
           type: "event",
@@ -88,7 +89,7 @@ var desktop = function desktop() {
             value: 0.00 // Optional as float
           }
         });
-      })
+      });
     }, 1000);
   } else {
     var index = $(".thumb-list .img-click").index(
@@ -106,7 +107,7 @@ var desktop = function desktop() {
           .$(".thumb-list .img-click:nth-of-type(" + (i + 1) + ")")
           .unbind("click");
       }
-      window.$(".thumb-list img[alt$=' - Signature']").click(function () {
+      window.$(".thumb-list img[alt$=' - Room']").click(function () {
         window['optimizely'] = window['optimizely'] || [];
         window['optimizely'].push({
           type: "event",
@@ -116,33 +117,33 @@ var desktop = function desktop() {
             value: 0.00 // Optional as float
           }
         });
-      })
+      });
     }, 1000);
   }
 };
 
-var anotherInterval = setInterval(function () {
-  if (typeof window.jQuery !== "undefined") {
-    var $ = window.jQuery;
 
-    try {
-      $._data($("span.view-more-number").parent()[0], "events").hasOwnProperty(
-        "click"
-      );
-
+$(document).ready(function () {
+  var anotherInterval = setInterval(function () {
+    if (typeof window.jQuery !== "undefined") {
+      var $ = window.jQuery;
+      clearInterval(anotherInterval);
       if (
         typeof window.$("#viewmoreComponentModal").modal("hide") == "object"
       ) {
-        clearInterval(anotherInterval);
-
         if (utag_data.site_type == "desktop") {
           desktop();
         } else {
-          mobile();
+          var mobileInterval = setInterval(function () {
+            if (typeof $("#imgSlider").slick == 'function') {
+              clearInterval(mobileInterval);
+              setTimeout(function () {
+                mobile();
+              }, 1000);
+            }
+          }, 50);
         }
       }
-    } catch (error) {
-      console.error(error);
     }
-  }
-}, 50);
+  }, 50);
+});

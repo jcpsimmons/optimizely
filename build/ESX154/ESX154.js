@@ -45,7 +45,7 @@ var desktop = function desktop() {
         window.$(".thumb-list .img-click:nth-of-type(" + (i + 1) + ")").unbind("click");
       }
 
-      window.$(".thumb-list .img-click").click(function () {
+      window.$(".thumb-list img[alt$=' - Signature']").click(function () {
         window['optimizely'] = window['optimizely'] || [];
         window['optimizely'].push({
           type: "event",
@@ -67,7 +67,7 @@ var desktop = function desktop() {
         window.$(".thumb-list .img-click:nth-of-type(" + (i + 1) + ")").unbind("click");
       }
 
-      window.$(".thumb-list .img-click").click(function () {
+      window.$(".thumb-list img[alt$=' - Signature']").click(function () {
         window['optimizely'] = window['optimizely'] || [];
         window['optimizely'].push({
           type: "event",
