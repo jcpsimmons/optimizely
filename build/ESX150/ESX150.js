@@ -195,7 +195,7 @@ var anotherInterval = setInterval(function () {
     var $ = window.jQuery;
     injectCss();
     buildHtml(utag_data, ".pl-container");
-    $("#SuggestedProducts").click(function (e) {
+    $("#SuggestedProducts").on('click', '*', function (e) {
       window["optimizely"] = window["optimizely"] || [];
       window["optimizely"].push({
         type: "event",

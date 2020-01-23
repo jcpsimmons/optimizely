@@ -75,15 +75,15 @@ const buildHtml = async (userData, cssSelector) => {
     for (const product of data.products) {
       html.push(
         `<div class="col-xs-3 product-element"> <a href="https://www.livingspaces.com/${
-          product.pid
+        product.pid
         }" target="_blank"> <img src="${
-          product.images[0].imageUrl
+        product.images[0].imageUrl
         }?w=263&amp;h=174&amp;mode=pad" class="img-responsive" alt="${
-          product.title
+        product.title
         }"> <span class="title ellipsis-wrap">${
-          product.title
+        product.title
         }</span> <span class="price">$${
-          product.price.salePrice
+        product.price.salePrice
         }</span><div class="ratings" role="button">${ratingGenerator(
           product.reviewsAvg,
           product.reviewsCount
@@ -101,13 +101,13 @@ const buildHtml = async (userData, cssSelector) => {
     for (const product of data.products) {
       html.push(
         `<div class="product-element"> <a href="https://www.livingspaces.com/${
-          product.pid
+        product.pid
         }"> <img src="${
-          product.images[0].imageUrl
+        product.images[0].imageUrl
         }?w=151&amp;h=100&amp;mode=pad" class="img-responsive lazy " alt="${
-          product.title
+        product.title
         }"> <span class="title">${product.title}</span> <span class="price">$${
-          product.price.salePrice
+        product.price.salePrice
         }</span> <div class="ratings" role="button">${ratingGenerator(
           product.reviewsAvg,
           product.reviewsCount
@@ -140,7 +140,7 @@ var anotherInterval = setInterval(() => {
     console.log("run");
     // buildHtml(utag_data, "#main-image");
     buildHtml(utag_data, ".pl-container");
-    $("#SuggestedProducts").click(e => {
+    $("#SuggestedProducts").on('click', '*', e => {
       window["optimizely"] = window["optimizely"] || [];
       window["optimizely"].push({
         type: "event",

@@ -12,6 +12,17 @@ var mobile = function mobile() {
     dots: true,
     arrows: false
   });
+  window.$('#imgSlider').click(function () {
+    window['optimizely'] = window['optimizely'] || [];
+    window['optimizely'].push({
+      type: "event",
+      eventName: "clickImgTiles",
+      tags: {
+        revenue: 0, // Optional in cents as integer (500 == $5.00)
+        value: 0.00 // Optional as float
+      }
+    });
+  })
 };
 
 var desktop = function desktop() {
@@ -25,7 +36,7 @@ var desktop = function desktop() {
   for (var i = 0; i < selectorPrefixes.length; i++) {
     $("".concat(selectorPrefixes[i], ' img[alt$=" - Room"]'))
       .parent()
-      .each(function() {
+      .each(function () {
         var x = $(this)
           .unbind("click")
           .detach();
@@ -40,19 +51,45 @@ var desktop = function desktop() {
     $(".thumb-list .img-click:nth-of-type(7)")
       .addClass("view-more")
       .append(viewMoreNumber)
-      .click(function() {
+      .click(function () {
         window.$("#viewmoreComponentModal").modal("show");
+        window
+          .$(
+            "#viewmoreComponentModal div.view-more-component__thumbnails > div"
+          )
+          .removeClass("active");
+        window
+          .$(
+            "#viewmoreComponentModal div.view-more-component__thumbnails > div:nth-child(6)"
+          )
+          .focus()
+          .addClass("active");
+        document.getElementById("large-image").src =
+          $(
+            "#viewmoreComponentModal div.view-more-component__thumbnails > div:nth-child(6) img"
+          )
+            .attr("src")
+            .split("?")[0] + "?w=1000&h=674&mode=pad";
       });
 
-    setTimeout(function() {
+    setTimeout(function () {
       for (var i = 0; i < 6; i++) {
-        console.log("timeout fire");
-        console.log(".thumb-list .img-click:nth-of-type(" + (i + 1) + ")");
-        $(".thumb-list .img-click:nth-of-type(" + (i + 1) + ")").unbind(
-          "click"
-        );
+        window
+          .$(".thumb-list .img-click:nth-of-type(" + (i + 1) + ")")
+          .unbind("click");
       }
-    }, 3000);
+      window.$(".thumb-list img[alt$=' - Signature']").click(function () {
+        window['optimizely'] = window['optimizely'] || [];
+        window['optimizely'].push({
+          type: "event",
+          eventName: "clickImgTiles",
+          tags: {
+            revenue: 0, // Optional in cents as integer (500 == $5.00)
+            value: 0.00 // Optional as float
+          }
+        });
+      })
+    }, 1000);
   } else {
     var index = $(".thumb-list .img-click").index(
       $(".thumb-list .img-click:last-of-type")
@@ -60,13 +97,31 @@ var desktop = function desktop() {
     $(".thumb-list .img-click:last-of-type")
       .addClass("view-more")
       .append(viewMoreNumber)
-      .click(function() {
+      .click(function () {
         window.$("#viewmoreComponentModal").modal("show");
       });
+    setTimeout(function () {
+      for (var i = 0; i < index; i++) {
+        window
+          .$(".thumb-list .img-click:nth-of-type(" + (i + 1) + ")")
+          .unbind("click");
+      }
+      window.$(".thumb-list img[alt$=' - Signature']").click(function () {
+        window['optimizely'] = window['optimizely'] || [];
+        window['optimizely'].push({
+          type: "event",
+          eventName: "clickImgTiles",
+          tags: {
+            revenue: 0, // Optional in cents as integer (500 == $5.00)
+            value: 0.00 // Optional as float
+          }
+        });
+      })
+    }, 1000);
   }
 };
 
-var anotherInterval = setInterval(function() {
+var anotherInterval = setInterval(function () {
   if (typeof window.jQuery !== "undefined") {
     var $ = window.jQuery;
 
@@ -86,6 +141,8 @@ var anotherInterval = setInterval(function() {
           mobile();
         }
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   }
 }, 50);
