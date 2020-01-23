@@ -1,14 +1,14 @@
 import _typeof from "@babel/runtime/helpers/typeof";
 
 var mobile = function mobile() {
-  $("#imgSlider").slick("unslick");
+  window.$("#imgSlider").slick("unslick");
   var lifestyleImages = $('.product-info-component img[alt$=" - Room"]').parent().parent().detach();
   $('.product-info-component img[alt$=" - Signature"]').parent().parent().after(lifestyleImages);
-  $("#imgSlider").slick({
+  window.$("#imgSlider").slick({
     dots: true,
     arrows: false
   });
-  window.$('#imgSlider').click(function () {
+  window.$('#imgSlider img[alt$=" - Room"]').bind('touchmove', function () {
     window['optimizely'] = window['optimizely'] || [];
     window['optimizely'].push({
       type: "event",
@@ -45,7 +45,7 @@ var desktop = function desktop() {
         window.$(".thumb-list .img-click:nth-of-type(" + (i + 1) + ")").unbind("click");
       }
 
-      window.$(".thumb-list img[alt$=' - Signature']").click(function () {
+      window.$(".thumb-list img[alt$=' - Room']").click(function () {
         window['optimizely'] = window['optimizely'] || [];
         window['optimizely'].push({
           type: "event",
@@ -67,7 +67,7 @@ var desktop = function desktop() {
         window.$(".thumb-list .img-click:nth-of-type(" + (i + 1) + ")").unbind("click");
       }
 
-      window.$(".thumb-list img[alt$=' - Signature']").click(function () {
+      window.$(".thumb-list img[alt$=' - Room']").click(function () {
         window['optimizely'] = window['optimizely'] || [];
         window['optimizely'].push({
           type: "event",
@@ -82,22 +82,26 @@ var desktop = function desktop() {
   }
 };
 
-var anotherInterval = setInterval(function () {
-  if (typeof window.jQuery !== "undefined") {
-    var $ = window.jQuery;
-
-    try {
-      $._data($("span.view-more-number").parent()[0], "events").hasOwnProperty("click");
+$(document).ready(function () {
+  var anotherInterval = setInterval(function () {
+    if (typeof window.jQuery !== "undefined") {
+      var $ = window.jQuery;
+      clearInterval(anotherInterval);
 
       if (_typeof(window.$("#viewmoreComponentModal").modal("hide")) == "object") {
-        clearInterval(anotherInterval);
-
         if (utag_data.site_type == "desktop") {
           desktop();
         } else {
-          mobile();
+          var mobileInterval = setInterval(function () {
+            if (typeof $("#imgSlider").slick == 'function') {
+              clearInterval(mobileInterval);
+              setTimeout(function () {
+                mobile();
+              }, 1000);
+            }
+          }, 50);
         }
       }
-    } catch (error) {}
-  }
-}, 50);
+    }
+  }, 50);
+});

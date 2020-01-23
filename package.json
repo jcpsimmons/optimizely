@@ -30,6 +30,7 @@
     "babel-traverse": "^6.26.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.19.1",
+    "gifencoder": "^2.0.1",
     "gitsnap": "^1.0.2",
     "gulp": "^4.0.2",
     "gulp-aegean": "^0.2.0",
