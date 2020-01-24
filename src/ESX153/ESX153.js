@@ -1,14 +1,26 @@
-var anotherInterval = setInterval(() => {
-  if (typeof window.jQuery !== "undefined") {
-    clearInterval(anotherInterval);
-    var $ = window.jQuery;
-    $("#pdp_icon_diagram").attr(
-      "src",
-      $("img[alt$='Dimensions Diagram']")[0].src.split("?")[0] +
-        "?w=750&h=505&mode=pad"
-    );
-  }
-}, 50);
+// ORIGINAL
+if (document.querySelectorAll('.product-icons li').length > 1) {
+  document.querySelector('li[data-icon="Product Dimensions"]').style.display = 'none';
+} else {
+  document.querySelector('.product-icons').style.display = 'none';
+}
+
+
+// Variation
+if (utag_data.site_type == 'desktop') {
+  var dimensionsImage = document.querySelector('div.thumb img[alt*=Dimensions]').src.split('?')[0] + '?w=1000&h=674&mode=pad';
+  document.getElementById('pdp_icon_diagram').src = dimensionsImage;
+} else {
+  var dimensionsImage = document.querySelector('#imgSlider img[alt*=Dimensions]').src.split('?')[0] + '?w=1000&h=674&mode=pad';
+  document.getElementById('pdp_icon_diagram').src = dimensionsImage;
+}
+document.querySelector('li[data-icon="Product Dimensions"]').addEventListener('click', function () {
+  window['optimizely'] = window['optimizely'] || [];
+  window['optimizely'].push({
+    type: "event",
+    eventName: "clickDimensionsIcon",
+  });
+});
 
 // polling
 [
