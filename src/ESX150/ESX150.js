@@ -5,8 +5,8 @@ const injectCss = () => {
 };
 
 let ratingGenerator = (average, count) => {
-  console.log("average: ", average);
-  console.log("count: ", count);
+  // console.log("average: ", average);
+  // console.log("count: ", count);
   // If there are no reviews return no code
   if (!parseInt(average) > 0 || !parseInt(average) > 0) {
     return "";
@@ -55,12 +55,12 @@ const buildHtml = async (userData, cssSelector) => {
     return false;
   }
 
-  console.log(
-    "url: ",
-    `https://www.livingspaces.com/api/restfulproducts?pid=${recentlyViewed.join(
-      ","
-    )}`
-  );
+  // console.log(
+  //   "url: ",
+  //   `https://www.livingspaces.com/api/restfulproducts?pid=${recentlyViewed.join(
+  //     ","
+  //   )}`
+  // );
   // API CALL
   let res = await fetch(
     `https://www.livingspaces.com/api/restfulproducts?pid=${recentlyViewed.join(
@@ -68,7 +68,7 @@ const buildHtml = async (userData, cssSelector) => {
     )}`
   );
   let data = await res.json();
-  console.log(data);
+  // console.log(data);
 
   if (utag_data.site_type == "desktop") {
     // DESKTOP
@@ -137,19 +137,8 @@ var anotherInterval = setInterval(() => {
     clearInterval(anotherInterval);
     var $ = window.jQuery;
     injectCss();
-    console.log("run");
+    // console.log("run");
     // buildHtml(utag_data, "#main-image");
     buildHtml(utag_data, ".pl-container");
-    $("#SuggestedProducts").on('click', '*', e => {
-      window["optimizely"] = window["optimizely"] || [];
-      window["optimizely"].push({
-        type: "event",
-        eventName: "clickSuggestedProducts",
-        tags: {
-          revenue: 0, // Optional in cents as integer (500 == $5.00)
-          value: 0.0 // Optional as float
-        }
-      });
-    });
   }
 }, 50);
