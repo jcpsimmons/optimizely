@@ -195,16 +195,5 @@ var anotherInterval = setInterval(function () {
     var $ = window.jQuery;
     injectCss();
     buildHtml(utag_data, ".pl-container");
-    $("#SuggestedProducts").on('click', '*', function (e) {
-      window["optimizely"] = window["optimizely"] || [];
-      window["optimizely"].push({
-        type: "event",
-        eventName: "clickSuggestedProducts",
-        tags: {
-          revenue: 0,
-          value: 0.0
-        }
-      });
-    });
   }
 }, 50);
