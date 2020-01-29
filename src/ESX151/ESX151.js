@@ -5,7 +5,7 @@ var anotherInterval = setInterval(() => {
 
         // CREATE AND ADD CSS
         const css =
-            "<style> .sticky_addToCart { position: fixed; z-index: 999; display: block; bottom: 0; left: 50%; transform: translateX(-50%); } .moveChatIcon { top: -25px; } .messages-starticon { transition: 0.2s } #WhiteBackground { display:none; z-index: 100; background-color:rgba(255,255,255,.9); border-top: 1px solid grey; position: fixed; left: 0; right: 0; bottom: 0; height: 7.5rem; box-shadow: 0 -5.3px 3px -4px grey; }</style>";
+            "<style> .sticky_addToCart { position: fixed; z-index: 999; display: block; bottom: 3rem; left: 50%; transform: translateX(-50%); } .moveChatIcon { top: -60px; } .messages-starticon { transition: 0.2s } #WhiteBackground { display:none; z-index: 100; background-color:rgba(255,255,255,.9); border-top: 1px solid grey; position: fixed; left: 0; right: 0; bottom: 0; height: 10rem; box-shadow: 0 -0.6px 4.5px 2.2px #757575; }</style>";
         $('head').after(css)
 
 
@@ -24,34 +24,28 @@ var anotherInterval = setInterval(() => {
             var st = $(this).scrollTop();
             if (st > lastScrollTop) {
                 scrollUp = false
-                console.log(scrollUp)
+                console.log('scrollUp', scrollUp)
             } else {
                 scrollUp = true
-                console.log(scrollUp)
+                console.log('scrollUp', scrollUp)
             }
             lastScrollTop = st;
         });
 
         $(window).scroll(function () {
-            console.log(isScrolledIntoView($('#iOSAppLink')))
             $("#btnAddToCart").each(function () {
                 // Button in main view
                 if (
                     isScrolledIntoView($("#product-detail-page-vue")) &&
-                    (elementVisible == false) || isScrolledIntoView($('#iOSAppLink'))
+                    (elementVisible == false) || !bottomActivationArea()
                 ) {
-                    if (isScrolledIntoView($('#iOSAppLink'))) {
-                        // do something special if its at the bottom of the page 
-                        // Probably need to reinsert the addtocart's height back into the document, just toss it as a body margin or something
-                        $('body').css('margin-top', $('#btnAddToCart').height() + 4)
-                    }
                     console.log("in view");
                     elementVisible = true;
                     $(".sticky_addToCart").removeClass("sticky_addToCart");
                     $('.messages-starticon').removeClass("moveChatIcon")
                     $('#WhiteBackground').hide()
                     // Sticky button
-                } else if (!isScrolledIntoView($(this)) && (elementVisible == true)) {
+                } else if ($(window).scrollTop() > 1 && !isScrolledIntoView($(this)) && (elementVisible == true)) {
                     $('body').css('margin-top', '0')
                     console.log("scrolled out of view");
                     elementVisible = false;
@@ -75,6 +69,13 @@ var anotherInterval = setInterval(() => {
             return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
         }
 
+        function bottomActivationArea() {
+            var additionalSpacing;
+            if (elementVisible) { additionalSpacing = $('#WhiteBackground').height() } else { additionalSpacing = 0 }
+            var pxFromBottom = $(document).height() - $(window).scrollTop() - $(window).height()
+            console.log('pxFromBottom', pxFromBottom)
+            if (pxFromBottom > 500 + additionalSpacing) { return true } else { return false }
+        }
     }
 }, 50);
 
