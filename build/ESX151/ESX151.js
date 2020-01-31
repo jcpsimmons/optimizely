@@ -30,7 +30,7 @@ var anotherInterval = setInterval(function () {
 
     clearInterval(anotherInterval);
     var $ = window.jQuery;
-    var css = "<style> .sticky_addToCart { position: fixed; z-index: 999; display: block; bottom: 3rem; left: 50%; transform: translateX(-50%); } .moveChatIcon { top: -60px; } .messages-starticon { transition: 0.2s } #WhiteBackground { display:none; z-index: 100; background-color:rgba(255,255,255,.9); border-top: 1px solid grey; position: fixed; left: 0; right: 0; bottom: 0; height: 10rem; box-shadow: 0 -0.6px 4.5px 2.2px #757575; }</style>";
+    var css = "<style> .sticky_addToCart { position: fixed; z-index: 999; display: block; top: 1.7rem; left: 50%; transform: translateX(-50%); } .messages-starticon { transition: 0.2s } #WhiteBackground { display:none; z-index: 100; background-color: #ffffff; border-top: 1px solid grey; position: fixed; left: 0; right: 0; top: 0; height: 8rem; box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2); }</style>";
     $('head').after(css);
     var elementVisible = true;
     $("#product-detail-page-vue form").before('<div id="WhiteBackground"></div>').wrap('<div id="StickyButtonWrapper"></div>');
@@ -49,19 +49,30 @@ var anotherInterval = setInterval(function () {
     });
     $(window).scroll(function () {
       $("#btnAddToCart").each(function () {
-        if (isScrolledIntoView($("#product-detail-page-vue")) && elementVisible == false || !bottomActivationArea()) {
+        if (isScrolledIntoView($("#product-detail-page-vue")) && elementVisible == false || !bottomActivationArea() || isScrolledIntoView('.product-info-component .mobile-slider-component')) {
           elementVisible = true;
           $(".sticky_addToCart").removeClass("sticky_addToCart");
-          $('.messages-starticon').removeClass("moveChatIcon");
           $('#WhiteBackground').hide();
-        } else if ($(window).scrollTop() > 1 && !isScrolledIntoView($(this)) && elementVisible == true) {
+        } else if ($(window).scrollTop() > 1 && !isScrolledIntoView($(this)) && !isScrolledIntoView('.product-info-component .mobile-slider-component') && elementVisible == true) {
           $('body').css('margin-top', '0');
           elementVisible = false;
           $('#StickyButtonWrapper').addClass('sticky_addToCart');
-          $('.messages-starticon').addClass("moveChatIcon");
           $('#WhiteBackground').show();
         }
       });
+    });
+    $('#btnAddToCart').click(function () {
+      if ($('#WhiteBackground').is(':visible')) {
+        window['optimizely'] = window['optimizely'] || [];
+        window['optimizely'].push({
+          type: "event",
+          eventName: "clickFloatingATC",
+          tags: {
+            revenue: 0,
+            value: 0.00
+          }
+        });
+      }
     });
   }
 }, 50);

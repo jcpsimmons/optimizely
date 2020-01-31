@@ -5,7 +5,7 @@ var anotherInterval = setInterval(() => {
 
         // CREATE AND ADD CSS
         const css =
-            "<style> .sticky_addToCart { position: fixed; z-index: 999; display: block; bottom: 3rem; left: 50%; transform: translateX(-50%); } .moveChatIcon { top: -60px; } .messages-starticon { transition: 0.2s } #WhiteBackground { display:none; z-index: 100; background-color:rgba(255,255,255,.9); border-top: 1px solid grey; position: fixed; left: 0; right: 0; bottom: 0; height: 10rem; box-shadow: 0 -0.6px 4.5px 2.2px #757575; }</style>";
+            "<style> .sticky_addToCart { position: fixed; z-index: 999; display: block; top: 1.7rem; left: 50%; transform: translateX(-50%); } .messages-starticon { transition: 0.2s } #WhiteBackground { display:none; z-index: 100; background-color: #ffffff; border-top: 1px solid grey; position: fixed; left: 0; right: 0; top: 0; height: 8rem; box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.2); }</style>";
         $('head').after(css)
 
 
@@ -37,20 +37,18 @@ var anotherInterval = setInterval(() => {
                 // Button in main view
                 if (
                     isScrolledIntoView($("#product-detail-page-vue")) &&
-                    (elementVisible == false) || !bottomActivationArea()
+                    (elementVisible == false) || !bottomActivationArea() || isScrolledIntoView('.product-info-component .mobile-slider-component')
                 ) {
                     console.log("in view");
                     elementVisible = true;
                     $(".sticky_addToCart").removeClass("sticky_addToCart");
-                    $('.messages-starticon').removeClass("moveChatIcon")
                     $('#WhiteBackground').hide()
                     // Sticky button
-                } else if ($(window).scrollTop() > 1 && !isScrolledIntoView($(this)) && (elementVisible == true)) {
+                } else if ($(window).scrollTop() > 1 && !isScrolledIntoView($(this)) && !isScrolledIntoView('.product-info-component .mobile-slider-component') && (elementVisible == true)) {
                     $('body').css('margin-top', '0')
                     console.log("scrolled out of view");
                     elementVisible = false;
                     $('#StickyButtonWrapper').addClass('sticky_addToCart')
-                    $('.messages-starticon').addClass("moveChatIcon")
                     $('#WhiteBackground').show()
                 }
             });
@@ -76,8 +74,21 @@ var anotherInterval = setInterval(() => {
             console.log('pxFromBottom', pxFromBottom)
             if (pxFromBottom > 500 + additionalSpacing) { return true } else { return false }
         }
+
+        // Add tracking for floating clicks
+        $('#btnAddToCart').click(function () {
+            if ($('#WhiteBackground').is(':visible')) {
+                window['optimizely'] = window['optimizely'] || [];
+                window['optimizely'].push({
+                    type: "event",
+                    eventName: "clickFloatingATC",
+                    tags: {
+                        revenue: 0, // Optional in cents as integer (500 == $5.00)
+                        value: 0.00 // Optional as float
+                    }
+                });
+            }
+        })
+
     }
 }, 50);
-
-
-// || (isScrolledIntoView($('#iOSAppLink') && (elementVisible == false)))
