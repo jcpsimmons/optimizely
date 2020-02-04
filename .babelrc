@@ -1,4 +1,8 @@
 {
   "presets": ["@babel/preset-env", { "comments": false }],
-  "plugins": ["transform-remove-console", "@babel/plugin-transform-runtime"]
+  "plugins": [
+    "transform-remove-console",
+    "@babel/plugin-transform-runtime",
+    "transform-ternary-to-if-else"
+  ]
 }

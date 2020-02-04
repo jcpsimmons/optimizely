@@ -30,9 +30,23 @@ window.addEventListener('load', function () {
       });
     };
 
-    var cookieRecentlyAdd = window.$.cookie('lsf-cartadds') ? window.$.cookie('lsf-cartadds') : false;
+    var cookieRecentlyAdd = function () {
+      if (window.$.cookie('lsf-cartadds')) {
+        return window.$.cookie('lsf-cartadds');
+      }
+
+      return false;
+    }();
+
     var recentlyAddCartList;
-    var targetElement = $('#vue-container').length > 0 ? $('#vue-container') : $('body > div.page-content');
+
+    var targetElement = function () {
+      if ($('#vue-container').length > 0) {
+        return $('#vue-container');
+      }
+
+      return $('body > div.page-content');
+    }();
 
     if (cookieRecentlyAdd) {
       recentlyAddCartList = cookieRecentlyAdd.split(',');

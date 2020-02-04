@@ -34,7 +34,13 @@ var addModalListeners = function addModalListeners() {
 };
 
 var stopScroll = function stopScroll(bool) {
-  bool ? document.body.classList.add("stop-scrolling") : document.body.classList.remove("stop-scrolling");
+  (function () {
+    if (bool) {
+      return document.body.classList.add("stop-scrolling");
+    }
+
+    return document.body.classList.remove("stop-scrolling");
+  })();
 };
 
 var anotherInterval = setInterval(function () {
