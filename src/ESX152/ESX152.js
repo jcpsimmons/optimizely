@@ -1,6 +1,7 @@
 // VARIATION CODE
 
 function scrollOnErrorClick() {
+  var $ = window.jQuery;
   $("#shipBillBtn").click(function() {
     if ($(".error:visible").length) {
       window["optimizely"] = window["optimizely"] || [];

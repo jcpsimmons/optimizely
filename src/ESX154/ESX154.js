@@ -13,14 +13,14 @@ var mobile = function mobile() {
     arrows: false
   });
   // Touch Event
-  window.$('#imgSlider img[alt$=" - Room"]').bind('touchmove', function () {
-    window['optimizely'] = window['optimizely'] || [];
-    window['optimizely'].push({
+  window.$('#imgSlider img[alt$=" - Room"]').bind("touchmove", function() {
+    window["optimizely"] = window["optimizely"] || [];
+    window["optimizely"].push({
       type: "event",
       eventName: "clickImgTiles",
       tags: {
         revenue: 0, // Optional in cents as integer (500 == $5.00)
-        value: 0.00 // Optional as float
+        value: 0.0 // Optional as float
       }
     });
   });
@@ -37,7 +37,7 @@ var desktop = function desktop() {
   for (var i = 0; i < selectorPrefixes.length; i++) {
     $("".concat(selectorPrefixes[i], ' img[alt$=" - Room"]'))
       .parent()
-      .each(function () {
+      .each(function() {
         var x = $(this)
           .unbind("click")
           .detach();
@@ -52,7 +52,7 @@ var desktop = function desktop() {
     $(".thumb-list .img-click:nth-of-type(7)")
       .addClass("view-more")
       .append(viewMoreNumber)
-      .click(function () {
+      .click(function() {
         window.$("#viewmoreComponentModal").modal("show");
         window
           .$(
@@ -73,48 +73,48 @@ var desktop = function desktop() {
             .split("?")[0] + "?w=1000&h=674&mode=pad";
       });
 
-    setTimeout(function () {
+    setTimeout(function() {
       for (var i = 0; i < 6; i++) {
         window
           .$(".thumb-list .img-click:nth-of-type(" + (i + 1) + ")")
           .unbind("click");
       }
-      window.$(".thumb-list img[alt$=' - Room']").click(function () {
-        window['optimizely'] = window['optimizely'] || [];
-        window['optimizely'].push({
+      window.$(".thumb-list img[alt$=' - Room']").click(function() {
+        window["optimizely"] = window["optimizely"] || [];
+        window["optimizely"].push({
           type: "event",
           eventName: "clickImgTiles",
           tags: {
             revenue: 0, // Optional in cents as integer (500 == $5.00)
-            value: 0.00 // Optional as float
+            value: 0.0 // Optional as float
           }
         });
       });
     }, 1000);
-  } else {
+  } else if ($(".view-more").length) {
     var index = $(".thumb-list .img-click").index(
       $(".thumb-list .img-click:last-of-type")
     );
     $(".thumb-list .img-click:last-of-type")
       .addClass("view-more")
       .append(viewMoreNumber)
-      .click(function () {
+      .click(function() {
         window.$("#viewmoreComponentModal").modal("show");
       });
-    setTimeout(function () {
+    setTimeout(function() {
       for (var i = 0; i < index; i++) {
         window
           .$(".thumb-list .img-click:nth-of-type(" + (i + 1) + ")")
           .unbind("click");
       }
-      window.$(".thumb-list img[alt$=' - Room']").click(function () {
-        window['optimizely'] = window['optimizely'] || [];
-        window['optimizely'].push({
+      window.$(".thumb-list img[alt$=' - Room']").click(function() {
+        window["optimizely"] = window["optimizely"] || [];
+        window["optimizely"].push({
           type: "event",
           eventName: "clickImgTiles",
           tags: {
             revenue: 0, // Optional in cents as integer (500 == $5.00)
-            value: 0.00 // Optional as float
+            value: 0.0 // Optional as float
           }
         });
       });
@@ -122,9 +122,8 @@ var desktop = function desktop() {
   }
 };
 
-
-$(document).ready(function () {
-  var anotherInterval = setInterval(function () {
+$(document).ready(function() {
+  var anotherInterval = setInterval(function() {
     if (typeof window.jQuery !== "undefined") {
       var $ = window.jQuery;
       clearInterval(anotherInterval);
@@ -134,10 +133,10 @@ $(document).ready(function () {
         if (utag_data.site_type == "desktop") {
           desktop();
         } else {
-          var mobileInterval = setInterval(function () {
-            if (typeof $("#imgSlider").slick == 'function') {
+          var mobileInterval = setInterval(function() {
+            if (typeof $("#imgSlider").slick == "function") {
               clearInterval(mobileInterval);
-              setTimeout(function () {
+              setTimeout(function() {
                 mobile();
               }, 1000);
             }

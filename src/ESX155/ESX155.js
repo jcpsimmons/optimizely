@@ -47,6 +47,16 @@ const handlerFunction = () => {// PRE_INIT ZIPCODE DATA
 
 
   viewYourOptions.addEventListener('click', () => {
+    window['optimizely'] = window['optimizely'] || [];
+    window['optimizely'].push({
+      type: "event",
+      eventName: "clickVYO",
+      tags: {
+        revenue: 0, // Optional in cents as integer (500 == $5.00)
+        value: 0.00 // Optional as float
+      }
+    });
+
     console.log('clickevent')
     curZip = + zipCodeBox.value
 
@@ -94,7 +104,7 @@ const handlerFunction = () => {// PRE_INIT ZIPCODE DATA
 
 
 var anotherInterval = setInterval(() => {
-  if (typeof window.utag_data !== 'undefined' && (document.querySelector('.search-form-container button') || document.getElementById('searchStoreButton'))) {
+  if (typeof window.utag_data !== 'undefined' && document.readyState == 'complete' && (document.querySelector('.search-form-container button') || document.getElementById('searchStoreButton'))) {
     clearInterval(anotherInterval);
     handlerFunction()
   }

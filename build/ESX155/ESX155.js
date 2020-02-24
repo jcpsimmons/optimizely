@@ -43,18 +43,23 @@ var handlerFunction = function handlerFunction() {
     return document.getElementById('searchStoreButton');
   }();
 
-  console.debug(viewYourOptions);
-
   var zipCodeBox = document.getElementById('cityOrZipCodeInput');
   var injectionPoint = document.getElementById('delivery-options-caption-container');
-  console.debug(injectionPoint);
 
   var makeNode = function makeNode(html) {
     return document.createRange().createContextualFragment(html);
   };
 
   viewYourOptions.addEventListener('click', function () {
-    console.debug('click');
+    window['optimizely'] = window['optimizely'] || [];
+    window['optimizely'].push({
+      type: "event",
+      eventName: "clickVYO",
+      tags: {
+        revenue: 0,
+        value: 0.00
+      }
+    });
     curZip = +zipCodeBox.value;
     var place = false;
     var stateNames = Object.keys(zipCodes);
@@ -109,9 +114,7 @@ var handlerFunction = function handlerFunction() {
 };
 
 var anotherInterval = setInterval(function () {
-  console.debug('loop');
-  if (typeof window.utag_data !== 'undefined' && (document.querySelector('.search-form-container button') || document.getElementById('searchStoreButton'))) {
-    console.debug('conditions met');
+  if (typeof window.utag_data !== 'undefined' && document.readyState == 'complete' && (document.querySelector('.search-form-container button') || document.getElementById('searchStoreButton'))) {
     clearInterval(anotherInterval);
     handlerFunction();
   }

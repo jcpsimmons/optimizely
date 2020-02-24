@@ -1,5 +1,3 @@
-import _typeof from "@babel/runtime/helpers/typeof";
-
 var mobile = function mobile() {
   window.$("#imgSlider").slick("unslick");
   var lifestyleImages = $('.product-info-component img[alt$=" - Room"]').parent().parent().detach();
@@ -8,14 +6,14 @@ var mobile = function mobile() {
     dots: true,
     arrows: false
   });
-  window.$('#imgSlider img[alt$=" - Room"]').bind('touchmove', function () {
-    window['optimizely'] = window['optimizely'] || [];
-    window['optimizely'].push({
+  window.$('#imgSlider img[alt$=" - Room"]').bind("touchmove", function () {
+    window["optimizely"] = window["optimizely"] || [];
+    window["optimizely"].push({
       type: "event",
       eventName: "clickImgTiles",
       tags: {
         revenue: 0,
-        value: 0.00
+        value: 0.0
       }
     });
   });
@@ -46,18 +44,18 @@ var desktop = function desktop() {
       }
 
       window.$(".thumb-list img[alt$=' - Room']").click(function () {
-        window['optimizely'] = window['optimizely'] || [];
-        window['optimizely'].push({
+        window["optimizely"] = window["optimizely"] || [];
+        window["optimizely"].push({
           type: "event",
           eventName: "clickImgTiles",
           tags: {
             revenue: 0,
-            value: 0.00
+            value: 0.0
           }
         });
       });
     }, 1000);
-  } else {
+  } else if ($(".view-more").length) {
     var index = $(".thumb-list .img-click").index($(".thumb-list .img-click:last-of-type"));
     $(".thumb-list .img-click:last-of-type").addClass("view-more").append(viewMoreNumber).click(function () {
       window.$("#viewmoreComponentModal").modal("show");
@@ -68,13 +66,13 @@ var desktop = function desktop() {
       }
 
       window.$(".thumb-list img[alt$=' - Room']").click(function () {
-        window['optimizely'] = window['optimizely'] || [];
-        window['optimizely'].push({
+        window["optimizely"] = window["optimizely"] || [];
+        window["optimizely"].push({
           type: "event",
           eventName: "clickImgTiles",
           tags: {
             revenue: 0,
-            value: 0.00
+            value: 0.0
           }
         });
       });
@@ -88,12 +86,12 @@ $(document).ready(function () {
       var $ = window.jQuery;
       clearInterval(anotherInterval);
 
-      if (_typeof(window.$("#viewmoreComponentModal").modal("hide")) == "object") {
+      if (typeof(window.$("#viewmoreComponentModal").modal("hide")) == "object") {
         if (utag_data.site_type == "desktop") {
           desktop();
         } else {
           var mobileInterval = setInterval(function () {
-            if (typeof $("#imgSlider").slick == 'function') {
+            if (typeof $("#imgSlider").slick == "function") {
               clearInterval(mobileInterval);
               setTimeout(function () {
                 mobile();

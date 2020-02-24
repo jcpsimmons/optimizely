@@ -1,0 +1,48 @@
+#geoModal .modal-body {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.6rem;
+  }
+  #geoModal .modal-body p {
+    font-size: 1.8rem;
+  }
+  #geoModal .footer_wrapper {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  #geoModal .footer_wrapper p,
+  #geoModal .footer_wrapper span {
+    font-size: 1.4rem;
+  }
+  #geoModal .modal-dialog {
+    width: 100%;
+  }
+  #geoModal .close_btn {
+    text-decoration: underline;
+  }
+  #geo_str_address {
+    margin: 0;
+  }
+  #geoModal .location a {
+    display: block;
+    text-decoration: underline;
+  }
+  #geoModal .round_wrapper {
+    border: 0.2rem solid #00699a;
+    color: #00699a;
+    border-radius: 4rem;
+    display: inline-block;
+    padding: 0.7rem 3rem;
+    margin-bottom: 2rem;
+  }
+  #geoModal .round_wrapper h3 {
+    margin: 0;
+    font-size: 2rem;
+  }
+  #geoModal .geo_close {
+    margin-right: 1rem !important;
+  }
+  #geoModal .geo_close span {
+    font-size: 3.5rem !important;
+  }
+  
