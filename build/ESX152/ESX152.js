@@ -1,4 +1,5 @@
 function scrollOnErrorClick() {
+  var $ = window.jQuery;
   $("#shipBillBtn").click(function () {
     if ($(".error:visible").length) {
       window["optimizely"] = window["optimizely"] || [];
@@ -6,8 +7,8 @@ function scrollOnErrorClick() {
         type: "event",
         eventName: "errClick"
       });
-      window.$([document.documentElement, document.body]).animate({
-        scrollTop: $(".error:visible").first().offset().top
+      $([document.documentElement, document.body]).animate({
+        scrollTop: window.$(".error:visible").first().offset().top
       }, 300);
     }
   });
