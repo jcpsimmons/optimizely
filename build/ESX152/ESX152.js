@@ -6,7 +6,7 @@ function scrollOnErrorClick() {
         type: "event",
         eventName: "errClick"
       });
-      $([document.documentElement, document.body]).animate({
+      window.$([document.documentElement, document.body]).animate({
         scrollTop: $(".error:visible").first().offset().top
       }, 300);
     }

@@ -11,7 +11,8 @@ function scrollOnErrorClick() {
       });
       $([document.documentElement, document.body]).animate(
         {
-          scrollTop: $(".error:visible")
+          scrollTop: window
+            .$(".error:visible")
             .first()
             .offset().top
         },

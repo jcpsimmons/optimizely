@@ -1,3 +1,5 @@
+import _typeof from "@babel/runtime/helpers/typeof";
+
 var mobile = function mobile() {
   window.$("#imgSlider").slick("unslick");
   var lifestyleImages = $('.product-info-component img[alt$=" - Room"]').parent().parent().detach();
@@ -86,7 +88,7 @@ $(document).ready(function () {
       var $ = window.jQuery;
       clearInterval(anotherInterval);
 
-      if (typeof(window.$("#viewmoreComponentModal").modal("hide")) == "object") {
+      if (_typeof(window.$("#viewmoreComponentModal").modal("hide")) == "object") {
         if (utag_data.site_type == "desktop") {
           desktop();
         } else {
