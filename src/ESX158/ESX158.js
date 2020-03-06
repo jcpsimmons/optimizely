@@ -47,7 +47,7 @@ const ESX158 = () => {
           randomId(),
           `Weight Capacity?`,
           `What is the recommended weight capacity?`,
-          `The weight capacity is ${getAttrValue(
+          `The recommended weight capacity is ${getAttrValue(
             "Recommended Weight Capacity"
           )}lbs.`
         ];
@@ -56,7 +56,7 @@ const ESX158 = () => {
         detachable = getAttrValue("Seat Type").search("Loose") > -1;
         return [
           randomId(),
-          `Detachable Cushions?`,
+          `Detachable Seat Cushions?`,
           `Are the seat cushions detachable?`,
           `${detachable ? "Yes" : "No"} the seat cusions ${
             detachable ? "are" : "aren't"
@@ -75,41 +75,47 @@ const ESX158 = () => {
         ];
       },
       removableCustionCovers: () => {
+        let removable =
+          getAttrValue("Seat Type").search("Loose") > -1 ? true : false;
+
         return [
           randomId(),
           `Removable Cusion Covers?`,
           `Are the cushion covers removable?`,
-          `Yes/no`
-        ];
-      },
-      doorClearance: () => {
-        return [
-          randomId(),
-          `Door Clearance?`,
-          `What is the door clearance?`,
-          `The door clearance is ${getAttrValue("Minimum Doorway")}in.`
+          `${removable ? "Yes" : "No"}, the cusion covers ${
+            removable ? "are" : "aren't"
+          } removable.`
         ];
       },
       comeAssembled: () => {
-        let assemblyTime = getAttrValue("Assembly Time");
+        let assemblyRequired = false;
+        try {
+          getAttrValue("What type of assembly");
+          assemblyRequired = true;
+        } catch (e) {}
 
         return [
           randomId(),
           `Comes Assembled?`,
           `Does this come assembled?`,
-          `${
-            assemblyTime > 0
-              ? `Assembly will take about ${assemblyTime} minutes`
-              : `Yes, this item comes assembled`
-          }`
+          `${assemblyRequired ? `No` : "Yes"}, assembly ${
+            assemblyRequired ? `is` : "is not"
+          } required.`
         ];
       },
       requireBoxSpring: () => {
+        let bs = false;
+        if (getAttrValue("Recommended Box Spring").search("Box") > -1) {
+          bs = true;
+        }
+
         return [
           randomId(),
           `Box Spring Needed?`,
           `Does this bed frame require a box spring?`,
-          `Yes/no`
+          `${bs ? "Yes" : "No"}, this bed frame ${
+            bs ? "does" : "does not"
+          } require a box spring.`
         ];
       }
     };
@@ -146,39 +152,68 @@ const ESX158 = () => {
       // handle questions exist
       document
         .getElementById("BVQAQuestionsID")
-        .insertAdjacentHTML("beforeend", html);
+        .insertAdjacentHTML("afterbegin", html);
     }
+  };
 
-    // eligibility and triggering
-
-    if (
-      document.getElementById("BVQANoQuestionsID") ||
-      document.querySelectorAll(".BVQAQuestionSummary").length < 6
-    ) {
-      console.log("good");
-    }
+  const makeEventListener = () => {
+    document.getElementById("BVQAMainID").addEventListener("click", e => {
+      window["optimizely"] = window["optimizely"] || [];
+      window["optimizely"].push({
+        type: "event",
+        eventName: "ESX158_ClickReviews",
+        tags: {}
+      });
+    });
   };
 
   let html = generateHtml();
   findSelectorAndInsert(html);
+  makeEventListener();
 };
 
 // Wait for the questions to load
 
-let ESX158Interval = setInterval(() => {
-  if (
-    document.getElementById("BVQANoQuestionsID") ||
-    document.getElementById("BVQAQuestionsID")
-  ) {
-    //   CALL OPTIMIZELY HERE
-    ESX158();
-    clearInterval(ESX158Interval);
-  }
-}, 50);
+// ESX158 Hook for Optimizely
+if (
+  utag_data.product_attribute.search(/sofa|dining chair|bed/) > -1 &&
+  utag_data.site_type == "desktop"
+) {
+  let tableHeaders = Array.from(document.querySelectorAll("th")).map(item => {
+    return item.textContent.trim();
+  });
 
-// Clear interval if it doesn't fire after 20 seconds
-setTimeout(() => {
-  if (ESX158Interval) {
-    clearInterval(ESX158Interval);
+  let searchingFor = [
+    "Seat Height",
+    "Recommended Weight Capacity",
+    "Seat Type",
+    "Back Type",
+    "What type of assembly is required",
+    "Recommended Box Spring"
+  ];
+
+  const matchFound = searchingFor.some(r => tableHeaders.indexOf(r) >= 0);
+
+  if (matchFound) {
+    let ESX158Interval = setInterval(() => {
+      if (
+        document.getElementById("BVQANoQuestionsID") ||
+        document.getElementById("BVQAQuestionsID")
+      ) {
+        if (
+          document.getElementById("BVQANoQuestionsID") ||
+          document.querySelectorAll(".BVQAQuestionSummary").length < 6
+        ) {
+          console.debug("Page eligible for ESX158");
+          window["optimizely"] = window["optimizely"] || [];
+          window["optimizely"].push({
+            type: "page",
+            pageName: "ESX158_PageActivation"
+          });
+        }
+
+        clearInterval(ESX158Interval);
+      }
+    }, 50);
   }
-}, 20000);
+}
