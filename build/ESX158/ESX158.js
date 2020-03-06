@@ -33,11 +33,11 @@ var ESX158 = function ESX158() {
         return [randomId(), "Seat Height?", "What is the seat height?", "The seat height is ".concat(getAttrValue("Seat Height"), " inches.")];
       },
       weightCapacity: function weightCapacity() {
-        return [randomId(), "Weight Capacity?", "What is the recommended weight capacity?", "The weight capacity is ".concat(getAttrValue("Recommended Weight Capacity"), "lbs.")];
+        return [randomId(), "Weight Capacity?", "What is the recommended weight capacity?", "The recommended weight capacity is ".concat(getAttrValue("Recommended Weight Capacity"), "lbs.")];
       },
       seatDetachable: function seatDetachable() {
         detachable = getAttrValue("Seat Type").search("Loose") > -1;
-        return [randomId(), "Detachable Cushions?", "Are the seat cushions detachable?", "".concat(function () {
+        return [randomId(), "Detachable Seat Cushions?", "Are the seat cushions detachable?", "".concat(function () {
           if (detachable) {
             return "Yes";
           }
@@ -68,23 +68,70 @@ var ESX158 = function ESX158() {
         }(), " detachable.")];
       },
       removableCustionCovers: function removableCustionCovers() {
-        return [randomId(), "Removable Cusion Covers?", "Are the cushion covers removable?", "Yes/no"];
-      },
-      doorClearance: function doorClearance() {
-        return [randomId(), "Door Clearance?", "What is the door clearance?", "The door clearance is ".concat(getAttrValue("Minimum Doorway"), "in.")];
-      },
-      comeAssembled: function comeAssembled() {
-        var assemblyTime = getAttrValue("Assembly Time");
-        return [randomId(), "Comes Assembled?", "Does this come assembled?", "".concat(function () {
-          if (assemblyTime > 0) {
-            return "Assembly will take about ".concat(assemblyTime, " minutes");
+        var removable = function () {
+          if (getAttrValue("Seat Type").search("Loose") > -1) {
+            return true;
           }
 
-          return "Yes, this item comes assembled";
-        }())];
+          return false;
+        }();
+
+        return [randomId(), "Removable Cusion Covers?", "Are the cushion covers removable?", "".concat(function () {
+          if (removable) {
+            return "Yes";
+          }
+
+          return "No";
+        }(), ", the cusion covers ").concat(function () {
+          if (removable) {
+            return "are";
+          }
+
+          return "aren't";
+        }(), " removable.")];
+      },
+      comeAssembled: function comeAssembled() {
+        var assemblyRequired = false;
+
+        try {
+          getAttrValue("What type of assembly");
+          assemblyRequired = true;
+        } catch (e) {}
+
+        return [randomId(), "Comes Assembled?", "Does this come assembled?", "".concat(function () {
+          if (assemblyRequired) {
+            return "No";
+          }
+
+          return "Yes";
+        }(), ", assembly ").concat(function () {
+          if (assemblyRequired) {
+            return "is";
+          }
+
+          return "is not";
+        }(), " required.")];
       },
       requireBoxSpring: function requireBoxSpring() {
-        return [randomId(), "Box Spring Needed?", "Does this bed frame require a box spring?", "Yes/no"];
+        var bs = false;
+
+        if (getAttrValue("Recommended Box Spring").search("Box") > -1) {
+          bs = true;
+        }
+
+        return [randomId(), "Box Spring Needed?", "Does this bed frame require a box spring?", "".concat(function () {
+          if (bs) {
+            return "Yes";
+          }
+
+          return "No";
+        }(), ", this bed frame ").concat(function () {
+          if (bs) {
+            return "does";
+          }
+
+          return "does not";
+        }(), " require a box spring.")];
       }
     };
     tmpHtml = Object.keys(questionTemplates).map(function (template) {
@@ -111,24 +158,51 @@ var ESX158 = function ESX158() {
       document.getElementById("BVQANoQuestionsID").outerHTML = "";
       document.getElementById("BVQAViewQuestionsContentID").insertAdjacentHTML("beforeend", html);
     } else {
-      document.getElementById("BVQAQuestionsID").insertAdjacentHTML("beforeend", html);
+      document.getElementById("BVQAQuestionsID").insertAdjacentHTML("afterbegin", html);
     }
+  };
 
-    if (document.getElementById("BVQANoQuestionsID") || document.querySelectorAll(".BVQAQuestionSummary").length < 6) {}
+  var makeEventListener = function makeEventListener() {
+    document.getElementById("BVQAMainID").addEventListener("click", function (e) {
+      window["optimizely"] = window["optimizely"] || [];
+      window["optimizely"].push({
+        type: "event",
+        eventName: "ESX158_ClickReviews",
+        tags: {}
+      });
+    });
   };
 
   var html = generateHtml();
   findSelectorAndInsert(html);
+  makeEventListener();
 };
 
-var ESX158Interval = setInterval(function () {
-  if (document.getElementById("BVQANoQuestionsID") || document.getElementById("BVQAQuestionsID")) {
-    ESX158();
-    clearInterval(ESX158Interval);
+
+// ESX158 Activation Code
+if (utag_data.product_attribute.search(/sofa|dining chair|bed/) > -1 && utag_data.site_type == "desktop") {
+  var tableHeaders = Array.from(document.querySelectorAll("th")).map(function (item) {
+    return item.textContent.trim();
+  });
+  var searchingFor = ["Seat Height", "Recommended Weight Capacity", "Seat Type", "Back Type", "What type of assembly is required", "Recommended Box Spring"];
+  var matchFound = searchingFor.some(function (r) {
+    return tableHeaders.indexOf(r) >= 0;
+  });
+
+  if (matchFound) {
+    var ESX158Interval = setInterval(function () {
+      if (document.getElementById("BVQANoQuestionsID") || document.getElementById("BVQAQuestionsID")) {
+        if (document.getElementById("BVQANoQuestionsID") || document.querySelectorAll(".BVQAQuestionSummary").length < 6) {
+          console.debug('Activating ESX158')
+          window["optimizely"] = window["optimizely"] || [];
+          window["optimizely"].push({
+            type: "page",
+            pageName: "ESX158_PageActivation"
+          });
+        }
+
+        clearInterval(ESX158Interval);
+      }
+    }, 50);
   }
-}, 50);
-setTimeout(function () {
-  if (ESX158Interval) {
-    clearInterval(ESX158Interval);
-  }
-}, 20000);
+}
