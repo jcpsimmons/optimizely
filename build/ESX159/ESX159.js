@@ -12,3 +12,18 @@ var margin = function () {
 }();
 
 document.querySelector(".product-icons").style.marginBottom = margin;
+document.querySelector(".product-icons").addEventListener("click", function () {
+  window["optimizely"] = window["optimizely"] || [];
+  window["optimizely"].push({
+    type: "event",
+    eventName: "pdp_icons",
+    tags: {
+      revenue: 0,
+      value: 0.0
+    }
+  });
+});
+
+function pollingFn() {
+  return window.globalVarToWaitFor === "READY";
+}
