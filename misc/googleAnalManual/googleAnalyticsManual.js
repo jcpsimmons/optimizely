@@ -1,4 +1,13 @@
 const googleAnalyticsManualTracking = () => {
+  // init google analytics script:
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "UA-161218040-1");
+  // end gtag init
+
   function titleCase(str) {
     return str
       .toLowerCase()
@@ -32,7 +41,7 @@ const googleAnalyticsManualTracking = () => {
   };
 
   // add all IDs on page to selector object
-  throwawayvar = [...document.querySelectorAll("[id]")]
+  let throwawayvar = [...document.querySelectorAll("[id]")]
     .filter(x => {
       if (
         x.tagName !== "SCRIPT" ||
@@ -89,13 +98,38 @@ const googleAnalyticsManualTracking = () => {
 
   document.addEventListener("click", function(e) {
     let elName = checkParent(e.target);
-    console.log(elName);
     gtag("event", elName, {
       event_category: `manualTracking_pdp_${getDevice()}`,
       event_label: elName,
-      send_to: "UA-463007-1"
+      send_to: "UA-161218040-1"
     });
   });
 };
 
 googleAnalyticsManualTracking();
+
+const initGAScriptTag = () => {
+  var fileRef = document.createElement("script");
+  fileRef.setAttribute("type", "text/javascript");
+  fileRef.setAttribute(
+    "src",
+    "https://www.googletagmanager.com/gtag/js?id=UA-161218040-1"
+  );
+  document.head.appendChild(fileRef);
+};
+
+if (document.readyState === "complete") {
+  initGAScriptTag();
+  googleAnalyticsManualTracking();
+  console.debug("GA Initialized");
+} else {
+  window.addEventListener(
+    "load",
+    function() {
+      initGAScriptTag();
+      googleAnalyticsManualTracking();
+      console.debug("GA Initialized");
+    },
+    false
+  );
+}

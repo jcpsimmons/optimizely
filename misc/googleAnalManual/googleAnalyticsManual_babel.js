@@ -28,6 +28,16 @@ function _arrayWithoutHoles(arr) {
 }
 
 var googleAnalyticsManualTracking = function googleAnalyticsManualTracking() {
+  // init google analytics script:
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
+  gtag("js", new Date());
+  gtag("config", "UA-161218040-1"); // end gtag init
+
   function titleCase(str) {
     return str
       .toLowerCase()
@@ -59,7 +69,7 @@ var googleAnalyticsManualTracking = function googleAnalyticsManualTracking() {
     "more-stores": "See at more stores"
   }; // add all IDs on page to selector object
 
-  throwawayvar = _toConsumableArray(document.querySelectorAll("[id]"))
+  var throwawayvar = _toConsumableArray(document.querySelectorAll("[id]"))
     .filter(function(x) {
       if (
         x.tagName !== "SCRIPT" ||
@@ -120,13 +130,38 @@ var googleAnalyticsManualTracking = function googleAnalyticsManualTracking() {
 
   document.addEventListener("click", function(e) {
     var elName = checkParent(e.target);
-    console.log(elName);
     gtag("event", elName, {
       event_category: "manualTracking_pdp_".concat(getDevice()),
       event_label: elName,
-      send_to: "UA-463007-1"
+      send_to: "UA-161218040-1"
     });
   });
 };
 
 googleAnalyticsManualTracking();
+
+var initGAScriptTag = function initGAScriptTag() {
+  var fileRef = document.createElement("script");
+  fileRef.setAttribute("type", "text/javascript");
+  fileRef.setAttribute(
+    "src",
+    "https://www.googletagmanager.com/gtag/js?id=UA-161218040-1"
+  );
+  document.head.appendChild(fileRef);
+};
+
+if (document.readyState === "complete") {
+  initGAScriptTag();
+  googleAnalyticsManualTracking();
+  console.debug("GA Initialized");
+} else {
+  window.addEventListener(
+    "load",
+    function() {
+      initGAScriptTag();
+      googleAnalyticsManualTracking();
+      console.debug("GA Initialized");
+    },
+    false
+  );
+}
