@@ -1,0 +1,68 @@
+<style>
+  #ItemsInCart {
+    max-width: 1140px;
+    margin: 0 auto 2rem;
+  }
+  #ItemsInCart .item {
+    display: inline-block;
+    margin: 0 2rem;
+    font-weight: 600;
+    font-size: 2rem;
+  }
+  #ItemsInCart .cart-items {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  #ItemsInCart .outer-flex {
+    display: flex;
+    align-items: center;
+    width: 70%;
+    margin: auto;
+    border-radius: 4px;
+    box-shadow: 0 0 6px 0 #bbb;
+    padding: 3rem;
+  }
+  #ItemsInCart button {
+    color: #fff;
+    background-color: #ad4e17;
+  }
+  #ItemsInCart .checkout-button {
+    margin-left: 4rem;
+  }
+</style>
+<div id="ItemsInCart" class="text-center">
+  <h2>Recently Added to Cart</h2>
+  <div class="outer-flex">
+    <div class="cart-items">
+      <div class="item">
+        <a href="/249592"
+          ><img
+            class="img-responsive"
+            src="https://www.livingspaces.com/globalassets/productassets/200000-299999/240000-249999/249000-249999/249500-249599/249592/249592_natural_wood_dining_table_signature_01.jpg"
+          />
+          <p>Lakeland Round Dining Table</p>
+          <p>$250</p></a
+        >
+      </div>
+      <div class="item">
+        <a href="/209572"
+          ><img
+            class="img-responsive"
+            src="https://www.livingspaces.com/globalassets/productassets/200000-299999/200000-209999/209000-209999/209500-209599/209572/209572_0.jpg"
+          />
+          <p>Hyland 5 Piece Counter Set With Stools</p>
+          <p>$550</p></a
+        >
+      </div>
+    </div>
+    <div class="checkout-button">
+      <h3>There are 2 items in your cart</h3>
+      <p>
+        Current Total: $112313
+      </p>
+      <button id="btnAddToCart" type="button" class="btn secondary-button">
+        Cart Subtotal &rsaquo;
+      </button>
+    </div>
+  </div>
+</div>
