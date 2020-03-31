@@ -27,18 +27,8 @@ window.addEventListener("DOMContentLoaded", function() {
   }
 
   function swapDeliveryHtml() {
-    // var pricesOverNinetyNine =
-    //   [
-    //     ...document.querySelectorAll(
-    //       ".delivery-options-table tr td:nth-of-type(3)"
-    //     )
-    //   ].filter(function(el) {
-    //     return parseInt(el.textContent.trim().replace(/\$|,/g, "")) > 99;
-    //   }).length > 0;
-    // if (!pricesOverNinetyNine) {
-    //   document.querySelector(".full-service-header").innerHTML =
-    //     '<span><img src="/Content/images/assets/full-service-delivery-40x40.png"></span> <span> Full Service Delivery $99 </span>';
-    // }
+    document.querySelector(".full-service-header").innerHTML =
+      '<span><img src="/Content/images/assets/full-service-delivery-40x40.png"></span> <span> Full Service Delivery $99 </span>';
 
     document.querySelector(".free-pickup-list").innerHTML =
       "<ul><li>Only available in Arizona</li></ul";
