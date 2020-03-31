@@ -1,12 +1,13 @@
 // VARIATION 1
 function addContent($) {
-  $(".price-total-table").after(`
+  $(".main-header").append(`
   <style id="ChatbotStyle">
   #ChatIcon {
     position: absolute;
     width: 170px;
     background-color: #ebebeb;
     z-index: 99;
+    right:33px;
   }
   #ChatIcon .flex-col,
   #ChatIcon .flex-row {
@@ -54,7 +55,7 @@ function addContent($) {
     left: -19px;
     background-color: #fff;
     border-radius: 50%;
-    border: 1px solid #dbdbdb;
+    border: 2px solid #dbdbdb;
     transform: scale(0.7);
   }
   #RemoveRepChat span {
@@ -106,24 +107,6 @@ function addContent($) {
 
 `);
 }
-
-const updateTime = () => {
-  const getTime = () => {
-    var time = new Date();
-    var curTime = time.toLocaleString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true
-    });
-    curTime = curTime.startsWith("0") ? curTime.replace("0", "") : curTime;
-    return curTime;
-  };
-  setInterval(() => {
-    document.querySelector(
-      "#ChatIcon .label-text"
-    ).innerHTML = `Living Spaces Team Member <span class="timeText">${getTime()}</span>`;
-  }, 1000);
-};
 
 const eventListeners = $ => {
   // Open Kore to prompt on click
@@ -184,6 +167,5 @@ var anotherInterval = setInterval(() => {
     var $ = window.jQuery;
     addContent($);
     eventListeners($);
-    updateTime();
   }
 }, 50);
