@@ -7,7 +7,8 @@ function addContent($) {
     width: 170px;
     background-color: #ebebeb;
     z-index: 99;
-    right:33px;
+    right:20px;
+    top:20px
   }
   #ChatIcon .flex-col,
   #ChatIcon .flex-row {
@@ -19,7 +20,6 @@ function addContent($) {
     text-align: center;
     background-color: white;
     margin: 10px;
-    border-radius: 4px;
     border: 1px solid #dbdbdb;
     padding: 10px 0;
   }
@@ -41,13 +41,12 @@ function addContent($) {
   }
   .green-dot {
     background-color: #47ab50;
-    height: 13px;
-    width: 13px;
     border-radius: 100%;
     border: 2px solid white;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: -5px;
+    right: -3px;
+    transform: scale(0.6);
   }
   #RemoveRepChat {
     position: absolute;
@@ -59,7 +58,7 @@ function addContent($) {
     transform: scale(0.7);
   }
   #RemoveRepChat span {
-    margin: 11px;
+    margin: 11px 8.5px;
   }
   #StaffPhoto {
     margin-top: -20px;
@@ -75,9 +74,13 @@ function addContent($) {
   }
   #ChatIcon .main-text {
     font-size: 14px;
-    line-height: 2.5rem;
+    line-height: 2rem;
     color: #4c4c4c;
     margin: auto;
+  }
+  #ChatIcon .green-dot i {
+    color: #fff;
+    margin: 0 3px;
   }
 </style>
 <div id="ChatIcon">
@@ -88,7 +91,7 @@ function addContent($) {
         alt=""
         class="img-responsive"
       />
-      <div class="green-dot"></div>
+      <div class="green-dot"><i class="fa fa-check" aria-hidden="true"></i></div>
     </div>
     <div class="flex-col">
       <div class="flex-item main-text">
@@ -97,7 +100,7 @@ function addContent($) {
     </div>
     <div id="RemoveRepChat">
       <span
-        style="font-size: 3rem; color: black; cursor:pointer;line-height:4rem"
+        style="font-size: 4rem; color: #333; cursor:pointer;line-height:4rem"
         aria-hidden="true"
         >×</span
       >

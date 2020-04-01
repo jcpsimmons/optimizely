@@ -1,4 +1,4 @@
-// VARIATION 1
+// VARIATION 3
 function addContent($) {
   $(".cart-header .col-xs-12").css("margin-bottom", "25px");
   $(".cart-header .col-xs-12").append(`
@@ -15,7 +15,7 @@ function addContent($) {
   #ChatIcon .green-dot {
     background-color: #47ab50;
     border-radius: 100%;
-    border: 2px solid white;
+    border: 3px solid white;
     position: absolute;
     bottom: -7px;
     right: -2px;

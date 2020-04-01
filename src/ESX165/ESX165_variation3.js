@@ -1,7 +1,9 @@
 // VARIATION 1
 function addContent($) {
-  $(".ShoppingCartPageProxy").css("position", "relative");
-  $(".ShoppingCartPageProxy").append(`
+  $(".cart-header")
+    .parent()
+    .css("position", "relative");
+  $(".cart-header").parent().prepend(`
   <style id="ChatbotStyle">
     #ChatIcon .flex-col,
     #ChatIcon .flex-row {
@@ -13,7 +15,7 @@ function addContent($) {
       justify-content: flex-end;
       color: #fff;
       width: 100%;
-      margin: 2rem;
+      margin: 2rem 0 2rem 2rem;
       padding: 1rem 0;
     }
     #ChatIcon .flex-row {
@@ -25,6 +27,7 @@ function addContent($) {
       right:0;
       width: auto;
       cursor: pointer;
+      z-index:99;
     }
     #ChatIcon img {
       border-radius: 100%;

@@ -40,13 +40,13 @@ function addContent($) {
   }
   .green-dot {
     background-color: #47ab50;
-    height: 20px;
-    width: 20px;
+    height: 13px;
+    width: 13px;
     border-radius: 100%;
     border: 2px solid white;
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: 2px;
   }
   #RemoveRepChat {
     position: absolute;
@@ -58,7 +58,7 @@ function addContent($) {
     transform: scale(0.8);
   }
   #RemoveRepChat span {
-    margin: 10px;
+    margin: 10px 8px;
   }
   /* typography */
   #ChatIcon .label-text {
@@ -69,7 +69,7 @@ function addContent($) {
   }
   #ChatIcon .main-text {
     font-size: 1.4rem;
-    line-height: 2.5rem;
+    line-height: 1.75rem;
     color: #4c4c4c;
     margin: auto 15px;
   }
@@ -91,7 +91,7 @@ function addContent($) {
     </div>
     <div id="RemoveRepChat">
       <span
-        style="font-size: 3rem; color: black; cursor:pointer;line-height:4rem"
+        style="font-size: 4rem; color: #333; cursor:pointer;line-height:4rem"
         aria-hidden="true"
         >×</span
       >

@@ -13,6 +13,8 @@ function addContent($) {
     background-color: white;
     margin: 2rem;
     padding: 1rem 0;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
   }
   #ChatIcon .flex-row {
     flex-direction: row-reverse;
@@ -25,13 +27,13 @@ function addContent($) {
   }
   #ChatIcon img {
     border-radius: 100%;
-    border: 2px solid white;
+    border: 4px solid white;
   }
   #ChatIcon .flex-item {
     margin: auto;
   }
   #ChatIcon .fb-tweak {
-    flex-basis: 25%;
+    flex-basis: 23%;
     margin-right: 2rem;
   }
   #ChatIcon .flex-row .flex-item {
@@ -71,13 +73,14 @@ function addContent($) {
     margin-top: 0;
     margin-right: 1rem;
   }
+  #ChatIcon .timeText {margin-left:4px}
 </style>
 
 <div id="ChatIcon">
   <div class="flex-row">
     <div class="flex-item xContainer" id="RemoveRepChat">
       <span
-        style="font-size: 3rem; color: black; cursor:pointer;line-height:4rem"
+        style="font-size: 4rem; color: #333; cursor:pointer;line-height:4rem"
         aria-hidden="true"
         >×</span
       >

@@ -14,6 +14,7 @@ function addContent($) {
   flex-direction: column;
   margin-left: 1rem;
   justify-content: center;
+  padding: 0 1rem;
 }
 #ChatIcon .flex-row {
   flex-direction: row;
@@ -26,7 +27,7 @@ function addContent($) {
 }
 #ChatIcon img {
   border-radius: 100%;
-  border: 2px solid #d8d8d8;
+  border: 4px solid #d8d8d8;
 }
 #ChatIcon .flex-row .flex-item {
   position: relative;
@@ -49,7 +50,7 @@ function addContent($) {
   text-align: right;
 }
 #ChatIcon .main-text {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   margin-right: 1rem;
 }
 </style>
@@ -73,7 +74,7 @@ function addContent($) {
 </div>
 </div>
 <div>
-<span id="RemoveRepChat" style="font-size: 4rem; color: black; margin-left:1rem; margin-top: -12px; cursor:pointer;" aria-hidden="true">×</span>
+<span id="RemoveRepChat" style="font-size: 4rem; color: #333; margin-left:1rem; margin-top: -12px; cursor:pointer;" aria-hidden="true">×</span>
 </div>
 </div>
 `);
