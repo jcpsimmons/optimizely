@@ -87,7 +87,7 @@ function addContent($) {
   <div class="flex-row">
     <div class="flex-item" id="StaffPhoto">
       <img
-        src="https://www.livingspaces.com/globalassets/images/home/2020/03/chat-girl.jpg"
+        src="https://www.livingspaces.com/globalassets/images/home/2020/03/chat-girl-168.jpg"
         alt=""
         class="img-responsive"
       />

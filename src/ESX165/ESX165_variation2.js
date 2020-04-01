@@ -28,6 +28,7 @@ function addContent($) {
   #ChatIcon img {
     border-radius: 100%;
     border: 4px solid white;
+    max-width: 125%;
   }
   #ChatIcon .flex-item {
     margin: auto;
@@ -46,9 +47,10 @@ function addContent($) {
     border-radius: 100%;
     border: 2px solid white;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: -9px;
+    right: -13px;
     color: white;
+    transform: scale(0.7);
   }
   .green-dot i {
     font-size: 15px;
@@ -87,7 +89,7 @@ function addContent($) {
     </div>
     <div class="flex-item fb-tweak">
       <img
-        src="https://www.livingspaces.com/globalassets/images/home/2020/03/chat-girl.jpg"
+        src="https://www.livingspaces.com/globalassets/images/home/2020/03/chat-girl-168.jpg"
         alt=""
         class="img-responsive"
       />

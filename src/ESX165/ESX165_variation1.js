@@ -21,13 +21,14 @@ function addContent($) {
 }
 #ChatIcon {
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-  border-radius: 40px;
+  border-radius: 100px;
   cursor: pointer;
   transition: 0.25s;
 }
 #ChatIcon img {
   border-radius: 100%;
   border: 4px solid #d8d8d8;
+  width: 11rem;
 }
 #ChatIcon .flex-row .flex-item {
   position: relative;
@@ -59,7 +60,7 @@ function addContent($) {
 <div class="flex-row">
   <div class="flex-item">
     <img
-      src="https://www.livingspaces.com/globalassets/images/home/2020/03/chat-girl.jpg"
+      src="https://www.livingspaces.com/globalassets/images/home/2020/03/chat-girl-168.jpg"
       alt=""
       class="img-responsive"
     />

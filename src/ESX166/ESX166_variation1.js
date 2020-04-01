@@ -34,6 +34,7 @@ function addContent($) {
   #ChatIcon img {
     border-radius: 100%;
     border: 2px solid #dbdbdb;
+    width: 90px;
   }
   #ChatIcon .flex-row .flex-item {
     position: relative;
@@ -78,7 +79,7 @@ function addContent($) {
   <div class="flex-row">
     <div class="flex-item">
       <img
-        src="https://www.livingspaces.com/globalassets/images/home/2020/03/chat-girl.jpg"
+        src="https://www.livingspaces.com/globalassets/images/home/2020/03/chat-girl-168.jpg"
         alt=""
         class="img-responsive"
       />
@@ -91,7 +92,7 @@ function addContent($) {
     </div>
     <div id="RemoveRepChat">
       <span
-        style="font-size: 4rem; color: #333; cursor:pointer;line-height:4rem"
+        style="font-size: 35px; color: #333; cursor:pointer;line-height:36px"
         aria-hidden="true"
         >×</span
       >

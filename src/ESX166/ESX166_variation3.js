@@ -17,8 +17,8 @@ function addContent($) {
     border-radius: 100%;
     border: 3px solid white;
     position: absolute;
-    bottom: -7px;
-    right: -2px;
+    bottom: -10px;
+    right: -6px;
     transform: scale(0.6);
   }
   #ChatIcon .green-dot i {
@@ -48,7 +48,7 @@ function addContent($) {
   </div>
   <div class="staffPhoto">
     <img
-      src="https://www.livingspaces.com/globalassets/images/home/2020/03/chat-girl.jpg"
+      src="https://www.livingspaces.com/globalassets/images/home/2020/03/chat-girl-168.jpg"
       alt=""
     />
     <div class="green-dot">
