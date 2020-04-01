@@ -131,11 +131,7 @@ const eventListeners = $ => {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
-      eventName: "speakWithRep",
-      tags: {
-        revenue: 0, // Optional in cents as integer (500 == $5.00)
-        value: 0.0 // Optional as float
-      }
+      eventName: "speakWithRep"
     });
     // opens Kore
     $(".messages-starticon").click();
@@ -156,11 +152,7 @@ const eventListeners = $ => {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
-      eventName: "Remove Speak with Rep",
-      tags: {
-        revenue: 0, // Optional in cents as integer (500 == $5.00)
-        value: 0.0 // Optional as float
-      }
+      eventName: "Remove Speak with Rep"
     });
   });
 
@@ -169,11 +161,7 @@ const eventListeners = $ => {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
-      eventName: "clickChatbotIcon",
-      tags: {
-        revenue: 0, // Optional in cents as integer (500 == $5.00)
-        value: 0.0 // Optional as float
-      }
+      eventName: "clickChatbotIcon"
     });
   });
 };
