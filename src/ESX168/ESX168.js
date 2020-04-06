@@ -1,10 +1,11 @@
 class hp4uLite {
-  constructor() {
+  constructor(containerId) {
     this.eligibility = false;
     this.skus = [];
     this.html = "";
     this.getSkus();
     this.genHtml();
+    this.getCartSkus();
   }
   getSkus() {
     if (
@@ -31,25 +32,21 @@ class hp4uLite {
     }
     return;
   }
+  getCartSkus() {
+    // will return an empty array if there are no cartadds
+    this.cartSkus = [
+      ...document.querySelectorAll(".cart-dropdown-content>.product-element>a"),
+    ].map((a) => a.href.split("-").pop());
+
+    // gets cart total from graphic - good secondary check
+    this.cartTotal = document.querySelector(
+      ".cart-dropdown-content>.subtotal strong"
+    ).textContent;
+  }
+
 }
 
-x = new hp4uLite();
+let HP4U = new hp4uLite('HP4U');
+let ItemsInCart = new hp4uLite('ItemsInCart');
 console.log(x);
 
-//
-
-/*
-const cartSkus = [
-  ...document.querySelectorAll(".cart-dropdown-content>.product-element>a"),
-].map((a) => a.href.split("-").pop());
-
-const cartTotal = document.querySelector(
-  ".cart-dropdown-content>.subtotal strong"
-).textContent;
-
-let cartItemData = await fetch(
-  `https://www.livingspaces.com/api/restfulproducts?pid=${cartSkus}`
-);
-
-cartItemData = await cartItemData.json();
-*/
