@@ -20,6 +20,7 @@ function addContent($) {
     bottom: -10px;
     right: -6px;
     transform: scale(0.6);
+    margin-right: 30px;
   }
   #ChatIcon .green-dot i {
     color: white;
@@ -29,7 +30,8 @@ function addContent($) {
     background-color: #333333;
     color: #fff;
     font-size: 14px;
-    padding: 7px 40px 7px 7px;
+    padding: 7px 91px 7px 7px;
+    margin-right: -50px;
   }
   #ChatIcon .staffPhoto {
     margin-left: -30px;
@@ -40,6 +42,16 @@ function addContent($) {
     width: 44px;
     border: 2px solid white;
     position: relative;
+    margin-right: 30px;
+  }
+  #RemoveRepChat {
+    position: absolute;
+    right: 0;
+    transform: scale(0.7);
+  }
+  #RemoveRepChat span {
+    margin: 11px 8.5px;
+    color: #fff;
   }
 </style>
 <div id="ChatIcon">
@@ -48,31 +60,38 @@ function addContent($) {
   </div>
   <div class="staffPhoto">
     <img
-      src="https://www.livingspaces.com/globalassets/images/home/2020/03/chat-girl-168.jpg"
+      src="https://www.livingspaces.com/globalassets/images/home/2020/03/chat-girl-168-02.jpg"
       alt=""
     />
     <div class="green-dot">
       <i class="fa fa-check" aria-hidden="true"></i>
     </div>
   </div>
+  <div id="RemoveRepChat">
+      <span
+        style="font-size: 4rem; color: #fff; cursor:pointer;line-height:4rem; margin: 5px;"
+        aria-hidden="true"
+        >×</span
+      >
+    </div>
 </div>
 
 `);
 }
 
-const eventListeners = $ => {
+const eventListeners = ($) => {
   // Open Kore to prompt on click
   document.getElementById("ChatIcon").addEventListener("click", () => {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
-      eventName: "speakWithRep"
+      eventName: "speakWithRep",
     });
     // opens Kore
     $(".messages-starticon").click();
     let waitForAgent = setInterval(() => {
-      if ($("li:contains('Chat with an agent')").length > 1) {
-        $("li:contains('Chat with an agent')")
+      if ($("li:contains('Chat')").length > 1) {
+        $("li:contains('Chat')")
           .last()
           .click();
         clearInterval(waitForAgent);
@@ -85,7 +104,7 @@ const eventListeners = $ => {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
-      eventName: "clickChatbotIcon"
+      eventName: "clickChatbotIcon",
     });
   });
 };

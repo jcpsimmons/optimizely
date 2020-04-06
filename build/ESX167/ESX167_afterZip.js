@@ -21,12 +21,12 @@ var eventListeners = function eventListeners($) {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
-      eventName: "speakWithRep"
+      eventName: "swr167"
     });
     $(".messages-starticon").click();
     var waitForAgent = setInterval(function () {
-      if ($("li:contains('Chat with an agent')").length > 1) {
-        $("li:contains('Chat with an agent')").last().click();
+      if ($("li:contains('Chat')").length > 1) {
+        $("li:contains('Chat')").last().click();
         clearInterval(waitForAgent);
       }
     }, 50);
@@ -37,7 +37,7 @@ var eventListeners = function eventListeners($) {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
-      eventName: "Remove Speak with Rep"
+      eventName: "rswr167"
     });
   });
   $(".messages-starticon").click(function () {

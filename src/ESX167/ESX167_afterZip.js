@@ -28,19 +28,19 @@ function addContent() {
   }
 }
 
-const eventListeners = $ => {
+const eventListeners = ($) => {
   // Open Kore to prompt on click
   document.getElementById("ChatIcon").addEventListener("click", () => {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
-      eventName: "speakWithRep"
+      eventName: "swr167",
     });
     // opens Kore
     $(".messages-starticon").click();
     let waitForAgent = setInterval(() => {
-      if ($("li:contains('Chat with an agent')").length > 1) {
-        $("li:contains('Chat with an agent')")
+      if ($("li:contains('Chat')").length > 1) {
+        $("li:contains('Chat')")
           .last()
           .click();
         clearInterval(waitForAgent);
@@ -49,13 +49,13 @@ const eventListeners = $ => {
   });
 
   // close prompt on x click
-  document.getElementById("RemoveRepChat").addEventListener("click", e => {
+  document.getElementById("RemoveRepChat").addEventListener("click", (e) => {
     e.stopPropagation();
     $("#ChatIcon").remove();
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
-      eventName: "Remove Speak with Rep"
+      eventName: "rswr167",
     });
   });
 
@@ -64,14 +64,14 @@ const eventListeners = $ => {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
-      eventName: "clickChatbotIcon"
+      eventName: "clickChatbotIcon",
     });
   });
 };
 
 var anotherInterval = setInterval(() => {
   if (typeof window.jQuery !== "undefined") {
-    document.addEventListener("click", e => {
+    document.addEventListener("click", (e) => {
       if (e.target.matches("#delivery-options button")) {
         var $ = window.jQuery;
         addContent();

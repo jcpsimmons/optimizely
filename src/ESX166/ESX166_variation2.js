@@ -87,7 +87,7 @@ function addContent($) {
   <div class="flex-row">
     <div class="flex-item" id="StaffPhoto">
       <img
-        src="https://www.livingspaces.com/globalassets/images/home/2020/03/chat-girl-168.jpg"
+        src="https://www.livingspaces.com/globalassets/images/home/2020/03/chat-girl-168-02.jpg"
         alt=""
         class="img-responsive"
       />
@@ -111,19 +111,19 @@ function addContent($) {
 `);
 }
 
-const eventListeners = $ => {
+const eventListeners = ($) => {
   // Open Kore to prompt on click
   document.getElementById("ChatIcon").addEventListener("click", () => {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
-      eventName: "speakWithRep"
+      eventName: "speakWithRep",
     });
     // opens Kore
     $(".messages-starticon").click();
     let waitForAgent = setInterval(() => {
-      if ($("li:contains('Chat with an agent')").length > 1) {
-        $("li:contains('Chat with an agent')")
+      if ($("li:contains('Chat')").length > 1) {
+        $("li:contains('Chat')")
           .last()
           .click();
         clearInterval(waitForAgent);
@@ -132,13 +132,13 @@ const eventListeners = $ => {
   });
 
   // close prompt on x click
-  document.getElementById("RemoveRepChat").addEventListener("click", e => {
+  document.getElementById("RemoveRepChat").addEventListener("click", (e) => {
     e.stopPropagation();
     $("#ChatIcon").remove();
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
-      eventName: "Remove Speak with Rep"
+      eventName: "Remove Speak with Rep",
     });
   });
 
@@ -147,7 +147,7 @@ const eventListeners = $ => {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
-      eventName: "clickChatbotIcon"
+      eventName: "clickChatbotIcon",
     });
   });
 };
