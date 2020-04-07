@@ -1,4 +1,4 @@
-import _typeof from "@babel/runtime/helpers/typeof";
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return function () { if (obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype) { return "symbol"; } return typeof obj; }(); }; } return _typeof(obj); }
 
 var mobile = function mobile() {
   $("#imgSlider").slick("unslick");
