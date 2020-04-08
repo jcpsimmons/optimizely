@@ -32,10 +32,11 @@ const customItemLayerInit = (itemsInCartStatus) => {
       }
 
       var $sliderTwo = $("#HP4UScroll > div");
+
       // Do image append here once script-generated
       $sliderTwo.slick({
         arrows: false,
-        // slidesToShow: 1.75,
+        slidesToScroll: itemsInCartStatus == "none" ? 6 : 4,
         infinte: false,
         variableWidth: true,
         arrows: true,
@@ -114,10 +115,21 @@ class hp4uLite {
         this.skus.push(...JSON.parse(utag_data["cp.lsf-recently-viewed-list"]));
     }
 
-    // filter out SKUs in blacklist (optional)
-    this.skus = this.skus.filter((sku) => {
-      return this.skusToFilter.indexOf(sku) < 0;
-    });
+    // filter out SKUs in blacklist and remove color-variant syntax
+    this.skus = this.skus
+      .filter((sku) => {
+        return this.skusToFilter.indexOf(sku) < 0;
+      })
+      .map((sku) => {
+        if (sku.search("cv") > -1) {
+          return sku.split("cv")[0];
+        } else {
+          return sku;
+        }
+      });
+
+    // limits array length to 40
+    this.skus = this.skus.slice(0, 40);
 
     return this;
   }
@@ -127,6 +139,14 @@ class hp4uLite {
     this.skus = [
       ...document.querySelectorAll(".cart-dropdown-content>.product-element>a"),
     ].map((a) => a.href.split("-").pop());
+
+    this.skus = this.skus.map((sku) => {
+      if (sku.search("cv") > -1) {
+        return sku.split("cv")[0];
+      } else {
+        return sku;
+      }
+    });
 
     return this;
   }
@@ -220,3 +240,4 @@ const initESX168 = () => {
 //     }, 1000);
 //   });
 // }
+//
