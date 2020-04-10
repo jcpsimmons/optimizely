@@ -38,6 +38,13 @@ var customItemLayerInit = function customItemLayerInit(itemsInCartStatus) {
       var $sliderTwo = $("#HP4UScroll > div");
       $sliderTwo.slick((_$sliderTwo$slick = {
         arrows: false,
+        slidesToScroll: function () {
+          if (itemsInCartStatus == "none") {
+            return 6;
+          }
+
+          return 4;
+        }(),
         infinte: false,
         variableWidth: true
       }, _defineProperty(_$sliderTwo$slick, "arrows", true), _defineProperty(_$sliderTwo$slick, "nextArrow", '<img src="https://www.livingspaces.com/globalassets/images/LP/2020/04/slick-arrow.png" alt="" class="img-responsive nextArrow">'), _defineProperty(_$sliderTwo$slick, "prevArrow", '<img src="https://www.livingspaces.com/globalassets/images/LP/2020/04/slick-arrow.png" alt="" class="img-responsive prevArrow">'), _$sliderTwo$slick));
@@ -117,7 +124,14 @@ var hp4uLite = function () {
 
       this.skus = this.skus.filter(function (sku) {
         return _this.skusToFilter.indexOf(sku) < 0;
+      }).map(function (sku) {
+        if (sku.search("cv") > -1) {
+          return sku.split("cv")[0];
+        } else {
+          return sku;
+        }
       });
+      this.skus = this.skus.slice(0, 40);
       return this;
     }
   }, {
@@ -125,6 +139,13 @@ var hp4uLite = function () {
     value: function getCartSkus() {
       this.skus = _toConsumableArray(document.querySelectorAll(".cart-dropdown-content>.product-element>a")).map(function (a) {
         return a.href.split("-").pop();
+      });
+      this.skus = this.skus.map(function (sku) {
+        if (sku.search("cv") > -1) {
+          return sku.split("cv")[0];
+        } else {
+          return sku;
+        }
       });
       return this;
     }
