@@ -18,6 +18,15 @@ var eventListeners = function eventListeners($) {
       }
     }, 50);
   });
+  document.getElementById("RemoveRepChat").addEventListener("click", function (e) {
+    e.stopPropagation();
+    $("#ChatIcon").remove();
+    window["optimizely"] = window["optimizely"] || [];
+    window["optimizely"].push({
+      type: "event",
+      eventName: "Remove Speak with Rep"
+    });
+  });
   $(".messages-starticon").click(function () {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({

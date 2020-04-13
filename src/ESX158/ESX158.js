@@ -105,18 +105,30 @@ const ESX158 = () => {
       },
       requireBoxSpring: () => {
         let bs = false;
+        let optional = false;
+        let returnVal = [];
         if (getAttrValue("Recommended Box Spring").search("Box") > -1) {
           bs = true;
+          returnVal = [
+            randomId(),
+            `Box Spring Needed?`,
+            `Does this bed frame require a box spring?`,
+            `${bs ? "Yes" : "No"}, this bed frame ${
+              bs ? "does" : "does not"
+            } require a box spring.`
+          ];
+        }
+        if (getAttrValue("Recommended Box Spring").search("Optional") > -1) {
+          optional = true;
+          returnVal = [
+            randomId(),
+            `Box Spring Needed?`,
+            `Does this bed frame require a box spring?`,
+            `A box spring is optional for this bed.`
+          ];
         }
 
-        return [
-          randomId(),
-          `Box Spring Needed?`,
-          `Does this bed frame require a box spring?`,
-          `${bs ? "Yes" : "No"}, this bed frame ${
-            bs ? "does" : "does not"
-          } require a box spring.`
-        ];
+        return returnVal;
       }
     };
 

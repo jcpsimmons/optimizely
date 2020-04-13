@@ -79,13 +79,13 @@ function addContent($) {
 `);
 }
 
-const eventListeners = ($) => {
+const eventListeners = $ => {
   // Open Kore to prompt on click
   document.getElementById("ChatIcon").addEventListener("click", () => {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
-      eventName: "speakWithRep",
+      eventName: "speakWithRep"
     });
     // opens Kore
     $(".messages-starticon").click();
@@ -99,12 +99,23 @@ const eventListeners = ($) => {
     }, 50);
   });
 
+  // close prompt on x click
+  document.getElementById("RemoveRepChat").addEventListener("click", e => {
+    e.stopPropagation();
+    $("#ChatIcon").remove();
+    window["optimizely"] = window["optimizely"] || [];
+    window["optimizely"].push({
+      type: "event",
+      eventName: "Remove Speak with Rep"
+    });
+  });
+
   // tracking for kore chat
   $(".messages-starticon").click(function() {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
-      eventName: "clickChatbotIcon",
+      eventName: "clickChatbotIcon"
     });
   });
 };

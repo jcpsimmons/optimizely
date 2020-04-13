@@ -120,24 +120,32 @@ var ESX158 = function ESX158() {
       },
       requireBoxSpring: function requireBoxSpring() {
         var bs = false;
+        var optional = false;
+        var returnVal = [];
 
         if (getAttrValue("Recommended Box Spring").search("Box") > -1) {
           bs = true;
+          returnVal = [randomId(), "Box Spring Needed?", "Does this bed frame require a box spring?", "".concat(function () {
+            if (bs) {
+              return "Yes";
+            }
+
+            return "No";
+          }(), ", this bed frame ").concat(function () {
+            if (bs) {
+              return "does";
+            }
+
+            return "does not";
+          }(), " require a box spring.")];
         }
 
-        return [randomId(), "Box Spring Needed?", "Does this bed frame require a box spring?", "".concat(function () {
-          if (bs) {
-            return "Yes";
-          }
+        if (getAttrValue("Recommended Box Spring").search("Optional") > -1) {
+          optional = true;
+          returnVal = [randomId(), "Box Spring Needed?", "Does this bed frame require a box spring?", "A box spring is optional for this bed."];
+        }
 
-          return "No";
-        }(), ", this bed frame ").concat(function () {
-          if (bs) {
-            return "does";
-          }
-
-          return "does not";
-        }(), " require a box spring.")];
+        return returnVal;
       }
     };
     var tmpHtml = Object.keys(questionTemplates).map(function (template) {
