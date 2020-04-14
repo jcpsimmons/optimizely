@@ -11,7 +11,7 @@ function pollingFn() {
   return (
     hasProds &&
     utag_data.product_name[0].match(
-      /panel bed|storage bed|4 piece|3 piece|sleigh bed|poster bed|canopy bed|upholstered headboard with metal/g
+      /panel bed|platform bed|storage bed|4 piece|3 piece|sleigh bed|poster bed|canopy bed|upholstered headboard with metal/g
     ) &&
     (utag_data.product_attribute == "bed" ||
       utag_data.product_attribute == "bedroom set")

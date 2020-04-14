@@ -2,7 +2,7 @@ document.querySelector("header").style.marginBottom = 0;
 
 var message = [
   "New! FREE 2-Day Shipping",
-  '<span >Eligible on all orders over $500. <a href="/delivery">Check availability in your area &rsaquo;</a></span >'
+  '<span >Eligible on all orders over $500. <a href="/delivery">Check availability in your area &rsaquo;</a></span >',
 ];
 
 var padding = "1.2rem 0";
@@ -10,7 +10,7 @@ var padding = "1.2rem 0";
 if (utag_data.site_type == "mobile") {
   message = [
     "FREE 2-Day Shipping",
-    '<span ><a href="/delivery">Check your availability &rsaquo;</a></span >'
+    '<span ><a href="/delivery">Check your availability &rsaquo;</a></span >',
   ];
   padding = ".7rem 0";
 }
@@ -28,5 +28,14 @@ document
   );
 
 document.getElementById("FSBar").addEventListener("click", function() {
+  window["optimizely"] = window["optimizely"] || [];
+  window["optimizely"].push({
+    type: "event",
+    eventName: "fsb_176",
+    tags: {
+      revenue: 0, // Optional in cents as integer (500 == $5.00)
+      value: 0.0, // Optional as float
+    },
+  });
   window.location.href = "https://www.livingspaces.com/delivery";
 });
