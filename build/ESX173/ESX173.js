@@ -13,7 +13,7 @@ var state = {
     type: "",
     currentProduct: true
   },
-  searchWords: ["platform", "panel", "4 piece", "3 piece"],
+  searchWords: ["canopy 4 piece", "canopy 3 piece", "4 piece", "3 piece", "bed w/storage", "sleigh bed", "poster bed", "canopy bed", "platform bed", "panel bed", "storage bed", "upholstered headboard with metal"],
   alsoInThisCollection: [],
   sortingOrder: ["queen", "eastern king", "california king"],
   sortedProducts: [],
@@ -24,7 +24,7 @@ var sortedItems = function sortedItems(r) {
   var sortedArr = [];
   state.sortingOrder.forEach(function (s) {
     var match = r.filter(function (x) {
-      return x.name.toLowerCase().search(s) > -1;
+      return x.name.toLowerCase().search(s) > -1 && x.name.toLowerCase().search(state.currentProduct.type) > -1;
     })[0];
     sortedArr.push(match);
   });
@@ -53,7 +53,7 @@ state.alsoInThisCollection = _toConsumableArray(document.querySelectorAll("#this
   return item.name.toLowerCase().search(state.currentProduct.type) > -1;
 });
 state.sortedProducts = sortedItems([].concat(_toConsumableArray(state.alsoInThisCollection), [state.currentProduct]));
-document.querySelector("head").insertAdjacentHTML("beforeend", "\n<style> #ESX173 { display: flex; width: 100%; justify-content: start; margin-bottom: 1rem; } #ESX173 * { text-transform: capitalize; font-size: 1.4rem; font-weight: 600; white-space: nowrap; } #ESX173 *:not(a) { border: 2px solid #323232; transition: 0.3s; } #ESX173 a:hover button { background-color: #d4d4d4; } #ESX173 button { background-color: #fff; color: #323232; padding: 1rem 1.5rem; } #ESX173 > *:nth-child(n + 2) { margin-left: 1rem; } #ESX173 .active-button { background-color: #323232; color: #fff; cursor: initial; } /* other page style tweaks */ #price-section { margin-bottom: 1rem !important; } </style>\n");
+document.querySelector("head").insertAdjacentHTML("beforeend", "\n<style> #ESX173 { display: flex; width: 100%; justify-content: start; margin-bottom: 1rem; } #ESX173 * { text-transform: capitalize; font-size: 1.4rem; font-weight: 600; white-space: nowrap; } #ESX173 *:not(a) { border: 1px solid #333; transition: 0.3s; border-radius: 2px;} #ESX173 a:hover button { background-color: #eee; } #ESX173 button { background-color: #fff; color: #333; padding: 1rem 1.5rem; } #ESX173 > *:nth-child(n + 2) { margin-left: 1rem; } #ESX173 .active-button { background-color: #333; color: #fff; cursor: initial; } /* other page style tweaks */ #price-section { margin-bottom: 1rem !important; } </style>\n");
 state.html = "<div id=\"ESX173\">".concat(state.sortedProducts.map(function (x) {
   var tmp = "<button class=".concat(function () {
     if (x.currentProduct) {

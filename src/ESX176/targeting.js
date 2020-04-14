@@ -1,3 +1,4 @@
+// ALSO NEED TO MAKE SURE CART IS EMPTY
 function pollingFn() {
   if (
     [
