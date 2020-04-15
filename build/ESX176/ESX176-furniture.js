@@ -9,5 +9,14 @@ if (utag_data.site_type == "mobile") {
 
 document.querySelector("#free-shipping-header-vue-container .alert-dismissible").insertAdjacentHTML("afterend", "<style> #FSBar { cursor:pointer;background-color: #f2f2f2; width: 100%; font-size: 1.6rem !important; text-align: center; padding:" + padding + '; } #FSBar i.fa { margin-right: 1rem; } #FSBar span { color: #333333; font-weight: 600; margin: auto 0.3rem; } #FSBar .blue-text { color: #00699a; font-weight: bold; } #FSBar a { text-decoration: none; cursor: pointer; } #FSBar a:hover { text-decoration: none; } </style> <div id="FSBar"> <span class="blue-text" ><i class="fa fa-truck"></i>' + message[0] + "</span >" + message[1] + "</div> ");
 document.getElementById("FSBar").addEventListener("click", function () {
+  window["optimizely"] = window["optimizely"] || [];
+  window["optimizely"].push({
+    type: "event",
+    eventName: "fsb_176",
+    tags: {
+      revenue: 0,
+      value: 0.0
+    }
+  });
   window.location.href = "https://www.livingspaces.com/delivery";
 });

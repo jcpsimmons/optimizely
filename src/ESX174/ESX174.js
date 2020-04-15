@@ -1,10 +1,10 @@
 document
   .querySelector("#delivery-options button")
-  .addEventListener("click", e => {
+  .addEventListener("click", (e) => {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
-      eventName: "clickVDO"
+      eventName: "clickVDO",
     });
   });
 
@@ -13,7 +13,7 @@ document
   .querySelector("head")
   .insertAdjacentHTML(
     "beforeend",
-    `<style>#ESX174{text-align:center;} #ESX174 h4{font-weight:600;} #ESX174 i{color:green;}</style>`
+    `<style>#ESX174{text-align:center;background:#ffffff;height:4.6rem;padding:0 3rem;transition:opacity 1s;} #ESX174 h4{font-weight:600; font-size: 1.8rem;} #ESX174 i{color:#00699a;}</style>`
   );
 
 const injectFSMsg = () => {
@@ -21,23 +21,44 @@ const injectFSMsg = () => {
   freeTexts = [
     ...document.querySelectorAll(
       "#delivery-options-caption-container tr td:nth-of-type(4)"
-    )
-  ].filter(el => {
+    ),
+  ].filter((el) => {
     return el.textContent.toLowerCase() == "free";
   });
 
   // make sure el exists, and free eligible
   if (!document.getElementById("ESX174") && freeTexts.length > 0) {
-    const injectionEl = document.querySelector(
-      "#delivery-options > div:first-of-type"
-    );
-    injectionEl.classList.remove("col-xs-12");
-    injectionEl.classList.add("col-xs-6");
-
-    injectionEl.insertAdjacentHTML(
-      "afterend",
-      '<div id="ESX174" class="col-xs-6"><h4><i class="fa fa-check"></i> You Qualify for FREE Shipping</h4></div>'
-    );
+    document
+      .querySelector("#delivery-options .col-xs-12:first-of-type")
+      .insertAdjacentHTML(
+        "afterend",
+        '<div id="ESX174"><h4><i class="fa fa-check"></i> You Qualify for FREE Shipping</h4></div>'
+      );
+    // document.querySelector(".search-form-container button").style.display =
+    //   "none";
+    // setTimeout(() => {
+    //   document.getElementById("ESX174").style.opacity = 0;
+    //   document.getElementById("ESX174").style.display = "none";
+    //   document.querySelector(".search-form-container button").style.display =
+    //     "block";
+    // }, 3000);
+  }
+  if (document.getElementById("ESX174") && freeTexts.length > 0) {
+    // if it already exists do this
+    // console.log("case B");
+    // document.getElementById("ESX174").style.display = "block";
+    // document.getElementById("ESX174").style.opacity = 1;
+    // document.querySelector(".search-form-container button").style.display =
+    //   "none";
+    // setTimeout(() => {
+    //   document.getElementById("ESX174").style.opacity = 0;
+    //   document.getElementById("ESX174").style.display = "none";
+    //   document.querySelector(".search-form-container button").style.display =
+    //     "block";
+    // }, 3000);
+  }
+  if (document.getElementById("ESX174") && freeTexts.length < 1) {
+    // no free shipping! remove it!!!
   }
 };
 
@@ -48,9 +69,14 @@ const targetNode = document.getElementById(
 
 // Callback function to execute when mutations are observed
 const callback = function(mutationsList, observer) {
+  console.log("mutate");
   // Use traditional 'for loops' for IE 11
   for (let mutation of mutationsList) {
-    if (mutation.type === "childList" || mutation.type === "attributes") {
+    if (
+      mutation.type === "childList" ||
+      mutation.type === "attributes" ||
+      mutation.type === "characterData"
+    ) {
       injectFSMsg();
     }
   }
@@ -63,5 +89,6 @@ const observer = new MutationObserver(callback);
 observer.observe(targetNode, {
   attributes: true,
   childList: true,
-  subtree: true
+  subtree: true,
+  characterData: true,
 });

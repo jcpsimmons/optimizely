@@ -13,7 +13,7 @@ var state = {
     type: "",
     currentProduct: true
   },
-  searchWords: ["canopy 4 piece", "canopy 3 piece", "4 piece", "3 piece", "bed w/storage", "sleigh bed", "poster bed", "canopy bed", "platform bed", "panel bed", "storage bed", "upholstered headboard with metal"],
+  searchWords: ["canopy 4 piece", "canopy 3 piece", "panel 4 piece", "panel 3 piece", "platform 4 piece", "platform 3 piece", "sleigh 4 piece", "sleigh 3 piece", "poster 4 piece", "poster 3 piece", "storage 4 piece", "storage 3 piece", "sleigh bed", "poster bed", "canopy bed", "platform bed", "panel bed", "storage bed", "upholstered headboard with metal", "4 piece", "3 piece"],
   alsoInThisCollection: [],
   sortingOrder: ["queen", "eastern king", "california king"],
   sortedProducts: [],

@@ -9,6 +9,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ESX158 = function ESX158() {
   var generateHtml = function generateHtml() {
     var formatHtml = function formatHtml(randomId, questionTitle, question, answer) {
+      if (typeof questionTitle == "undefined") {
+        return "";
+      }
+
       var randomName = ["Emma", "Eddy", "Olivia", "Kevin", "Kimberly"];
       randomName = randomName[Math.floor(Math.random() * randomName.length)];
 
@@ -172,7 +176,9 @@ var ESX158 = function ESX158() {
       document.getElementById("BVQANoQuestionsID").outerHTML = "";
       document.getElementById("BVQAViewQuestionsContentID").insertAdjacentHTML("beforeend", html);
     } else {
-      document.getElementById("BVQAQuestionsID").insertAdjacentHTML("afterbegin", html);
+      try {
+        document.getElementById("BVQAQuestionsID").insertAdjacentHTML("afterbegin", html);
+      } catch (error) {}
     }
   };
 

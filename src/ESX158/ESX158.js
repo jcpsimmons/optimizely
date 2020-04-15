@@ -2,6 +2,9 @@
 const ESX158 = () => {
   const generateHtml = () => {
     const formatHtml = (randomId, questionTitle, question, answer) => {
+      if (typeof questionTitle == "undefined") {
+        return "";
+      }
       let randomName = ["Emma", "Eddy", "Olivia", "Kevin", "Kimberly"];
       randomName = randomName[Math.floor(Math.random() * randomName.length)];
       let gender =
@@ -23,10 +26,10 @@ const ESX158 = () => {
     };
 
     // function to get value given attribute name from table
-    const getAttrValue = attrName => {
+    const getAttrValue = (attrName) => {
       // essentially :contains()
       let x = Array.from(document.querySelectorAll("th")).find(
-        el => el.textContent.search(attrName) > -1
+        (el) => el.textContent.search(attrName) > -1
       );
       // the value
       return x.nextElementSibling.innerText;
@@ -39,7 +42,7 @@ const ESX158 = () => {
           randomId(),
           `Seat Height?`,
           `What is the seat height?`,
-          `The seat height is ${getAttrValue("Seat Height")} inches.`
+          `The seat height is ${getAttrValue("Seat Height")} inches.`,
         ];
       },
       weightCapacity: () => {
@@ -49,7 +52,7 @@ const ESX158 = () => {
           `What is the recommended weight capacity?`,
           `The recommended weight capacity is ${getAttrValue(
             "Recommended Weight Capacity"
-          )}lbs.`
+          )}lbs.`,
         ];
       },
       seatDetachable: () => {
@@ -60,7 +63,7 @@ const ESX158 = () => {
           `Are the seat cushions detachable?`,
           `${detachable ? "Yes" : "No"} the seat cusions ${
             detachable ? "are" : "aren't"
-          } detachable.`
+          } detachable.`,
         ];
       },
       backDetachable: () => {
@@ -71,7 +74,7 @@ const ESX158 = () => {
           `Are the back cushions detachable?`,
           `${detachable ? "Yes" : "No"} the back cusions ${
             detachable ? "are" : "aren't"
-          } detachable.`
+          } detachable.`,
         ];
       },
       removableCustionCovers: () => {
@@ -84,7 +87,7 @@ const ESX158 = () => {
           `Are the cushion covers removable?`,
           `${removable ? "Yes" : "No"}, the cusion covers ${
             removable ? "are" : "aren't"
-          } removable.`
+          } removable.`,
         ];
       },
       comeAssembled: () => {
@@ -100,7 +103,7 @@ const ESX158 = () => {
           `Does this come assembled?`,
           `${assemblyRequired ? `No` : "Yes"}, assembly ${
             assemblyRequired ? `is` : "is not"
-          } required.`
+          } required.`,
         ];
       },
       requireBoxSpring: () => {
@@ -115,7 +118,7 @@ const ESX158 = () => {
             `Does this bed frame require a box spring?`,
             `${bs ? "Yes" : "No"}, this bed frame ${
               bs ? "does" : "does not"
-            } require a box spring.`
+            } require a box spring.`,
           ];
         }
         if (getAttrValue("Recommended Box Spring").search("Optional") > -1) {
@@ -124,17 +127,17 @@ const ESX158 = () => {
             randomId(),
             `Box Spring Needed?`,
             `Does this bed frame require a box spring?`,
-            `A box spring is optional for this bed.`
+            `A box spring is optional for this bed.`,
           ];
         }
 
         return returnVal;
-      }
+      },
     };
 
     // Dont even need to part out the different possibilities, just try them all with try/catch
     let tmpHtml = Object.keys(questionTemplates)
-      .map(template => {
+      .map((template) => {
         try {
           let [randomId, questionTitle, question, answer] = eval(
             `questionTemplates.${template}()`
@@ -144,7 +147,7 @@ const ESX158 = () => {
           return "";
         }
       })
-      .filter(item => {
+      .filter((item) => {
         return item != "";
       })
       .join("");
@@ -152,7 +155,7 @@ const ESX158 = () => {
     return tmpHtml;
   };
 
-  const findSelectorAndInsert = html => {
+  const findSelectorAndInsert = (html) => {
     // Determine where to insert HTML
     if (document.getElementById("BVQANoQuestionsID")) {
       // Handle no questions
@@ -162,19 +165,21 @@ const ESX158 = () => {
         .insertAdjacentHTML("beforeend", html);
     } else {
       // handle questions exist
-      document
-        .getElementById("BVQAQuestionsID")
-        .insertAdjacentHTML("afterbegin", html);
+      try {
+        document
+          .getElementById("BVQAQuestionsID")
+          .insertAdjacentHTML("afterbegin", html);
+      } catch (error) {}
     }
   };
 
   const makeEventListener = () => {
-    document.getElementById("BVQAMainID").addEventListener("click", e => {
+    document.getElementById("BVQAMainID").addEventListener("click", (e) => {
       window["optimizely"] = window["optimizely"] || [];
       window["optimizely"].push({
         type: "event",
         eventName: "ESX158_ClickReviews",
-        tags: {}
+        tags: {},
       });
     });
   };
