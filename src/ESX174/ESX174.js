@@ -1,10 +1,13 @@
 const esx174 = () => {
   let freeColNumber = "4";
   let fontSize = "1.8rem";
+  let zipChartSel = ".delivery-options-text > span:nth-of-type(2)";
 
   if (utag_data.site_type == "mobile") {
     freeColNumber = "3";
     fontSize = "1.3rem";
+    zipChartSel =
+      "#delivery-options > div.col-xs-12.pad-left-0.delivery-options-text > div:nth-child(2) > span:nth-child(1)";
   }
 
   document
@@ -35,6 +38,8 @@ const esx174 = () => {
       return el.textContent.toLowerCase() == "free";
     });
 
+    console.log("freeTexts", freeTexts);
+
     // make sure el exists, and free eligible
     if (!document.getElementById("ESX174") && freeTexts.length > 0) {
       document
@@ -48,72 +53,44 @@ const esx174 = () => {
       // if it already exists do this
       document.getElementById("ESX174").style.display = "block";
     }
-    if (document.getElementById("ESX174") && freeTexts.length < 1) {
+    if (
+      (document.getElementById("ESX174") && freeTexts.length < 1) ||
+      document.getElementById("delivery-options-error-message")
+    ) {
       // no free shipping! remove it!!!
       document.getElementById("ESX174").style.display = "none";
     }
   };
 
-  // node to observe
-  const targetNode = document.getElementById(
-    "delivery-options-caption-container"
-  );
-
-  // config
-  const config = {
-    attributes: true,
-    childList: true,
-    subtree: true,
-    characterData: true,
+  const detectRun = () => {
+    const enteredZip = document.getElementById("cityOrZipCodeInput").value;
+    let x = setInterval(() => {
+      if (document.querySelector(zipChartSel)) {
+        const zip = document
+          .querySelector(zipChartSel)
+          .textContent.replace(/\D/g, "");
+        if (enteredZip == zip) {
+          injectFSMsg();
+          clearInterval(x);
+        }
+      }
+    }, 50);
   };
 
-  // Callback function to execute when mutations are observed
-  const callback = function(mutationsList, observer) {
-    // Use traditional 'for loops' for IE 11
-    for (let mutation of mutationsList) {
-      if (
-        mutation.type === "childList" ||
-        mutation.type === "attributes" ||
-        mutation.type === "characterData"
-      ) {
-        injectFSMsg();
-      }
+  document
+    .querySelector(".search-form-container button")
+    .addEventListener("click", detectRun);
+
+  window.onkeydown = function(e) {
+    if (e.key == "Enter") {
+      detectRun();
+    } else if (
+      e.target.id == "cityOrZipCodeInput" &&
+      document.getElementById("ESX174")
+    ) {
+      document.getElementById("ESX174").style.display = "none";
     }
   };
-
-  // Create an observer instance linked to the callback function
-  const observer = new MutationObserver(callback);
-
-  // Start observing the target node for configured mutations
-  observer.observe(targetNode, config);
-
-  // Observer for error message
-  const errorObesrver = new MutationObserver((mutationsList, observer) => {
-    // Use traditional 'for loops' for IE 11
-    for (let mutation of mutationsList) {
-      if (
-        (mutation.type === "childList" ||
-          mutation.type === "attributes" ||
-          mutation.type === "characterData") &&
-        document.querySelector(".validation-error").style.display !== "none" &&
-        document.getElementById("ESX174")
-      ) {
-        document.getElementById("ESX174").style.display = "none";
-      }
-
-      if (
-        (mutation.type === "childList" ||
-          mutation.type === "attributes" ||
-          mutation.type === "characterData") &&
-        document.getElementById("delivery-options-error-message")
-      ) {
-        document.getElementById("ESX174").style.display = "none";
-      }
-    }
-  });
-
-  errorObesrver.observe(document.querySelector(".validation-error"), config);
-  errorObesrver.observe(document.querySelector("#delivery-options"), config);
 };
 
 let waitloop = setInterval(() => {

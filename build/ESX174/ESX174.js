@@ -9,10 +9,12 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var esx174 = function esx174() {
   var freeColNumber = "4";
   var fontSize = "1.8rem";
+  var zipChartSel = ".delivery-options-text > span:nth-of-type(2)";
 
   if (utag_data.site_type == "mobile") {
     freeColNumber = "3";
     fontSize = "1.3rem";
+    zipChartSel = "#delivery-options > div.col-xs-12.pad-left-0.delivery-options-text > div:nth-child(2) > span:nth-child(1)";
   }
 
   document.querySelector("#delivery-options button").addEventListener("click", function (e) {
@@ -37,84 +39,34 @@ var esx174 = function esx174() {
       document.getElementById("ESX174").style.display = "block";
     }
 
-    if (document.getElementById("ESX174") && freeTexts.length < 1) {
+    if (document.getElementById("ESX174") && freeTexts.length < 1 || document.getElementById("delivery-options-error-message")) {
       document.getElementById("ESX174").style.display = "none";
     }
   };
 
-  var targetNode = document.getElementById("delivery-options-caption-container");
-  var config = {
-    attributes: true,
-    childList: true,
-    subtree: true,
-    characterData: true
-  };
+  var detectRun = function detectRun() {
+    var enteredZip = document.getElementById("cityOrZipCodeInput").value;
+    var x = setInterval(function () {
+      if (document.querySelector(zipChartSel)) {
+        var zip = document.querySelector(zipChartSel).textContent.replace(/\D/g, "");
 
-  var callback = function callback(mutationsList, observer) {
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-      for (var _iterator = mutationsList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var mutation = _step.value;
-
-        if (mutation.type === "childList" || mutation.type === "attributes" || mutation.type === "characterData") {
+        if (enteredZip == zip) {
           injectFSMsg();
+          clearInterval(x);
         }
       }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-          _iterator["return"]();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
-    }
+    }, 50);
   };
 
-  var observer = new MutationObserver(callback);
-  observer.observe(targetNode, config);
-  var errorObesrver = new MutationObserver(function (mutationsList, observer) {
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
+  document.querySelector(".search-form-container button").addEventListener("click", detectRun);
 
-    try {
-      for (var _iterator2 = mutationsList[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-        var mutation = _step2.value;
-
-        if ((mutation.type === "childList" || mutation.type === "attributes" || mutation.type === "characterData") && document.querySelector(".validation-error").style.display !== "none" && document.getElementById("ESX174")) {
-          document.getElementById("ESX174").style.display = "none";
-        }
-
-        if ((mutation.type === "childList" || mutation.type === "attributes" || mutation.type === "characterData") && document.getElementById("delivery-options-error-message")) {
-          document.getElementById("ESX174").style.display = "none";
-        }
-      }
-    } catch (err) {
-      _didIteratorError2 = true;
-      _iteratorError2 = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-          _iterator2["return"]();
-        }
-      } finally {
-        if (_didIteratorError2) {
-          throw _iteratorError2;
-        }
-      }
+  window.onkeydown = function (e) {
+    if (e.key == "Enter") {
+      detectRun();
+    } else if (e.target.id == "cityOrZipCodeInput" && document.getElementById("ESX174")) {
+      document.getElementById("ESX174").style.display = "none";
     }
-  });
-  errorObesrver.observe(document.querySelector(".validation-error"), config);
-  errorObesrver.observe(document.querySelector("#delivery-options"), config);
+  };
 };
 
 var waitloop = setInterval(function () {

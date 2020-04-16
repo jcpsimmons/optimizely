@@ -1,0 +1,65 @@
+#ESX178,
+#ItemsInCartScroll {
+  padding-top: 2rem;
+}
+#ESX178 {
+  overflow: hidden;
+}
+#ESX178 .slick-row > div {
+  visibility: hidden;
+}
+#ESX178 .slick-slide {
+  width: auto !important;
+  padding-left: 2rem !important;
+}
+#ESX178 .slick-slide a {
+  border: none;
+}
+#ESX178 .slick-slide a img {
+  width: 16rem;
+}
+#ESX178 .IICText {
+  padding: 0 2rem;
+  justify-content: space-between;
+}
+#ESX178 .IICText .flex-item > * {
+  display: inline;
+}
+#ESX178 .slick-initialized .slick-slide {
+  padding: 0;
+}
+#ESX178 .nextArrow,
+#ESX178 .prevArrow {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transition: 0.25s;
+  opacity: 0;
+}
+#ESX178:hover .nextArrow,
+#ESX178:hover .prevArrow {
+  opacity: 1;
+}
+#ESX178 .prevArrow {
+  transform: translate(-50%, -50%) scaleX(-1);
+  left: 2.5rem;
+}
+#ESX178 .nextArrow {
+  transform: translate(-50%, -50%);
+  right: 2.5rem;
+}
+@media (max-width: 1199px) {
+  #ESX178 h3 {
+    font-size: 1.5rem;
+  }
+  #ESX178 p {
+    font-size: 1.3rem;
+  }
+}
+#ESX178 p.prodtitle {
+  width: 17.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
