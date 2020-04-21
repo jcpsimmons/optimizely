@@ -1,3 +1,5 @@
 function pol() {
-  return 501 - parseFloat(document.querySelector(".progress__actual-value.text-blue.font-weight-600").textContent.replace("$", "")) < 50;
+  try {
+    return parseInt(document.querySelector("[for=tohome-option] span.label-n-t").innerText.replace("$", "")) == 59 && parseInt(document.querySelector(".free-shipping-incentive__title").textContent.replace(/[^0-9\.]/g, "")) < 59;
+  } catch (error) {}
 }

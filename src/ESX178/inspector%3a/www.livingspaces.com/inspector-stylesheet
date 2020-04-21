@@ -1,0 +1,7 @@
+.flex-col {
+    width: 33rem;
+}.prodprice {
+    font-weight: bold!important;
+}
+
+p {}

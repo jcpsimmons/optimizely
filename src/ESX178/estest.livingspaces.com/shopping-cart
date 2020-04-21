@@ -3086,7 +3086,7 @@ if (checkEligible()) {
                 <p>You can still browse our products during this maintenance.</p>
                 <p>Thank you for your patience!</p>
                 <hr />
-                <p><b>This maintenance is scheduled to end in 69948680 hours and 10 minutes</b></p>
+                <p><b>This maintenance is scheduled to end in /* overflow: hidden; */10 minutes</b></p>
                     <hr />
                     <p>No schedule found, reverting to max values</p>
             </div>

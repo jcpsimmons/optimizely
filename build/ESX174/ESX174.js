@@ -17,12 +17,14 @@ var esx174 = function esx174() {
     zipChartSel = "#delivery-options > div.col-xs-12.pad-left-0.delivery-options-text > div:nth-child(2) > span:nth-child(1)";
   }
 
-  document.querySelector("#delivery-options button").addEventListener("click", function (e) {
-    window["optimizely"] = window["optimizely"] || [];
-    window["optimizely"].push({
-      type: "event",
-      eventName: "clickVDO"
-    });
+  document.addEventListener("click", function (e) {
+    if (e.target.type == "submit" && e.target.parentNode.parentNode.parentNode.parentNode.id == "delivery-options" || e.target.parentNode.parentNode.id == "delivery-options-search") {
+      window["optimizely"] = window["optimizely"] || [];
+      window["optimizely"].push({
+        type: "event",
+        eventName: "clickVDO"
+      });
+    }
   });
   document.querySelector("head").insertAdjacentHTML("beforeend", "<style>#ESX174{padding: 0;} #ESX174 h4{font-weight:600; font-size: ".concat(fontSize, "; white-space: nowrap; color: #00699A;} #ESX174 i{color:#00699A;}</style>"));
 
@@ -58,7 +60,11 @@ var esx174 = function esx174() {
     }, 50);
   };
 
-  document.querySelector(".search-form-container button").addEventListener("click", detectRun);
+  document.addEventListener("click", function (e) {
+    if (e.target.type == "submit" && e.target.parentNode.parentNode.parentNode.parentNode.id == "delivery-options" || e.target.parentNode.parentNode.id == "delivery-options-search") {
+      detectRun();
+    }
+  });
 
   window.onkeydown = function (e) {
     if (e.key == "Enter") {

@@ -10,15 +10,20 @@ const esx174 = () => {
       "#delivery-options > div.col-xs-12.pad-left-0.delivery-options-text > div:nth-child(2) > span:nth-child(1)";
   }
 
-  document
-    .querySelector("#delivery-options button")
-    .addEventListener("click", (e) => {
+  document.addEventListener("click", (e) => {
+    if (
+      (e.target.type == "submit" &&
+        e.target.parentNode.parentNode.parentNode.parentNode.id ==
+          "delivery-options") ||
+      e.target.parentNode.parentNode.id == "delivery-options-search"
+    ) {
       window["optimizely"] = window["optimizely"] || [];
       window["optimizely"].push({
         type: "event",
         eventName: "clickVDO",
       });
-    });
+    }
+  });
 
   // add css
   document
@@ -77,9 +82,16 @@ const esx174 = () => {
     }, 50);
   };
 
-  document
-    .querySelector(".search-form-container button")
-    .addEventListener("click", detectRun);
+  document.addEventListener("click", (e) => {
+    if (
+      (e.target.type == "submit" &&
+        e.target.parentNode.parentNode.parentNode.parentNode.id ==
+          "delivery-options") ||
+      e.target.parentNode.parentNode.id == "delivery-options-search"
+    ) {
+      detectRun();
+    }
+  });
 
   window.onkeydown = function(e) {
     if (e.key == "Enter") {

@@ -42,12 +42,11 @@
   opacity: 1;
 }
 #ESX178 .prevArrow {
-  transform: translate(-50%, -50%) scaleX(-1);
+  transform: translateY(-50%) scaleX(-1);
   left: 2.5rem;
 }
 #ESX178 .nextArrow {
   transform: translate(-50%, -50%);
-  right: 2.5rem;
 }
 @media (max-width: 1199px) {
   #ESX178 h3 {
