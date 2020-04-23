@@ -1,6 +1,8 @@
 // VARIATION 1
 function addContent($) {
-  $(".main-header").append(`
+  document.querySelector(".main-header").insertAdjacentHTML(
+    "afterend",
+    `
   <style id="ChatbotStyle">
   #ChatIcon {
     position: absolute;
@@ -108,7 +110,8 @@ function addContent($) {
   </div>
 </div>
 
-`);
+`
+  );
 }
 
 const eventListeners = ($) => {

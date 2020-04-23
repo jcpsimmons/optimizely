@@ -39,13 +39,27 @@ let state = {
 const sortedItems = (r) => {
   let sortedArr = [];
   state.sortingOrder.forEach((s) => {
-    let match = r.filter((x) => {
-      // this is returning multiple prods sometimes but you're truncating the right ones out
-      return (
-        x.name.toLowerCase().search(s) > -1 &&
-        x.name.toLowerCase().search(state.currentProduct.type) > -1
-      );
+    let match;
+    match = r.filter((x) => {
+      return x.name.toLowerCase().search(s) > -1 && x.currentProduct;
     })[0];
+
+    console.log("match", match);
+
+    if (typeof match == "undefined") {
+      match = r.filter((x) => {
+        // this is returning multiple prods sometimes but you're truncating the right ones out
+        if (x.name.toLowerCase().search(s) > -1 && x.currentProduct) {
+          return true;
+        } else if (
+          x.name.toLowerCase().search(s) > -1 &&
+          x.name.toLowerCase().search(state.currentProduct.type) > -1
+        ) {
+          return true;
+        }
+      })[0];
+    }
+
     sortedArr.push(match);
   });
   return sortedArr;

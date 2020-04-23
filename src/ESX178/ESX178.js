@@ -1,3 +1,5 @@
+var SIZE = "large";
+
 const ESX178 = (version) => {
   // CONFIG VARS
   // arg takes small or large version
@@ -330,10 +332,21 @@ const ESX178 = (version) => {
       state.need
     }+TO+${state.need + 20}%5d&sortby=sale_price+asc`;
 
-    if (oldState == state) {
+    console.log("oldState", oldState);
+    console.log("state", state);
+
+    if (JSON.stringify(oldState) == JSON.stringify(state)) {
       return state;
-    } else if (oldState == {} || oldState !== state) {
-      // Put function calls here that need to happen if INIT or if state changes (HTML updates!)
+    } else if (
+      oldState == {} ||
+      JSON.stringify(oldState) !== JSON.stringify(state)
+    ) {
+      // REMOVE element if it exists already
+      if (document.getElementById("ESX178")) {
+        let el = document.getElementById("ESX178");
+        el.parentElement.removeChild(el);
+      }
+
       bloomreachApiCall();
       return state;
     }
@@ -348,38 +361,33 @@ const ESX178 = (version) => {
     injectCss();
     state = {};
   }
-};
 
-// // testing script - check inline of this for experiment triggering
-// document
-//   .querySelector("body")
-//   .insertAdjacentHTML(
-//     "afterbegin",
-//     `<div id="Sticky" style="position:sticky;top:0;z-index:999;"><button>variation 1</button><button>variation 2</button></div>`
-//   );
-// document.querySelector("#Sticky").addEventListener("click", (e) => {
-//   if (e.target.textContent == "variation 1") {
-//     try {
-//       document
-//         .getElementById("ESX178")
-//         .parentElement.removeChild(document.getElementById("ESX178"));
-//     } catch (error) {}
-//     // this is how it will be run from optimizely - ESX178(VERSION)
-//     ESX178("small");
-//   } else {
-//     try {
-//       document
-//         .getElementById("ESX178")
-//         .parentElement.removeChild(document.getElementById("ESX178"));
-//     } catch (error) {}
-//     ESX178("large");
-//   }
-// });
+  // Observe changes and update accordingly
+  const observer = new MutationObserver((mutations) => {
+    // On mutation check if eligibility is met -
+    if (checkEligible()) {
+      // Update data
+      state = updateState(state);
+    } else {
+      // Remove if not eligible
+      if (document.getElementById("ESX178")) {
+        let el = document.getElementById("ESX178");
+        el.parentElement.removeChild(el);
+      }
+    }
+  });
+  var config = {
+    attributes: true,
+    childList: true,
+    subtree: true,
+  };
+  observer.observe(document.querySelector(".cart-change-zipcode"), config);
+  observer.observe(document.querySelector(".cart-main-content"), config);
+};
 
 var anotherInterval = setInterval(() => {
   if (typeof window.jQuery !== "undefined") {
     clearInterval(anotherInterval);
-    var $ = window.jQuery;
-    ESX178("large");
+    ESX178(SIZE);
   }
 }, 50);

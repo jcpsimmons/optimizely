@@ -23,9 +23,21 @@ var state = {
 var sortedItems = function sortedItems(r) {
   var sortedArr = [];
   state.sortingOrder.forEach(function (s) {
-    var match = r.filter(function (x) {
-      return x.name.toLowerCase().search(s) > -1 && x.name.toLowerCase().search(state.currentProduct.type) > -1;
+    var match;
+    match = r.filter(function (x) {
+      return x.name.toLowerCase().search(s) > -1 && x.currentProduct;
     })[0];
+
+    if (typeof match == "undefined") {
+      match = r.filter(function (x) {
+        if (x.name.toLowerCase().search(s) > -1 && x.currentProduct) {
+          return true;
+        } else if (x.name.toLowerCase().search(s) > -1 && x.name.toLowerCase().search(state.currentProduct.type) > -1) {
+          return true;
+        }
+      })[0];
+    }
+
     sortedArr.push(match);
   });
   return sortedArr;

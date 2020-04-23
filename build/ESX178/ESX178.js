@@ -6,6 +6,8 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
+var SIZE = "large";
+
 var ESX178 = function ESX178(version) {
   var $ = window.jQuery;
   var INJECTION_LOCATION;
@@ -134,9 +136,14 @@ var ESX178 = function ESX178(version) {
     state.need = getNeedAmt();
     state.moreOptionsUrl = "https://www.livingspaces.com/search?term=decor&sale_price=%5b".concat(state.need, "+TO+").concat(state.need + 20, "%5d&sortby=sale_price+asc");
 
-    if (oldState == state) {
+    if (JSON.stringify(oldState) == JSON.stringify(state)) {
       return state;
-    } else if (oldState == {} || oldState !== state) {
+    } else if (oldState == {} || JSON.stringify(oldState) !== JSON.stringify(state)) {
+      if (document.getElementById("ESX178")) {
+        var el = document.getElementById("ESX178");
+        el.parentElement.removeChild(el);
+      }
+
       bloomreachApiCall();
       return state;
     }
@@ -151,12 +158,29 @@ var ESX178 = function ESX178(version) {
     injectCss();
     state = {};
   }
+
+  var observer = new MutationObserver(function (mutations) {
+    if (checkEligible()) {
+      state = updateState(state);
+    } else {
+      if (document.getElementById("ESX178")) {
+        var el = document.getElementById("ESX178");
+        el.parentElement.removeChild(el);
+      }
+    }
+  });
+  var config = {
+    attributes: true,
+    childList: true,
+    subtree: true
+  };
+  observer.observe(document.querySelector(".cart-change-zipcode"), config);
+  observer.observe(document.querySelector(".cart-main-content"), config);
 };
 
 var anotherInterval = setInterval(function () {
   if (typeof window.jQuery !== "undefined") {
     clearInterval(anotherInterval);
-    var $ = window.jQuery;
-    ESX178("large");
+    ESX178(SIZE);
   }
 }, 50);
