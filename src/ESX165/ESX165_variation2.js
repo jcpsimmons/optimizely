@@ -78,7 +78,7 @@ function addContent($) {
   #ChatIcon .timeText {margin-left:4px}
 </style>
 
-<div id="ChatIcon">
+<div id="ChatIcon" class="intercom-button">
   <div class="flex-row">
     <div class="flex-item xContainer" id="RemoveRepChat">
       <span

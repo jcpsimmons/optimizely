@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
       transition: .1s;
       display: none;
       position: fixed;
-      bottom: 75px;
-      right: .3rem;
+      bottom: 100px;
+      right: 34px;
       background-color: #333;
       border-radius: 10px;
       border: 3px solid #fff;
@@ -46,9 +46,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     if (scrolled > coords) {
       el.style.display = "flex";
+      console.log("display");
     }
     if (scrolled < coords) {
       el.style.display = "none";
+      console.log("hide");
     }
   }
 
@@ -61,22 +63,24 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
 
   // check intersections with footer (change positioning)
-  const footer = document.querySelector("footer");
+  // no longer need with intercom
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (
-        entry.intersectionRatio > 0 &&
-        !Boolean(document.getElementById("StickyButtonWrapper"))
-      ) {
-        el.style.bottom = "200px";
-      } else {
-        el.style.bottom = "75px";
-      }
-    });
-  });
+  // const footer = document.querySelector("footer");
 
-  observer.observe(footer);
+  // const observer = new IntersectionObserver(entries => {
+  //   entries.forEach(entry => {
+  //     if (
+  //       entry.intersectionRatio > 0 &&
+  //       !Boolean(document.getElementById("StickyButtonWrapper"))
+  //     ) {
+  //       el.style.bottom = "200px";
+  //     } else {
+  //       el.style.bottom = "75px";
+  //     }
+  //   });
+  // });
+
+  // observer.observe(footer);
 
   // scroll and click listeners
   document.addEventListener("scroll", trackScroll);
@@ -89,8 +93,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
       eventName: "clickBackToTopButton",
       tags: {
         revenue: 0, // Optional in cents as integer (500 == $5.00)
-        value: 0.0 // Optional as float
-      }
+        value: 0.0, // Optional as float
+      },
     });
     backToTop();
   });

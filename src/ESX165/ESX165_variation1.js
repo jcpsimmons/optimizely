@@ -55,7 +55,7 @@ function addContent($) {
   margin-right: 1rem;
 }
 </style>
-<div id="ChatIconContainer">
+<div id="ChatIconContainer" class="intercom-button">
 <div id="ChatIcon">
 <div class="flex-row">
   <div class="flex-item">

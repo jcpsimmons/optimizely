@@ -85,7 +85,7 @@ function addContent($) {
     }
   }
 </style>
-<div id="ChatIcon">
+<div id="ChatIcon" class="intercom-button">
   <div class="flex-row">
     <div class="flex-col">
       <div class="flex-item main-text">
