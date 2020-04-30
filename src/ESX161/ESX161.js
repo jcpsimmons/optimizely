@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
       transition: .1s;
       display: none;
       position: fixed;
-      bottom: 100px;
-      right: 34px;
+      bottom: 83px;
+      right: 20px;
       background-color: #333;
       border-radius: 10px;
       border: 3px solid #fff;

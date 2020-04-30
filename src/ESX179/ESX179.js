@@ -1,23 +1,7 @@
 const callAgent = (question) => {
-  document.querySelector(".messages-starticon").click();
-  let waitForAgent = setInterval(() => {
-    let agentButton = [
-      ...document.querySelectorAll(
-        ".kore-chat-window li.buttonTmplContentChild"
-      ),
-    ].filter((el) => {
-      return el.textContent.toLowerCase().search("chat with a live agent") > -1;
-    });
-
-    if (agentButton.length >= 1) {
-      // click call agent
-      agentButton[0].click();
-      //   populate question
-      document.querySelector(".chatInputBox").textContent = question;
-
-      clearInterval(waitForAgent);
-    }
-  }, 50);
+  Intercom("showNewMessage", question);
+  // this click isn't working - might not be able to do it
+  document.querySelector(".intercom-composer-send-button").click();
 };
 
 [...document.querySelectorAll(".BVButton")].forEach((el) => {
@@ -28,4 +12,18 @@ const callAgent = (question) => {
       callAgent(question);
     });
   }
+});
+
+// testing below
+Intercom("showNewMessage", "xxxxxxxxx");
+Intercom("onShow", function() {
+  temp = setInterval(() => {
+    console.log("int");
+    document.querySelector(".intercom-conversation-body textarea").focus();
+    if (document.querySelector(".intercom-composer-send-button")) {
+      console.log("found");
+      document.querySelector(".intercom-composer-send-button").click();
+      clearInterval(temp);
+    }
+  }, 50);
 });
