@@ -135,6 +135,16 @@ const eventListeners = ($) => {
       type: "event",
       eventName: "speakWithRep",
     });
+    // opens Kore
+    $(".messages-starticon").click();
+    let waitForAgent = setInterval(() => {
+      if ($("li:contains('Chat')").length > 1) {
+        $("li:contains('Chat')")
+          .last()
+          .click();
+        clearInterval(waitForAgent);
+      }
+    }, 50);
   });
 
   // close prompt on x click
@@ -149,7 +159,7 @@ const eventListeners = ($) => {
   });
 
   // tracking for kore chat
-  Intercom("onShow", function() {
+  $(".messages-starticon").click(function() {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",

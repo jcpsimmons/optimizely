@@ -19,13 +19,6 @@ var eventListeners = function eventListeners($) {
       type: "event",
       eventName: "swr167"
     });
-    $(".messages-starticon").click();
-    var waitForAgent = setInterval(function () {
-      if ($("li:contains('Chat')").length > 1) {
-        $("li:contains('Chat')").last().click();
-        clearInterval(waitForAgent);
-      }
-    }, 50);
   });
   document.getElementById("RemoveRepChat").addEventListener("click", function (e) {
     e.stopPropagation();
@@ -36,7 +29,7 @@ var eventListeners = function eventListeners($) {
       eventName: "rswr167"
     });
   });
-  $(".messages-starticon").click(function () {
+  Intercom("onShow", function () {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",

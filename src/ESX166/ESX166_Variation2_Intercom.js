@@ -1,124 +1,117 @@
 // VARIATION 1
 function addContent($) {
-  $(".cart-header")
-    .parent()
-    .css("position", "relative");
-  $(".cart-header").parent().prepend(`
-  <style id="ChatbotStyle">
+  document.querySelector(".main-header").insertAdjacentHTML(
+    "afterend",
+    `
+    <style id="ChatbotStyle">
+    #ChatIcon {
+      position: absolute;
+      width: 170px;
+      background-color: #ebebeb;
+      z-index: 99;
+      right:20px;
+      top:20px
+    }
     #ChatIcon .flex-col,
     #ChatIcon .flex-row {
       display: flex;
       flex-wrap: nowrap;
     }
     #ChatIcon .flex-col {
-      flex-direction: column;
-      justify-content: flex-end;
-      color: #fff;
-      width: 100%;
-      margin: 2rem -9rem 2rem 2rem;
-      padding: 1rem 0;
+      position: relative;
+      text-align: center;
+      background-color: white;
+      margin: 10px;
+      border: 1px solid #dbdbdb;
+      padding: 10px 0;
     }
     #ChatIcon .flex-row {
-      flex-direction: row-reverse;
+      flex-direction: column-reverse;
+      align-items: center;
     }
     #ChatIcon {
-      position: absolute;
-      top:-2rem;
-      right:0;
-      width: auto;
+      box-shadow: 00 0 6px 0 #bbbbbb;
       cursor: pointer;
-      z-index:1;
     }
     #ChatIcon img {
       border-radius: 100%;
-      border: 5px solid white;
-      float: right;
-      max-width: 70%;
-    }
-    #ChatIcon .flex-item {
-      margin: auto;
-    }
-    #ChatIcon .fb-tweak {
-      flex-basis: 29%;
-      margin-right: 2rem;
+      border: 2px solid #fff;
+      width: 44px;
     }
     #ChatIcon .flex-row .flex-item {
       position: relative;
     }
     .green-dot {
-      background-color: #45ab4e;
-      height: auto;
-      width: auto;
+      background-color: #47ab50;
       border-radius: 100%;
       border: 2px solid white;
       position: absolute;
-      bottom: 0;
-      right: 0;
-      color: white;
+      bottom: -5px;
+      right: -3px;
+      transform: scale(0.6);
     }
-    .green-dot i {
-      font-size: 12px;
-      margin: 0px 4px;
-    }
-    #ChatIcon .chat-bg {
-      background-color: #333333;
-      width: 100%;
-      height: 5rem;
+    #RemoveRepChat {
       position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      z-index: -1;
+      top: -23px;
+      left: -19px;
+      background-color: #fff;
+      border-radius: 50%;
+      border: 2px solid #dbdbdb;
+      transform: scale(0.7);
+    }
+    #RemoveRepChat span {
+      margin: 11px 8.5px;
+    }
+    #StaffPhoto {
+      margin-top: -20px;
+      z-index: 99;
+      margin-bottom: 10px;
     }
     /* typography */
     #ChatIcon .label-text {
-      font-size: 1.4rem;
-      color: #fff;
-    }
-    #ChatIcon .label-text > span {
-      color: rgb(170, 170, 170);
+      font-size: 1.2rem;
+      margin-right: calc(40px - 1rem);
+      color: grey;
+      text-align: right;
     }
     #ChatIcon .main-text {
-      font-weight: 600;
-      font-size: 1.4rem;
-      margin-left: 0
+      font-size: 14px;
+      line-height: 2rem;
+      color: #4c4c4c;
+      margin: auto;
     }
-    #ChatIcon .xContainer {
-      margin-top: 2rem;
+    #ChatIcon .green-dot i {
+      color: #fff;
+      margin: 0 3px;
     }
   </style>
-  
   <div id="ChatIcon" class="intercom-button">
-    <div class="chat-bg"></div>
     <div class="flex-row">
-      <div class="flex-item xContainer">
-        <span
-          id="RemoveRepChat"
-          style="font-size: 3rem; color: #fff; cursor:pointer;line-height:4rem;margin-right: 1rem;"
-          aria-hidden="true"
-          >×</span
-        >
-      </div>
-      <div class="flex-item fb-tweak">
+      <div class="flex-item" id="StaffPhoto">
         <img
           src="https://www.livingspaces.com/globalassets/images/home/2020/03/chat-girl-168-02.jpg"
           alt=""
           class="img-responsive"
         />
-        <div class="green-dot">
-          <i class="fa fa-check" aria-hidden="true"></i>
-        </div>
+        <div class="green-dot"><i class="fa fa-check" aria-hidden="true"></i></div>
       </div>
       <div class="flex-col">
         <div class="flex-item main-text">
-          Need help choosing a delivery option?
+          Chat with a live expert for help with your cart.
         </div>
-        <div class="label-text">Talk to a live expert</div>
+      </div>
+      <div id="RemoveRepChat">
+        <span
+          style="font-size: 4rem; color: #333; cursor:pointer;line-height:4rem"
+          aria-hidden="true"
+          >×</span
+        >
       </div>
     </div>
   </div>
   
-`);
+  `
+  );
 }
 
 const eventListeners = ($) => {
@@ -134,7 +127,11 @@ const eventListeners = ($) => {
   // close prompt on x click
   document.getElementById("RemoveRepChat").addEventListener("click", (e) => {
     e.stopPropagation();
-    $("#ChatIcon").remove();
+    document
+      .getElementById("ChatIcon")
+      .parentNode.removeChild(document.getElementById("ChatIcon"));
+    // need to close intercom code here
+    Intercom("shutdown");
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
@@ -142,7 +139,7 @@ const eventListeners = ($) => {
     });
   });
 
-  // tracking for intercom chat
+  // need intercom selector
   Intercom("onShow", function() {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
