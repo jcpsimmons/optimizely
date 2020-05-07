@@ -1,0 +1,120 @@
+<style>
+  #ESX180Modal.modal .modal-dialog .modal-content .modal-body,
+  #ESX180Modal.modal .modal-dialog .modal-content .modal-header {
+    padding: 0;
+  }
+
+  #ESX180Modal.modal .modal-dialog .modal-content .modal-body img {
+    border: none;
+    position: relative;
+    /* filter: blur(2px) brightness(0.2); */
+    filter: brightness(0.4);
+  }
+  #ESX180Modal .modal-content {
+    position: relative;
+  }
+  #ESX180Modal.modal .modal-dialog .modal-content .close {
+    color: #fff;
+  }
+  #ESX180Modal .inner-border {
+    position: absolute;
+    border: 5px solid #fff;
+    width: calc(100% - 10rem);
+    height: calc(100% - 10rem);
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+  }
+  #ESX180Modal .text-overlay {
+    position: absolute;
+    top: 4rem;
+    left: 7rem;
+    /* transform: translate(-50%, -50%); */
+    color: #fff;
+    width: calc(100% - 14rem);
+    z-index: 99;
+  }
+  #ESX180Modal .text-overlay h1 {
+    font-weight: 600;
+    letter-spacing: 0.2rem;
+    font-size: 10rem;
+  }
+  #ESX180Modal .text-overlay h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-left: 0.5rem;
+  }
+  #ESX180Modal input {
+    background: #fff !important;
+    flex-basis: 75%;
+  }
+  #ESX180Modal form {
+    display: flex;
+    margin-top: 3rem;
+  }
+
+  #ESX180Modal .text-overlay button {
+    background: #bd5519;
+  }
+
+  @media (max-width: 991px) {
+    #ESX180Modal form {
+      margin-top: auto;
+    }
+  }
+</style>
+
+<div id="ESX180Modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="inner-border"></div>
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img
+          class="img-responsive"
+          src="https://cdn.brandfolder.io/XQW73PF4/as/pwx57b-2x6raw-b4qezu/NJ_Otb_20190809.jpg?width=1040&height=669"
+          alt=""
+        />
+        <div class="text-overlay">
+          <h1>Be<br />Notified</h1>
+          <h2>When this item is in stock</h2>
+
+          <form>
+            <div class="form-group"></div>
+            <input
+              placeholder="Your Email"
+              name="Email"
+              data-val="true"
+              data-val-regex="Email is not valid"
+              data-val-regex-pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-&zwnj;&#8203;]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$"
+              data-val-required="The email address is required"
+              id="Email"
+              type="email"
+              value=""
+              class="form-control input-lg text-box single-line"
+              id="180Email"
+            />
+            <button type="submit" class="btn primary-button">
+              <span>Sign Up</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $("#ESX180Modal").modal();
+</script>

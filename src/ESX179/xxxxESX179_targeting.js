@@ -1,3 +1,4 @@
+// NO LONGER USING
 function pollingFn() {
   return Boolean(
     (text = Array.prototype.slice

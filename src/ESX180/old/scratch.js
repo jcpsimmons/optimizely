@@ -8,8 +8,6 @@ document.addEventListener("scroll", () => {
 
 // takes true or false to lock scroll on page
 function scrollLock(bool) {
-  var $ = window.jQuery;
-
   if (!document.getElementById("ESX180ScrollLock") && bool) {
     document.querySelector("head").insertAdjacentHTML(
       "beforeend",
@@ -56,8 +54,6 @@ const scrollToTop = () => {
 
 // adds modal style and displays modal
 const addModalCode = () => {
-  var $ = window.jQuery;
-
   const el = document.querySelector(
     "#product-detail-page-vue .out-stock-wrapper"
   );
@@ -139,7 +135,7 @@ const addModalCode = () => {
 
   // add the text overlay
   const textOverlay = `
-    <div id="ESX180TextOverlay" style="display:none;"><h3>Currently Out of Stock</h3><h4>We plan on getting more inventory, sign up to be alerted by email below</h4><button  type="button" data-dismiss="modal" aria-label="Close" class="close" ><span id="CloseESX180" aria-hidden="true">×</span></button></div>
+    <div id="ESX180TextOverlay" style="display:none;"><h3>Currently Out of Stock</h3><h4>We plan on getting more inventory, sign up to be alerted by email below</h4><button type="button" data-dismiss="modal" aria-label="Close" class="close" ><span aria-hidden="true">×</span></button></div>
     `;
   document
     .querySelector(".page.LsfVariantProxy")
@@ -161,56 +157,48 @@ const addModalCode = () => {
   );
 };
 
-const addEventListeners = () => {
-  // event listeners
-  window.addEventListener("resize", () => {
-    var $ = window.jQuery;
-    if (MODAL_IN_VIEW) {
-      //   need to use a position reference element because the actual element moves on init
-      const el = document.querySelector(
-        "#product-detail-page-vue .out-stock-wrapper"
-      );
+// event listeners
+window.addEventListener("resize", () => {
+  if (MODAL_IN_VIEW) {
+    //   need to use a position reference element because the actual element moves on init
+    const el = document.querySelector(
+      "#product-detail-page-vue .out-stock-wrapper"
+    );
 
-      el.style.left = `calc(${-$("#product-detail-page-vue").offset()
-        .left}px + 50vw)`;
-      el.style.top = `calc(${SCROLL -
-        $("#product-detail-page-vue").offset().top}px + ${
-        window.pageYOffset
-      }px)`;
+    el.style.left = `calc(${-$("#product-detail-page-vue").offset()
+      .left}px + 50vw)`;
+    el.style.top = `calc(${SCROLL -
+      $("#product-detail-page-vue").offset().top}px + ${window.pageYOffset}px)`;
 
-      // set up left position
-      $("#ESX180TextOverlay").css(
-        "left",
-        `${$("#product-detail-page-vue .out-stock-wrapper").offset().left +
-          $("#product-detail-page-vue .out-stock-wrapper").width() / 2}px`
-      );
+    // set up left position
+    $("#ESX180TextOverlay").css(
+      "left",
+      `${$("#product-detail-page-vue .out-stock-wrapper").offset().left +
+        $("#product-detail-page-vue .out-stock-wrapper").width() / 2}px`
+    );
 
-      // top position
-      $("#ESX180TextOverlay").css(
-        "top",
-        `calc(${$("#product-detail-page-vue .out-stock-wrapper").offset().top +
-          $("#product-detail-page-vue .out-stock-wrapper").height() /
-            2}px - 4.5rem)`
-      );
-    }
-  });
+    // top position
+    $("#ESX180TextOverlay").css(
+      "top",
+      `calc(${$("#product-detail-page-vue .out-stock-wrapper").offset().top +
+        $("#product-detail-page-vue .out-stock-wrapper").height() /
+          2}px - 4.5rem)`
+    );
+  }
+});
 
-  document.addEventListener("click", (e) => {
-    if (
-      e.target.id == "btnEmailMeBackInStock" ||
-      e.target.id == "CloseESX180"
-    ) {
-      displayModal(false);
-    }
-  });
+document.addEventListener("click", (e) => {
+  if (e.target.id == "btnEmailMeBackInStock") {
+    displayModal(false);
+  }
+});
 
-  document.addEventListener("keyup", (e) => {
-    console.log(e.key);
-    if (e.key == "Escape") {
-      displayModal(false);
-    }
-  });
-};
+document.addEventListener("keyup", (e) => {
+  console.log(e.key);
+  if (e.key == "Escape") {
+    displayModal(false);
+  }
+});
 
 const displayModal = (bool) => {
   MODAL_IN_VIEW = bool;
@@ -225,12 +213,4 @@ const displayModal = (bool) => {
   }
 };
 
-var anotherInterval = setInterval(() => {
-  if (typeof window.jQuery !== "undefined") {
-    clearInterval(anotherInterval);
-    addEventListeners();
-    setTimeout(() => {
-      displayModal(true);
-    }, 3000);
-  }
-}, 50);
+displayModal(true);
