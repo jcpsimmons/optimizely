@@ -1,0 +1,5 @@
+#step3 .gift-card .checkbox-lg-text:before {
+  content: "\f09d";
+  font-family: "FontAwesome";
+  margin-right: 1rem;
+}

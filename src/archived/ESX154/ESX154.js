@@ -7,21 +7,21 @@ var mobile = function mobile() {
   $('.product-info-component img[alt$=" - Signature"]')
     .parent()
     .parent()
+    .last()
     .after(lifestyleImages);
   window.$("#imgSlider").slick({
     dots: true,
-    arrows: false
+    arrows: false,
   });
-  // Touch Event
   window.$('#imgSlider img[alt$=" - Room"]').bind("touchmove", function() {
     window["optimizely"] = window["optimizely"] || [];
     window["optimizely"].push({
       type: "event",
       eventName: "clickImgTiles",
       tags: {
-        revenue: 0, // Optional in cents as integer (500 == $5.00)
-        value: 0.0 // Optional as float
-      }
+        revenue: 0,
+        value: 0.0,
+      },
     });
   });
 };
@@ -31,7 +31,7 @@ var desktop = function desktop() {
   $(".product-info-component .view-more").removeClass("view-more");
   selectorPrefixes = [
     "#viewmoreComponentModal",
-    ".product-info-component  div.img-click"
+    ".product-info-component  div.img-click",
   ];
 
   for (var i = 0; i < selectorPrefixes.length; i++) {
@@ -72,22 +72,22 @@ var desktop = function desktop() {
             .attr("src")
             .split("?")[0] + "?w=1000&h=674&mode=pad";
       });
-
     setTimeout(function() {
       for (var i = 0; i < 6; i++) {
         window
           .$(".thumb-list .img-click:nth-of-type(" + (i + 1) + ")")
           .unbind("click");
       }
+
       window.$(".thumb-list img[alt$=' - Room']").click(function() {
         window["optimizely"] = window["optimizely"] || [];
         window["optimizely"].push({
           type: "event",
           eventName: "clickImgTiles",
           tags: {
-            revenue: 0, // Optional in cents as integer (500 == $5.00)
-            value: 0.0 // Optional as float
-          }
+            revenue: 0,
+            value: 0.0,
+          },
         });
       });
     }, 1000);
@@ -107,15 +107,16 @@ var desktop = function desktop() {
           .$(".thumb-list .img-click:nth-of-type(" + (i + 1) + ")")
           .unbind("click");
       }
+
       window.$(".thumb-list img[alt$=' - Room']").click(function() {
         window["optimizely"] = window["optimizely"] || [];
         window["optimizely"].push({
           type: "event",
           eventName: "clickImgTiles",
           tags: {
-            revenue: 0, // Optional in cents as integer (500 == $5.00)
-            value: 0.0 // Optional as float
-          }
+            revenue: 0,
+            value: 0.0,
+          },
         });
       });
     }, 1000);
@@ -127,6 +128,7 @@ $(document).ready(function() {
     if (typeof window.jQuery !== "undefined") {
       var $ = window.jQuery;
       clearInterval(anotherInterval);
+
       if (
         typeof window.$("#viewmoreComponentModal").modal("hide") == "object"
       ) {

@@ -1,6 +1,9 @@
 let MODAL_IN_VIEW = false;
-
+let MANUAL_TAB_INDEX = 0;
+let MANUAL_TAB_ITEMS;
 let SCROLL = window.pageYOffset;
+
+let IE = window.document.documentMode ? true : false;
 
 document.addEventListener("scroll", () => {
   SCROLL = window.pageYOffset;
@@ -58,6 +61,9 @@ const scrollToTop = () => {
 const addModalCode = () => {
   var $ = window.jQuery;
 
+  // reinitialize tab index to 0
+  MANUAL_TAB_INDEX = 2;
+
   const el = document.querySelector(
     "#product-detail-page-vue .out-stock-wrapper"
   );
@@ -87,6 +93,7 @@ const addModalCode = () => {
       #product-detail-page-vue .out-stock-wrapper form {
         display: flex;
         margin: auto;
+        margin-left: ${IE ? "15rem" : "auto"};
         margin-top: 18rem;
         justify-content: center;
       }
@@ -159,6 +166,12 @@ const addModalCode = () => {
       $("#product-detail-page-vue .out-stock-wrapper").height() /
         2}px - 4.5rem)`
   );
+
+  MANUAL_TAB_ITEMS = [
+    document.getElementById("oos_email"),
+    document.getElementById("btnEmailMeBackInStock"),
+    document.getElementById("CloseESX180").parentElement,
+  ];
 };
 
 const addEventListeners = () => {
@@ -196,18 +209,77 @@ const addEventListeners = () => {
   });
 
   document.addEventListener("click", (e) => {
-    if (
-      e.target.id == "btnEmailMeBackInStock" ||
-      e.target.id == "CloseESX180"
+    if (e.target.id == "btnEmailMeBackInStock") {
+      displayModal(false);
+      window["optimizely"] = window["optimizely"] || [];
+      window["optimizely"].push({
+        type: "event",
+        eventName: "180_SM",
+        tags: {
+          revenue: 0, // Optional in cents as integer (500 == $5.00)
+          value: 0.0, // Optional as float
+        },
+      });
+    } else if (
+      e.target.id == "CloseESX180" ||
+      e.target.id == "ESX180ScrollOverlay"
     ) {
       displayModal(false);
+      window["optimizely"] = window["optimizely"] || [];
+      window["optimizely"].push({
+        type: "event",
+        eventName: "180_CM",
+        tags: {
+          revenue: 0, // Optional in cents as integer (500 == $5.00)
+          value: 0.0, // Optional as float
+        },
+      });
     }
   });
 
   document.addEventListener("keyup", (e) => {
     console.log(e.key);
-    if (e.key == "Escape") {
+    if (e.key == "Escape" && MODAL_IN_VIEW) {
       displayModal(false);
+      window["optimizely"] = window["optimizely"] || [];
+      window["optimizely"].push({
+        type: "event",
+        eventName: "180_CM",
+        tags: {
+          revenue: 0, // Optional in cents as integer (500 == $5.00)
+          value: 0.0, // Optional as float
+        },
+      });
+    }
+    if (e.key == "Enter" && MODAL_IN_VIEW) {
+      window["optimizely"] = window["optimizely"] || [];
+      window["optimizely"].push({
+        type: "event",
+        eventName: "180_SM",
+        tags: {
+          revenue: 0, // Optional in cents as integer (500 == $5.00)
+          value: 0.0, // Optional as float
+        },
+      });
+    }
+  });
+
+  // manually handle tab focus
+  document.addEventListener("keydown", (e) => {
+    if (event.which == 9 && MODAL_IN_VIEW) {
+      event.preventDefault();
+      // global var is MANUAL_TAB_INDEX and MANUAL_TAB_ITEMS
+      MANUAL_TAB_INDEX += 1;
+      if (MANUAL_TAB_INDEX > MANUAL_TAB_ITEMS.length - 1) MANUAL_TAB_INDEX = 0;
+
+      let prevIndex =
+        MANUAL_TAB_INDEX - 1 < 0
+          ? MANUAL_TAB_ITEMS.length - 1
+          : MANUAL_TAB_INDEX - 1;
+      console.log(MANUAL_TAB_INDEX);
+      console.log(MANUAL_TAB_ITEMS[MANUAL_TAB_INDEX]);
+      MANUAL_TAB_ITEMS[prevIndex].blur();
+      MANUAL_TAB_ITEMS[MANUAL_TAB_INDEX].focus();
     }
   });
 };
