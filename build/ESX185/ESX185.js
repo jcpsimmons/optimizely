@@ -1,3 +1,15 @@
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 var addCSS = function addCSS() {
   var css = "\n    <style>\n      .product-info-component .thumb-list {\n        height: 12rem !important;\n        text-align: left!important;\n      }\n      @media (max-width: 1199px) {\n        .product-info-component .thumb-list {\n          height: 10rem !important;\n        }\n      }\n      @media (max-width: 991px) {\n        .product-info-component .thumb-list {\n          height: 11rem !important;\n        }\n      }\n    </style>\n  ";
   document.querySelector("head").insertAdjacentHTML("beforeend", css);
@@ -24,7 +36,7 @@ var findLastVisibleImage = function findLastVisibleImage() {
     output.colorPreviewThumb = true;
   }
 
-  if (document.querySelectorAll(".row.thumb-list > div").length > 14 || document.querySelectorAll(".row.thumb-list > div").length > 13 && output.colorPreviewThumb) {
+  if (document.querySelectorAll(".row.thumb-list > div").length > 15 || document.querySelectorAll(".row.thumb-list > div").length > 14 && output.colorPreviewThumb) {
     output.needsSpan = true;
   }
 
@@ -57,6 +69,11 @@ var eventListeners = function eventListeners() {
       }();
 
       window.$("#viewmoreComponentModal").modal("show");
+
+      _toConsumableArray(document.querySelectorAll(".modal-body .view-more-component__thumbnails .active")).forEach(function (el) {
+        el.classList.remove("active");
+      });
+
       var el = document.querySelector(".view-more-component__thumbnails > div:nth-of-type(".concat(imagesShown, ")"));
       el.classList.add("active");
       el.focus();
@@ -103,7 +120,7 @@ var moveMoreText = function moveMoreText() {
   var curViewMore = document.querySelector(".row.thumb-list .view-more");
   var spanText = curViewMore.querySelector(".view-more-number");
   var spanTextCopy = spanText.cloneNode(true);
-  spanTextCopy.textContent = "+ ".concat(imagesHidden, " more");
+  spanTextCopy.textContent = "+ ".concat(imagesHidden + 1, " more");
   spanText.parentElement.removeChild(spanText);
   curViewMore.classList.remove("view-more");
 

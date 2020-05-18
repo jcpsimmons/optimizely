@@ -37,8 +37,8 @@ const findLastVisibleImage = () => {
   }
 
   if (
-    document.querySelectorAll(".row.thumb-list > div").length > 14 ||
-    (document.querySelectorAll(".row.thumb-list > div").length > 13 &&
+    document.querySelectorAll(".row.thumb-list > div").length > 15 ||
+    (document.querySelectorAll(".row.thumb-list > div").length > 14 &&
       output.colorPreviewThumb)
   ) {
     output.needsSpan = true;
@@ -75,6 +75,16 @@ const eventListeners = () => {
       imagesShown = colorPreviewThumb ? imagesShown - 1 : imagesShown;
 
       window.$("#viewmoreComponentModal").modal("show");
+
+      // wipe all active classes on modal - sometimes they stay from last launch
+      [
+        ...document.querySelectorAll(
+          ".modal-body .view-more-component__thumbnails .active"
+        ),
+      ].forEach((el) => {
+        el.classList.remove("active");
+      });
+
       // on modal launch add active class to correct image
       let el = document.querySelector(
         `.view-more-component__thumbnails > div:nth-of-type(${imagesShown})`
@@ -131,7 +141,7 @@ const moveMoreText = () => {
   const spanText = curViewMore.querySelector(".view-more-number");
   // save clone to variable
   const spanTextCopy = spanText.cloneNode(true);
-  spanTextCopy.textContent = `+ ${imagesHidden} more`;
+  spanTextCopy.textContent = `+ ${imagesHidden + 1} more`;
 
   // delete og
   spanText.parentElement.removeChild(spanText);
