@@ -1,6 +1,4 @@
 var ESX189ManualLaunch = function ESX189ManualLaunch() {
-  var iOS = /iPhone|iPhone Simulator/.test(navigator.userAgent) && !window.MSStream;
-
   var iOSSafari = function iOSSafari() {
     var ua = window.navigator.userAgent;
     var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
@@ -11,7 +9,7 @@ var ESX189ManualLaunch = function ESX189ManualLaunch() {
 
   var faceMask = /face mask/.test(utag_data.product_name);
 
-  if (iOS && !faceMask) {
+  if (iOSSafari() && !faceMask) {
     EventBus.$on("productAddedToCart", function () {
       window["optimizely"] = window["optimizely"] || [];
       window["optimizely"].push({

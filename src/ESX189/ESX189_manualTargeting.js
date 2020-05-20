@@ -1,6 +1,6 @@
 const ESX189ManualLaunch = () => {
-  const iOS =
-    /iPhone|iPhone Simulator/.test(navigator.userAgent) && !window.MSStream;
+  // const iOS =
+  //   /iPhone|iPhone Simulator/.test(navigator.userAgent) && !window.MSStream;
 
   const iOSSafari = () => {
     var ua = window.navigator.userAgent;
@@ -13,7 +13,7 @@ const ESX189ManualLaunch = () => {
   const faceMask = /face mask/.test(utag_data.product_name);
 
   //    replace iOS with iOSSafari function for deploy
-  if (iOS && !faceMask) {
+  if (iOSSafari() && !faceMask) {
     console.debug("ESX189 Manual Trigger Added");
     EventBus.$on("productAddedToCart", function() {
       //trigger optimizely
