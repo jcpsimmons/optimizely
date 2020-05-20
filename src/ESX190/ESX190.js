@@ -106,7 +106,7 @@ const ESX190 = () => {
 
   document.querySelector("head").insertAdjacentHTML(
     "beforeend",
-    html`
+    `
       <style>
         #ESX190 {
           display: flex;
@@ -148,7 +148,7 @@ const ESX190 = () => {
     `
   );
 
-  state.html = `<div id="ESX190">${state.sortedProducts
+  state.html = `${state.sortedProducts
     .map((x) => {
       console.log(x);
       let tmp = `<button class=${x.currentProduct ? "active-button" : ""}>${
@@ -157,14 +157,16 @@ const ESX190 = () => {
       tmp = x.currentProduct ? tmp : `<a href="${x.link}">${tmp}</a>`;
       return tmp;
     })
-    .join("")}</div>`;
+    .join("")}`;
+
+  state.html = `<div id="ESX190"><span>View Other Sizes</span>${state.html}</div>`;
 
   document
     .getElementById("price-section")
     .insertAdjacentHTML("afterend", state.html);
 
   // Add event listener for optimizely
-  document.getElementById("ESX190").addEventListener("click", (e) => {
+  document.addEventListener("click", (e) => {
     if (e.target.closest("#ESX190")) {
       // Click event for tracking
       window["optimizely"] = window["optimizely"] || [];
