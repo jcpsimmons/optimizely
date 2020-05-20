@@ -25,6 +25,9 @@ const ESX187 = () => {
     #productImageGallery .slick-initialized{
       padding: 0 6.2rem;
     }
+    #productImageGallery .slick-slide img{
+      max-height: inherit;
+    }
   </style>
   <section class="board" id="ESX187">
     <a

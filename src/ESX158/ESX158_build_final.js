@@ -1,5 +1,3 @@
-"use strict";
-
 function _slicedToArray(arr, i) {
   return (
     _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest()
@@ -49,7 +47,6 @@ function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
 }
 
-// NEST IN HERE FOR DEPLOY
 var ESX158 = function ESX158() {
   var generateHtml = function generateHtml() {
     var formatHtml = function formatHtml(
@@ -58,10 +55,21 @@ var ESX158 = function ESX158() {
       question,
       answer
     ) {
+      if (typeof questionTitle == "undefined") {
+        return "";
+      }
+
       var randomName = ["Emma", "Eddy", "Olivia", "Kevin", "Kimberly"];
       randomName = randomName[Math.floor(Math.random() * randomName.length)];
-      var gender =
-        randomName.search(/Emma|Olivia|Kimberly/) > -1 ? "Female" : "Male";
+
+      var gender = (function() {
+        if (randomName.search(/Emma|Olivia|Kimberly/) > -1) {
+          return "Female";
+        }
+
+        return "Male";
+      })();
+
       return '<div id="BVQAQuestionAndAnswers'
         .concat(
           randomId,
@@ -218,7 +226,7 @@ var ESX158 = function ESX158() {
           randomId,
           '%26format%3Dembeddedhtml&amp;return=https%3A%2F%2Fwww.livingspaces.com%2Fpdp-turdur-sofa-223508&amp;sessionparams=__BVSESSIONPARAMS__&amp;submissionparams=__BVSUBMISSIONPARAMETERS__&amp;submissionurl=&amp;user=__USERID__" data-bvcfg="755200077" href="javascript://" title="" class="BVDILink " name="BV_TrackingTag_Answer_Display_Inappropriate_1595141" role="button" tabindex="0" aria-pressed="false"><span class="BVDILinkSpan">Report inappropriate content</span></a> </div> </div> <div class="BVQASpacer BVQAContentDataSpacer"></div> </div> </div> </div> </div> </div>'
         );
-    }; // Create random string for unique ID names
+    };
 
     var randomId = function randomId() {
       return (
@@ -229,16 +237,14 @@ var ESX158 = function ESX158() {
           .toString(36)
           .substring(2, 15)
       );
-    }; // function to get value given attribute name from table
+    };
 
     var getAttrValue = function getAttrValue(attrName) {
-      // essentially :contains()
       var x = Array.from(document.querySelectorAll("th")).find(function(el) {
         return el.textContent.search(attrName) > -1;
-      }); // the value
-
+      });
       return x.nextElementSibling.innerText;
-    }; //   html generators will go in here
+    };
 
     var questionTemplates = {
       seatHeight: function seatHeight() {
@@ -246,7 +252,7 @@ var ESX158 = function ESX158() {
           randomId(),
           "Seat Height?",
           "What is the seat height?",
-          "The seat height is ".concat(getAttrValue("Seat Height"), " inches.")
+          "The seat height is ".concat(getAttrValue("Seat Height"), " inches."),
         ];
       },
       weightCapacity: function weightCapacity() {
@@ -257,7 +263,7 @@ var ESX158 = function ESX158() {
           "The recommended weight capacity is ".concat(
             getAttrValue("Recommended Weight Capacity"),
             "lbs."
-          )
+          ),
         ];
       },
       seatDetachable: function seatDetachable() {
@@ -267,8 +273,26 @@ var ESX158 = function ESX158() {
           "Detachable Seat Cushions?",
           "Are the seat cushions detachable?",
           ""
-            .concat(detachable ? "Yes" : "No", " the seat cusions ")
-            .concat(detachable ? "are" : "aren't", " detachable.")
+            .concat(
+              (function() {
+                if (detachable) {
+                  return "Yes";
+                }
+
+                return "No";
+              })(),
+              " the seat cusions "
+            )
+            .concat(
+              (function() {
+                if (detachable) {
+                  return "are";
+                }
+
+                return "aren't";
+              })(),
+              " detachable."
+            ),
         ];
       },
       backDetachable: function backDetachable() {
@@ -278,20 +302,62 @@ var ESX158 = function ESX158() {
           "Back Cushions Detachable?",
           "Are the back cushions detachable?",
           ""
-            .concat(detachable ? "Yes" : "No", " the back cusions ")
-            .concat(detachable ? "are" : "aren't", " detachable.")
+            .concat(
+              (function() {
+                if (detachable) {
+                  return "Yes";
+                }
+
+                return "No";
+              })(),
+              " the back cusions "
+            )
+            .concat(
+              (function() {
+                if (detachable) {
+                  return "are";
+                }
+
+                return "aren't";
+              })(),
+              " detachable."
+            ),
         ];
       },
       removableCustionCovers: function removableCustionCovers() {
-        var removable =
-          getAttrValue("Seat Type").search("Loose") > -1 ? true : false;
+        var removable = (function() {
+          if (getAttrValue("Seat Type").search("Loose") > -1) {
+            return true;
+          }
+
+          return false;
+        })();
+
         return [
           randomId(),
           "Removable Cusion Covers?",
           "Are the cushion covers removable?",
           ""
-            .concat(removable ? "Yes" : "No", ", the cusion covers ")
-            .concat(removable ? "are" : "aren't", " removable.")
+            .concat(
+              (function() {
+                if (removable) {
+                  return "Yes";
+                }
+
+                return "No";
+              })(),
+              ", the cusion covers "
+            )
+            .concat(
+              (function() {
+                if (removable) {
+                  return "are";
+                }
+
+                return "aren't";
+              })(),
+              " removable."
+            ),
         ];
       },
       comeAssembled: function comeAssembled() {
@@ -307,28 +373,76 @@ var ESX158 = function ESX158() {
           "Comes Assembled?",
           "Does this come assembled?",
           ""
-            .concat(assemblyRequired ? "No" : "Yes", ", assembly ")
-            .concat(assemblyRequired ? "is" : "is not", " required.")
+            .concat(
+              (function() {
+                if (assemblyRequired) {
+                  return "No";
+                }
+
+                return "Yes";
+              })(),
+              ", assembly "
+            )
+            .concat(
+              (function() {
+                if (assemblyRequired) {
+                  return "is";
+                }
+
+                return "is not";
+              })(),
+              " required."
+            ),
         ];
       },
       requireBoxSpring: function requireBoxSpring() {
         var bs = false;
+        var optional = false;
+        var returnVal = [];
 
         if (getAttrValue("Recommended Box Spring").search("Box") > -1) {
           bs = true;
+          returnVal = [
+            randomId(),
+            "Box Spring Needed?",
+            "Does this bed frame require a box spring?",
+            ""
+              .concat(
+                (function() {
+                  if (bs) {
+                    return "Yes";
+                  }
+
+                  return "No";
+                })(),
+                ", this bed frame "
+              )
+              .concat(
+                (function() {
+                  if (bs) {
+                    return "does";
+                  }
+
+                  return "does not";
+                })(),
+                " require a box spring."
+              ),
+          ];
         }
 
-        return [
-          randomId(),
-          "Box Spring Needed?",
-          "Does this bed frame require a box spring?",
-          ""
-            .concat(bs ? "Yes" : "No", ", this bed frame ")
-            .concat(bs ? "does" : "does not", " require a box spring.")
-        ];
-      }
-    }; // Dont even need to part out the different possibilities, just try them all with try/catch
+        if (getAttrValue("Recommended Box Spring").search("Optional") > -1) {
+          optional = true;
+          returnVal = [
+            randomId(),
+            "Box Spring Needed?",
+            "Does this bed frame require a box spring?",
+            "A box spring is optional for this bed.",
+          ];
+        }
 
+        return returnVal;
+      },
+    };
     var tmpHtml = Object.keys(questionTemplates)
       .map(function(template) {
         try {
@@ -352,18 +466,17 @@ var ESX158 = function ESX158() {
   };
 
   var findSelectorAndInsert = function findSelectorAndInsert(html) {
-    // Determine where to insert HTML
     if (document.getElementById("BVQANoQuestionsID")) {
-      // Handle no questions
       document.getElementById("BVQANoQuestionsID").outerHTML = "";
       document
         .getElementById("BVQAViewQuestionsContentID")
         .insertAdjacentHTML("beforeend", html);
     } else {
-      // handle questions exist
-      document
-        .getElementById("BVQAQuestionsID")
-        .insertAdjacentHTML("afterbegin", html);
+      try {
+        document
+          .getElementById("BVQAQuestionsID")
+          .insertAdjacentHTML("afterbegin", html);
+      } catch (error) {}
     }
   };
 
@@ -375,7 +488,7 @@ var ESX158 = function ESX158() {
         window["optimizely"].push({
           type: "event",
           eventName: "ESX158_ClickReviews",
-          tags: {}
+          tags: {},
         });
       });
   };
@@ -385,4 +498,10 @@ var ESX158 = function ESX158() {
   makeEventListener();
 };
 
-ESX158();
+var anotherInterval = setInterval(() => {
+  if (typeof window.jQuery !== "undefined") {
+    clearInterval(anotherInterval);
+    var $ = window.jQuery;
+    ESX158();
+  }
+}, 50);

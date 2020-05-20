@@ -8,7 +8,7 @@ let OPTIMIZELY_CREDS = fs
 
 const headers = {
   "Content-Type": "application/json",
-  Authorization: `Bearer ${OPTIMIZELY_CREDS}`
+  Authorization: `Bearer ${OPTIMIZELY_CREDS}`,
 };
 console.log(headers);
 
@@ -23,6 +23,7 @@ let varName = readlineSync.question(`What's the name of the variation? `);
 let esxFormatted = `./src/ESX${esxNumber}`;
 if (!fs.existsSync(esxFormatted)) {
   fs.mkdirSync(esxFormatted);
+  fs.writeFileSync(`${esxFormatted}/ESX${esxNumber}_targeting.js`);
   fs.writeFileSync(
     `${esxFormatted}/ESX${esxNumber}.js`,
     `var anotherInterval = setInterval(() => {
@@ -50,19 +51,19 @@ let data = {
       name: "Original",
       actions: [
         {
-          page_id: 16772130649
-        }
-      ]
+          page_id: 16772130649,
+        },
+      ],
     },
     {
       weight: 5000,
       name: varName,
       actions: [
         {
-          page_id: 16772130649
-        }
-      ]
-    }
+          page_id: 16772130649,
+        },
+      ],
+    },
   ],
   page_ids: [16772130649],
   metrics: [
@@ -70,41 +71,41 @@ let data = {
       aggregator: "sum",
       field: "revenue",
       scope: "visitor",
-      winning_direction: "increasing"
+      winning_direction: "increasing",
     },
     {
       aggregator: "unique",
       event_id: 10666463782,
       scope: "visitor",
-      winning_direction: "increasing"
+      winning_direction: "increasing",
     },
     {
       aggregator: "unique",
       event_id: 10647053297,
       scope: "visitor",
-      winning_direction: "increasing"
+      winning_direction: "increasing",
     },
     {
       aggregator: "unique",
       event_id: 10650830507,
       scope: "visitor",
-      winning_direction: "increasing"
+      winning_direction: "increasing",
     },
     {
       aggregator: "unique",
       event_id: 10654130421,
       scope: "visitor",
-      winning_direction: "increasing"
-    }
-  ]
+      winning_direction: "increasing",
+    },
+  ],
 };
 
 // API CALL to create EXP
 axios
   .post("https://api.optimizely.com/v2/experiments", JSON.stringify(data), {
-    headers: headers
+    headers: headers,
   })
-  .then(res => console.log(res))
-  .catch(err => {
+  .then((res) => console.log(res))
+  .catch((err) => {
     console.error(err);
   });
