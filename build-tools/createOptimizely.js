@@ -23,16 +23,16 @@ let varName = readlineSync.question(`What's the name of the variation? `);
 let esxFormatted = `./src/ESX${esxNumber}`;
 if (!fs.existsSync(esxFormatted)) {
   fs.mkdirSync(esxFormatted);
-  fs.writeFileSync(`${esxFormatted}/ESX${esxNumber}_targeting.js`);
+  fs.writeFileSync(`${esxFormatted}/ESX${esxNumber}_targeting.js`, ``);
   fs.writeFileSync(
     `${esxFormatted}/ESX${esxNumber}.js`,
     `var anotherInterval = setInterval(() => {
-      if (typeof window.jQuery !== "undefined") {
-        clearInterval(anotherInterval);
-        var $ = window.jQuery;
-      }
-    }, 50);
-    `
+    if (typeof window.jQuery !== "undefined") {
+      clearInterval(anotherInterval);
+      var $ = window.jQuery;
+    }
+  }, 50);
+  `
   );
 } else {
   console.error(`ERROR - An experiment numbered ${esxNumber} already exists!`);
@@ -100,12 +100,13 @@ let data = {
   ],
 };
 
+console.log("Creating experiment in Optimizely...");
 // API CALL to create EXP
 axios
   .post("https://api.optimizely.com/v2/experiments", JSON.stringify(data), {
     headers: headers,
   })
-  .then((res) => console.log(res))
+  .then((res) => console.log("Done!"))
   .catch((err) => {
     console.error(err);
   });

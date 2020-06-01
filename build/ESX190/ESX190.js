@@ -1,15 +1,3 @@
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n      <style>\n        #ESX190 {\n          display: flex;\n          width: 100%;\n          justify-content: start;\n          margin-bottom: 1rem;\n        }\n        #ESX190 * {\n          text-transform: capitalize;\n          font-size: 1.4rem;\n          font-weight: 600;\n          white-space: nowrap;\n        }\n        #ESX190 *:not(a) {\n          border: 1px solid #333;\n          transition: 0.3s;\n          border-radius: 2px;\n        }\n        #ESX190 a:hover button {\n          background-color: #eee;\n        }\n        #ESX190 button {\n          background-color: #fff;\n          color: #333;\n          padding: 1rem 1.5rem;\n        }\n        #ESX190 > *:nth-child(n + 2) {\n          margin-left: 1rem;\n        }\n        #ESX190 .active-button {\n          background-color: #333;\n          color: #fff;\n          cursor: initial;\n        } /* other page style tweaks */\n        #price-section {\n          margin-bottom: 1rem !important;\n        }\n      </style>\n    "]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -28,7 +16,14 @@ var ESX190 = function ESX190() {
       name: utag_data.product_name[0],
       size: "",
       type: "",
-      currentProduct: true
+      currentProduct: true,
+      sku: function () {
+        if (window.location.href.match(/[0-9]{5,7}$/gm)) {
+          return window.location.href.match(/[0-9]{5,7}$/gm)[0];
+        }
+
+        return null;
+      }()
     },
     searchWords: ["canopy 4 piece", "canopy 3 piece", "panel 4 piece", "panel 3 piece", "platform 4 piece", "platform 3 piece", "sleigh 4 piece", "sleigh 3 piece", "poster 4 piece", "poster 3 piece", "storage 4 piece", "storage 3 piece", "sleigh bed", "poster bed", "canopy bed", "platform bed", "panel bed", "storage bed", "upholstered headboard with metal", "4 piece", "3 piece"],
     alsoInThisCollection: [],
@@ -57,6 +52,9 @@ var ESX190 = function ESX190() {
 
       sortedArr.push(match);
     });
+    sortedArr = sortedArr.filter(function (x) {
+      return x !== undefined;
+    });
     return sortedArr;
   };
 
@@ -68,29 +66,37 @@ var ESX190 = function ESX190() {
   })[0];
   state.alsoInThisCollection = _toConsumableArray(document.querySelectorAll("#thisCollection a")).map(function (el) {
     var link = el.href;
+
+    var sku = function () {
+      if (link.match(/[0-9]{5,7}$/gm)) {
+        return link.match(/[0-9]{5,7}$/gm)[0];
+      }
+
+      return null;
+    }();
+
+    var price = el.querySelector(".price").textContent;
     var name = el.querySelector(".title").textContent;
     var size = state.sortingOrder.filter(function (s) {
       return name.toLowerCase().search(s) > -1;
     })[0];
     return {
       name: name,
+      sku: sku,
       link: link,
       size: size,
+      price: price,
       currentProduct: false
     };
   }).filter(function (item) {
     return item.name.toLowerCase().search(state.currentProduct.type) > -1;
   });
   state.sortedProducts = sortedItems([].concat(_toConsumableArray(state.alsoInThisCollection), [state.currentProduct]));
-  document.querySelector("head").insertAdjacentHTML("beforeend", html(_templateObject()));
-  state.html = "<div id=\"ESX190\">".concat(state.sortedProducts.map(function (x) {
-    var tmp = "<button class=".concat(function () {
-      if (x.currentProduct) {
-        return "active-button";
-      }
-
-      return "";
-    }(), ">").concat(x.size, "</button>");
+  document.querySelector("head").insertAdjacentHTML("beforeend", "\n      <style>\n        #ESX190 {\n          display: flex;\n          width: 100%;\n          justify-content: start;\n          margin-bottom: 3rem;\n          align-items: center;\n        }\n        #ESX190 * {\n          text-transform: capitalize;\n          font-size: 1.4rem;\n          font-weight: 600;\n          white-space: nowrap;\n        }\n        #ESX190 button {\n          border: 1px solid #333;\n          border-radius: 2px;\n        }\n        #ESX190 a:hover button {\n          background-color: #333;\n          color: #fff;\n        }\n        #ESX190 button {\n          background-color: #fff;\n          color: #333;\n          padding: 1rem 1.5rem;\n        }\n        #ESX190 button span, #ESX190 > span {\n          font-weight: 800;\n        }\n        #ESX190 > *:nth-child(n + 2) {\n          margin-left: 1rem;\n        }\n        #ESX190 .active-button {\n          background-color: #333;\n          color: #fff;\n          cursor: initial;\n        }\n        @media (min-width: 992px) and (max-width: 1100px) {\n          #ESX190 button {\n            padding: 1rem .5rem;\n          }\n        }\n      </style>\n    ");
+  state.html = "".concat(state.sortedProducts.filter(function (i) {
+    return i.sku !== state.currentProduct.sku;
+  }).map(function (x) {
+    var tmp = "<button><span>".concat(x.size, "</span> ").concat(x.price, "</button>");
 
     tmp = function () {
       if (x.currentProduct) {
@@ -101,25 +107,24 @@ var ESX190 = function ESX190() {
     }();
 
     return tmp;
-  }).join(""), "</div>");
+  }).join(""));
+  state.html = "<div id=\"ESX190\"><span>View Other Sizes</span>".concat(state.html, "</div>");
   document.getElementById("price-section").insertAdjacentHTML("afterend", state.html);
-  document.getElementById("ESX190").addEventListener("click", function (e) {
-    if (e.target.closest("#ESX190")) {
-      window["optimizely"] = window["optimizely"] || [];
-      window["optimizely"].push({
-        type: "event",
-        eventName: "clickSizeOpts"
-      });
-    }
-  });
 };
 
-var anotherInterval = setInterval(function () {
-  if (typeof window.jQuery !== "undefined") {
-    clearInterval(anotherInterval);
-    var $ = window.jQuery;
-    $(document).ready(function () {
-      ESX190();
+$(document).ready(function () {
+  ESX190();
+});
+document.addEventListener("click", function (e) {
+  if (e.target.closest("#ESX190")) {
+    window["optimizely"] = window["optimizely"] || [];
+    window["optimizely"].push({
+      type: "event",
+      eventName: "190_cso",
+      tags: {
+        revenue: 0,
+        value: 0.0
+      }
     });
   }
-}, 50);
+});

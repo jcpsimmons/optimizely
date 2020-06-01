@@ -5,6 +5,9 @@ const ESX190 = () => {
       size: "",
       type: "",
       currentProduct: true,
+      sku: window.location.href.match(/[0-9]{5,7}$/gm)
+        ? window.location.href.match(/[0-9]{5,7}$/gm)[0]
+        : null,
     },
     //  searchWords ends up acting like a switch statement - early cases will override later cases
     searchWords: [
@@ -63,6 +66,7 @@ const ESX190 = () => {
 
       sortedArr.push(match);
     });
+    sortedArr = sortedArr.filter((x) => x !== undefined);
     return sortedArr;
   };
 
@@ -83,14 +87,20 @@ const ESX190 = () => {
   ]
     .map((el) => {
       let link = el.href;
+      let sku = link.match(/[0-9]{5,7}$/gm)
+        ? link.match(/[0-9]{5,7}$/gm)[0]
+        : null;
+      let price = el.querySelector(".price").textContent;
       let name = el.querySelector(".title").textContent;
       let size = state.sortingOrder.filter((s) => {
         return name.toLowerCase().search(s) > -1;
       })[0];
       return {
         name: name,
+        sku: sku,
         link: link,
         size: size,
+        price: price,
         currentProduct: false,
       };
     })
@@ -112,7 +122,8 @@ const ESX190 = () => {
           display: flex;
           width: 100%;
           justify-content: start;
-          margin-bottom: 1rem;
+          margin-bottom: 3rem;
+          align-items: center;
         }
         #ESX190 * {
           text-transform: capitalize;
@@ -120,18 +131,21 @@ const ESX190 = () => {
           font-weight: 600;
           white-space: nowrap;
         }
-        #ESX190 *:not(a) {
+        #ESX190 button {
           border: 1px solid #333;
-          transition: 0.3s;
           border-radius: 2px;
         }
         #ESX190 a:hover button {
-          background-color: #eee;
+          background-color: #333;
+          color: #fff;
         }
         #ESX190 button {
           background-color: #fff;
           color: #333;
           padding: 1rem 1.5rem;
+        }
+        #ESX190 button span, #ESX190 > span {
+          font-weight: 800;
         }
         #ESX190 > *:nth-child(n + 2) {
           margin-left: 1rem;
@@ -140,20 +154,21 @@ const ESX190 = () => {
           background-color: #333;
           color: #fff;
           cursor: initial;
-        } /* other page style tweaks */
-        #price-section {
-          margin-bottom: 1rem !important;
+        }
+        @media (min-width: 992px) and (max-width: 1100px) {
+          #ESX190 button {
+            padding: 1rem .5rem;
+          }
         }
       </style>
     `
   );
 
   state.html = `${state.sortedProducts
+    .filter((i) => i.sku !== state.currentProduct.sku) // remove current product
     .map((x) => {
-      console.log(x);
-      let tmp = `<button class=${x.currentProduct ? "active-button" : ""}>${
-        x.size
-      }</button>`;
+      console.log("products to display", x);
+      let tmp = `<button><span>${x.size}</span> ${x.price}</button>`;
       tmp = x.currentProduct ? tmp : `<a href="${x.link}">${tmp}</a>`;
       return tmp;
     })
@@ -164,26 +179,24 @@ const ESX190 = () => {
   document
     .getElementById("price-section")
     .insertAdjacentHTML("afterend", state.html);
-
-  // Add event listener for optimizely
-  document.addEventListener("click", (e) => {
-    if (e.target.closest("#ESX190")) {
-      // Click event for tracking
-      window["optimizely"] = window["optimizely"] || [];
-      window["optimizely"].push({
-        type: "event",
-        eventName: "clickSizeOpts",
-      });
-    }
-  });
 };
 
-var anotherInterval = setInterval(() => {
-  if (typeof window.jQuery !== "undefined") {
-    clearInterval(anotherInterval);
-    var $ = window.jQuery;
-    $(document).ready(function() {
-      ESX190();
+$(document).ready(function() {
+  ESX190();
+});
+
+// Add event listener for optimizely
+document.addEventListener("click", (e) => {
+  if (e.target.closest("#ESX190")) {
+    // Click event for tracking
+    window["optimizely"] = window["optimizely"] || [];
+    window["optimizely"].push({
+      type: "event",
+      eventName: "190_cso",
+      tags: {
+        revenue: 0, // Optional in cents as integer (500 == $5.00)
+        value: 0.0, // Optional as float
+      },
     });
   }
-}, 50);
+});
