@@ -1,93 +1,127 @@
-async function cartAdds() {
-  // ARRAY OF CART ADDS
-  //   probably move this to manual triggering on site for Optimizely
-  const numItemsInCart = parseInt(
-    document.querySelector(".counter.cart").textContent.trim()
-  );
+const checkoutModal = () => {
+  const addModal = () => {
+    document.querySelector("body").insertAdjacentHTML(
+      "beforebegin",
+      `
+      <div id="ExperimentContainer">
+        <style>
+          #ModalThing {
+            position: absolute;
+            left: 50vw;
+            top: 83vw;
+            font-size: 5rem;
+            z-index: 999;
+            transform: translate(-50%,-50%);
+          }
+        </style>
+        <div id="ModalThing">
+          <h1>This is a modal stand-in</h1>
+          <button onclick="modalOnClickBehavior()">Click to confirm</button>
+        </div>
+      </div>
+      `
+    );
 
-  if (!numItemsInCart) {
-    //   break function if nothing is in cart
-    return false;
-  }
+    MODAL_IS_VISIBLE = true;
+  };
 
-  //   Add style tag
-  document.querySelector("head").insertAdjacentHTML(
-    "beforeend",
-    `
-<style>
-  #ItemsInCart {
-    max-width: 1140px;
-    margin: 0 auto 2rem;
-  }
-  #ItemsInCart .item {
-    display: inline-block;
-    margin: 0 2rem;
-    font-weight: 600;
-    font-size: 2rem;
-  }
-  #ItemsInCart .cart-items {
-    display: flex;
-    flex-wrap: nowrap;
-  }
-  #ItemsInCart .cart-items>div {
-    margin: auto 1rem;
-  }
-  #ItemsInCart .outer-flex {
-    display: flex;
-    align-items: center;
-    width: 70%;
-    margin: auto auto auto 0;
-    border-radius: 4px;
-    box-shadow: 0 0 6px 0 #bbb;
-    padding: 3rem;
-  }
-  #ItemsInCart button {
-    color: #fff;
-    background-color: #ad4e17;
-  }
-  #ItemsInCart button a {
-    color: #fff!important;
-  }
-  #ItemsInCart button a:hover,#ItemsInCart button a:visited,#ItemsInCart button a:focus {
-      text-decoration:none
-  }
-  #ItemsInCart .checkout-button {
-    margin-left: 4rem;
-  }
-</style>
-`
-  );
+  const checkAddErrors = (fieldsIDsToCheck) => {
+    let fieldInvalid = false;
 
-  const cartSkus = [
-    ...document.querySelectorAll(".cart-dropdown-content>.product-element>a")
-  ].map(a => a.href.split("-").pop());
+    fieldsIDsToCheck.forEach((field) => {
+      const el = document.getElementById(field);
 
-  const cartTotal = document.querySelector(
-    ".cart-dropdown-content>.subtotal strong"
-  ).textContent;
+      // if there's no value or check, add error class and show label
+      if (el.value === "" || (el === "accept-terms" && !el.checked)) {
+        fieldInvalid = true;
 
-  let cartItemData = await fetch(
-    `https://www.livingspaces.com/api/restfulproducts?pid=${cartSkus}`
-  );
+        // special case for credit card type field
+        if (field === "credit-card-type") {
+          el.parentElement.parentElement.classList.add("error");
+          el.parentElement.parentElement.querySelector(
+            "span.validation-error"
+          ).style.display = "block";
+        } else {
+          el.parentElement.classList.add("error");
+          el.parentElement.querySelector(
+            "span.validation-error"
+          ).style.display = "block";
+        }
+      }
+    });
 
-  cartItemData = await cartItemData.json();
+    return fieldInvalid;
+  };
 
-  insertHtml = cartItemData.products
-    .map(item => {
-      console.log(item.images[0]);
-      return `<div><a href="/${item.pid}"><img class="img-responsive" src="${item.images[0].imageUrl}"/><p>${item.title}</p><p>$${item.price.salePrice}</p></a></div>`;
-    })
-    .join("");
+  const clearErrors = (fieldsIDsToCheck) => {
+    fieldsIDsToCheck.forEach((field) => {
+      const el = document.getElementById(field);
 
-  insertHtml = `
-  <div id="ItemsInCart" class="text-center">
-  <div class="outer-flex">
-    <div class="cart-items">${insertHtml}</div>
-  </div>
-</div>`;
+      // special case for credit card type field
+      if (field === "credit-card-type") {
+        el.parentElement.parentElement.classList.remove("error");
+        el.parentElement.parentElement.querySelector(
+          "span.validation-error"
+        ).style.display = "none";
+      } else {
+        el.parentElement.classList.remove("error");
+        el.parentElement.querySelector("span.validation-error").style.display =
+          "none";
+      }
+    });
+  };
 
-  document
-    .getElementById("ls_hero_event")
-    .parentElement.insertAdjacentHTML("afterend", insertHtml);
+  document.addEventListener("click", (e) => {
+    if (e.target.id == "placeOrderBtn" && !MODAL_IS_VISIBLE) {
+      const fieldsIDsToCheck = [
+        "credit-card-type",
+        "credit-card",
+        "exp-month",
+        "exp-year",
+        "ccv",
+        "accept-terms",
+      ];
+
+      e.preventDefault();
+      const fieldInvalid = checkAddErrors(fieldsIDsToCheck);
+      if (!fieldInvalid) {
+        clearErrors(fieldsIDsToCheck);
+        addModal();
+      }
+    }
+  });
+};
+
+// // form fields
+
+// // ship date
+// console.log(
+//   document.querySelector("#step3 .cart-main-content .date").textContent
+// );
+
+// // address - formatted
+// console.log(
+//   `${document.getElementById("shipping-address1").value} ${
+//     document.getElementById("shipping-address2") === ""
+//       ? ""
+//       : document.getElementById("shipping-address2").value
+//   } ${document.getElementById("shipping-city").value}, ${
+//     document.getElementById("shipping-state").value
+//   } ${document.getElementById("shipping-zip").value}`
+// );
+
+// set global modal variable and launch
+let MODAL_IS_VISIBLE = false;
+
+const modalOnClickBehavior = () => {
+  const el = document.getElementById("ExperimentContainer");
+  el.parentNode.removeChild(el);
+  document.MODAL_IS_VISIBLE = false;
+  document.getElementById("placeOrderBtn").click();
+};
+
+if (document.readyState === "complete") {
+  checkoutModal();
+} else {
+  document.addEventListener("DOMContentLoaded", checkoutModal);
 }
-cartAdds();

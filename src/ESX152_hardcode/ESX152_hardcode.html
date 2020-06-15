@@ -1,0 +1,50 @@
+<script>
+  // Temporary hardcode for ESX152
+
+  function ESX152Hardcode() {
+    function scrollOnErrorClick() {
+      var $ = window.jQuery;
+      $("#shipBillBtn").click(function() {
+        if ($(".error:visible").length) {
+          $([document.documentElement, document.body]).animate(
+            {
+              scrollTop: window
+                .$(".error:visible")
+                .first()
+                .offset().top,
+            },
+            300
+          );
+        }
+      });
+    }
+
+    function checkStep() {
+      try {
+        return (
+          document.getElementById("step2Tab").getAttribute("aria-expanded") ==
+          "true"
+        );
+      } catch (error) {
+        return false;
+      }
+    }
+
+    var esx152Interval = setInterval(function() {
+      if (typeof window.jQuery !== "undefined" && checkStep()) {
+        clearInterval(esx152Interval);
+        scrollOnErrorClick();
+      }
+    }, 50);
+  }
+
+  // document ready
+  if (
+    document.readyState === "complete" ||
+    (document.readyState !== "loading" && !document.documentElement.doScroll)
+  ) {
+    ESX152Hardcode();
+  } else {
+    document.addEventListener("DOMContentLoaded", ESX152Hardcode);
+  }
+</script>
