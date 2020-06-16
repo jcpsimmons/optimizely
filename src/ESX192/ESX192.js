@@ -35,9 +35,6 @@ const ESX192 = ($) => {
           background: #686868;
           border-color: #686868;
         }
-        #ESX192Modal .modal-footer a {
-          text-decoration: none;
-        }
       </style>
       <div id="ESX192Modal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -56,7 +53,6 @@ const ESX192 = ($) => {
             </div>
             <div class="modal-body"></div>
             <div class="modal-footer">
-              <a href="/shopping-cart">
                 <button
                   id="ESX192_EditOrderButton"
                   type="button"
@@ -64,7 +60,6 @@ const ESX192 = ($) => {
                 >
                   Edit Order
                 </button>
-              </a>
               <button
                 id="ESX192_PlaceOrderButton"
                 type="button"
@@ -80,56 +75,69 @@ const ESX192 = ($) => {
   );
 
   const insertModalBody = () => {
-    document.querySelector("#ESX192Modal .modal-body").innerHTML = `
-      ${
-        document
-          .querySelector("#step3 .cart-main-content .header-info p")
-          .textContent.toLowerCase()
-          .includes("pickup")
-          ? `
-            <p>
-              Pickup Store:
-              ${
-                document
-                  .querySelector(
-                    "#step3 .cart-main-content .main-header .title"
-                  )
-                  .textContent.split("at ")[1]
-              }
-            </p>
-            <p>
-              Pickup Window:
-              ${
-                document
-                  .querySelector("#step3 .cart-main-content .date")
-                  .textContent.split("(")[0]
-              }
-            </p>
-          `
-          : `
-          <p>
-            Delivery Address:
-            ${document.getElementById("shipping-address1").value}
-            ${
-              document.getElementById("shipping-address2") === ""
-                ? ""
-                : document.getElementById("shipping-address2").value
-            }
-            ${document.getElementById("shipping-city").value},
-            ${document.getElementById("shipping-state").value}
-            ${document.getElementById("shipping-zip").value}
-          </p>
-          <p>
-            Delivery Window:
-            ${
-              document
-                .querySelector("#step3 .cart-main-content .date")
-                .textContent.split("(")[0]
-            }
-          </p>
-        `
-      }
-    `;
+    // get all of the mixed cart data
+    const shippingInfo = [
+      ...document.querySelectorAll(
+        "#step3 .cart-component .content-header.main-header"
+      ),
+    ]
+      .map((el) => {
+        data = {};
+
+        // figure out if it's pickup/shipping/delivery
+        const titleText = el.querySelector(".title").innerText.toLowerCase();
+        if (titleText.includes("pickup")) {
+          data.location = `Pickup Store: ${el
+            .querySelector(".title")
+            .textContent.split("at ")[1]
+            .trim()}`;
+          data.window = `Pickup Window:
+        ${el
+          .querySelector(".date")
+          .textContent.split("(")[0]
+          .trim()}`;
+        } else if (titleText.includes("shipped")) {
+          data.location = `Shipping Address: ${
+            document.getElementById("shipping-address1").value
+          }
+        ${
+          document.getElementById("shipping-address2") === ""
+            ? ""
+            : document.getElementById("shipping-address2").value
+        }
+        ${document.getElementById("shipping-city").value},
+        ${document.getElementById("shipping-state").value}
+        ${document.getElementById("shipping-zip").value}`;
+          data.window = `Shipping Window: ${el
+            .querySelector(".date")
+            .textContent.split("(")[0]
+            .trim()}`;
+        } else if (titleText.includes("delivered")) {
+          data.location = `Delivery Address: ${
+            document.getElementById("shipping-address1").value
+          }
+        ${
+          document.getElementById("shipping-address2") === ""
+            ? ""
+            : document.getElementById("shipping-address2").value
+        }
+        ${document.getElementById("shipping-city").value},
+        ${document.getElementById("shipping-state").value}
+        ${document.getElementById("shipping-zip").value}`;
+          data.window = `Delivery Window: ${el
+            .querySelector(".date")
+            .textContent.split("(")[0]
+            .trim()}`;
+        }
+
+        return data;
+      })
+      .map((item) => {
+        return `<p>${item.location}</p><p>${item.window}</p>`;
+      })
+      .join("");
+
+    document.querySelector("#ESX192Modal .modal-body").innerHTML = shippingInfo;
   };
 
   const checkFormComplete = () => {
@@ -168,6 +176,10 @@ const ESX192 = ($) => {
 
   const showModal = () => {
     $("#ESX192Modal").modal("show");
+  };
+
+  const closeModal = () => {
+    $("#ESX192Modal").modal("hide");
   };
 
   const checkAddErrors = (FIELD_IDS_TO_CHECK) => {
@@ -237,6 +249,10 @@ const ESX192 = ($) => {
       .includes("error processing card");
   };
 
+  const goToStepTwo = () => {
+    document.getElementById("step2Tab").click();
+  };
+
   // capture event on submission click
   document.addEventListener("click", (e) => {
     if (
@@ -265,6 +281,9 @@ const ESX192 = ($) => {
       submitOrder();
     } else if (e.target.id === "ESX192_CloseModalButton") {
       closeModal();
+    } else if (e.target.id === "ESX192_EditOrderButton") {
+      closeModal();
+      goToStepTwo();
     }
   });
 };
