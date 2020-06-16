@@ -1,33 +1,58 @@
-var checkoutModal = function checkoutModal() {
+var ESX192 = function ESX192($) {
+  var ORDER_SUBMITTED = false;
   var MODAL_IS_VISIBLE = false;
-  var MODAL_ELIGIBLE = true;
-  document.querySelector("body").insertAdjacentHTML("beforeend", "\n      <style>\n        #ESX192Modal {\n          text-align: center;\n        }\n        #ESX192Modal .modal-footer {\n          text-align: center;\n        }\n        #ESX192_PlaceOrderButton {\n          background: #bd5519;\n          border-color: #bd5519;\n          margin-left: 3rem;\n        }\n        #ESX192_EditOrderButton {\n          background: #686868;\n          border-color: #686868;\n        }\n      </style>\n      <div id=\"ESX192Modal\" class=\"modal\" tabindex=\"-1\" role=\"dialog\">\n        <div class=\"modal-dialog\" role=\"document\">\n          <div class=\"modal-content\">\n            <div class=\"modal-header\">\n              <h5 class=\"modal-title\">Review Order</h5>\n              <button\n                id=\"ESX192_CloseModalButton\"\n                type=\"button\"\n                class=\"close\"\n                data-dismiss=\"modal\"\n                aria-label=\"Close\"\n              >\n                <span aria-hidden=\"true\">&times;</span>\n              </button>\n            </div>\n            <div class=\"modal-body\">\n              <p>\n                Delivery Address:\n                ".concat(document.getElementById("shipping-address1").value, "\n                ").concat(function () {
-    if (document.getElementById("shipping-address2") === "") {
-      return "";
+  var FORM_COMPLETE = false;
+  var FIELD_IDS_TO_CHECK = ["credit-card-type", "credit-card", "exp-month", "exp-year", "ccv", "accept-terms"];
+  document.getElementById("placeOrderBtn").innerText = "Review Order";
+  document.querySelector("body").insertAdjacentHTML("beforeend", "\n      <style>\n        #ESX192Modal {\n          text-align: center;\n        }\n        #ESX192Modal .modal-footer {\n          text-align: center;\n        }\n        #ESX192_PlaceOrderButton {\n          background: #bd5519;\n          border-color: #bd5519;\n          margin-left: 3rem;\n        }\n        #ESX192_EditOrderButton {\n          background: #686868;\n          border-color: #686868;\n        }\n        #ESX192Modal .modal-footer a {\n          text-decoration: none;\n        }\n      </style>\n      <div id=\"ESX192Modal\" class=\"modal\" tabindex=\"-1\" role=\"dialog\">\n        <div class=\"modal-dialog\" role=\"document\">\n          <div class=\"modal-content\">\n            <div class=\"modal-header\">\n              <h5 class=\"modal-title\">Review Order</h5>\n              <button\n                id=\"ESX192_CloseModalButton\"\n                type=\"button\"\n                class=\"close\"\n                data-dismiss=\"modal\"\n                aria-label=\"Close\"\n              >\n                <span aria-hidden=\"true\">&times;</span>\n              </button>\n            </div>\n            <div class=\"modal-body\">\n              ".concat(function () {
+    if (document.querySelector("#step3 .cart-main-content .header-info p").textContent.toLowerCase().includes("pickup")) {
+      return "\n                      <p>\n                        Pickup Store:\n                        ".concat(document.querySelector("#step3 .cart-main-content .main-header .title").textContent.split("at ")[1], "\n                      </p>\n                      <p>\n                        Pickup Window:\n                        ").concat(document.querySelector("#step3 .cart-main-content .date").textContent.split("(")[0], "\n                      </p>\n                    ");
     }
 
-    return document.getElementById("shipping-address2").value;
-  }(), "\n                ").concat(document.getElementById("shipping-city").value, ",\n                ").concat(document.getElementById("shipping-state").value, "\n                ").concat(document.getElementById("shipping-zip").value, "\n              </p>\n              <p>\n                Delivery Window:\n                ").concat(document.querySelector("#step3 .cart-main-content .date").textContent, "\n              </p>\n            </div>\n            <div class=\"modal-footer\">\n              <a href=\"/shopping-cart\">\n                <button\n                  id=\"ESX192_EditOrderButton\"\n                  type=\"button\"\n                  class=\"btn btn-primary\"\n                >\n                  Edit Order\n                </button>\n              </a>\n              <button\n                id=\"ESX192_PlaceOrderButton\"\n                type=\"button\"\n                class=\"btn btn-primary\"\n              >\n                Place Order\n              </button>\n            </div>\n          </div>\n        </div>\n      </div>\n    "));
+    return "\n                    <p>\n                      Delivery Address:\n                      ".concat(document.getElementById("shipping-address1").value, "\n                      ").concat(function () {
+      if (document.getElementById("shipping-address2") === "") {
+        return "";
+      }
+
+      return document.getElementById("shipping-address2").value;
+    }(), "\n                      ").concat(document.getElementById("shipping-city").value, ",\n                      ").concat(document.getElementById("shipping-state").value, "\n                      ").concat(document.getElementById("shipping-zip").value, "\n                    </p>\n                    <p>\n                      Delivery Window:\n                      ").concat(document.querySelector("#step3 .cart-main-content .date").textContent.split("(")[0], "\n                    </p>\n                  ");
+  }(), "\n            </div>\n            <div class=\"modal-footer\">\n              <a href=\"/shopping-cart\">\n                <button\n                  id=\"ESX192_EditOrderButton\"\n                  type=\"button\"\n                  class=\"btn btn-primary\"\n                >\n                  Edit Order\n                </button>\n              </a>\n              <button\n                id=\"ESX192_PlaceOrderButton\"\n                type=\"button\"\n                class=\"btn btn-primary\"\n              >\n                Place Order\n              </button>\n            </div>\n          </div>\n        </div>\n      </div>\n    "));
+
+  var checkFormComplete = function checkFormComplete() {
+    FORM_COMPLETE = FIELD_IDS_TO_CHECK.map(function (field) {
+      var el = document.getElementById(field);
+
+      if (el.id !== "accept-terms" && el.value === "" || el.id === "accept-terms" && !el.checked) {
+        return false;
+      } else {
+        return true;
+      }
+    }).every(function (item) {
+      return item === true;
+    });
+    return FORM_COMPLETE;
+  };
+
+  $("#ESX192Modal").on("hide.bs.modal", function () {
+    MODAL_IS_VISIBLE = false;
+  });
+  $("#ESX192Modal").on("show.bs.modal", function () {
+    MODAL_IS_VISIBLE = true;
+  });
 
   var submitOrder = function submitOrder() {
-    window.$("#ESX192Modal").modal("hide");
+    ORDER_SUBMITTED = true;
+    $("#ESX192Modal").modal("hide");
     document.getElementById("placeOrderBtn").click();
   };
 
-  var goToStepTwo = function goToStepTwo() {
-    window.$("#ESX192Modal").modal("hide");
-    document.getElementById("step2Tab").click();
-  };
-
   var showModal = function showModal() {
-    window.$("#ESX192Modal").modal("show");
-    MODAL_IS_VISIBLE = true;
-    MODAL_ELIGIBLE = false;
+    $("#ESX192Modal").modal("show");
   };
 
-  var checkAddErrors = function checkAddErrors(fieldsIDsToCheck) {
+  var checkAddErrors = function checkAddErrors(FIELD_IDS_TO_CHECK) {
     var fieldInvalid = false;
-    fieldsIDsToCheck.forEach(function (field) {
+    FIELD_IDS_TO_CHECK.forEach(function (field) {
       var el = document.getElementById(field);
 
       if (el.id !== "accept-terms" && el.value === "" || el.id === "accept-terms" && !el.checked) {
@@ -47,8 +72,8 @@ var checkoutModal = function checkoutModal() {
     return fieldInvalid;
   };
 
-  var clearErrors = function clearErrors(fieldsIDsToCheck) {
-    fieldsIDsToCheck.forEach(function (field) {
+  var clearErrors = function clearErrors(FIELD_IDS_TO_CHECK) {
+    FIELD_IDS_TO_CHECK.forEach(function (field) {
       var el = document.getElementById(field);
 
       if (field === "credit-card-type") {
@@ -63,21 +88,28 @@ var checkoutModal = function checkoutModal() {
     });
   };
 
-  document.addEventListener("click", function (e) {
-    if (e.target.id == "placeOrderBtn" && !MODAL_IS_VISIBLE && MODAL_ELIGIBLE) {
-      var fieldsIDsToCheck = ["credit-card-type", "credit-card", "exp-month", "exp-year", "ccv", "accept-terms"];
-      e.preventDefault();
-      clearErrors(fieldsIDsToCheck);
-      var fieldInvalid = checkAddErrors(fieldsIDsToCheck);
+  var hideCCError = function hideCCError() {
+    document.getElementById("paymentError").style.display = "none";
+  };
 
-      if (!fieldInvalid) {
-        clearErrors(fieldsIDsToCheck);
-        showModal();
+  var errorWithCard = function errorWithCard() {
+    return document.getElementById("paymentError").textContent.toLowerCase().includes("error processing card");
+  };
+
+  document.addEventListener("click", function (e) {
+    if (e.target.id == "placeOrderBtn" && !MODAL_IS_VISIBLE && !ORDER_SUBMITTED || e.target.id == "placeOrderBtn" && !MODAL_IS_VISIBLE && ORDER_SUBMITTED && document.getElementById("paymentError").style.display !== "none") {
+      if (!checkFormComplete() || errorWithCard()) {
+        return true;
+      } else {
+        e.preventDefault();
+        clearErrors(FIELD_IDS_TO_CHECK);
+        var fieldInvalid = checkAddErrors(FIELD_IDS_TO_CHECK);
+
+        if (!fieldInvalid) {
+          clearErrors(FIELD_IDS_TO_CHECK);
+          showModal();
+        }
       }
-    } else if (e.target.id === "ESX192_EditOrderButton") {
-      goToStepTwo();
-      MODAL_ELIGIBLE = true;
-      MODAL_IS_VISIBLE = false;
     } else if (e.target.id === "ESX192_PlaceOrderButton") {
       submitOrder();
     } else if (e.target.id === "ESX192_CloseModalButton") {
@@ -86,8 +118,18 @@ var checkoutModal = function checkoutModal() {
   });
 };
 
+var ESX192WaitLoop = function ESX192WaitLoop() {
+  var wait = setInterval(function () {
+    if (typeof window.jQuery !== "undefined") {
+      clearInterval(wait);
+      var $ = window.jQuery;
+      ESX192($);
+    }
+  }, 50);
+};
+
 if (document.readyState === "complete") {
-  checkoutModal();
+  ESX192WaitLoop();
 } else {
-  document.addEventListener("DOMContentLoaded", checkoutModal);
+  document.addEventListener("DOMContentLoaded", ESX192WaitLoop);
 }

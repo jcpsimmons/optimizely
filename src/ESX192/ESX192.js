@@ -54,56 +54,7 @@ const ESX192 = ($) => {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              ${
-                document
-                  .querySelector("#step3 .cart-main-content .header-info p")
-                  .textContent.toLowerCase()
-                  .includes("pickup")
-                  ? `
-                      <p>
-                        Pickup Store:
-                        ${
-                          document
-                            .querySelector(
-                              "#step3 .cart-main-content .main-header .title"
-                            )
-                            .textContent.split("at ")[1]
-                        }
-                      </p>
-                      <p>
-                        Pickup Window:
-                        ${
-                          document
-                            .querySelector("#step3 .cart-main-content .date")
-                            .textContent.split("(")[0]
-                        }
-                      </p>
-                    `
-                  : `
-                    <p>
-                      Delivery Address:
-                      ${document.getElementById("shipping-address1").value}
-                      ${
-                        document.getElementById("shipping-address2") === ""
-                          ? ""
-                          : document.getElementById("shipping-address2").value
-                      }
-                      ${document.getElementById("shipping-city").value},
-                      ${document.getElementById("shipping-state").value}
-                      ${document.getElementById("shipping-zip").value}
-                    </p>
-                    <p>
-                      Delivery Window:
-                      ${
-                        document
-                          .querySelector("#step3 .cart-main-content .date")
-                          .textContent.split("(")[0]
-                      }
-                    </p>
-                  `
-              }
-            </div>
+            <div class="modal-body"></div>
             <div class="modal-footer">
               <a href="/shopping-cart">
                 <button
@@ -127,6 +78,59 @@ const ESX192 = ($) => {
       </div>
     `
   );
+
+  const insertModalBody = () => {
+    document.querySelector("#ESX192Modal .modal-body").innerHTML = `
+      ${
+        document
+          .querySelector("#step3 .cart-main-content .header-info p")
+          .textContent.toLowerCase()
+          .includes("pickup")
+          ? `
+            <p>
+              Pickup Store:
+              ${
+                document
+                  .querySelector(
+                    "#step3 .cart-main-content .main-header .title"
+                  )
+                  .textContent.split("at ")[1]
+              }
+            </p>
+            <p>
+              Pickup Window:
+              ${
+                document
+                  .querySelector("#step3 .cart-main-content .date")
+                  .textContent.split("(")[0]
+              }
+            </p>
+          `
+          : `
+          <p>
+            Delivery Address:
+            ${document.getElementById("shipping-address1").value}
+            ${
+              document.getElementById("shipping-address2") === ""
+                ? ""
+                : document.getElementById("shipping-address2").value
+            }
+            ${document.getElementById("shipping-city").value},
+            ${document.getElementById("shipping-state").value}
+            ${document.getElementById("shipping-zip").value}
+          </p>
+          <p>
+            Delivery Window:
+            ${
+              document
+                .querySelector("#step3 .cart-main-content .date")
+                .textContent.split("(")[0]
+            }
+          </p>
+        `
+      }
+    `;
+  };
 
   const checkFormComplete = () => {
     FORM_COMPLETE = FIELD_IDS_TO_CHECK.map((field) => {
@@ -253,6 +257,7 @@ const ESX192 = ($) => {
         const fieldInvalid = checkAddErrors(FIELD_IDS_TO_CHECK);
         if (!fieldInvalid) {
           clearErrors(FIELD_IDS_TO_CHECK);
+          insertModalBody();
           showModal();
         }
       }
