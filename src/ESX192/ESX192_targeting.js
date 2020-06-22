@@ -2,19 +2,39 @@ const addEventListeners = () => {
   document.addEventListener("click", (e) => {
     switch (e.target.id) {
       case "accept-terms":
-        alert("accept terms clicked");
+        window["optimizely"] = window["optimizely"] || [];
+        window["optimizely"].push({
+          type: "event",
+          eventName: "192_CAT",
+        });
         break;
       case "placeOrderBtn":
-        alert("place order button");
+        window["optimizely"] = window["optimizely"] || [];
+        window["optimizely"].push({
+          type: "event",
+          eventName: "192_CPOB",
+        });
         break;
       case "ESX192_EditOrderButton":
-        alert("edit order button on modal");
+        window["optimizely"] = window["optimizely"] || [];
+        window["optimizely"].push({
+          type: "event",
+          eventName: "192_EOB",
+        });
         break;
       case "ESX192_PlaceOrderButton":
-        alert("place order button on modal");
+        window["optimizely"] = window["optimizely"] || [];
+        window["optimizely"].push({
+          type: "event",
+          eventName: "192_CPOBM",
+        });
         break;
       case "ESX192_CloseModalButton":
-        alert("close modal button");
+        window["optimizely"] = window["optimizely"] || [];
+        window["optimizely"].push({
+          type: "event",
+          eventName: "192_CMBM",
+        });
       default:
         break;
     }

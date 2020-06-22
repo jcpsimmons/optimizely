@@ -4,14 +4,17 @@ const ESX192 = ($) => {
   let ORDER_SUBMITTED = false;
   let MODAL_IS_VISIBLE = false;
   let FORM_COMPLETE = false;
-  const FIELD_IDS_TO_CHECK = [
-    "credit-card-type",
-    "credit-card",
-    "exp-month",
-    "exp-year",
-    "ccv",
-    "accept-terms",
-  ];
+  let AMEX = false;
+  const FIELD_IDS_TO_CHECK = () => {
+    return [
+      "credit-card-type",
+      "credit-card",
+      "exp-month",
+      "exp-year",
+      `${AMEX ? "amexccv" : "ccv"}`,
+      "accept-terms",
+    ];
+  };
 
   // change place order button text
   document.getElementById("placeOrderBtn").innerText = "Review Order";
@@ -75,6 +78,9 @@ const ESX192 = ($) => {
   );
 
   const insertModalBody = () => {
+    // this var keeps track of if there is UPS shipping and LS delivery on a cart
+    let shipAndDeliverCount = 0;
+
     // get all of the mixed cart data
     const shippingInfo = [
       ...document.querySelectorAll(
@@ -97,9 +103,13 @@ const ESX192 = ($) => {
           .textContent.split("(")[0]
           .trim()}`;
         } else if (titleText.includes("shipped")) {
-          data.location = `Shipping Address: ${
-            document.getElementById("shipping-address1").value
-          }
+          shipAndDeliverCount++;
+
+          data.location =
+            shipAndDeliverCount < 2
+              ? `UPS Shipping Address: ${
+                  document.getElementById("shipping-address1").value
+                }
         ${
           document.getElementById("shipping-address2") === ""
             ? ""
@@ -107,15 +117,20 @@ const ESX192 = ($) => {
         }
         ${document.getElementById("shipping-city").value},
         ${document.getElementById("shipping-state").value}
-        ${document.getElementById("shipping-zip").value}`;
-          data.window = `Shipping Window: ${el
+        ${document.getElementById("shipping-zip").value}`
+              : "";
+          data.window = `UPS Shipping Window: ${el
             .querySelector(".date")
             .textContent.split("(")[0]
             .trim()}`;
         } else if (titleText.includes("delivered")) {
-          data.location = `Delivery Address: ${
-            document.getElementById("shipping-address1").value
-          }
+          shipAndDeliverCount++;
+
+          data.location =
+            shipAndDeliverCount < 2
+              ? `Delivery Address: ${
+                  document.getElementById("shipping-address1").value
+                }
         ${
           document.getElementById("shipping-address2") === ""
             ? ""
@@ -123,7 +138,8 @@ const ESX192 = ($) => {
         }
         ${document.getElementById("shipping-city").value},
         ${document.getElementById("shipping-state").value}
-        ${document.getElementById("shipping-zip").value}`;
+        ${document.getElementById("shipping-zip").value}`
+              : "";
           data.window = `Delivery Window: ${el
             .querySelector(".date")
             .textContent.split("(")[0]
@@ -133,7 +149,9 @@ const ESX192 = ($) => {
         return data;
       })
       .map((item) => {
-        return `<p>${item.location}</p><p>${item.window}</p>`;
+        return `${item.location !== "" ? `<p>${item.location}</p>` : ""}<p>${
+          item.window
+        }</p>`;
       })
       .join("");
 
@@ -141,19 +159,38 @@ const ESX192 = ($) => {
   };
 
   const checkFormComplete = () => {
-    FORM_COMPLETE = FIELD_IDS_TO_CHECK.map((field) => {
-      const el = document.getElementById(field);
-
-      // if there's no value or check, add error class and show label
+    // special case - LS Credit Card - if LS credit card is selected, return true if agree is checked and there is a card no.
+    if (
+      document.getElementById("credit-card-type").value ===
+      "Living Spaces Credit Card"
+    ) {
       if (
-        (el.id !== "accept-terms" && el.value === "") ||
-        (el.id === "accept-terms" && !el.checked)
+        document.getElementById("synchrony-card").value !== "" &&
+        document.getElementById("accept-terms").checked
       ) {
-        return false;
-      } else {
         return true;
+      } else {
+        return false;
       }
-    }).every((item) => item === true);
+    }
+
+    console.log(`checking: ${FIELD_IDS_TO_CHECK()}`);
+
+    FORM_COMPLETE = FIELD_IDS_TO_CHECK()
+      .map((field) => {
+        const el = document.getElementById(field);
+
+        // if there's no value or check, add error class and show label
+        if (
+          (el.id !== "accept-terms" && el.value === "") ||
+          (el.id === "accept-terms" && !el.checked)
+        ) {
+          return false;
+        } else {
+          return true;
+        }
+      })
+      .every((item) => item === true);
 
     return FORM_COMPLETE;
   };
@@ -165,7 +202,11 @@ const ESX192 = ($) => {
 
   $("#ESX192Modal").on("show.bs.modal", function() {
     MODAL_IS_VISIBLE = true;
-    // ADD OPTIMIZELY EVENT FOR USER SEES MODAL
+    window["optimizely"] = window["optimizely"] || [];
+    window["optimizely"].push({
+      type: "event",
+      eventName: "192_SMUSM",
+    });
   });
 
   const submitOrder = () => {
@@ -182,10 +223,45 @@ const ESX192 = ($) => {
     $("#ESX192Modal").modal("hide");
   };
 
-  const checkAddErrors = (FIELD_IDS_TO_CHECK) => {
+  const checkErrors = () => {
+    let errors = false;
+
+    [...document.querySelectorAll("#step3 .validation-error")].forEach((el) => {
+      if (el.style.display !== "none") {
+        errors = true;
+      }
+    });
+
+    return errors;
+  };
+
+  const checkAddErrors = () => {
+    console.log(`checking: ${FIELD_IDS_TO_CHECK()}`);
+
     let fieldInvalid = false;
 
-    FIELD_IDS_TO_CHECK.forEach((field) => {
+    // special case for LS CC
+    if (
+      document.getElementById("credit-card-type").value ===
+      "Living Spaces Credit Card"
+    ) {
+      if (document.getElementById("synchrony-card").value === "") {
+        fieldInvalid = true;
+        const parent = document.getElementById("synchrony-card").parentElement;
+        parent.classList.add("error");
+        parent.querySelector(".validation-error").style.display = "block";
+      }
+      if (document.getElementById("accept-terms").checked === false) {
+        fieldInvalid = true;
+        document
+          .getElementById("accept-terms")
+          .parentElement.querySelector(".validation-error").style.display =
+          "block";
+      }
+      return fieldInvalid;
+    }
+
+    FIELD_IDS_TO_CHECK().forEach((field) => {
       const el = document.getElementById(field);
 
       // if there's no value or check, add error class and show label
@@ -215,8 +291,8 @@ const ESX192 = ($) => {
     return fieldInvalid;
   };
 
-  const clearErrors = (FIELD_IDS_TO_CHECK) => {
-    FIELD_IDS_TO_CHECK.forEach((field) => {
+  const clearErrors = () => {
+    FIELD_IDS_TO_CHECK().forEach((field) => {
       const el = document.getElementById(field);
 
       // special case for credit card type field
@@ -234,12 +310,6 @@ const ESX192 = ($) => {
           "none";
       }
     });
-  };
-
-  // not called - bailing on CC now
-  const hideCCError = () => {
-    // hide CC error on submit - vue will take a second to validate CC and re-show error if necessary
-    document.getElementById("paymentError").style.display = "none";
   };
 
   const errorWithCard = () => {
@@ -264,15 +334,22 @@ const ESX192 = ($) => {
         ORDER_SUBMITTED &&
         document.getElementById("paymentError").style.display !== "none")
     ) {
+      console.log("checkpoint 1");
       if (!checkFormComplete() || errorWithCard()) {
+        console.log("option 1");
         return true;
-      } else {
+      } else if (checkErrors()) {
+        console.log("option 2");
         e.preventDefault();
-        clearErrors(FIELD_IDS_TO_CHECK);
+      } else {
+        console.log("option3");
+        e.preventDefault();
+        clearErrors();
 
-        const fieldInvalid = checkAddErrors(FIELD_IDS_TO_CHECK);
+        const fieldInvalid = checkAddErrors();
         if (!fieldInvalid) {
-          clearErrors(FIELD_IDS_TO_CHECK);
+          console.log("option 4");
+          clearErrors();
           insertModalBody();
           showModal();
         }
@@ -284,6 +361,13 @@ const ESX192 = ($) => {
     } else if (e.target.id === "ESX192_EditOrderButton") {
       closeModal();
       goToStepTwo();
+    }
+  });
+  document.addEventListener("change", (e) => {
+    console.log("e.target.value :>> ", e.target.value);
+    if (e.target.id === "credit-card-type") {
+      console.log(`checking amex ${e.target.value === "Amex"}`);
+      AMEX = e.target.value === "Amex";
     }
   });
 };
