@@ -8,13 +8,20 @@ function cartHistorySliderMobile() {
   var cookieRecentlyAdd = window.$.cookie("lsf-cartadds")
     ? window.$.cookie("lsf-cartadds")
     : false;
+
   var recentlyAddCartList;
+
   var targetElement =
     $("#recentlyViewed").length > 0
       ? $("#recentlyViewed")
           .parent()
           .parent()
       : $("body > div.page-content");
+
+  // 0625 modification
+  // If this is an empty /shopping-cart page set correct inject area
+  var isShoppingCart = window.location.href.includes("/shopping-cart");
+  if (isShoppingCart) targetElement = $(".without-results").parent();
 
   if (cookieRecentlyAdd) {
     recentlyAddCartList = cookieRecentlyAdd.split(",");
@@ -45,7 +52,15 @@ function cartHistorySliderMobile() {
       viewAllHref +
       '">View all</a></div></div></div> </section> </section>';
 
-    if ($("#recentlyViewed").length > 0) {
+    if (isShoppingCart) {
+      targetElement.after(shoppingCartHistoryWrapper);
+      document
+        .querySelector("body")
+        .insertAdjacentHTML(
+          "afterbegin",
+          "<style> #shoppingCartHistory_box > .container {padding: 0;} #shoppingCartHistory_box .slick-slide img {padding-left: 1.5rem;}</style>"
+        );
+    } else if ($("#recentlyViewed").length > 0) {
       targetElement.before(shoppingCartHistoryWrapper);
     } else {
       targetElement.append(shoppingCartHistoryWrapper);
@@ -77,6 +92,11 @@ function cartHistorySliderDesktop() {
       ? $("#recently-viewed-vue-container")
       : $("body > div.page-content");
 
+  // 0625 modification
+  // If this is an empty /shopping-cart page set correct inject area
+  var isShoppingCart = window.location.href.includes("/shopping-cart");
+  if (isShoppingCart) targetElement = $(".without-results").parent();
+
   if (cookieRecentlyAdd) {
     recentlyAddCartList = cookieRecentlyAdd.split(",");
     var viewAllLink =
@@ -106,9 +126,11 @@ function cartHistorySliderDesktop() {
       viewAllHref +
       '">View all</a></div></div></div>  </section> </section>';
 
-    if ($("#recentlyViewed").length > 0) {
+    if ($("#recentlyViewed").length > 0 && !isShoppingCart) {
+      // target element becomes the recently viewed box on this condition
       targetElement.before(shoppingCartHistoryWrapper);
     } else {
+      // else target is div.page-content
       targetElement.append(shoppingCartHistoryWrapper);
     }
     runSlickSlider();
@@ -126,29 +148,30 @@ function cartHistorySliderDesktop() {
   }
 }
 
-// CHECK PAGE ELIGIBILITY
-var urlsToAvoid = [
-  "/order-confirmation",
-  "/checkout",
-  "/shopping-cart",
-  "/support",
-  "/changedelivery",
-  "/track-delivery",
-  "/tools",
-  "/company",
-  "/help",
-];
+var execOnLoad = function() {
+  var historyInterval = setInterval(function() {
+    if (typeof window.jQuery !== "undefined") {
+      clearInterval(historyInterval);
 
-var historyInterval = setInterval(() => {
-  if (typeof window.jQuery !== "undefined") {
-    clearInterval(historyInterval);
-    // If the URL contains substring from above, run the code
-    if (!urlsToAvoid.some((url) => window.location.href.includes(url))) {
-      utag_data.site_type == "desktop"
-        ? cartHistorySliderDesktop()
-        : cartHistorySliderMobile();
+      // check IE
+      var ua = window.navigator.userAgent;
+      var isIE = /MSIE|Trident/.test(ua);
+
+      if (isIE) {
+        utag_data.site_type == "desktop"
+          ? cartHistorySliderDesktop()
+          : cartHistorySliderMobile();
+      } else {
+        utag_data.site_type == "desktop"
+          ? cartHistorySliderDesktop()
+          : cartHistorySliderMobile();
+      }
     }
-  }
-}, 50);
+  }, 50);
+};
 
-// .carousel-component+.carousel-links .carousel-links-wrapper a
+if (document.readyState == "complete") {
+  execOnLoad();
+} else {
+  document.addEventListener("DOMContentLoaded", execOnLoad);
+}

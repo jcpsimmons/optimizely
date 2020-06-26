@@ -121,29 +121,36 @@ function cartHistorySliderDesktop() {
   }
 }
 
-var urlsToAvoid = ["/order-confirmation", "/checkout", "/support", "/changedelivery", "/track-delivery", "/tools", "/company", "/help"];
-var historyInterval = setInterval(function () {
-  if (typeof window.jQuery !== "undefined") {
-    clearInterval(historyInterval);
+var execOnLoad = function execOnLoad() {
+  var historyInterval = setInterval(function () {
+    if (typeof window.jQuery !== "undefined") {
+      clearInterval(historyInterval);
+      var ua = window.navigator.userAgent;
+      var isIE = /MSIE|Trident/.test(ua);
 
-    if (!urlsToAvoid.some(function (url) {
-      return window.location.href.includes(url);
-    })) {
-      (function () {
-        if (utag_data.site_type == "desktop") {
-          return cartHistorySliderDesktop();
-        }
+      if (isIE) {
+        (function () {
+          if (utag_data.site_type == "desktop") {
+            return cartHistorySliderDesktop();
+          }
 
-        return cartHistorySliderMobile();
-      })();
-    } else if (window.location.href.includes("/shopping-cart") && document.querySelector(".without-results")) {
-      (function () {
-        if (utag_data.site_type == "desktop") {
-          return cartHistorySliderDesktop();
-        }
+          return cartHistorySliderMobile();
+        })();
+      } else {
+        (function () {
+          if (utag_data.site_type == "desktop") {
+            return cartHistorySliderDesktop();
+          }
 
-        return cartHistorySliderMobile();
-      })();
+          return cartHistorySliderMobile();
+        })();
+      }
     }
-  }
-}, 50);
+  }, 50);
+};
+
+if (document.readyState == "complete") {
+  execOnLoad();
+} else {
+  document.addEventListener("DOMContentLoaded", execOnLoad);
+}
