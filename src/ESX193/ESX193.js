@@ -27,11 +27,6 @@ const ESX193 = () => {
   // REMOVE HEADER HIDE ON DEPLOY
   const insertHtml = `
     <style>
-      header,
-      #free-shipping-header-vue-container {
-        display: none;
-      }
-
 
       #ESX193_container {
         width: 100%;
@@ -64,8 +59,10 @@ const ESX193 = () => {
       #ESX193 .cart-icon > * {
         color: #fff;
       }
-      #ESX193 .cart-icon > a > * {
-        display: inline-block;
+      #ESX193 .cart-icon > a {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
       }
       #ESX193 .cart-icon > a > p {
         margin: 0;
