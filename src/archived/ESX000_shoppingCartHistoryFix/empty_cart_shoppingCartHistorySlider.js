@@ -48,9 +48,10 @@ function cartHistorySliderMobile() {
     shoppingCartHistoryWrapper =
       '<section id="shoppingCartHistory_box"> <section class="container no-padding board"><a role="button" data-toggle="collapse" href="#shoppingCartHistory" aria-expanded="true" aria-controls="shoppingCartHistory" class="collapse-link">Your Shopping Cart History<span aria-hidden="true" class="fa fa-angle-down"></span></a> <div id="shoppingCartHistory" class="collapse in"> <div id="shoppingCartHistory_slider" class="mobile-carousel-component">' +
       productHtml +
-      ' </div><div class="carousel-links text-right"><div class="carousel-links-wrapper"><a href="' +
-      viewAllHref +
-      '">View all</a></div></div></div> </section> </section>';
+      ' </div><div class="carousel-links text-right"><div class="carousel-links-wrapper">' +
+      `${
+        productList.length > 4 ? `<a href="${viewAllHref}">View all</a>` : ""
+      }</div></div></div> </section> </section>`;
 
     if (isShoppingCart) {
       targetElement.after(shoppingCartHistoryWrapper);
@@ -122,9 +123,10 @@ function cartHistorySliderDesktop() {
     shoppingCartHistoryWrapper =
       '<section id="shoppingCartHistory_box"> <section class="container no-padding board"><a role="button" data-toggle="collapse" href="#shoppingCartHistory" aria-expanded="true" aria-controls="shoppingCartHistory" class="collapse-link">Your Shopping Cart History<span aria-hidden="true" class="fa fa-angle-down"></span></a> <div id="shoppingCartHistory" class="collapse in"> <div id="shoppingCartHistory_slider" class="row carousel-component">' +
       productHtml +
-      ' </div><div class="carousel-links text-right"><div class="carousel-links-wrapper"><a href="' +
-      viewAllHref +
-      '">View all</a></div></div></div>  </section> </section>';
+      ' </div><div class="carousel-links text-right"><div class="carousel-links-wrapper">' +
+      `${
+        productList.length > 4 ? `<a href="${viewAllHref}">View all</a>` : ""
+      }</div></div></div>  </section> </section>`;
 
     if ($("#recentlyViewed").length > 0 && !isShoppingCart) {
       // target element becomes the recently viewed box on this condition

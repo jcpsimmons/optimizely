@@ -34,7 +34,7 @@ const ESX190 = () => {
       "3 piece",
     ], // words that can throw a product match in AITC
     alsoInThisCollection: [], // will be arr of objects - params: name,link,size,currentProduct
-    sortingOrder: ["queen", "eastern king", "california king"], // the sizes required for the experiment in the correct order to display on the page
+    sortingOrder: ["twin", "full", "queen", "eastern king", "california king"], // the sizes required for the experiment in the correct order to display on the page
     sortedProducts: [], // sorted list of prods in same category. INCLUDES current product
     html: "",
   };
