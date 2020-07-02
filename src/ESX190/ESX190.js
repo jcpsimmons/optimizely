@@ -11,6 +11,7 @@ const ESX190 = () => {
     },
     //  searchWords ends up acting like a switch statement - early cases will override later cases
     searchWords: [
+      "panel bed with storage",
       "canopy 4 piece",
       "canopy 3 piece",
       "panel 4 piece",
@@ -44,6 +45,7 @@ const ESX190 = () => {
     let sortedArr = [];
     state.sortingOrder.forEach((s) => {
       let match;
+
       match = r.filter((x) => {
         return x.name.toLowerCase().search(s) > -1 && x.currentProduct;
       })[0];
@@ -105,7 +107,14 @@ const ESX190 = () => {
       };
     })
     .filter((item) => {
-      return item.name.toLowerCase().search(state.currentProduct.type) > -1;
+      if (state.currentProduct.type === "panel bed") {
+        return (
+          item.name.toLowerCase().search(state.currentProduct.type) > -1 &&
+          item.name.toLowerCase().search("storage") == -1
+        );
+      } else {
+        return item.name.toLowerCase().search(state.currentProduct.type) > -1;
+      }
     });
 
   // Create array of all products including the current one, then sort them by size

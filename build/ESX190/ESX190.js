@@ -25,7 +25,7 @@ var ESX190 = function ESX190() {
         return null;
       }()
     },
-    searchWords: ["canopy 4 piece", "canopy 3 piece", "panel 4 piece", "panel 3 piece", "platform 4 piece", "platform 3 piece", "sleigh 4 piece", "sleigh 3 piece", "poster 4 piece", "poster 3 piece", "storage 4 piece", "storage 3 piece", "sleigh bed", "poster bed", "canopy bed", "platform bed", "panel bed", "storage bed", "upholstered headboard with metal", "4 piece", "3 piece"],
+    searchWords: ["panel bed with storage", "canopy 4 piece", "canopy 3 piece", "panel 4 piece", "panel 3 piece", "platform 4 piece", "platform 3 piece", "sleigh 4 piece", "sleigh 3 piece", "poster 4 piece", "poster 3 piece", "storage 4 piece", "storage 3 piece", "sleigh bed", "poster bed", "canopy bed", "platform bed", "panel bed", "storage bed", "upholstered headboard with metal", "4 piece", "3 piece"],
     alsoInThisCollection: [],
     sortingOrder: ["twin", "full", "queen", "eastern king", "california king"],
     sortedProducts: [],
@@ -89,7 +89,11 @@ var ESX190 = function ESX190() {
       currentProduct: false
     };
   }).filter(function (item) {
-    return item.name.toLowerCase().search(state.currentProduct.type) > -1;
+    if (state.currentProduct.type === "panel bed") {
+      return item.name.toLowerCase().search(state.currentProduct.type) > -1 && item.name.toLowerCase().search("storage") == -1;
+    } else {
+      return item.name.toLowerCase().search(state.currentProduct.type) > -1;
+    }
   });
   state.sortedProducts = sortedItems([].concat(_toConsumableArray(state.alsoInThisCollection), [state.currentProduct]));
   document.querySelector("head").insertAdjacentHTML("beforeend", "\n      <style>\n        #ESX190 {\n          display: flex;\n          width: 100%;\n          justify-content: start;\n          margin-bottom: 3rem;\n          align-items: center;\n        }\n        #ESX190 * {\n          text-transform: capitalize;\n          font-size: 1.4rem;\n          font-weight: 600;\n          white-space: nowrap;\n        }\n        #ESX190 button {\n          border: 1px solid #333;\n          border-radius: 2px;\n        }\n        #ESX190 a:hover button {\n          background-color: #333;\n          color: #fff;\n        }\n        #ESX190 button {\n          background-color: #fff;\n          color: #333;\n          padding: 1rem 1.5rem;\n        }\n        #ESX190 button span, #ESX190 > span {\n          font-weight: 800;\n        }\n        #ESX190 > *:nth-child(n + 2) {\n          margin-left: 1rem;\n        }\n        #ESX190 .active-button {\n          background-color: #333;\n          color: #fff;\n          cursor: initial;\n        }\n        @media (min-width: 992px) and (max-width: 1100px) {\n          #ESX190 button {\n            padding: 1rem .5rem;\n          }\n        }\n      </style>\n    ");
