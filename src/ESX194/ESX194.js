@@ -76,7 +76,6 @@ const ESX194 = () => {
       font-size: 16px;
     }
     .ESX194 .cart-component .item-description {
-      padding-left: 0;
       padding-right: .25rem;
     }
     .cart-component .item-description .item-and-price {

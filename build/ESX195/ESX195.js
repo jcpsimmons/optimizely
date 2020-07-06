@@ -1,0 +1,3 @@
+var style = "\n  <style>\n    #ESX195 {\n      position: absolute;\n      top: 17rem;\n      right: 3rem;\n      color: #fff;\n      background: #00699a;\n      font-size: 1.6rem;\n      width: 8rem;\n      padding: 0.5rem;\n      border-radius: 0.25rem;\n    }\n  </style>\n";
+document.querySelector("head").insertAdjacentHTML("beforeend", style);
+document.querySelector("body").insertAdjacentHTML("beforeend", "<div id=\"ESX195\">Back to Cart</div>");
