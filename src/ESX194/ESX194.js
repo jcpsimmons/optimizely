@@ -29,10 +29,10 @@ const ESX194 = () => {
     }
     .ESX194 h3,
     .ESX194 .item p {
-      font-size: 1.8rem;
+      font-size: 1.8rem!important;
     }
     .ESX194 .item p {
-      font-weight: normal;
+      font-weight: normal!important;
     }
     .ESX194 .item .id-no {
       display: inline;
@@ -48,6 +48,7 @@ const ESX194 = () => {
       border: none;
       padding-left: 0;
       padding-right: 0;
+      padding-bottom: 0;
     }
     .ESX194 .product-card .card-side img {
       width: 9rem;
