@@ -63,7 +63,9 @@ const ESX194 = () => {
     .ESX194 .form-title,
     #step3 .col-xs-7.cart-component,
     .ESX194 .recycle-info,
-    .ESX194 .shipping-info {
+    .ESX194 .shipping-info,
+    .ESX194 .care-free-info
+    {
       display: none!important;
     }
     .ESX194 .form-title {
@@ -119,7 +121,7 @@ const ESX194 = () => {
     .insertAdjacentHTML("afterend", sourceHtml);
 
   // have to move all prices into another div to get alignment right
-  [...document.querySelectorAll(".ESX194 .price")].forEach((el) => {
+  [...document.querySelectorAll(".ESX194 .item-and-price .price")].forEach((el) => {
     let insertTarget = el.parentNode.querySelector(".item .id-no");
     let html = el.outerHTML;
     el.parentNode.removeChild(el);
@@ -134,6 +136,11 @@ const ESX194 = () => {
         .split(" ")
         .map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
         .join(" ");
+
+      titleText = titleText
+        .split("-")
+        .map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
+        .join("-");
       el.textContent = titleText;
     }
   );
@@ -156,5 +163,5 @@ const ESX194 = () => {
 if (document.readyState === "complete") {
   ESX194();
 } else {
-  document.addEventListener("DOMContentLoaded", ESX194);
+  window.addEventListener("load", ESX194);
 }

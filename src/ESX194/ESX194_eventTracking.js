@@ -20,14 +20,22 @@ const ESX194Tracking = () => {
         .classList.contains("active")
     ) {
       console.log("step 2 - click tracking");
-      // optimizely info will go here
+      window["optimizely"] = window["optimizely"] || [];
+      window["optimizely"].push({
+        type: "event",
+        eventName: "194_UHS2",
+      });
     } else if (
       document
         .querySelector("#checkoutVue li:nth-of-type(3)")
         .classList.contains("active")
     ) {
       console.log("step 3 - click tracking");
-      // optimizely info will go here
+      window["optimizely"] = window["optimizely"] || [];
+      window["optimizely"].push({
+        type: "event",
+        eventName: "194_UHS3",
+      });
     }
   });
   observer.observe(targetNode, observerOptions);
@@ -36,5 +44,5 @@ const ESX194Tracking = () => {
 if (document.readyState === "complete") {
   ESX194Tracking();
 } else {
-  document.addEventListener("DOMContentLoaded", ESX194Tracking);
+  window.addEventListener("load", ESX194Tracking);
 }

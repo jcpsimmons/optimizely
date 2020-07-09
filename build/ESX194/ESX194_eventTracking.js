@@ -6,7 +6,19 @@ var ESX194Tracking = function ESX194Tracking() {
     subtree: true
   };
   var observer = new MutationObserver(function () {
-    if (document.querySelector("#checkoutVue li:nth-of-type(1)").classList.contains("active")) {} else if (document.querySelector("#checkoutVue li:nth-of-type(2)").classList.contains("active")) {} else if (document.querySelector("#checkoutVue li:nth-of-type(3)").classList.contains("active")) {}
+    if (document.querySelector("#checkoutVue li:nth-of-type(1)").classList.contains("active")) {} else if (document.querySelector("#checkoutVue li:nth-of-type(2)").classList.contains("active")) {
+      window["optimizely"] = window["optimizely"] || [];
+      window["optimizely"].push({
+        type: "event",
+        eventName: "194_UHS2"
+      });
+    } else if (document.querySelector("#checkoutVue li:nth-of-type(3)").classList.contains("active")) {
+      window["optimizely"] = window["optimizely"] || [];
+      window["optimizely"].push({
+        type: "event",
+        eventName: "194_UHS3"
+      });
+    }
   });
   observer.observe(targetNode, observerOptions);
 };
@@ -14,5 +26,5 @@ var ESX194Tracking = function ESX194Tracking() {
 if (document.readyState === "complete") {
   ESX194Tracking();
 } else {
-  document.addEventListener("DOMContentLoaded", ESX194Tracking);
+  window.addEventListener("load", ESX194Tracking);
 }

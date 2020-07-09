@@ -1,0 +1,180 @@
+<style>
+  #VideoLinkContainer {
+    background: #fff;
+  }
+  #VideoLink {
+    display: flex;
+    justify-content: space-between;
+  }
+  #VideoLink > div {
+    margin: auto;
+  }
+  #VideoLink img {
+    border: none !important;
+  }
+  #VideoLink span {
+    color: #00699a;
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
+
+  /* VIDEO MODAL */
+  #modal-video .modal-backdrop.in {
+    filter: alpha(opacity=7);
+    opacity: 0.7;
+  }
+
+  #modal-video .modal-header {
+    padding: 25px 25px 15px 25px;
+    text-align: right;
+  }
+
+  #modal-video .modal-header,
+  #modal-video .modal-footer {
+    border: 0;
+  }
+
+  #modal-video .modal-header .close {
+    float: none;
+    text-shadow: none;
+    color: #fff !important;
+    opacity: 1 !important;
+    font-weight: 400 !important;
+    font-size: 3rem !important;
+    margin-top: 3.6rem !important;
+    margin-right: 3.4rem !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
+    z-index: 9 !important;
+    border-radius: 30rem !important;
+    background: #100f0f !important;
+    width: 3rem !important;
+    height: 3rem !important;
+  }
+
+  #modal-video .modal-body {
+    padding: 0 2.5rem 2.5rem 2.5rem;
+  }
+
+  #modal-video .modal-content {
+    background: none;
+    border: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+</style>
+<tr id="VideoLinkContainer">
+  <td></td>
+  <td></td>
+  <td>
+    <div id="VideoLink">
+      <a
+        class="playVideo"
+        data-toggle="modal"
+        data-target="#modal-video"
+        data-theVideo="https://www.youtube.com/embed/JY9kQZCIFas"
+        role="button"
+        aria-label="Click to Watch the delivery video"
+        href=""
+        alt="Click to watch the delivery video"
+      >
+        <div>
+          <img
+            src="/globalassets/images/lp/2020/07/play-video-icon.jpg"
+            alt="Click to play the video."
+            class="img-responsive"
+          />
+        </div>
+        <div><span>Watch Video About Free Shipping Limitations</span></div>
+      </a>
+    </div>
+  </td>
+</tr>
+
+<!-- VIDEO MODAL -->
+<div
+  class="modal fade"
+  id="modal-video"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modal-video-label"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-video">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe
+              id="main-Video"
+              class="embed-responsive-item"
+              width="1170"
+              src=""
+              webkitallowfullscreen
+              mozallowfullscreen
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add modal event listener -->
+<script>
+  // probably should just remove defaults on each of the close modal buttons and manually close on click!
+
+  // must put this in main script or it won't exec.!!!
+  function playModal() {
+    var trigger = $("body").find('#VideoLink [data-toggle="modal"].playVideo');
+    trigger.click(function() {
+      var theModal = $(this).data("target"),
+        videoSRC = $(this).attr("data-theVideo"),
+        videoSRCauto =
+          videoSRC +
+          "?rel=0&vq=1080&controls=1&autoplay=1&modestbranding=1&showinfo=0";
+      $(theModal + " iframe").attr("src", videoSRCauto);
+      $(theModal + " button.close").click(function() {
+        $(theModal + " iframe").attr("src", videoSRC);
+      });
+
+      $("#modal-video").on("hidden.bs.modal", function(e) {
+        $(theModal + " iframe").attr("src", videoSRC);
+      });
+    });
+
+    // dual modal fix
+    // $(document).on("show.bs.modal", ".modal", function() {
+    //   var zIndex = 1040 + 10 * $(".modal:visible").length;
+    //   $(this).css("z-index", zIndex);
+    //   setTimeout(function() {
+    //     $(".modal-backdrop")
+    //       .not(".modal-stack")
+    //       .css("z-index", zIndex - 1)
+    //       .addClass("modal-stack");
+    //   }, 0);
+    // });
+  }
+
+  var anotherInterval = setInterval(function() {
+    if (window.jQuery) {
+      clearInterval(anotherInterval);
+      playModal();
+    }
+  }, 50);
+</script>
